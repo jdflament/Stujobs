@@ -38,6 +38,8 @@ Route::group(['middleware' => 'can:accessAdminpanelAdmins'], function() {
     Route::get('/dashboard/admins', 'Adminpanel\Dashboard@indexAdmins')->name('indexDashboardAdmins');
     // Create an admin
     Route::post('/dashboard/admins', 'Adminpanel\Dashboard@createAdmin')->name('createAdmin');
+    // Edit an admin
+    Route::post('/dashboard/admins/{id}/edit', 'Adminpanel\Dashboard@editAdmin')->name('editAdmin');
     // Delete an admin
     Route::get('/dashboard/admins/{id}/delete', 'Adminpanel\Dashboard@deleteAdmin')->name('deleteAdmin');
 });

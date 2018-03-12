@@ -81,6 +81,61 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
 
 /*
 |--------------------------------------------------------------------------
+| Admin edition
+|--------------------------------------------------------------------------
+*/
+
+// Set inputs values and form action to current address
+$(document).on('click', '.btn-pre-edit-admin', function(event) {
+    event.preventDefault();
+
+    var $admin = $(this).data('admin');
+    var $modal = $('#modalEditAdmin');
+    $modal.find('form').attr('action', '/dashboard/admins/' + $admin.id + '/edit');
+
+    for (var key in $admin) {
+        var value = $admin[key];
+        $modal.find('input[name=edit_' + key + ']').val(value);
+        $modal.find('select[name=edit_' + key + ']').val(value);
+    }
+});
+
+// Ajax admin edition
+$(document).on('submit', 'form[name=editAdmin]', function(event) {
+    event.preventDefault();
+
+    var $modal = $(this).closest('.modal');
+    var $submit = $(this).find('button[type=submit]');
+    var $submitValue = $submit.html();
+    var form = $(this);
+    var url = form.attr('action');
+    var data = form.serialize();
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        beforeSend: function() {
+            $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
+        },
+        success: function(response) {
+            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> modifé.", "alert-success", 4000);
+            $submit.html('<i class="fa fa-check"></i>');
+            $modal.load(location.href + " #modalEditAdmin>*", "");
+            $("#admins-content").load(location.href + " #admins-content>*", "");
+            $modal.modal('toggle');
+        },
+        error: function (response) {
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+        },
+        complete: function() {
+            $submit.html($submitValue);
+        }
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
 | Admin deletion
 |--------------------------------------------------------------------------
 */

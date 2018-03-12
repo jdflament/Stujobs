@@ -54,7 +54,7 @@ class Dashboard extends Controller
      */
     public function createAdmin()
     {
-        $data = Input::only('email', 'password', 'role');
+        $data = Input::only('create_email', 'create_password', 'create_role');
 
         $user = new User();
         $user->setAttribute('email', $data['email']);
@@ -63,6 +63,21 @@ class Dashboard extends Controller
         $user->save();
 
         return $user;
+    }
+
+    /**
+     * @param $id
+     *
+     * Edit an admin
+     */
+    public function editAdmin($id)
+    {
+        $data = Input::only('edit_email', 'edit_role');
+        $admin = User::where('id', '=', $id)->first();
+
+        $admin->setAttribute('email', $data['edit_email']);
+        $admin->setAttribute('role', $data['edit_role']);
+        $admin->save();
     }
 
     /**

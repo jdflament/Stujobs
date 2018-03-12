@@ -27,5 +27,6 @@
     </div>
 
     @include('dashboard/admins/actions/create')
+    @include('dashboard/admins/actions/edit')
     @include('dashboard/admins/actions/delete')
 @endsection

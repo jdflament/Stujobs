@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Adminpanel;
+namespace App\Http\Controllers\Dashboard;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -9,25 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 
-class Dashboard extends Controller
+class Admins extends Controller
 {
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     *
-     * Show the dashboard index
-     */
-    public function indexDashboard() {
-        return view('dashboard/index');
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     *
-     * Show the companies page
-     */
-    public function indexCompanies() {
-        return view('dashboard/companies/index');
-    }
 
     /**
      * @param Request $request
@@ -35,7 +18,7 @@ class Dashboard extends Controller
      *
      * Show the admins page (only accessible by the super admins)
      */
-    public function indexAdmins(Request $request) {
+    public function index(Request $request) {
         $roles = ['superadmin', 'admin'];
 
         $admins = DB::table('users')
@@ -52,7 +35,7 @@ class Dashboard extends Controller
      *
      * Create an admin
      */
-    public function createAdmin()
+    public function create()
     {
         $data = Input::only('create_email', 'create_password', 'create_role');
 
@@ -70,7 +53,7 @@ class Dashboard extends Controller
      *
      * Edit an admin
      */
-    public function editAdmin($id)
+    public function edit($id)
     {
         $data = Input::only('edit_email', 'edit_role');
         $admin = User::where('id', '=', $id)->first();
@@ -85,8 +68,25 @@ class Dashboard extends Controller
      *
      * Delete an admin (user)
      */
-    public function deleteAdmin($id)
+    public function delete($id)
     {
         User::where('id', $id)->delete();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show an admin (infos)
+     */
+    public function show($id)
+    {
+        $admin = DB::table('users')->where('users.id', $id)
+            ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'admins.user_id', 'admins.firstname', 'admins.lastname', 'admins.phone', 'admins.office')
+            ->get()
+            ->first();
+
+        return view('dashboard/admins/actions/show', ['admin' => $admin]);
     }
 }

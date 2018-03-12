@@ -26,35 +26,58 @@ Route::get('/', 'HomeController@index')->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard (super admin) routes
+| Home (super admin) routes
 |--------------------------------------------------------------------------
 |
 | There is the routes of the dashboard (only accessible by the super admin)
 |
 */
 
-Route::group(['middleware' => 'can:accessAdminpanelAdmins'], function() {
+/*
+ * Administrators manager
+ */
+
+Route::group(['middleware' => 'can:superAdminAccess'], function() {
     // Admins list
-    Route::get('/dashboard/admins', 'Adminpanel\Dashboard@indexAdmins')->name('indexDashboardAdmins');
+    Route::get('/dashboard/admins', 'Dashboard\Admins@index')->name('indexAdmins');
     // Create an admin
-    Route::post('/dashboard/admins', 'Adminpanel\Dashboard@createAdmin')->name('createAdmin');
+    Route::post('/dashboard/admins', 'Dashboard\Admins@create')->name('createAdmin');
     // Edit an admin
-    Route::post('/dashboard/admins/{id}/edit', 'Adminpanel\Dashboard@editAdmin')->name('editAdmin');
+    Route::post('/dashboard/admins/{id}/edit', 'Dashboard\Admins@edit')->name('editAdmin');
     // Delete an admin
-    Route::get('/dashboard/admins/{id}/delete', 'Adminpanel\Dashboard@deleteAdmin')->name('deleteAdmin');
+    Route::get('/dashboard/admins/{id}/delete', 'Dashboard\Admins@delete')->name('deleteAdmin');
+    // Show an admin
+    Route::get('/dashboard/admins/{id}/show', 'Dashboard\Admins@show')->name('showAdmin');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard (admin) routes
+| Home (admin) routes
 |--------------------------------------------------------------------------
 |
 | There is the routes of the dashboard (only accessible by admins and super admin)
 |
 */
 
-Route::group(['middleware' => 'can:accessAdminpanel'], function() {
-    Route::get('/dashboard', 'Adminpanel\Dashboard@indexDashboard')->name('indexDashboard');
-    Route::get('/dashboard/companies', 'Adminpanel\Dashboard@indexCompanies')->name('indexDashboardCompanies');
-    // future adminpanel routes also should belong to the group
+/*
+ * Companies manager
+ */
+
+Route::group(['middleware' => 'can:allAdminsAccess'], function() {
+    // Companies list
+    Route::get('/dashboard/companies', 'Dashboard\Companies@index')->name('indexCompanies');
+    // Create a company
+    Route::post('/dashboard/companies', 'Dashboard\Companies@create')->name('createCompany');
+    // Edit a company
+    Route::post('/dashboard/companies/{id}/edit', 'Dashboard\Companies@edit')->name('editCompany');
+    // Delete a company
+    Route::get('/dashboard/companies/{id}/delete', 'Dashboard\Companies@delete')->name('deleteCompany');
+});
+
+/*
+ * Home manager
+ */
+
+Route::group(['middleware' => 'can:allAdminsAccess'], function() {
+    Route::get('/dashboard', 'Dashboard\Home@index')->name('indexDashboard');
 });

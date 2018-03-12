@@ -25,28 +25,28 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // access to admins manager
-        Gate::define('accessAdminpanelAdmins', function($user) {
+        // access authorized by all different users
+        Gate::define('allUsersAccess', function($user) {
+            return $user->role(['superadmin', 'admin', 'company']);
+        });
+
+        // access authorized by superadmins and admins
+        Gate::define('allAdminsAccess', function($user) {
+            return $user->role(['superadmin', 'admin']);
+        });
+
+        // access authorized by superadmin
+        Gate::define('superAdminAccess', function($user) {
             return $user->role('superadmin');
         });
 
-        // access to companies manager
-        Gate::define('accessAdminpanelCompanies', function($user) {
-            return $user->role(['superadmin', 'admin']);
+        // access authorized by admins
+        Gate::define('adminsAccess', function($user) {
+            return $user->role('admin');
         });
 
-        // access to dashboard
-        Gate::define('accessAdminpanel', function($user) {
-            return $user->role(['superadmin', 'admin']);
-        });
-
-        // access to profile
-        Gate::define('accessProfile', function($user) {
-            return $user->role('company');
-        });
-
-        // access to profile
-        Gate::define('accessAddOffer', function($user) {
+        // access authorized by companies
+        Gate::define('companyAccess', function($user) {
             return $user->role('company');
         });
     }

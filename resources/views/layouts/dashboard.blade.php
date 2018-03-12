@@ -84,7 +84,7 @@
                 </li>
                 @if ( Auth::user()->role == 'superadmin' )
                 <li class="{{ strpos(Request::path(), 'admins') !== false ? 'active' : '' }}">
-                    <a href="{{ route('indexDashboardAdmins') }}">
+                    <a href="{{ route('indexAdmins') }}">
                         <i class="fa fa-user"></i> Admins
                     </a>
                 </li>

@@ -16,7 +16,7 @@ class Companies extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
-     * Show the admins page (only accessible by the super admins)
+     * Show the companies page
      */
     public function index(Request $request) {
         $roles = ['company'];
@@ -33,43 +33,61 @@ class Companies extends Controller
     /**
      * @return mixed
      *
-     * Create an admin
+     * Create a company
      */
     public function create()
     {
         $data = Input::only('create_email', 'create_password', 'create_role');
 
-        $user = new User();
-        $user->setAttribute('email', $data['email']);
-        $user->setAttribute('password', Hash::make($data['password']));
-        $user->setAttribute('role', $data['role']);
-        $user->save();
+        $company = new User();
+        $company->setAttribute('email', $data['email']);
+        $company->setAttribute('password', Hash::make($data['password']));
+        $company->setAttribute('role', $data['role']);
+        $company->save();
 
-        return $user;
+        return $company;
     }
 
     /**
      * @param $id
      *
-     * Edit an admin
+     * Edit a company
      */
     public function edit($id)
     {
         $data = Input::only('edit_email', 'edit_role');
-        $admin = User::where('id', '=', $id)->first();
+        $company = User::where('id', '=', $id)->first();
 
-        $admin->setAttribute('email', $data['edit_email']);
-        $admin->setAttribute('role', $data['edit_role']);
-        $admin->save();
+        $company->setAttribute('email', $data['edit_email']);
+        $company->setAttribute('role', $data['edit_role']);
+        $company->save();
     }
 
     /**
      * @param $id
      *
-     * Delete an admin (user)
+     * Delete a company (user)
      */
     public function delete($id)
     {
+        // TODO : Cascade the companies informations
         User::where('id', $id)->delete();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show a company
+     */
+    public function show($id)
+    {
+        $company = DB::table('users')->where('users.id', $id)
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
+            ->get()
+            ->first();
+
+        return view('dashboard/companies/actions/show', ['company' => $company]);
     }
 }

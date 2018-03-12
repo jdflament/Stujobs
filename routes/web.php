@@ -72,6 +72,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::post('/dashboard/companies/{id}/edit', 'Dashboard\Companies@edit')->name('editCompany');
     // Delete a company
     Route::get('/dashboard/companies/{id}/delete', 'Dashboard\Companies@delete')->name('deleteCompany');
+    // Show a company
+    Route::get('/dashboard/companies/{id}/show', 'Dashboard\Companies@show')->name('showCompany');
 });
 
 /*

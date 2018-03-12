@@ -39,13 +39,13 @@ class Admins extends Controller
     {
         $data = Input::only('create_email', 'create_password', 'create_role');
 
-        $user = new User();
-        $user->setAttribute('email', $data['email']);
-        $user->setAttribute('password', Hash::make($data['password']));
-        $user->setAttribute('role', $data['role']);
-        $user->save();
+        $admin = new User();
+        $admin->setAttribute('email', $data['email']);
+        $admin->setAttribute('password', Hash::make($data['password']));
+        $admin->setAttribute('role', $data['role']);
+        $admin->save();
 
-        return $user;
+        return $admin;
     }
 
     /**
@@ -70,6 +70,7 @@ class Admins extends Controller
      */
     public function delete($id)
     {
+        // TODO : Cascade the admins informations
         User::where('id', $id)->delete();
     }
 

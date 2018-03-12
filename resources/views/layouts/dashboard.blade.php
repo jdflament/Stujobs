@@ -89,6 +89,11 @@
                     </a>
                 </li>
                 @endif
+                <li class="{{ strpos(Request::path(), 'companies') !== false ? 'active' : '' }}">
+                    <a href="{{ route('indexCompanies') }}">
+                        <i class="fa fa-building"></i> Entreprises
+                    </a>
+                </li>
             </ul>
         </nav>
 
@@ -102,5 +107,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/dashboard/admins.js') }}"></script>
+    <script src="{{ asset('js/dashboard/companies.js') }}"></script>
 </body>
 </html>

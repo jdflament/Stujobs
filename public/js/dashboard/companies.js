@@ -20,22 +20,22 @@ function closeAlert(div) {
 
 /*
 |--------------------------------------------------------------------------
-| Admin creation
+| Company creation
 |--------------------------------------------------------------------------
 */
 
 // Set inputs values and form action to current admin
-$(document).on('click', '.btn-pre-create-admin', function(event) {
+$(document).on('click', '.btn-pre-create-company', function(event) {
     event.preventDefault();
 
     var $destination = $(this).data('destination');
-    var $modal = $('#modalCreateAdmin');
+    var $modal = $('#modalCreateCompany');
 
     $modal.find('form').attr('data-destination', $destination);
 });
 
-// Ajax admin creation
-$(document).on('submit', 'form[name=createAdmin]', function(event) {
+// Ajax company creation
+$(document).on('submit', 'form[name=createCompany]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
@@ -54,9 +54,9 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> créé.", "alert-success", 4000);
+            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> crée.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
-            $modal.load(location.href + " #modalCreateAdmin>*", "");
+            $modal.load(location.href + " #modalCreateCompany>*", "");
 
             $("#" + destination).load(location.href + " #" + destination + ">*", "");
 
@@ -73,27 +73,27 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
 
 /*
 |--------------------------------------------------------------------------
-| Admin edition
+| Company edition
 |--------------------------------------------------------------------------
 */
 
 // Set inputs values and form action to current address
-$(document).on('click', '.btn-pre-edit-admin', function(event) {
+$(document).on('click', '.btn-pre-edit-company', function(event) {
     event.preventDefault();
 
-    var $admin = $(this).data('admin');
-    var $modal = $('#modalEditAdmin');
-    $modal.find('form').attr('action', '/dashboard/admins/' + $admin.id + '/edit');
-
-    for (var key in $admin) {
-        var value = $admin[key];
+    var $company = $(this).data('company');
+    var $modal = $('#modalEditCompany');
+    $modal.find('form').attr('action', '/dashboard/companies/' + $company.id + '/edit');
+    
+    for (var key in $company) {
+        var value = $company[key];
         $modal.find('input[name=edit_' + key + ']').val(value);
         $modal.find('select[name=edit_' + key + ']').val(value);
     }
 });
 
-// Ajax admin edition
-$(document).on('submit', 'form[name=editAdmin]', function(event) {
+// Ajax company edition
+$(document).on('submit', 'form[name=editCompany]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
@@ -111,10 +111,10 @@ $(document).on('submit', 'form[name=editAdmin]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> modifé.", "alert-success", 4000);
+            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> modifée.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
-            $modal.load(location.href + " #modalEditAdmin>*", "");
-            $("#admins-content").load(location.href + " #admins-content>*", "");
+            $modal.load(location.href + " #modalEditCompany>*", "");
+            $("#companies-content").load(location.href + " #companies-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
@@ -128,24 +128,24 @@ $(document).on('submit', 'form[name=editAdmin]', function(event) {
 
 /*
 |--------------------------------------------------------------------------
-| Admin deletion
+| Company deletion
 |--------------------------------------------------------------------------
 */
 
 // Set delete button href
-$(document).on('click', '.btn-pre-delete-admin', function(event) {
+$(document).on('click', '.btn-pre-delete-company', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
 
-    $('#btn-delete-admin').attr('href', route);
+    $('#btn-delete-company').attr('href', route);
 });
 
 // Reset delete button href
-$(document).on('hidden.bs.modal', '#modalDeleteAdmin', function() {
-    $(this).find('#btn-delete-admin').attr('href', '#');
+$(document).on('hidden.bs.modal', '#modalDeleteCompany', function() {
+    $(this).find('#btn-delete-company').attr('href', '#');
 });
 
-$(document).on('click', '#btn-delete-admin', function(event) {
+$(document).on('click', '#btn-delete-company', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
@@ -160,9 +160,9 @@ $(document).on('click', '#btn-delete-admin', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> supprimé.", "alert-success", 4000);
+            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
             $button.html('<i class="fa fa-check"></i>');
-            $("#admins-content").load(location.href + " #admins-content>*", "");
+            $("#companies-content").load(location.href + " #companies-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {

@@ -5,7 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Liste des sociétés</div>
+                    <div class="card-header">Liste des sociétés
+                        <!-- Button trigger modal -->
+                        <button style="float: right;" data-destination="companies-content" class="btn btn-primary btn-sm btn-pre-create-company" data-toggle="modal" data-target="#modalCreateCompany">
+                            Ajouter une société
+                        </button>
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,12 +19,14 @@
                             </div>
                         @endif
 
-                        <ul>
-                            <li>Société 1...</li>
-                        </ul>
+                        @include('dashboard/companies/actions/list')
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('dashboard/companies/actions/create')
+    @include('dashboard/companies/actions/edit')
+    @include('dashboard/companies/actions/delete')
 @endsection

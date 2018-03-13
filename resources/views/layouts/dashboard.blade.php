@@ -68,6 +68,7 @@
             </div>
         </nav>
 
+        @if ( Auth::user() )
         <nav id="sidebar" class="active">
             <!-- Sidebar Header -->
             <div class="sidebar-header">
@@ -96,6 +97,7 @@
                 </li>
             </ul>
         </nav>
+        @endif
 
         <main class="py-4">
             <div id="alerts"></div>

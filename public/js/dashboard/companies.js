@@ -84,7 +84,7 @@ $(document).on('click', '.btn-pre-edit-company', function(event) {
     var $company = $(this).data('company');
     var $modal = $('#modalEditCompany');
     $modal.find('form').attr('action', '/dashboard/companies/' + $company.id + '/edit');
-    
+
     for (var key in $company) {
         var value = $company[key];
         $modal.find('input[name=edit_' + key + ']').val(value);

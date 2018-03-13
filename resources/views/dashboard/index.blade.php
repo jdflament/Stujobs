@@ -14,7 +14,16 @@
                             </div>
                         @endif
 
-                        You are logged in!
+                        Voici les dernières annonces postées non validées...<br /> <br />
+
+                        Quelques statistiques :
+                        <ul>
+                            <li>Nombre d'annonce en ligne</li>
+                            <li>Nombre d'email dans la newsletter</li>
+                            <li>Nombre d'entreprise inscrites sur le site</li>
+                            <li>Nombre d'administrateurs et de super administrateur</li>
+                            <li>Nombre de visiteur par mois</li>
+                        </ul>
                     </div>
                 </div>
             </div>

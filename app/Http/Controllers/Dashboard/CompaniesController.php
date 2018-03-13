@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 
-class Companies extends Controller
+class CompaniesController extends Controller
 {
 
     /**

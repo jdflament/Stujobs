@@ -15,18 +15,54 @@ Auth::routes();
 
 /*
 |--------------------------------------------------------------------------
-| Website (client side) routes
+| Website routes
 |--------------------------------------------------------------------------
 |
 | There is the routes of the website (client side)
 |
 */
 
+/*
+ * Website Homepage
+ */
+
 Route::get('/', 'Website\HomeController@index')->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| Home (super admin) routes
+| Company manager routes
+|--------------------------------------------------------------------------
+|
+| There is the routes of the website (client side)
+|
+*/
+
+/*
+ * Profile
+ */
+
+Route::group(['middleware' => 'can:companyAccess'], function() {
+    // Profile index page
+    Route::get('/profile', 'Website\ProfileController@index')->name('indexProfile');
+});
+
+/*
+ * Offer
+ */
+
+Route::group(['middleware' => 'can:companyAccess'], function() {
+    // Offer (of a company) index page
+    Route::get('/profile/offers', 'Website\OffersController@index')->name('indexOffers');
+    // Offer creation page
+    Route::get('/profile/offer/create', 'Website\OffersController@createPage')->name('createOfferPage');
+});
+
+// Create a job offer
+Route::post('/offer/create', 'Website\OffersController@create')->name('createOffer');
+
+/*
+|--------------------------------------------------------------------------
+| HomeController (super admin) routes
 |--------------------------------------------------------------------------
 |
 | There is the routes of the dashboard (only accessible by the super admin)
@@ -38,21 +74,21 @@ Route::get('/', 'Website\HomeController@index')->name('home');
  */
 
 Route::group(['middleware' => 'can:superAdminAccess'], function() {
-    // Admins list
-    Route::get('/dashboard/admins', 'Dashboard\Admins@index')->name('indexAdmins');
+    // AdminsController list
+    Route::get('/dashboard/admins', 'Dashboard\AdminsController@index')->name('indexAdmins');
     // Create an admin
-    Route::post('/dashboard/admins', 'Dashboard\Admins@create')->name('createAdmin');
+    Route::post('/dashboard/admins', 'Dashboard\AdminsController@create')->name('createAdmin');
     // Edit an admin
-    Route::post('/dashboard/admins/{id}/edit', 'Dashboard\Admins@edit')->name('editAdmin');
+    Route::post('/dashboard/admins/{id}/edit', 'Dashboard\AdminsController@edit')->name('editAdmin');
     // Delete an admin
-    Route::get('/dashboard/admins/{id}/delete', 'Dashboard\Admins@delete')->name('deleteAdmin');
+    Route::get('/dashboard/admins/{id}/delete', 'Dashboard\AdminsController@delete')->name('deleteAdmin');
     // Show an admin
-    Route::get('/dashboard/admins/{id}/show', 'Dashboard\Admins@show')->name('showAdmin');
+    Route::get('/dashboard/admins/{id}/show', 'Dashboard\AdminsController@show')->name('showAdmin');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Home (admin) routes
+| HomeController (admin) routes
 |--------------------------------------------------------------------------
 |
 | There is the routes of the dashboard (only accessible by admins and super admin)
@@ -60,26 +96,26 @@ Route::group(['middleware' => 'can:superAdminAccess'], function() {
 */
 
 /*
- * Companies manager
+ * CompaniesController manager
  */
 
 Route::group(['middleware' => 'can:allAdminsAccess'], function() {
-    // Companies list
-    Route::get('/dashboard/companies', 'Dashboard\Companies@index')->name('indexCompanies');
+    // CompaniesController list
+    Route::get('/dashboard/companies', 'Dashboard\CompaniesController@index')->name('indexCompanies');
     // Create a company
-    Route::post('/dashboard/companies', 'Dashboard\Companies@create')->name('createCompany');
+    Route::post('/dashboard/companies', 'Dashboard\CompaniesController@create')->name('createCompany');
     // Edit a company
-    Route::post('/dashboard/companies/{id}/edit', 'Dashboard\Companies@edit')->name('editCompany');
+    Route::post('/dashboard/companies/{id}/edit', 'Dashboard\CompaniesController@edit')->name('editCompany');
     // Delete a company
-    Route::get('/dashboard/companies/{id}/delete', 'Dashboard\Companies@delete')->name('deleteCompany');
+    Route::get('/dashboard/companies/{id}/delete', 'Dashboard\CompaniesController@delete')->name('deleteCompany');
     // Show a company
-    Route::get('/dashboard/companies/{id}/show', 'Dashboard\Companies@show')->name('showCompany');
+    Route::get('/dashboard/companies/{id}/show', 'Dashboard\CompaniesController@show')->name('showCompany');
 });
 
 /*
- * Home manager
+ * HomeController manager
  */
 
 Route::group(['middleware' => 'can:allAdminsAccess'], function() {
-    Route::get('/dashboard', 'Dashboard\Home@index')->name('indexDashboard');
+    Route::get('/dashboard', 'Dashboard\HomeController@index')->name('indexDashboard');
 });

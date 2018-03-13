@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Website;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class OffersController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,7 +14,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        return view('website/offers/index');
     }
 
     /**
@@ -22,8 +27,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function createPage()
     {
-        return view('home');
+        return view('website/offers/actions/create');
     }
 }

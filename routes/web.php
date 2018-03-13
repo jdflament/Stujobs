@@ -54,7 +54,7 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
     // Offer (of a company) index page
     Route::get('/profile/offers', 'Website\OffersController@index')->name('indexOffers');
     // Offer creation page
-    Route::get('/profile/offer/create', 'Website\OffersController@createPage')->name('createOfferPage');
+    Route::get('/offer/create', 'Website\OffersController@createPage')->name('createOfferPage');
 });
 
 // Create a job offer

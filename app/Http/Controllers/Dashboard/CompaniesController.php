@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -40,9 +40,9 @@ class CompaniesController extends Controller
         $data = Input::only('create_email', 'create_password', 'create_role');
 
         $company = new User();
-        $company->setAttribute('email', $data['email']);
-        $company->setAttribute('password', Hash::make($data['password']));
-        $company->setAttribute('role', $data['role']);
+        $company->setAttribute('email', $data['create_email']);
+        $company->setAttribute('password', Hash::make($data['create_password']));
+        $company->setAttribute('role', $data['create_role']);
         $company->save();
 
         return $company;

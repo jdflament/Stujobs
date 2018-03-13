@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -40,9 +40,9 @@ class AdminsController extends Controller
         $data = Input::only('create_email', 'create_password', 'create_role');
 
         $admin = new User();
-        $admin->setAttribute('email', $data['email']);
-        $admin->setAttribute('password', Hash::make($data['password']));
-        $admin->setAttribute('role', $data['role']);
+        $admin->setAttribute('email', $data['create_email']);
+        $admin->setAttribute('password', Hash::make($data['create_password']));
+        $admin->setAttribute('role', $data['create_role']);
         $admin->save();
 
         return $admin;

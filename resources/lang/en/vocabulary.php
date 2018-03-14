@@ -15,6 +15,7 @@ return [
     // Contract type
 
     'nc' => 'Non précisé',
+    'sj' => 'Job Étudiant',
     'ctt' => 'Intérim',
     'stage' => 'Stage',
     'ca' => 'Contrat d\'apprentissage',

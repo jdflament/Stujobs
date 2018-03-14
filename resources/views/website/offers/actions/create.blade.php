@@ -40,6 +40,7 @@
                                         <option disabled selected value="">Sélectionner un type de contrat</option>
                                         <option value="nc">Non précisé</option>
                                         <option value="ctt">Intérim</option>
+                                        <option value="sj">Job Étudiant</option>
                                         <option value="stage">Stage</option>
                                         <option value="ca">Contrat d'apprentissage</option>
                                         <option value="cp">Contrat de professionnalisation</option>

@@ -1,7 +1,31 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jean-davidflament
- * Date: 14/03/2018
- * Time: 21:32
- */
+@extends('layouts.dashboard')
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header">Liste des offres
+                        <!-- Button trigger modal -->
+                        <a href="{{ route('dashboardCreateOfferPage') }}" style="float: right;" class="btn btn-primary btn-sm">
+                            Ajouter une offre
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        @include('dashboard/offers/actions/list')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{--@include('dashboard/offers/actions/edit')--}}
+    {{--@include('dashboard/offers/actions/delete')--}}
+@endsection

@@ -34,6 +34,39 @@
                             </div>
                         </div>
                     </div>
+                    <p style="text-align:center;">Les informations suivantes ne sont pas obligatoire</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="edit_name">Nom de l'entreprise</label>
+                                <input type="text" class="form-control" id="edit_name" name="edit_name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="edit_siret">SIRET</label>
+                                <input type="text" class="form-control" id="edit_siret" name="edit_siret" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="edit_address">Adresse</label>
+                                <input type="text" class="form-control" id="edit_address" name="edit_address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="edit_phone">Téléphone</label>
+                                <input type="text" class="form-control" id="edit_phone" name="edit_phone" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @foreach ($errors->all() as $error)
                     <p>{{ $error }}</p>

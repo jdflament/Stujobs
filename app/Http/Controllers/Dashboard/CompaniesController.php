@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,15 +38,29 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        $data = Input::only('create_email', 'create_password', 'create_role');
+        $user_data = Input::only('create_email', 'create_password', 'create_role');
+        $company_data = Input::only('create_name', 'create_siret', 'create_address', 'create_phone');
 
-        $company = new User();
-        $company->setAttribute('email', $data['create_email']);
-        $company->setAttribute('password', Hash::make($data['create_password']));
-        $company->setAttribute('role', $data['create_role']);
+        $user = new User();
+        $user->setAttribute('email', $user_data['create_email']);
+        $user->setAttribute('password', Hash::make($user_data['create_password']));
+        $user->setAttribute('role', $user_data['create_role']);
+        $user->save();
+
+        $company = new Company();
+        $company->setAttribute('user_id', $user->getAttribute('id'));
+        $company->setAttribute('name', $company_data['create_name']);
+        $company->setAttribute('siret', $company_data['create_siret']);
+        $company->setAttribute('address', $company_data['create_address']);
+        $company->setAttribute('phone', $company_data['create_phone']);
         $company->save();
 
-        return $company;
+        $user->company_name = $company->name;
+        $user->company_siret = $company->siret;
+        $user->company_address = $company->address;
+        $user->company_phone = $company->phone;
+
+        return $user;
     }
 
     /**
@@ -55,11 +70,19 @@ class CompaniesController extends Controller
      */
     public function edit($id)
     {
-        $data = Input::only('edit_email', 'edit_role');
-        $company = User::where('id', '=', $id)->first();
+        $user_data = Input::only('edit_email', 'edit_role');
+        $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone');
 
-        $company->setAttribute('email', $data['edit_email']);
-        $company->setAttribute('role', $data['edit_role']);
+        $user = User::where('id', '=', $id)->first();
+        $user->setAttribute('email', $user_data['edit_email']);
+        $user->setAttribute('role', $user_data['edit_role']);
+        $user->save();
+
+        $company = Company::firstOrNew(['user_id' => $id]);
+        $company->setAttribute('name', $company_data['edit_name']);
+        $company->setAttribute('siret', $company_data['edit_siret']);
+        $company->setAttribute('address', $company_data['edit_address']);
+        $company->setAttribute('phone', $company_data['edit_phone']);
         $company->save();
     }
 
@@ -70,8 +93,11 @@ class CompaniesController extends Controller
      */
     public function delete($id)
     {
-        // TODO : Cascade the companies informations
         User::where('id', $id)->delete();
+        $company = Company::where('user_id', '=', $id)->get()->first();
+        if ($company) {
+            $company->delete();
+        }
     }
 
     /**

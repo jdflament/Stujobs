@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <a href="{{ route('indexAdmins') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
+                <a href="{{ route('dashboardIndexAdmins') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
                 <div class="card card-default">
                     <div class="card-header">Administrateur n°<span style="font-weight: 400;">{{ $admin->id }}</span>
                     </div>

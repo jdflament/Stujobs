@@ -46,7 +46,7 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
-                                        <a class="dropdown-item" href="{{ route('indexDashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
                                             Dashboard
                                         </a>
                                     @endif
@@ -78,20 +78,25 @@
             <!-- Sidebar Links -->
             <ul class="list-unstyled components">
                 <li class="{{ Request::path() == 'dashboard' ? 'active' : '' }}">
-                    <a href="{{ route('indexDashboard') }}">
+                    <a href="{{ route('dashboardIndex') }}">
                         <i class="fa fa-compass"></i> Dashboard
                     </a>
                 </li>
                 @if ( Auth::user()->role == 'superadmin' )
                 <li class="{{ strpos(Request::path(), 'admins') !== false ? 'active' : '' }}">
-                    <a href="{{ route('indexAdmins') }}">
+                    <a href="{{ route('dashboardIndexAdmins') }}">
                         <i class="fa fa-user"></i> Admins
                     </a>
                 </li>
                 @endif
                 <li class="{{ strpos(Request::path(), 'companies') !== false ? 'active' : '' }}">
-                    <a href="{{ route('indexCompanies') }}">
+                    <a href="{{ route('dashboardIndexCompanies') }}">
                         <i class="fa fa-building"></i> Entreprises
+                    </a>
+                </li>
+                <li class="{{ strpos(Request::path(), 'offers') !== false ? 'active' : '' }}">
+                    <a href="{{ route('dashboardIndexOffers') }}">
+                        <i class="fa fa-briefcase"></i> Offres
                     </a>
                 </li>
             </ul>

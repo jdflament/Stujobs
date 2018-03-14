@@ -42,6 +42,39 @@
                             </div>
                         </div>
                     </div>
+                    <p style="text-align:center;">Les informations suivantes ne sont pas obligatoire</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="create_name">Nom de l'entreprise</label>
+                                <input type="text" class="form-control" id="create_name" name="create_name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="create_siret">SIRET</label>
+                                <input type="text" class="form-control" id="create_siret" name="create_siret" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="create_address">Adresse</label>
+                                <input type="text" class="form-control" id="create_address" name="create_address" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="create_phone">Téléphone</label>
+                                <input type="text" class="form-control" id="create_phone" name="create_phone" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @foreach ($errors->all() as $error)
                     <p>{{ $error }}</p>

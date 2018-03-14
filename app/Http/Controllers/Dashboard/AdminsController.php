@@ -56,6 +56,7 @@ class AdminsController extends Controller
     public function edit($id)
     {
         $data = Input::only('edit_email', 'edit_role');
+
         $admin = User::where('id', '=', $id)->first();
 
         $admin->setAttribute('email', $data['edit_email']);

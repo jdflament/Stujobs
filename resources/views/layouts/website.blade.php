@@ -45,7 +45,7 @@
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
-                                <a class="dropdown-item" href="{{ route('indexDashboard') }}">
+                                <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
                                     Dashboard
                                 </a>
                                 @endif

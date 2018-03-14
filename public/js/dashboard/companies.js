@@ -57,12 +57,18 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
             alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> crée.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalCreateCompany>*", "");
-
-            $("#" + destination).load(location.href + " #" + destination + ">*", "");
+            console.log(response);
+            if (destination == "companies-content") {
+                $("#" + destination).load(location.href + " #" + destination + ">*", "");
+            } else {
+                $("#" + destination).find('select option:first').after('<option value="' + response.id + '">' + response.email + ' (' + response.company_name + ') </option>');
+                $("#" + destination).find('select').val("" + response.id + "").change();
+            }
 
             $modal.modal('toggle');
         },
         error: function (response) {
+            console.log(response);
             alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
         },
         complete: function(response) {

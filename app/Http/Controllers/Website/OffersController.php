@@ -26,6 +26,7 @@ class OffersController extends Controller
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->orderBy('offers.created_at', 'DESC')
             ->get();
 
         return view('website/offers/index', ['offers' => $offers]);
@@ -60,6 +61,13 @@ class OffersController extends Controller
         $offer->setAttribute('valid', filter_var($data['create_valid'], FILTER_VALIDATE_BOOLEAN));
         $offer->save();
 
-        return view('website/offers/index');
+        $offers = DB::table('offers')
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->orderBy('offers.created_at', 'DESC')
+            ->get();
+
+        return view('website/offers/index', ['offers' => $offers]);
     }
 }

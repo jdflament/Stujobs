@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     @foreach($offers as $offer)
-        <tr @if ($offer->valid == 0)style="background-color:#ffe4e4;"@endif>
+        <tr>
             <td>{{ $offer->title ? $offer->title : 'NC' }}</td>
             <td>@lang('vocabulary.' . $offer->contract_type)</td>
             <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
@@ -25,18 +25,22 @@
             </td>
             <td>
                 @if ($offer->valid == 0)
-                <a href="/profile/offers/{{ $offer->id }}/validate" class="btn btn-success btn-sm">
+                <button data-href="/dashboard/offers/{{ $offer->id }}/approve" class="btn btn-success btn-sm btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer" style="margin-right: 30px;">
                     <i style="color: white;" class="fa fa-check"></i>
-                </a>
+                </button>
+                @else
+                <button data-href="/dashboard/offers/{{ $offer->id }}/disapprove" class="btn btn-danger btn-sm btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer" style="margin-right: 30px;">
+                    <i style="color: white;" class="fa fa-times"></i>
+                </button>
                 @endif
-                <a href="/profile/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm">
+                <a href="/dashboard/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>
-                <button data-offer="{{ json_encode($offer) }}" class="btn btn-warning btn-sm btn-pre-edit-offer" data-toggle="modal" data-target="#modalEditOffer">
+                <a href="/dashboard/offers/{{ $offer->id }}/edit" class="btn btn-warning btn-sm btn-pre-edit-offer">
                     <i style="color: white;" class="fa fa-pencil"></i>
-                </button>
-                <button data-href="/profile/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
-                    <i class="fa fa-times"></i>
+                </a>
+                <button data-href="/dashboard/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
+                    <i class="fa fa-trash"></i>
                 </button>
             </td>
         </tr>

@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-md-6 col-lg-6">
                 <a href="{{ route('dashboardIndexCompanies') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
                 <div class="card card-default">
-                    <div class="card-header">Entreprise n°<span style="font-weight: 400;">{{ $company->id }}</span>
+                    <div class="card-header">Compte entreprise
                     </div>
 
                     <div class="card-body" style="overflow-x:scroll;">

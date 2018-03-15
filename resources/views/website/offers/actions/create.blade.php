@@ -8,7 +8,7 @@
                     <div class="card-header">Créer une nouvelle annonce
                     </div>
 
-                    <form name="createOffer" role="form" method="post" action="/offer/create">
+                    <form name="createOffer" role="form" method="post" action="/profile/offer/create">
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success">

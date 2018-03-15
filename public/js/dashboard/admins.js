@@ -63,6 +63,7 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
+            console.log(response);
             alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
         },
         complete: function(response) {

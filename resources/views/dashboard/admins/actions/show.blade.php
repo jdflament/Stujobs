@@ -6,7 +6,7 @@
             <div class="col-sm-12 col-md-6 col-lg-6">
                 <a href="{{ route('dashboardIndexAdmins') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
                 <div class="card card-default">
-                    <div class="card-header">Administrateur n°<span style="font-weight: 400;">{{ $admin->id }}</span>
+                    <div class="card-header">Compte administrateur
                     </div>
 
                     <div class="card-body" style="overflow-x:scroll;">

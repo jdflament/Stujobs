@@ -111,12 +111,18 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/offers', 'Dashboard\OffersController@index')->name('dashboardIndexOffers');
     // Create offer page
     Route::get('/dashboard/offers/create', 'Dashboard\OffersController@createPage')->name('dashboardCreateOfferPage');
-//    // Create an offer
-//    Route::post('/dashboard/offers', 'Dashboard\OffersController@create')->name('dashboardCreateOffer');
-//    // Edit an offer
-//    Route::post('/dashboard/offers/{id}/edit', 'Dashboard\OffersController@edit')->name('dashboardEditOffer');
-//    // Delete an offer
-//    Route::get('/dashboard/offers/{id}/delete', 'Dashboard\OffersController@delete')->name('dashboardDeleteOffer');
+    // Create an offer
+    Route::post('/dashboard/offers', 'Dashboard\OffersController@create')->name('dashboardCreateOffer');
+    // Approve an offer
+    Route::get('/dashboard/offers/{id}/approve', 'Dashboard\OffersController@approve')->name('dashboardApproveOffer');
+    // Disapprove an offer
+    Route::get('/dashboard/offers/{id}/disapprove', 'Dashboard\OffersController@disapprove')->name('dashboardDisapproveOffer');
+    // Edit offer page
+    Route::get('/dashboard/offers/{id}/edit', 'Dashboard\OffersController@editPage')->name('dashboardEditOfferPage');
+    // Edit an offer
+    Route::post('/dashboard/offers/{id}/edit', 'Dashboard\OffersController@edit')->name('dashboardEditOffer');
+    // Delete an offer
+    Route::get('/dashboard/offers/{id}/delete', 'Dashboard\OffersController@delete')->name('dashboardDeleteOffer');
 //    // Show an offer
 //    Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
 });

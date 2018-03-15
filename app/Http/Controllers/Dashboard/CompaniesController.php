@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Company;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -94,9 +95,19 @@ class CompaniesController extends Controller
     public function delete($id)
     {
         User::where('id', $id)->delete();
+
+        // Delete the associated company info if exist
         $company = Company::where('user_id', '=', $id)->get()->first();
         if ($company) {
             $company->delete();
+        }
+
+        // Delete the associated offers if exist
+        $offers = Offer::where('company_id', '=', $id)->get();
+        if ($offers) {
+            foreach ($offers as $offer) {
+                $offer->delete();
+            }
         }
     }
 

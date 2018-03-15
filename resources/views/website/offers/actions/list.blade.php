@@ -31,7 +31,7 @@
                     <i style="color: white;" class="fa fa-pencil"></i>
                 </button>
                 <button data-href="/profile/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-trash"></i>
                 </button>
             </td>
         </tr>

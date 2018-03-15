@@ -23,7 +23,7 @@
                     <i style="color: white;" class="fa fa-pencil"></i>
                 </button>
                 <button data-href="/dashboard/admins/{{ $admin->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-admin" data-toggle="modal" data-target="#modalDeleteAdmin">
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-trash"></i>
                 </button>
             </td>
         </tr>

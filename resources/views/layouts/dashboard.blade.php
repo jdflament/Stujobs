@@ -94,8 +94,9 @@
                         <i class="fa fa-building"></i> Entreprises
                     </a>
                 </li>
-                <li class="{{ strpos(Request::path(), 'offers') !== false ? 'active' : '' }}">
+                <li class="{{ strpos(Request::path(), 'offers') !== false ? 'active' : '' }}" style="position: relative;">
                     <a href="{{ route('dashboardIndexOffers') }}">
+                        <div class="totalOffersInvalid @if ($total < 1) hidden @endif">{{ $total }}</div>
                         <i class="fa fa-briefcase"></i> Offres
                     </a>
                 </li>

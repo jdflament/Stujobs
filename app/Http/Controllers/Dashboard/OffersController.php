@@ -79,25 +79,41 @@ class OffersController extends Controller
     /**
      * @param $id
      *
-     * Approve an offer
+     * Approve an offer and return the total not approve
      */
     public function approve($id)
     {
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('valid', 1);
         $offer->save();
+
+        $offers = DB::table('offers')
+            ->where('valid', '=', 0)
+            ->get();
+
+        $total = count($offers);
+
+        return $total;
     }
 
     /**
      * @param $id
      *
-     * Disapprove an offer
+     * Disapprove an offer and return the total not approve
      */
     public function disapprove($id)
     {
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('valid', 0);
         $offer->save();
+
+        $offers = DB::table('offers')
+            ->where('valid', '=', 0)
+            ->get();
+
+        $total = count($offers);
+
+        return $total;
     }
 
     /**

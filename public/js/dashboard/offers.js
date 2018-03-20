@@ -55,6 +55,15 @@ $(document).on('click', '#btn-approve-offer', function(event) {
             alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> approuvée.", "alert-success", 4000);
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
+
+            // Update the offer icon on sidebar
+            if (response > 0) {
+                $(".totalOffersInvalid").html(response);
+                $(".totalOffersInvalid").removeClass('hidden');
+            } else {
+                $(".totalOffersInvalid").addClass('hidden');
+            }
+
             $modal.modal('toggle');
         },
         error: function (response) {
@@ -103,6 +112,15 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
             alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> désapprouvée.", "alert-success", 4000);
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
+
+            // Update the offer icon on sidebar
+            if (response > 0) {
+                $(".totalOffersInvalid").html(response);
+                $(".totalOffersInvalid").removeClass('hidden');
+            } else {
+                $(".totalOffersInvalid").addClass('hidden');
+            }
+            
             $modal.modal('toggle');
         },
         error: function (response) {

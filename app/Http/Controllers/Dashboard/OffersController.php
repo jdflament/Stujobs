@@ -78,6 +78,7 @@ class OffersController extends Controller
 
     /**
      * @param $id
+     * @return int
      *
      * Approve an offer and return the total not approve
      */
@@ -98,6 +99,7 @@ class OffersController extends Controller
 
     /**
      * @param $id
+     * @return int
      *
      * Disapprove an offer and return the total not approve
      */

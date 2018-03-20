@@ -25,7 +25,8 @@
                         </div>
 
                         <div class="card-body">
-                            <p style="margin: 30px;">{{ $offer->description }}</p>
+                            <?php $description = $offer->description; ?>
+                            <p style="margin: 30px;"><?php echo nl2br($description) ?></p>
 
                             <hr>
 

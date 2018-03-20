@@ -23,10 +23,13 @@ Auth::routes();
 */
 
 /*
- * Website Homepage
+ * Website Pages
  */
 
+// Show the homepage
 Route::get('/', 'Website\HomeController@index')->name('home');
+// Show an offer
+Route::get('/offers/{id}/show', 'Website\OffersController@show')->name('showOffer');
 
 /*
  * Company : Profile manager

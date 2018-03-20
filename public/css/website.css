@@ -1,0 +1,26 @@
+.socials-buttons {
+    text-align: center;
+}
+
+.btn-social {
+    width: 45px;
+    padding: 10px 0;
+    color: white;
+    margin: 15px;
+}
+
+.btn-social:hover {
+    color: white;
+}
+
+.btn-facebook {
+    background-color: #4468b0;
+}
+
+.btn-twitter {
+    background-color: #2aa3ef;
+}
+
+.btn-google-plus{
+    background-color: #db4c3f;
+}

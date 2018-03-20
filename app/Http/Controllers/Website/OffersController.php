@@ -85,7 +85,11 @@ class OffersController extends Controller
             ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid')
             ->get()
             ->first();
-
-        return view('website/offers/actions/show', ['offer' => $offer]);
+        
+        if ($offer->valid == 1) {
+            return view('website/offers/actions/show', ['offer' => $offer]);
+        } else {
+            abort(404);
+        }
     }
 }

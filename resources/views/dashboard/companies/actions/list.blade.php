@@ -12,7 +12,7 @@
     @foreach($companies as $company)
         <tr>
             <td>{{ $company->name ? $company->name : 'NC' }}</td>
-            <td>{{ $company->siret ? $company->siret : 'NC'}}</td>
+            <td>{{ $company->siret ? $company->siret : 'NC' }}</td>
             <td>{{ $company->email }}</td>
             <td>{{ $company->role }}</td>
             <td>

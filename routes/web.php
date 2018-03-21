@@ -106,6 +106,15 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
 });
 
 /*
+ * Company : Profile manager
+ */
+
+Route::group(['middleware' => 'can:allAdminsAccess'], function() {
+    // Profile index page
+    Route::get('/dashboard/profile', 'Dashboard\ProfileController@index')->name('dashboardIndexProfile');
+});
+
+/*
  * Offers manager
  */
 

@@ -49,6 +49,9 @@
                                         <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
                                             Dashboard
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('dashboardIndexProfile') }}">
+                                            Mon Profil
+                                        </a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

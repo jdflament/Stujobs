@@ -54,7 +54,7 @@
                                 <td>{{ $admin->lastname ? $admin->lastname : 'NC' }}</td>
                             </tr>
                             <tr>
-                                <th>SIRET</th>
+                                <th>Prénom</th>
                                 <td>{{ $admin->firstname ? $admin->firstname : 'NC' }}</td>
                             </tr>
                             <tr>
@@ -62,7 +62,7 @@
                                 <td>{{ $admin->phone ? $admin->phone : 'NC' }}</td>
                             </tr>
                             <tr>
-                                <th>Adresse</th>
+                                <th>Poste</th>
                                 <td>{{ $admin->office ? $admin->office : 'NC' }}</td>
                             </tr>
                             </tbody>

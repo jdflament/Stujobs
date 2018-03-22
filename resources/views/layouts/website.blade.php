@@ -49,6 +49,9 @@
                                 <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
                                     Dashboard
                                 </a>
+                                <a class="dropdown-item" href="{{ route('dashboardIndexProfile') }}">
+                                            Mon Profil
+                                </a>
                                 @endif
                                 @if ( Auth::user()->role == 'company')
                                     <a class="dropdown-item" href="{{ route('indexProfile') }}">

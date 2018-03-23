@@ -2,12 +2,14 @@
 
 @section('content')
     <div class="container">
+    <a href="{{ route('dashboardEditProfilePage') }}" class="btn btn-primary btn-sm">
+        Modifier mes informations
+    </a>
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-6">
                 <div class="card card-default">
                     <div class="card-header">Compte Admin
                     </div>
-
                     <div class="card-body" style="overflow-x:scroll;">
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -36,7 +38,7 @@
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card card-default" style="margin-top: 42px;">
+                <div class="card card-default">
                     <div class="card-header">Informations complémentaires
                     </div>
 

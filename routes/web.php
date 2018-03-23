@@ -112,6 +112,10 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
 Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     // Profile index page
     Route::get('/dashboard/profile', 'Dashboard\ProfileController@index')->name('dashboardIndexProfile');
+    // Display Edit Page    
+    Route::get('/dashboard/profile/edit', 'Dashboard\ProfileController@editPage')->name('dashboardEditProfilePage');
+    // Edit Informations        
+    Route::post('/dashboard/profile/edit', 'Dashboard\ProfileController@edit')->name('dashboardEditProfile');
 });
 
 /*

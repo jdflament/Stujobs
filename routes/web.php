@@ -29,7 +29,7 @@ Auth::routes();
 // Show the homepage
 Route::get('/', 'Website\HomeController@index')->name('home');
 // Show an offer
-Route::get('/offers/{id}/show', 'Website\OffersController@show')->name('showOffer');
+Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showValidOffer');
 
 /*
  * Company : Profile manager

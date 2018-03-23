@@ -17,7 +17,7 @@
                             <p class="card-text">{{ $offer->description }}</p>
                             <hr>
                             <p class="card-text"><small class="text-muted">Posté par : {{ $offer->name ? $offer->name : $offer->email }} le {{ $offer->created_at }}</small></p>
-                            <a href="/offers/{{ $offer->id_offer }}/show" class="card-link">Voir plus</a>
+                            <a href="/offers/{{ $offer->id_offer }}" class="card-link">Voir plus</a>
                         </div>
                     </div>
                     @endforeach

@@ -75,9 +75,9 @@ class OffersController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
-     * Show a job offer
+     * Show a valid job offer on website
      */
-    public function show($id)
+    public function showValid($id)
     {
         $offer = DB::table('offers')->where('offers.id', $id)
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')

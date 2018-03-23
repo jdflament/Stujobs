@@ -2,7 +2,7 @@
 <div class="modal fade" id="modalChangePassword" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form name="createCompany" role="form" method="post" action="/dashboard/profile/edit">
+            <form name="changePassword" role="form" method="post" action="/dashboard/profile/password/update">
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
@@ -19,7 +19,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="current-password">Veuillez saisir votre mot de passe actuel</label>*
-                                <input type="password" class="form-control" id="current-password" name="current-password" required="required" placeholder="Mot de passe actuel..."/>
+                                <input type="password" class="form-control" id="current_password" name="current_password" required="required" placeholder="Mot de passe actuel..."/>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="new-password">Veuillez saisir votre nouveau mot de passe</label>*
-                                <input type="password" class="form-control" id="new-password" name="new-password" required="required" placeholder="Mot de passe..."/>
+                                <input type="password" class="form-control" id="new_password" name="new_password" required="required" placeholder="Mot de passe..."/>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="new-password-confirm">Veuillez confirmer votre nouveau mot de passe</label>*
-                                <input type="password" class="form-control" id="new-password-confirm" name="new-password-confirm" required="required" placeholder="Mot de passe..."/>
+                                <input type="password" class="form-control" id="new_password_confirm" name="new_password_confirm" required="required" placeholder="Mot de passe..."/>
                             </div>
                         </div>
                     </div>

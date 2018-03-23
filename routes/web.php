@@ -116,6 +116,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/profile/edit', 'Dashboard\ProfileController@editPage')->name('dashboardEditProfilePage');
     // Edit Informations        
     Route::post('/dashboard/profile/edit', 'Dashboard\ProfileController@edit')->name('dashboardEditProfile');
+    // Change Password            
+    Route::post('/dashboard/profile/password/update', 'Dashboard\ProfileController@changePassword')->name('dashboardProfileUpdatePassword');
 });
 
 /*

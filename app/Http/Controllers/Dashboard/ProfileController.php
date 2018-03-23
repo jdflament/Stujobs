@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -63,7 +64,7 @@ class ProfileController extends Controller
 
         return view('dashboard/profile/index', ['admin' => $admin]);
     }
-        /**
+    /**
      *
      * Create Edit page
      */
@@ -78,4 +79,36 @@ class ProfileController extends Controller
 
         return view('dashboard/profile/actions/edit', ['admin' => $admin]);
     }
+    /**
+     *
+     * Change Password
+     */
+    public function changePassword(Request $request)
+    {
+        // $pass = Auth::user()->password;
+        // $current_password = Input::only('current_password');
+        // $new_password = Input::only('new_password', 'new_password_confirm');
+        
+        // if(Hash::check($current_password, $pass)) {
+        //     // 
+        // }
+ 
+        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+        //     //Current password and new password are same
+        //     return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        // }
+ 
+        // // $validatedData = $request->validate([
+        // //     'current-password' => 'required',
+        // //     'new-password' => 'required',
+        // // ]);
+ 
+        // //Change Password
+        // $user = Auth::user();
+        // $user->password = bcrypt($request->get('new-password'));
+        // $user->save();
+        return view('dashboard/profile/index');
+        
+    }
+
 }

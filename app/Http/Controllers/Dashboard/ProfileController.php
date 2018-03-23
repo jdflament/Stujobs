@@ -56,13 +56,7 @@ class ProfileController extends Controller
         $admin->setAttribute('office', $admin_data['edit_office']);
         $admin->save();
 
-        $admin = DB::table('users')->where('users.id', $id)
-            ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
-            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'admins.user_id', 'admins.firstname', 'admins.lastname', 'admins.phone', 'admins.office')
-            ->get()
-            ->first();
-
-        return view('dashboard/profile/index', ['admin' => $admin]);
+        return redirect('dashboard/profile');
     }
     /**
      *
@@ -83,31 +77,36 @@ class ProfileController extends Controller
      *
      * Change Password
      */
-    public function changePassword(Request $request)
+    public function changePassword()
     {
-        // $pass = Auth::user()->password;
-        // $current_password = Input::only('current_password');
-        // $new_password = Input::only('new_password', 'new_password_confirm');
+        $pass = Auth::user()->password;
+        $current_password = Input::only('current_password');
+        $new_password = Input::only('new_password', 'new_password_confirm');
         
-        // if(Hash::check($current_password, $pass)) {
-        //     // 
-        // }
- 
-        // if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-        //     //Current password and new password are same
-        //     return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
-        // }
- 
-        // // $validatedData = $request->validate([
-        // //     'current-password' => 'required',
-        // //     'new-password' => 'required',
-        // // ]);
- 
-        // //Change Password
-        // $user = Auth::user();
-        // $user->password = bcrypt($request->get('new-password'));
-        // $user->save();
-        return view('dashboard/profile/index');
+        // Check if the current password match with the user password
+        if(Hash::check($current_password["current_password"], $pass)) {
+            // Check if new password is different from the current one
+            if(!strcmp($current_password["current_password"], $new_password["new_password"]) == 0){
+                // Check if new password and new password confirm is the same              
+                if(strcmp($new_password["new_password"], $new_password["new_password_confirm"]) == 0){                      
+                    //Change Password
+                    $user = Auth::user();
+                    $user->password = bcrypt($new_password["new_password"]);
+                    $user->save();
+                }
+            }
+            else {
+                dd("pas ok");
+                return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");                               
+            }
+
+        }
+        else {
+            dd("pass pas ok");
+            return redirect()->back()->with("error","Current password wrong");            
+        }
+
+        return redirect('dashboard/profile');
         
     }
 

@@ -182,21 +182,22 @@ class OffersController extends Controller
     {
         Offer::where('id', $id)->delete();
     }
-//
-//    /**
-//     * @param $id
-//     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-//     *
-//     * Show a company
-//     */
-//    public function show($id)
-//    {
-//        $company = DB::table('users')->where('users.id', $id)
-//            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-//            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
-//            ->get()
-//            ->first();
-//
-//        return view('dashboard/companies/actions/show', ['company' => $company]);
-//    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show an offer on Dashboard
+     */
+    public function show($id)
+    {
+        $offer = DB::table('offers')->where('offers.id', $id)
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid')
+            ->get()
+            ->first();
+
+        return view('dashboard/offers/actions/show', ['offer' => $offer]);
+    }
 }

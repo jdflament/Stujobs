@@ -29,7 +29,7 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('website/offers/index', ['offers' => $offers]);
+        return view('website/profile/offers/index', ['offers' => $offers]);
     }
 
     /**
@@ -39,7 +39,7 @@ class OffersController extends Controller
      */
     public function createPage()
     {
-        return view('website/offers/actions/create');
+        return view('website/profile/offers/actions/create');
     }
 
     /**
@@ -68,16 +68,16 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('website/offers/index', ['offers' => $offers]);
+        return view('website/profile/offers/index', ['offers' => $offers]);
     }
 
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
-     * Show a job offer
+     * Show a valid job offer on website
      */
-    public function show($id)
+    public function showValid($id)
     {
         $offer = DB::table('offers')->where('offers.id', $id)
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')

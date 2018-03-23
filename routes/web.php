@@ -29,7 +29,7 @@ Auth::routes();
 // Show the homepage
 Route::get('/', 'Website\HomeController@index')->name('home');
 // Show an offer
-Route::get('/offers/{id}/show', 'Website\OffersController@show')->name('showOffer');
+Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showValidOffer');
 
 /*
  * Company : Profile manager
@@ -141,8 +141,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::post('/dashboard/offers/{id}/edit', 'Dashboard\OffersController@edit')->name('dashboardEditOffer');
     // Delete an offer
     Route::get('/dashboard/offers/{id}/delete', 'Dashboard\OffersController@delete')->name('dashboardDeleteOffer');
-//    // Show an offer
-//    Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
+    // Show an offer
+    Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
 });
 
 /*

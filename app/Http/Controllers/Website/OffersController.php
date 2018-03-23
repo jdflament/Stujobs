@@ -29,7 +29,7 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('website/offers/index', ['offers' => $offers]);
+        return view('website/profile/offers/index', ['offers' => $offers]);
     }
 
     /**
@@ -39,7 +39,7 @@ class OffersController extends Controller
      */
     public function createPage()
     {
-        return view('website/offers/actions/create');
+        return view('website/profile/offers/actions/create');
     }
 
     /**
@@ -68,7 +68,7 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('website/offers/index', ['offers' => $offers]);
+        return view('website/profile/offers/index', ['offers' => $offers]);
     }
 
     /**

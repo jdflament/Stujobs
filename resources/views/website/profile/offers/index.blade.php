@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="card-body">
-                        @include('website/offers/actions/list')
+                        @include('website.profile.offers.actions.list')
                     </div>
                 </div>
             </div>

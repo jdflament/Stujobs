@@ -22,6 +22,6 @@ class HomeController extends Controller
             ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->get();
 
-        return view('home', ['offers' => $offers]);
+        return view('website/index', ['offers' => $offers]);
     }
 }

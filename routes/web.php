@@ -139,8 +139,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::post('/dashboard/offers/{id}/edit', 'Dashboard\OffersController@edit')->name('dashboardEditOffer');
     // Delete an offer
     Route::get('/dashboard/offers/{id}/delete', 'Dashboard\OffersController@delete')->name('dashboardDeleteOffer');
-//    // Show an offer
-//    Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
+    // Show an offer
+    Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
 });
 
 /*

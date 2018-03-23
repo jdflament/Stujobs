@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Company;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -62,9 +64,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+//        $user = User::create([
+//            'email' => $data['email'],
+//            'password' => Hash::make($data['password']),
+//        ]);
+//
+//        $company = Input::only('name', 'siret', 'phone', 'address');
+
+        $user_data = Input::only('email', 'password', 'password_confirmation');
+        $company_data = Input::only('name', 'siret', 'address', 'phone');
+
+        $user = new User();
+        $user->setAttribute('email', $user_data['email']);
+        $user->setAttribute('password', Hash::make($data['password']));
+        $user->save();
+
+        $company = new Company();
+        $company->setAttribute('user_id', $user->getAttribute('id'));
+        $company->setAttribute('name', $company_data['name']);
+        $company->setAttribute('siret', $company_data['siret']);
+        $company->setAttribute('address', $company_data['address']);
+        $company->setAttribute('phone', $company_data['phone']);
+        $company->save();
+
+        $user->company_name = $company->name;
+        $user->company_siret = $company->siret;
+        $user->company_address = $company->address;
+        $user->company_phone = $company->phone;
+
+        return $user;
     }
 }

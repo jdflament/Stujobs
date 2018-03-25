@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h5 style="text-align: center; margin-bottom: 30px">Bienvenue sur le site Stujobs, il y a {{ count($offers) }} annonce(s) en ligne.</h5>
+            <h5 style="text-align: center; margin-bottom: 30px">Bienvenue sur le site Stujobs, il y a {{ count($offers) }} offre(s) d'emploi en ligne.</h5>
 
             @if (count($offers) > 0)
                 <div class="card-deck">
@@ -25,7 +25,7 @@
             @else
                 <div class="card">
                     <div class="card-body">
-                    Il n'y a aucune annonce en ligne, inscrivez vous à la newsletter si vous souhaitez être notifié lors d'une nouvelle annonce.
+                    Il n'y a aucune offre d'emploi en ligne, inscrivez vous à la newsletter si vous souhaitez être notifié lors d'une nouvelle annonce.
                     </div>
                 </div>
             @endif

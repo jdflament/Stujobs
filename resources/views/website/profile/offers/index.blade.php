@@ -5,9 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Mes annonces
+                    <div class="card-header">Mes offres d'emploi
                     <a href="{{ route('createOfferPage') }}" style="float: right;" class="btn btn-primary btn-sm">
-                        Créer une nouvelle annonce
+                        Créer une nouvelle offre
                     </a>
                     </div>
 

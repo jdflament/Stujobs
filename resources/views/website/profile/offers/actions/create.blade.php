@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Créer une nouvelle annonce
+                    <div class="card-header">Créer une nouvelle offre d'emploi
                     </div>
 
                     <form name="createOffer" role="form" method="post" action="/profile/offer/create">
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="create_title">Titre de l'annonce</label>*
+                                    <label for="create_title">Titre de l'offre</label>*
                                     <input type="text" class="form-control" id="create_title" name="create_title" required="required"/>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="create_description">Description de l'annonce</label>*
+                                    <label for="create_description">Description de l'offre</label>*
                                     <textarea class="form-control" id="create_description" name="create_description" required="required" rows="5"></textarea>
                                 </div>
                             </div>

@@ -58,7 +58,7 @@
                                         Mon profil
                                     </a>
                                     <a class="dropdown-item" href="{{ route('indexOffers') }}">
-                                        Mes annonces
+                                        Mes offres d'emploi
                                     </a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"

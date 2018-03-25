@@ -18,8 +18,11 @@ class HomeController extends Controller
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->where('offers.valid', '=', true)
-            ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->where([
+                ['offers.valid', '=', true],
+                ['offers.complete', '=', false],
+            ])
+            ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->get();
 
         return view('website/index', ['offers' => $offers]);

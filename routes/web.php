@@ -51,6 +51,10 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
     Route::get('/profile/offer/create', 'Website\OffersController@createPage')->name('createOfferPage');
     // Create a job offer
     Route::post('/profile/offer/create', 'Website\OffersController@create')->name('createOffer');
+    // Complete an offer
+    Route::get('/profile/offers/{id}/complete', 'Website\OffersController@complete')->name('dashboardCompleteOffer');
+    // Uncomplete an offer
+    Route::get('/profile/offers/{id}/uncomplete', 'Website\OffersController@uncomplete')->name('dashboardUncompleteOffer');
 });
 
 /*

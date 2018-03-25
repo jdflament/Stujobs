@@ -6,6 +6,7 @@
         <th>Durée</th>
         <th>Rémunération</th>
         <th>Validée</th>
+        <th>Terminée</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -24,6 +25,22 @@
                 @endif
             </td>
             <td>
+                @if ($offer->complete == 0)
+                    <span class="badge badge-success">Non</span>
+                @else
+                    <span class="badge badge-danger">Oui</span>
+                @endif
+            </td>
+            <td>
+                @if ($offer->complete == 0)
+                    <button data-href="/profile/offers/{{ $offer->id }}/complete" class="btn btn-success btn-sm btn-pre-complete-offer" data-toggle="modal" data-target="#modalCompleteOffer" style="margin-right: 30px;">
+                        <i style="color: white;" class="fa fa-check"></i>
+                    </button>
+                @else
+                    <button data-href="/profile/offers/{{ $offer->id }}/uncomplete" class="btn btn-danger btn-sm btn-pre-uncomplete-offer" data-toggle="modal" data-target="#modalUncompleteOffer" style="margin-right: 30px;">
+                        <i style="color: white;" class="fa fa-times"></i>
+                    </button>
+                @endif
                 <a href="/profile/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>

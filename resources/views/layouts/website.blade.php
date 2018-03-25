@@ -79,6 +79,14 @@
     </nav>
 
     <main class="py-4">
+        <div id="alerts"></div>
+        <div id="alertsBack">
+            @if (\Session::has('error'))
+                <div class="alert alert-danger">
+                    {!! \Session::get('error') !!}
+                </div>
+            @endif
+        </div>
         @yield('content')
     </main>
 </div>

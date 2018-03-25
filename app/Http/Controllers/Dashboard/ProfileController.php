@@ -23,6 +23,11 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Display the current user profile
+     */
     public function index()
     {
         $id = Auth::user()->id;
@@ -36,8 +41,9 @@ class ProfileController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      *
-     * Edit profile
+     * Edit the admin/super admin profile
      */
     public function edit()
     {
@@ -58,9 +64,11 @@ class ProfileController extends Controller
 
         return redirect('dashboard/profile');
     }
+
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
-     * Create Edit page
+     * Display the profile edit page
      */
     public function editPage()
     {
@@ -73,9 +81,11 @@ class ProfileController extends Controller
 
         return view('dashboard/profile/actions/edit', ['admin' => $admin]);
     }
+
     /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      *
-     * Change Password
+     * Change the current user password
      */
     public function changePassword()
     {
@@ -96,14 +106,12 @@ class ProfileController extends Controller
                 }
             }
             else {
-                dd("pas ok");
-                return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");                               
+                return redirect()->back()->with("error","Le nouveau mot de passe ne peut pas être identique à l'ancien mot de passe. Merci d'en choisir un nouveau.");
             }
 
         }
         else {
-            dd("pass pas ok");
-            return redirect()->back()->with("error","Current password wrong");            
+            return redirect()->back()->with("error","Le mot de passe actuel saisi est incorrect");
         }
 
         return redirect('dashboard/profile');

@@ -18,6 +18,15 @@ function closeAlert(div) {
     $(div).fadeOut();
 }
 
+// Global widget alert close function
+$(document).on('click', '#alertsBack', function(event) {
+   event.preventDefault();
+
+    $(this).find('.alert').fadeOut("normal", function() {
+        $(this).remove();
+    });
+});
+
 /*
 |--------------------------------------------------------------------------
 | Admin creation

@@ -48,7 +48,7 @@
                 <div class="modal-footer">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="submit" id="submit-change-password-btn" class="btn btn-primary submit-btn">Valider</button>
+                    <button type="submit" class="btn btn-primary submit-btn">Valider</button>
                 </div>
             </form>
         </div>

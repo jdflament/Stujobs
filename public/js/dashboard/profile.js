@@ -1,3 +1,3 @@
-$(document).on('click', '#submit-change-password-btn', function(event) {
+$(document).on('submit', 'form[name=changePassword]', function(event) {
     event.preventDefault();
 });

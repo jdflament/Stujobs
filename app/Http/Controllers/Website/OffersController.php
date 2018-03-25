@@ -68,7 +68,7 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('website/profile/offers/index', ['offers' => $offers]);
+        return redirect()->route('indexOffers')->with('offers', $offers);
     }
 
     /**

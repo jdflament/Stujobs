@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -22,7 +23,9 @@ class OffersController extends Controller
 
     public function index()
     {
-        $offers = DB::table('offers')
+        $id = Auth::user()->id;
+
+        $offers = DB::table('offers')->where('offers.company_id', $id)
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')

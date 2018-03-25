@@ -1,6 +1,7 @@
 <table id="offers-content" class="table table-response table-bordered table-striped table-hover table-responsive-lg" style="width: 100%;">
     <thead>
     <tr>
+        <th>En ligne</th>
         <th>Titre</th>
         <th>Type de contrat</th>
         <th>Durée</th>
@@ -11,8 +12,14 @@
     </tr>
     </thead>
     <tbody>
+    @if (count($offers) > 0)
     @foreach($offers as $offer)
         <tr>
+            @if ($offer->valid == 1 && $offer->complete == 0)
+            <td><span class="badge badge-success">Oui</span></td>
+            @else
+            <td><span class="badge badge-danger">Non</span></td>
+            @endif
             <td>{{ $offer->title ? $offer->title : 'NC' }}</td>
             <td>@lang('vocabulary.' . $offer->contract_type)</td>
             <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
@@ -53,5 +60,10 @@
             </td>
         </tr>
     @endforeach
+    @else
+    <tr>
+        <td align="center" colspan="8">Vous n'avez pas encore publié d'offre d'emploi.</td>
+    </tr>
+    @endif
     </tbody>
 </table>

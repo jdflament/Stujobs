@@ -73,7 +73,7 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('dashboard/offers/index', ['offers' => $offers]);
+        return redirect()->route('dashboardIndexOffers')->with('offers', $offers);
     }
 
     /**
@@ -170,7 +170,7 @@ class OffersController extends Controller
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->get();
 
-        return view('dashboard/offers/index', ['offers' => $offers]);
+        return redirect()->route('dashboardIndexOffers')->with('offers', $offers);
     }
 
     /**

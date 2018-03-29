@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
 
 class ProfileController extends Controller
 {
@@ -103,15 +104,17 @@ class ProfileController extends Controller
                     $user = Auth::user();
                     $user->password = bcrypt($new_password["new_password"]);
                     $user->save();
+                } else {
+                    return response()->json(['error' => Lang::get('errors.' . 468)], 468);
                 }
             }
             else {
-                return response()->json(['error' => "Le nouveau mot de passe ne peut pas être identique à l'ancien mot de passe. Merci d'en choisir un nouveau."], 404);
+                return response()->json(['error' => Lang::get('errors.' . 470)], 470);
             }
 
         }
         else {
-            return response()->json(['error' => 'Mot de passe incorrect'], 404);
+            return response()->json(['error' => Lang::get('errors.' . 469)], 469);
         }
 
         return redirect('dashboard/profile');

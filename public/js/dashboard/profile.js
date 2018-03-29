@@ -16,15 +16,14 @@ $(document).on('submit', 'form[name=changePassword]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> crée.", "alert-success", 4000);
+            console.log(response);
+            alertWidget("#alerts" ,"Le mot de passe a été <strong>correctement</strong> modifié.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalChangePassword>*", "");
-            console.log(response);
 
             $modal.modal('toggle');
         },
         error: function (response) {
-            console.log(response);
             alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
         },
         complete: function(response) {

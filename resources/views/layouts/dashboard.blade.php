@@ -126,5 +126,6 @@
     <script src="{{ asset('js/dashboard/admins.js') }}"></script>
     <script src="{{ asset('js/dashboard/companies.js') }}"></script>
     <script src="{{ asset('js/dashboard/offers.js') }}"></script>
+    <script src="{{ asset('js/dashboard/profile.js') }}"></script>
 </body>
 </html>

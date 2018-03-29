@@ -106,12 +106,12 @@ class ProfileController extends Controller
                 }
             }
             else {
-                return redirect()->back()->with("error","Le nouveau mot de passe ne peut pas être identique à l'ancien mot de passe. Merci d'en choisir un nouveau.");
+                return response()->json(['error' => "Le nouveau mot de passe ne peut pas être identique à l'ancien mot de passe. Merci d'en choisir un nouveau."], 404);
             }
 
         }
         else {
-            return redirect()->back()->with("error","Le mot de passe actuel saisi est incorrect");
+            return response()->json(['error' => 'Mot de passe incorrect'], 404);
         }
 
         return redirect('dashboard/profile');

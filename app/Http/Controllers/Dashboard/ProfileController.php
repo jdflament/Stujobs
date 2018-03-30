@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -88,33 +89,47 @@ class ProfileController extends Controller
      *
      * Change the current user password
      */
-    public function changePassword()
+    public function changePassword(Request $request)
     {
+
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|string|min:6|max:255',
+            'new_password' => 'required|string|min:6',
+            'new_password_confirm' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+        }
+
         $pass = Auth::user()->password;
         $current_password = Input::only('current_password');
         $new_password = Input::only('new_password', 'new_password_confirm');
-        
-        // Check if the current password match with the user password
+
         if(Hash::check($current_password["current_password"], $pass)) {
-            // Check if new password is different from the current one
+
             if(!strcmp($current_password["current_password"], $new_password["new_password"]) == 0){
-                // Check if new password and new password confirm is the same              
-                if(strcmp($new_password["new_password"], $new_password["new_password_confirm"]) == 0){                      
+
+                if(strcmp($new_password["new_password"], $new_password["new_password_confirm"]) == 0){
                     //Change Password
                     $user = Auth::user();
                     $user->password = bcrypt($new_password["new_password"]);
                     $user->save();
                 } else {
+                    // New passwords don't match
                     return response()->json(['error' => Lang::get('errors.' . 468)], 468);
                 }
             }
             else {
-                return response()->json(['error' => Lang::get('errors.' . 470)], 470);
+                // New password like the current
+                return response()->json(['error' => Lang::get('errors.' . 469)], 469);
             }
 
         }
         else {
-            return response()->json(['error' => Lang::get('errors.' . 469)], 469);
+            // User password invalid
+            return response()->json(['error' => Lang::get('errors.' . 470)], 470);
         }
 
         return redirect('dashboard/profile');

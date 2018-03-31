@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Validator;
 
 class CompaniesController extends Controller
 {
@@ -37,8 +39,19 @@ class CompaniesController extends Controller
      *
      * Create a company
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'create_email' => 'required|email',
+            'create_password' => 'required|string|min:6',
+            'create_role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+        }
+
         $user_data = Input::only('create_email', 'create_password', 'create_role');
         $company_data = Input::only('create_name', 'create_siret', 'create_address', 'create_phone');
 
@@ -69,8 +82,19 @@ class CompaniesController extends Controller
      *
      * Edit a company
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'edit_email' => 'required|email',
+            'edit_role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+        }
+
         $user_data = Input::only('edit_email', 'edit_role');
         $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone');
 

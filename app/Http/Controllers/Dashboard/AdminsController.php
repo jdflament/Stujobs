@@ -36,8 +36,19 @@ class AdminsController extends Controller
      *
      * Create an admin
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'create_email' => 'required|email',
+            'create_password' => 'required|string|min:6',
+            'create_role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+        }
+
         $user_data = Input::only('create_email', 'create_password', 'create_role');
         $admin_data = Input::only('create_firstname', 'create_lastname', 'create_phone', 'create_office');
 
@@ -68,8 +79,18 @@ class AdminsController extends Controller
      *
      * Edit an admin
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'edit_email' => 'required|email',
+            'create_role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+        }
+
         $user_data = Input::only('edit_email', 'edit_role');
         $admin_data = Input::only('edit_firstname', 'edit_lastname', 'edit_phone', 'edit_office');
 

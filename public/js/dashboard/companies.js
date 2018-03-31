@@ -73,7 +73,8 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
         },
         error: function (response) {
             console.log(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            // alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
         },
         complete: function(response) {
             $submit.html($submitValue);
@@ -128,7 +129,8 @@ $(document).on('submit', 'form[name=editCompany]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            // alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
         },
         complete: function() {
             $submit.html($submitValue);

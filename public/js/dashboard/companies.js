@@ -18,6 +18,10 @@ function closeAlert(div) {
     $(div).fadeOut();
 }
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Company creation

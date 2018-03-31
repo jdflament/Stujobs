@@ -21,7 +21,11 @@ $(document).on('click', '#alertsBack', function(event) {
     });
 });
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
+// Socials network sharing popup
 ;(function($){
     $.fn.customerPopup = function (e, intWidth, intHeight, blnResize) {
 

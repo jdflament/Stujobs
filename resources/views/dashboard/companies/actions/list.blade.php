@@ -16,15 +16,19 @@
             <td>{{ $company->email }}</td>
             <td>{{ $company->role }}</td>
             <td>
-                <a href="/dashboard/companies/{{ $company->id }}/show" class="btn btn-primary btn-sm">
+                <a href="/dashboard/companies/{{ $company->id }}/show" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Voir le profil">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>
-                <button data-company="{{ json_encode($company) }}" class="btn btn-warning btn-sm btn-pre-edit-company" data-toggle="modal" data-target="#modalEditCompany">
-                    <i style="color: white;" class="fa fa-pencil"></i>
-                </button>
-                <button data-href="/dashboard/companies/{{ $company->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-company" data-toggle="modal" data-target="#modalDeleteCompany">
-                    <i class="fa fa-trash"></i>
-                </button>
+                <span data-toggle="tooltip" data-placement="top" title="Modifier">
+                    <button data-company="{{ json_encode($company) }}" class="btn btn-warning btn-sm btn-pre-edit-company" data-toggle="modal" data-target="#modalEditCompany">
+                        <i style="color: white;" class="fa fa-pencil"></i>
+                    </button>
+                </span>
+                <span data-toggle="tooltip" data-placement="top" title="Supprimer">
+                    <button data-href="/dashboard/companies/{{ $company->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-company" data-toggle="modal" data-target="#modalDeleteCompany">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </span>
             </td>
         </tr>
     @endforeach

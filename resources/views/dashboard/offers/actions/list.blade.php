@@ -25,23 +25,29 @@
             </td>
             <td>
                 @if ($offer->valid == 0)
-                <button data-href="/dashboard/offers/{{ $offer->id }}/approve" class="btn btn-success btn-sm btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer" style="margin-right: 30px;">
-                    <i style="color: white;" class="fa fa-check"></i>
-                </button>
+                <span data-toggle="tooltip" data-placement="top" title="Approuver l'offre">
+                    <button data-href="/dashboard/offers/{{ $offer->id }}/approve" class="btn btn-success btn-sm btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer" style="margin-right: 30px;">
+                        <i style="color: white;" class="fa fa-check"></i>
+                    </button>
+                </span>
                 @else
-                <button data-href="/dashboard/offers/{{ $offer->id }}/disapprove" class="btn btn-danger btn-sm btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer" style="margin-right: 30px;">
-                    <i style="color: white;" class="fa fa-times"></i>
-                </button>
+                <span data-toggle="tooltip" data-placement="top" title="Désapprouver l'offre">
+                    <button data-href="/dashboard/offers/{{ $offer->id }}/disapprove" class="btn btn-danger btn-sm btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer" style="margin-right: 30px;">
+                        <i style="color: white;" class="fa fa-times"></i>
+                    </button>
+                </span>
                 @endif
-                <a href="/dashboard/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm">
+                <a href="/dashboard/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Voir l'offre">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>
-                <a href="/dashboard/offers/{{ $offer->id }}/edit" class="btn btn-warning btn-sm btn-pre-edit-offer">
+                <a href="/dashboard/offers/{{ $offer->id }}/edit" class="btn btn-warning btn-sm btn-pre-edit-offer" data-toggle="tooltip" data-placement="top" title="Modifier">
                     <i style="color: white;" class="fa fa-pencil"></i>
                 </a>
-                <button data-href="/dashboard/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
-                    <i class="fa fa-trash"></i>
-                </button>
+                <span data-toggle="tooltip" data-placement="top" title="Supprimer">
+                    <button data-href="/dashboard/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </span>
             </td>
         </tr>
     @endforeach

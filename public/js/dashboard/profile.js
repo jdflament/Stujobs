@@ -23,7 +23,12 @@ $(document).on('submit', 'form[name=changePassword]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    alertWidget("#alerts" ,val, "alert-danger", 4000);
+                    console.log(val);
+                });
+            });
         },
         complete: function(response) {
             $submit.html($submitValue);

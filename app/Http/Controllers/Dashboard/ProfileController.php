@@ -100,7 +100,8 @@ class ProfileController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+            // return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
         }
 
         $pass = Auth::user()->password;
@@ -134,6 +135,14 @@ class ProfileController extends Controller
 
         return redirect('dashboard/profile');
         
+    }
+    public function messages()
+    {
+        return [
+            'current_password.required' => 'Champs requis',
+            'current_password.min:6' => 'Minium 6',
+            'current_password.max:255' => 'Maximum 255',
+        ];
     }
 
 }

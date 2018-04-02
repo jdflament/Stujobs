@@ -23,10 +23,11 @@ $(document).on('submit', 'form[name=changePassword]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
+            alertWidget("#alerts" ,"Une erreur est survenue. Merci de <strong>réessayer</strong> ultérieurement.", "alert-danger", 4000);
+            $('.error-message').remove();
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
-                    alertWidget("#alerts" ,val, "alert-danger", 4000);
-                    console.log(val);
+                    $('#' + i).after('<div class="error-message">' + val + '</div>');
                 });
             });
         },

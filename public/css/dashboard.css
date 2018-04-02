@@ -122,6 +122,12 @@ ul ul a {
     bottom: -5px;
 }
 
+.error-message {
+    color: #ab333f;
+    text-align: right;
+    margin: 5px;
+}
+
 /* Remove dropdown carret */
 /*#trackingList::after {*/
 /*display:none*/

@@ -14,7 +14,7 @@
 
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <p class="statusMsg"></p>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -40,9 +40,6 @@
                         </div>
                     </div>
                 </div>
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-            @endforeach
 
             <!-- Modal Footer -->
                 <div class="modal-footer">

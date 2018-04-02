@@ -13,6 +13,9 @@ return [
     */
 
     404 => "Une erreur est survenue, la page demandée est introuvable.",
+    'current_password.required' => 'Champs requis',
+    'current_password.min:6' => 'Minimum 6',
+    'current_password.max:255' => 'Maximum 255',
 
     // Password errors
     467 => "Une erreur est survenue. Merci de vérifier les champs.",

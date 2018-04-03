@@ -26,7 +26,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <p style="text-align:center;">Les informations suivantes ne sont pas obligatoire</p>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -65,7 +64,7 @@
                         </div>
                         <div class="card-footer" style="text-align: right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <a href="{{ route('dashboardIndexProfile') }}" type="button" class="btn btn-default" data-dismiss="modal" style="-webkit-appearance: initial; color:black">Annuler</a>
+                            <a href="{{ route('indexProfile') }}" type="button" class="btn btn-default" data-dismiss="modal" style="-webkit-appearance: initial; color:black">Annuler</a>
                             <button type="submit" class="btn btn-primary submit-btn">Modifier</button>
                         </div>
                     </form>

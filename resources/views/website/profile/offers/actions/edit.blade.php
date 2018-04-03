@@ -82,6 +82,4 @@
             </div>
         </div>
     </div>
-
-    @include('dashboard/companies/actions/create')
 @endsection

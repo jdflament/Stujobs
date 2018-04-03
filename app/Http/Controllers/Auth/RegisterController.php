@@ -10,6 +10,7 @@ use App\Models\VerifyUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -111,5 +112,16 @@ class RegisterController extends Controller
         }
 
         return redirect('/login')->with('status', $status);
+    }
+
+    /**
+     * @param Request $request
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
     }
 }

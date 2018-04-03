@@ -53,3 +53,9 @@
     margin-right: auto;
     cursor: pointer;
 }
+
+.error-message {
+    color: #ab333f;
+    text-align: right;
+    margin: 5px;
+}

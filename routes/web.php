@@ -38,6 +38,12 @@ Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showVali
 Route::group(['middleware' => 'can:companyAccess'], function() {
     // Profile index page
     Route::get('/profile', 'Website\ProfileController@index')->name('indexProfile');
+    // Display Edit Page
+    Route::get('/profile/edit', 'Website\ProfileController@editPage')->name('editProfilePage');
+    // Edit Informations
+    Route::post('/profile/edit', 'Website\ProfileController@edit')->name('editProfile');
+    // Change Password
+    Route::post('/profile/password/update', 'Website\ProfileController@changePassword')->name('profileUpdatePassword');
 });
 
 /*

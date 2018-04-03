@@ -6,13 +6,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Mon profil
-                        <a href="{{ route('indexOffers') }}" style="float: right;" class="btn btn-primary btn-sm">
-                            Voir mes annonces
+                        <a style="float: right; margin-right: 10px;" href="{{ route('editProfilePage') }}" class="btn btn-primary btn-sm">
+                            Modifier mes informations
                         </a>
                     </div>
 
                     <div class="card-body">
-                        Voici mes informations, je peux également les éditer ici...
+                        @include('website/profile/actions/list')
                     </div>
                 </div>
             </div>

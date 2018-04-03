@@ -98,30 +98,6 @@ ul ul a {
     -webkit-appearance: inherit !important;
 }
 
-.parcel-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.parcel-row div:first-child {
-    flex-basis: 10%;
-    text-align: center;
-    position: relative;
-    bottom: -5px;
-}
-
-.parcel-row div:nth-child(2), .parcel-row div:nth-child(3), .parcel-row div:nth-child(4), .parcel-row div:nth-child(5) {
-    flex-basis: 18%;
-}
-
-.parcel-row div:last-child {
-    flex-basis: 10%;
-    text-align: center;
-    position: relative;
-    bottom: -5px;
-}
-
 .error-message {
     color: #ab333f;
     text-align: right;

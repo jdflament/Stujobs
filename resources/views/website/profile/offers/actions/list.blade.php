@@ -2,12 +2,12 @@
     <thead>
     <tr>
         <th>En ligne</th>
+        <th>Validée</th>
+        <th>Terminée</th>
         <th>Titre</th>
         <th>Type de contrat</th>
         <th>Durée</th>
         <th>Rémunération</th>
-        <th>Validée</th>
-        <th>Terminée</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -20,10 +20,6 @@
             @else
             <td><span class="badge badge-danger">Non</span></td>
             @endif
-            <td><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
-            <td>@lang('vocabulary.' . $offer->contract_type)</td>
-            <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
-            <td>{{ $offer->remuneration ? $offer->remuneration : 'NC'}}</td>
             <td>
                 @if ($offer->valid == 0)
                     <span class="badge badge-danger">Non</span>
@@ -38,6 +34,11 @@
                     <span class="badge badge-danger">Oui</span>
                 @endif
             </td>
+            <td><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
+            <td>@lang('vocabulary.' . $offer->contract_type)</td>
+            <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
+            <td>{{ $offer->remuneration ? $offer->remuneration : 'NC'}}</td>
+
             <td>
                 @if ($offer->complete == 0)
                     <span data-toggle="tooltip" data-placement="top" title="Terminer l'offre">

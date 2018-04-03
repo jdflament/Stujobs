@@ -12,47 +12,6 @@ function closeAlert(div) {
     $(div).fadeOut();
 }
 
-// Global widget alert close function
-$(document).on('click', '#alertsBack', function(event) {
-    event.preventDefault();
-
-    $(this).find('.alert').fadeOut("normal", function() {
-        $(this).remove();
-    });
-});
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-// Socials network sharing popup
-;(function($){
-    $.fn.customerPopup = function (e, intWidth, intHeight, blnResize) {
-
-        // Prevent default anchor event
-        e.preventDefault();
-
-        // Set values for window
-        intWidth = intWidth || '500';
-        intHeight = intHeight || '400';
-        strResize = (blnResize ? 'yes' : 'no');
-
-        // Set title and open popup with focus on it
-        var strTitle = ((typeof this.attr('title') !== 'undefined') ? this.attr('title') : 'Social Share'),
-            strParam = 'width=' + intWidth + ',height=' + intHeight + ',resizable=' + strResize,
-            objWindow = window.open(this.attr('href'), strTitle, strParam).focus();
-    };
-
-    /* ================================================== */
-
-    $(document).ready(function ($) {
-        $('.btn-social').on("click", function(e) {
-            $(this).customerPopup(e);
-        });
-    });
-
-}(jQuery));
-
 
 /*
 |--------------------------------------------------------------------------
@@ -140,6 +99,54 @@ $(document).on('click', '#btn-uncomplete-offer', function(event) {
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
 
+            $modal.modal('toggle');
+        },
+        error: function (response) {
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+        },
+        complete: function() {
+            $button.html($buttonValue);
+        }
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Offer deletion
+|--------------------------------------------------------------------------
+*/
+
+// Set delete button href
+$(document).on('click', '.btn-pre-delete-offer', function(event) {
+    event.preventDefault();
+    var route = $(this).data('href');
+
+    $('#btn-delete-offer').attr('href', route);
+});
+
+// Reset delete button href
+$(document).on('hidden.bs.modal', '#modalDeleteOffer', function() {
+    $(this).find('#btn-delete-offer').attr('href', '#');
+});
+
+$(document).on('click', '#btn-delete-offer', function(event) {
+    event.preventDefault();
+
+    var $modal = $(this).closest('.modal');
+    var $button = $(this);
+    var $buttonValue = $button.html();
+    var url = $(this).attr('href');
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        beforeSend: function() {
+            $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
+        },
+        success: function(response) {
+            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
+            $button.html('<i class="fa fa-check"></i>');
+            $("#offers-content").load(location.href + " #offers-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {

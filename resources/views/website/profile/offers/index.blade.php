@@ -21,4 +21,5 @@
 
     @include('website/profile/offers/actions/complete')
     @include('website/profile/offers/actions/uncomplete')
+    @include('website/profile/offers/actions/delete')
 @endsection

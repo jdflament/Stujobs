@@ -52,10 +52,10 @@ class OffersController extends Controller
      */
     public function create()
     {
-        $data = Input::only('create_company_id', 'create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_valid');
+        $data = Input::only('create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_valid');
 
         $offer = new Offer();
-        $offer->setAttribute('company_id', $data['create_company_id']);
+        $offer->setAttribute('company_id', Auth::user()->id);
         $offer->setAttribute('title', $data['create_title']);
         $offer->setAttribute('description', $data['create_description']);
         $offer->setAttribute('contract_type', $data['create_contract_type']);
@@ -138,5 +138,80 @@ class OffersController extends Controller
         } else {
             abort(404);
         }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show the offer edit page
+     */
+    public function editPage($id)
+    {
+        $offer = DB::table('offers')
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('offers.id', 'users.email', 'users.id as user_id', 'users.role','offers.company_id' , 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->where('offers.id', '=', $id)
+            ->get()
+            ->first();
+
+        return view('website/profile/offers/actions/edit', ['offer' => $offer]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Edit an offer
+     */
+    public function edit($id)
+    {
+        $data = Input::only('edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration');
+
+        $offer = Offer::where('id', $id)->first();
+        $offer->setAttribute('company_id', Auth::user()->id);
+        $offer->setAttribute('title', $data['edit_title']);
+        $offer->setAttribute('description', $data['edit_description']);
+        $offer->setAttribute('contract_type', $data['edit_contract_type']);
+        $offer->setAttribute('duration', $data['edit_duration']);
+        $offer->setAttribute('remuneration', $data['edit_remuneration']);
+        $offer->save();
+
+        $offers = DB::table('offers')
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->get();
+
+        return redirect()->route('indexOffers')->with('offers', $offers);
+    }
+
+    /**
+     * @param $id
+     *
+     * Delete an offer
+     */
+    public function delete($id)
+    {
+        Offer::where('id', $id)->delete();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show an offer on Profile
+     */
+    public function show($id)
+    {
+        $offer = DB::table('offers')->where('offers.id', $id)
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete')
+            ->get()
+            ->first();
+
+        return view('website/profile/offers/actions/show', ['offer' => $offer]);
     }
 }

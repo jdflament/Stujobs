@@ -20,7 +20,7 @@
             @else
             <td><span class="badge badge-danger">Non</span></td>
             @endif
-            <td>{{ $offer->title ? $offer->title : 'NC' }}</td>
+            <td><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
             <td>@lang('vocabulary.' . $offer->contract_type)</td>
             <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
             <td>{{ $offer->remuneration ? $offer->remuneration : 'NC'}}</td>
@@ -55,11 +55,9 @@
                 <a href="/profile/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Voir l'offre">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>
-                <span data-toggle="tooltip" data-placement="top" title="Modifier">
-                    <button data-offer="{{ json_encode($offer) }}" class="btn btn-warning btn-sm btn-pre-edit-offer" data-toggle="modal" data-target="#modalEditOffer">
-                        <i style="color: white;" class="fa fa-pencil"></i>
-                    </button>
-                </span>
+                <a href="/profile/offers/{{ $offer->id }}/edit" class="btn btn-warning btn-sm btn-pre-edit-offer" data-toggle="tooltip" data-placement="top" title="Modifier">
+                    <i style="color: white;" class="fa fa-pencil"></i>
+                </a>
                 <span data-toggle="tooltip" data-placement="top" title="Supprimer">
                     <button data-href="/profile/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
                         <i class="fa fa-trash"></i>

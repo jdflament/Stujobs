@@ -52,9 +52,17 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
     // Create a job offer
     Route::post('/profile/offer/create', 'Website\OffersController@create')->name('createOffer');
     // Complete an offer
-    Route::get('/profile/offers/{id}/complete', 'Website\OffersController@complete')->name('dashboardCompleteOffer');
+    Route::get('/profile/offers/{id}/complete', 'Website\OffersController@complete')->name('completeOffer');
     // Uncomplete an offer
-    Route::get('/profile/offers/{id}/uncomplete', 'Website\OffersController@uncomplete')->name('dashboardUncompleteOffer');
+    Route::get('/profile/offers/{id}/uncomplete', 'Website\OffersController@uncomplete')->name('uncompleteOffer');
+    // Edit offer page
+    Route::get('/profile/offers/{id}/edit', 'Website\OffersController@editPage')->name('editOfferPage');
+    // Edit an offer
+    Route::post('/profile/offers/{id}/edit', 'Website\OffersController@edit')->name('editOffer');
+    // Delete an offer
+    Route::get('/profile/offers/{id}/delete', 'Website\OffersController@delete')->name('deleteOffer');
+    // Show an offer
+    Route::get('/profile/offers/{id}/show', 'Website\OffersController@show')->name('showOffer');
 });
 
 /*

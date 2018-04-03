@@ -118,6 +118,7 @@ class ProfileController extends Controller
                     $user->save();
                 } else {
                     // New passwords don't match
+//                    return response()->json(['error' => Lang::get('errors.' . 468)], 468);
                     return response()->json(['error' => Lang::get('errors.' . 468)], 468);
                 }
             }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12 col-xs-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">Créer une nouvelle offre d'emploi
                     </div>
@@ -15,7 +15,6 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <input type="hidden" name="create_company_id" id="create_company_id" required="required" value="{{ Auth::user()->id }}" />
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

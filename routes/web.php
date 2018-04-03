@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+// Email verification
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+
 /*
 |--------------------------------------------------------------------------
 | Website routes

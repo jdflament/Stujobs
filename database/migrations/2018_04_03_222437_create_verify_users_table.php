@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateOfferRemuneration extends Migration
+class CreateVerifyUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class UpdateOfferRemuneration extends Migration
      */
     public function up()
     {
-        Schema::table('offers', function (Blueprint $table) {
-            $table->string('remuneration')->nullable(false)->change();
+        Schema::create('verify_users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('token');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class UpdateOfferRemuneration extends Migration
      */
     public function down()
     {
-        Schema::table('offers', function (Blueprint $table) {
-            $table->integer('remuneration')->change();
-        });
+        Schema::dropIfExists('verify_users');
     }
 }

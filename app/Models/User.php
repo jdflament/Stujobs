@@ -36,4 +36,12 @@ class User extends Authenticatable
         $role = (array)$role;
         return in_array($this->role, $role);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function verifyUser()
+    {
+        return $this->hasOne('App\VerifyUser');
+    }
 }

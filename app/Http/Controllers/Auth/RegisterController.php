@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\VerifyMail;
 use App\Models\Company;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\VerifyUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -81,11 +84,32 @@ class RegisterController extends Controller
         $company->setAttribute('phone', $company_data['phone']);
         $company->save();
 
-        $user->company_name = $company->name;
-        $user->company_siret = $company->siret;
-        $user->company_address = $company->address;
-        $user->company_phone = $company->phone;
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->getAttribute('id'),
+            'token' => str_random(40)
+        ]);
+
+        Mail::to($user->email)->send(new VerifyMail($user));
 
         return $user;
+    }
+
+    public function verifyUser($token)
+    {
+        $verifyUser = VerifyUser::where('token', $token)->first();
+        if (isset($verifyUser)) {
+            $user = $verifyUser->user;
+            if (!$user->verified) {
+                $verifyUser->user->verified = 1;
+                $verifyUser->user->save();
+                $status = "Votre adresse email est vérifiée. Vous pouvez vous connecter.";
+            } else {
+                $status = "Votre adresse email est déjà vérifiée. Vous pouvez vous connecter";
+            }
+        } else {
+            return redirect('/login')->with('warning', "Désolé, votre email n'est pas valide.");
+        }
+
+        return redirect('/login')->with('status', $status);
     }
 }

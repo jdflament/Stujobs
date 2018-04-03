@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateOfferRemuneration extends Migration
+class AddUserVerify extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateOfferRemuneration extends Migration
      */
     public function up()
     {
-        Schema::table('offers', function (Blueprint $table) {
-            $table->string('remuneration')->nullable(false)->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('verified')->default(false);
         });
     }
 
@@ -25,8 +25,8 @@ class UpdateOfferRemuneration extends Migration
      */
     public function down()
     {
-        Schema::table('offers', function (Blueprint $table) {
-            $table->integer('remuneration')->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('verified');
         });
     }
 }

@@ -7,10 +7,10 @@ use App\Models\Company;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\VerifyUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -119,7 +119,7 @@ class RegisterController extends Controller
      * @param $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function registered(Request $request, $user)
+    public function registered(Request $request, $user)
     {
         $this->guard()->logout();
         return redirect('/login')->with('status', 'Nous vous avons envoyé un email de vérification. Merci de cliquer sur le bouton de vérification dans le mail.');

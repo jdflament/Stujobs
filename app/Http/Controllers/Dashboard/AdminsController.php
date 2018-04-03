@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 
 class AdminsController extends Controller
@@ -41,13 +42,13 @@ class AdminsController extends Controller
     {
         // Inputs errors
         $validator = Validator::make($request->all(), [
-            'create_email' => 'required|email',
+            'create_email' => 'required|email|unique:users,email',
             'create_password' => 'required|string|min:6',
             'create_role' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
         }
 
         $user_data = Input::only('create_email', 'create_password', 'create_role');
@@ -81,21 +82,20 @@ class AdminsController extends Controller
      * Edit an admin
      */
     public function edit($id, Request $request)
-    {
+    {            
         // Inputs errors
         $validator = Validator::make($request->all(), [
-            'edit_email' => 'required|email',
-            'create_role' => 'required',
+            'edit_email' => 'required|email|unique:users,email,'.$id
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);            
         }
-
+        
+        $user = User::where('id', '=', $id)->first();
         $user_data = Input::only('edit_email', 'edit_role');
         $admin_data = Input::only('edit_firstname', 'edit_lastname', 'edit_phone', 'edit_office');
 
-        $user = User::where('id', '=', $id)->first();
         $user->setAttribute('email', $user_data['edit_email']);
         $user->setAttribute('role', $user_data['edit_role']);
         $user->save();

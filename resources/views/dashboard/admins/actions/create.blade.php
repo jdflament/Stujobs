@@ -19,7 +19,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_email">Email de l'administrateur</label>*
-                                <input type="text" class="form-control" id="create_email" name="create_email" required="required" placeholder="Ex : admin@mail.com"/>
+                                <input type="text" class="form-control" id="create_email" name="create_email" required="required"  placeholder="Ex : admin@mail.com"/>
                             </div>
                         </div>
                     </div>
@@ -77,9 +77,6 @@
                         </div>
                     </div>
                 </div>
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-            @endforeach
 
             <!-- Modal Footer -->
                 <div class="modal-footer">

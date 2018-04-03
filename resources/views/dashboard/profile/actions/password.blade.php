@@ -19,7 +19,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="current-password">Veuillez saisir votre mot de passe actuel</label>*
-                                <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Mot de passe actuel..."/>
+                                <input type="password" class="form-control" id="current_password" name="current_password" required="required" placeholder="Mot de passe actuel..."/>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="new-password">Veuillez saisir votre nouveau mot de passe</label>*
-                                <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Mot de passe..."/>
+                                <input type="password" class="form-control" id="new_password" name="new_password" required="required" placeholder="Mot de passe..."/>
                             </div>
                         </div>
                     </div>

@@ -69,9 +69,6 @@
                         </div>
                     </div>
                 </div>
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-            @endforeach
 
             <!-- Modal Footer -->
                 <div class="modal-footer">

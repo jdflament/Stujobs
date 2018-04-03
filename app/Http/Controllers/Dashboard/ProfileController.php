@@ -47,13 +47,25 @@ class ProfileController extends Controller
      *
      * Edit the admin/super admin profile
      */
-    public function edit()
+    public function edit(Request $request)
     {
-        $id = Auth::user()->id;
+        $id = Auth::user()->id;        
+        
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'edit_email' => 'required|email|min:6|max:255|unique:users,email,'.$id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('dashboard/profile/edit')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        
+        $user = User::where('id', $id)->first();        
         $user_data = Input::only('edit_email');              
         $admin_data = Input::only('edit_lastname', 'edit_firstname', 'edit_phone', 'edit_office');
 
-        $user = User::where('id', $id)->first();
         $user->setAttribute('email', $user_data['edit_email']);
         $user->save();
         

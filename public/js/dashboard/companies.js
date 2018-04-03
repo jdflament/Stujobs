@@ -73,8 +73,12 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
         },
         error: function (response) {
             console.log(response);
-            // alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
-            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error-message">' + val + '</div>');
+                });
+            });
         },
         complete: function(response) {
             $submit.html($submitValue);
@@ -129,8 +133,13 @@ $(document).on('submit', 'form[name=editCompany]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            // alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
-            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            $('.error-message').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error-message">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $submit.html($submitValue);

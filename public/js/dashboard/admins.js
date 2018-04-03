@@ -68,8 +68,13 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
         },
         error: function (response) {
             console.log(response);
-            // alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
-            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            $('.error-message').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error-message">' + val + '</div>');
+                });
+            });
         },
         complete: function(response) {
             $submit.html($submitValue);
@@ -117,6 +122,7 @@ $(document).on('submit', 'form[name=editAdmin]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
+            console.log(response);
             alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> modifé.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalEditAdmin>*", "");
@@ -124,8 +130,13 @@ $(document).on('submit', 'form[name=editAdmin]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            // alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
-            alertWidget("#alerts" ,response.responseJSON.error, "alert-danger", 4000);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            $('.error-message').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error-message">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $submit.html($submitValue);

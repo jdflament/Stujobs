@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CompaniesController extends Controller
 {
@@ -43,13 +44,13 @@ class CompaniesController extends Controller
     {
         // Inputs errors
         $validator = Validator::make($request->all(), [
-            'create_email' => 'required|email',
+            'create_email' => 'required|email|unique:users,email',
             'create_password' => 'required|string|min:6',
             'create_role' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);            
         }
 
         $user_data = Input::only('create_email', 'create_password', 'create_role');
@@ -84,21 +85,20 @@ class CompaniesController extends Controller
      */
     public function edit($id, Request $request)
     {
-
         // Inputs errors
         $validator = Validator::make($request->all(), [
-            'edit_email' => 'required|email',
+            'edit_email' => 'required|email|unique:users,email,'.$id,
             'edit_role' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => Lang::get('errors.' . 467)], 467);
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
         }
 
+        $user = User::where('id', '=', $id)->first();        
         $user_data = Input::only('edit_email', 'edit_role');
         $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone');
 
-        $user = User::where('id', '=', $id)->first();
         $user->setAttribute('email', $user_data['edit_email']);
         $user->setAttribute('role', $user_data['edit_role']);
         $user->save();

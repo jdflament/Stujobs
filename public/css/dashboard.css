@@ -104,6 +104,10 @@ ul ul a {
     margin: 5px;
 }
 
+.chart-block {
+    max-width: 400px;
+}
+
 /* Remove dropdown carret */
 /*#trackingList::after {*/
 /*display:none*/

@@ -110,6 +110,17 @@ Route::group(['middleware' => 'can:superAdminAccess'], function() {
 */
 
 /*
+ * Dashboard manager
+ */
+
+Route::group(['middleware' => 'can:allAdminsAccess'], function() {
+    // Access to the dashboard homepage
+    Route::get('/dashboard', 'Dashboard\HomeController@index')->name('dashboardIndex');
+    // Get diffrent offers contracts type
+    Route::get('/dashboard/offers/contracttype', 'Dashboard\HomeController@contractType')->name('dashboardContractType');
+});
+
+/*
  * Companies manager
  */
 
@@ -127,7 +138,7 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
 });
 
 /*
- * Company : Profile manager
+ * Profile manager
  */
 
 Route::group(['middleware' => 'can:allAdminsAccess'], function() {
@@ -164,12 +175,4 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/offers/{id}/delete', 'Dashboard\OffersController@delete')->name('dashboardDeleteOffer');
     // Show an offer
     Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
-});
-
-/*
- * HomeController manager
- */
-
-Route::group(['middleware' => 'can:allAdminsAccess'], function() {
-    Route::get('/dashboard', 'Dashboard\HomeController@index')->name('dashboardIndex');
 });

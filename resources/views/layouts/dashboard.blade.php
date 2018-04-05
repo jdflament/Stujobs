@@ -124,10 +124,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
     <script src="{{ asset('js/dashboard/admins.js') }}"></script>
     <script src="{{ asset('js/dashboard/companies.js') }}"></script>
     <script src="{{ asset('js/dashboard/offers.js') }}"></script>
     <script src="{{ asset('js/dashboard/profile.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

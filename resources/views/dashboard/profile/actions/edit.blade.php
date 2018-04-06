@@ -24,6 +24,9 @@
                                         <label for="edit_email">Adresse email</label>*
                                         <input type="text" class="form-control" id="edit_email" name="edit_email" value="{{ $admin->email }}" />
                                     </div>
+                                    @if ($errors->has('edit_email'))
+                                            <div class="error">{{ $errors->first('edit_email') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <p style="text-align:center;">Les informations suivantes ne sont pas obligatoire</p>
@@ -33,6 +36,9 @@
                                         <label for="edit_lastname">Nom</label>
                                         <input type="text" class="form-control" id="edit_lastname" name="edit_lastname" value="{{ $admin->lastname }}" />
                                     </div>
+                                    @if ($errors->has('edit_lastname'))
+                                            <div class="error">{{ $errors->first('edit_lastname') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -41,6 +47,9 @@
                                         <label for="edit_firstname">Prénom</label>
                                         <input type="text" class="form-control" id="edit_firstname" name="edit_firstname" value="{{ $admin->firstname }}" />
                                     </div>
+                                    @if ($errors->has('edit_firstname'))
+                                            <div class="error">{{ $errors->first('edit_firstname') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -49,6 +58,9 @@
                                         <label for="edit_phone">Téléphone</label>
                                         <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="{{ $admin->phone }}" />
                                     </div>
+                                    @if ($errors->has('edit_phone'))
+                                            <div class="error">{{ $errors->first('edit_phone') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -57,11 +69,11 @@
                                         <label for="edit_office">Poste</label>
                                         <input type="text" class="form-control" id="edit_office" name="edit_office" value="{{ $admin->office }}" />
                                     </div>
+                                    @if ($errors->has('edit_office'))
+                                            <div class="error">{{ $errors->first('edit_office') }}</div>
+                                    @endif
                                 </div>
                             </div>
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
                         </div>
                         <div class="card-footer" style="text-align: right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

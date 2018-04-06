@@ -24,6 +24,9 @@
                                                 <option value="{{ $company->id }}" @if($offer->user_id == $company->id) selected @endif>{{ $company->email }} {{ $company->name ? '(' . $company->name . ')' : '(NC)' }}</option>
                                             @endforeach
                                         </select>
+                                        @if ($errors->has('edit_company_id'))
+                                            <div class="error">{{ $errors->first('edit_company_id') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
@@ -39,6 +42,9 @@
                                         <label for="edit_title">Titre de l'annonce</label>*
                                         <input type="text" class="form-control" id="edit_title" name="edit_title" required="required" value="{{ $offer->title }}" />
                                     </div>
+                                    @if ($errors->has('edit_title'))
+                                            <div class="error">{{ $errors->first('edit_title') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -47,6 +53,9 @@
                                         <label for="edit_description">Description de l'annonce</label>*
                                         <textarea class="form-control" id="edit_description" name="edit_description" required="required" rows="5">{{ $offer->description }}</textarea>
                                     </div>
+                                    @if ($errors->has('edit_description'))
+                                            <div class="error">{{ $errors->first('edit_description') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -71,6 +80,9 @@
                                             <option value="<?= $key ?>" @if($offer->contract_type == $key) selected @endif><?= $contract ?></option>
                                             <?php endforeach; ?>
                                         </select>
+                                        @if ($errors->has('edit_contract_type'))
+                                            <div class="error">{{ $errors->first('edit_contract_type') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -78,17 +90,20 @@
                                         <label for="edit_duration">Durée</label>*
                                         <input type="text" class="form-control" id="edit_duration" name="edit_duration" required="required" placeholder="Ex : 6 mois" value="{{ $offer->duration }}" />
                                     </div>
+                                    @if ($errors->has('edit_duration'))
+                                            <div class="error">{{ $errors->first('edit_duration') }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="edit_remuneration">Rémunération</label>* (taux horaire)
                                         <input type="text" class="form-control" id="edit_remuneration" name="edit_remuneration" required="required" value="{{ $offer->remuneration }}" placeholder="Ex : 10€/h" />
                                     </div>
+                                    @if ($errors->has('edit_remuneration'))
+                                            <div class="error">{{ $errors->first('edit_remuneration') }}</div>
+                                    @endif
                                 </div>
                             </div>
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
                         </div>
                         <div class="card-footer" style="text-align: right">
                             <input type="hidden" name="create_valid" id="edit_valid" value="{{ $offer->valid }}" />

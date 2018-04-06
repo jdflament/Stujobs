@@ -25,6 +25,9 @@
                                             <option value="{{ $company->id }}">{{ $company->email }} {{ $company->name ? '(' . $company->name . ')' : '(NC)' }}</option>
                                             @endforeach
                                         </select>
+                                        @if ($errors->has('create_company_id'))
+                                            <div class="error">{{ $errors->first('create_company_id') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
@@ -39,6 +42,9 @@
                                     <div class="form-group">
                                         <label for="create_title">Titre de l'annonce</label>*
                                         <input type="text" class="form-control" id="create_title" name="create_title" required="required"/>
+                                        @if ($errors->has('create_title'))
+                                            <div class="error">{{ $errors->first('create_title') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +52,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="create_description">Description de l'annonce</label>*
-                                        <textarea class="form-control" id="create_description" name="create_description" required="required" rows="5"></textarea>
+                                        <textarea class="form-control" id="create_description" name="create_description" rows="5" required="required"></textarea>
+                                        @if ($errors->has('create_description'))
+                                            <div class="error">{{ $errors->first('create_description') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -65,6 +74,9 @@
                                             <option value="cdd">CDD</option>
                                             <option value="cdi">CDI</option>
                                         </select>
+                                        @if ($errors->has('create_contract_type'))
+                                            <div class="error">{{ $errors->first('create_contract_type') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -72,17 +84,20 @@
                                         <label for="create_duration">Durée</label>*
                                         <input type="text" class="form-control" id="create_duration" name="create_duration" required="required" placeholder="Ex : 6 mois" />
                                     </div>
+                                    @if ($errors->has('create_duration'))
+                                        <div class="error">{{ $errors->first('create_duration') }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="create_remuneration">Rémunération</label>* (taux horaire)
                                         <input type="text" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10€/h" />
                                     </div>
+                                    @if ($errors->has('create_remuneration'))
+                                        <div class="error">{{ $errors->first('create_remuneration') }}</div>
+                                    @endif
                                 </div>
                             </div>
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
                         </div>
                         <div class="card-footer" style="text-align: right">
                             <input type="hidden" name="create_valid" id="create_valid" value="false" />

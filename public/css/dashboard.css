@@ -103,7 +103,9 @@ ul ul a {
     text-align: right;
     margin: 5px;
 }
-
+.error {
+    color: #ab333f;    
+}
 .chart-block {
     max-width: 400px;
 }

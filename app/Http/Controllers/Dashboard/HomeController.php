@@ -43,4 +43,37 @@ class HomeController extends Controller
 
         return $data;
     }
+
+    public function offersInformations() {
+        $offers = DB::table('offers')
+            ->select('offers.valid', 'offers.complete')
+            ->get()
+            ->all();
+
+        $data = [
+            'total' => 0,
+            'valid' => 0,
+            'invalid' => 0,
+            'complete' => 0,
+            'incomplete' => 0,
+        ];
+
+        foreach ($offers as $offer) {
+            $data['total'] += 1;
+
+            if ($offer->valid === 1) {
+                $data['valid'] += 1;
+            } else {
+                $data['invalid'] += 1;
+            }
+
+            if ($offer->complete === 1) {
+                $data['complete'] += 1;
+            } else {
+                $data['incomplete'] += 1;
+            }
+        }
+
+        return $data;
+    }
 }

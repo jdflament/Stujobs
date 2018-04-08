@@ -2,8 +2,6 @@
     <thead>
     <tr>
         <th>En ligne</th>
-        <th>Validée</th>
-        <th>Terminée</th>
         <th>Titre</th>
         <th>Type de contrat</th>
         <th>Durée</th>
@@ -20,20 +18,6 @@
             @else
             <td><span class="badge badge-danger">Non</span></td>
             @endif
-            <td>
-                @if ($offer->valid == 0)
-                    <span class="badge badge-danger">Non</span>
-                @else
-                    <span class="badge badge-success">Oui</span>
-                @endif
-            </td>
-            <td>
-                @if ($offer->complete == 0)
-                    <span class="badge badge-success">Non</span>
-                @else
-                    <span class="badge badge-danger">Oui</span>
-                @endif
-            </td>
             <td><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
             <td>@lang('vocabulary.' . $offer->contract_type)</td>
             <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>

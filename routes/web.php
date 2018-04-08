@@ -116,8 +116,10 @@ Route::group(['middleware' => 'can:superAdminAccess'], function() {
 Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     // Access to the dashboard homepage
     Route::get('/dashboard', 'Dashboard\HomeController@index')->name('dashboardIndex');
-    // Get diffrent offers contracts type
+    // Get different offers contracts type
     Route::get('/dashboard/offers/contracttype', 'Dashboard\HomeController@contractType')->name('dashboardContractType');
+    // Get informations of offers
+    Route::get('/dashboard/offers/informations', 'Dashboard\HomeController@offersInformations')->name('dashboardOffersInformations');
 });
 
 /*

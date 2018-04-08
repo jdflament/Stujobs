@@ -3,21 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
-
+                    <div class="card-header">Statistiques</div>
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <div class="chart-block">
-                            <h3 style="text-align: center">Types de contrats proposés</h3>
-                            <canvas id="pieContractType" width="200" height="200"></canvas>
-                        </div>
                         Voici les dernières annonces postées non validées...<br /> <br />
 
                         Quelques statistiques :
@@ -27,8 +16,39 @@
                             <li>Nombre d'entreprise inscrites sur le site</li>
                             <li>Nombre d'administrateurs et de super administrateur</li>
                             <li>Nombre de visiteur par mois</li>
-                            <li>Nombre de type de contrat proposé (bar charts)</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Types de contrats proposés
+                    </div>
+                    <div class="card-body">
+                        <canvas id="pieContractType"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center" style="margin-top: 25px;">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Informations sur les offres
+                    </div>
+                    <div class="card-body">
+                        <canvas id="pieOffersInfos"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header">
+                        Test
+                    </div>
+                    <div class="card-body">
+
                     </div>
                 </div>
             </div>

@@ -56,3 +56,54 @@ $(document).ready(function(event) {
         }
     });
 });
+
+$(document).ready(function(event) {
+    $.ajax({
+        type: 'GET',
+        url: '/dashboard/offers/informations',
+        success: function(response) {
+            var values = [];
+            var labels = [];
+            var mapping = {
+                'total': 'Total',
+                'complete': 'Clôturée',
+                'incomplete': 'En cours',
+                'valid': 'Validée',
+                'invalid': 'Invalidée'
+            };
+
+            $.each(response, function(index, value) {
+                values.push(value);
+                labels.push(mapping[index]);
+            });
+
+            // Store datas
+            var data = {
+                datasets: [{
+                    data: values,
+                    backgroundColor: ["#0074D9", "#fc416a", "#fd9e4b", "#fecc60", "#32cecd", "#B10DC9", "#FFDC00", "#001f3f"],
+                }],
+
+                labels: labels
+            };
+
+            // Store options
+            var options = {
+                legend: {
+                    display: false,
+                }
+            };
+
+            var ctx = document.getElementById("pieOffersInfos");
+            var pieOffersInfos = new Chart(ctx,{
+                type: 'bar',
+                data: data,
+                options: options
+            });
+        },
+        error: function (response) {
+            console.error(response);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données des offres.", "alert-danger", 4000);
+        }
+    });
+});

@@ -17,7 +17,16 @@ class HomeController extends Controller
      * Show the dashboard index
      */
     public function index() {
-        return view('dashboard/index');
+        $offersToValid  = DB::table('offers')
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->orderBy('offers.created_at', 'DESC')
+            ->where('offers.valid', '=', 0)
+            ->get()
+            ->all();
+
+        return view('dashboard/index', ['offersToValid' => $offersToValid]);
     }
 
     /**

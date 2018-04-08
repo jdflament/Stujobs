@@ -5,18 +5,21 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Statistiques</div>
-                    <div class="card-body">
-                        Voici les dernières annonces postées non validées...<br /> <br />
+                    <div class="card-header">Offres à valider</div>
+                    <div class="card-body" style="max-height: 350px; overflow-y: scroll;">
+                        <div class="list-group">
+                            @foreach ($offersToValid as $offerToValid)
+                                <a href="/dashboard/offers/{{ $offerToValid->id }}/show" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between" style="display: -webkit-box !important">
+                                        <h5 class="mb-1 text-truncate">{{ $offerToValid->title }} <span style="font-size: 12px">(@lang('vocabulary.' . $offerToValid->contract_type))</span></h5>
 
-                        Quelques statistiques :
-                        <ul>
-                            <li>Nombre d'annonce en ligne (pie chart validées/terminées/non validées)</li>
-                            <li>Nombre d'email dans la newsletter</li>
-                            <li>Nombre d'entreprise inscrites sur le site</li>
-                            <li>Nombre d'administrateurs et de super administrateur</li>
-                            <li>Nombre de visiteur par mois</li>
-                        </ul>
+                                        <small class="badge badge-primary">{{ (new Carbon\Carbon($offerToValid->created_at))->diffForHumans() }}</small>
+                                    </div>
+                                    <p class="mb-1 text-truncate" style="color: inherit;">{{ $offerToValid->description }}</p>
+                                    <small>Posté par {{ $offerToValid->name }}</small>
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +51,15 @@
                         Test
                     </div>
                     <div class="card-body">
+                        Voici les dernières annonces postées non validées...<br /> <br />
 
+                        Quelques statistiques :
+                        <ul>
+                            <li>Nombre d'email dans la newsletter</li>
+                            <li>Nombre d'entreprise inscrites sur le site</li>
+                            <li>Nombre d'administrateurs et de super administrateur</li>
+                            <li>Nombre de visiteur par mois</li>
+                        </ul>
                     </div>
                 </div>
             </div>

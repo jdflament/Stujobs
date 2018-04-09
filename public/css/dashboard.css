@@ -110,7 +110,7 @@ ul ul a {
 
 .dashboard-numbers {
     padding: 35px 0;
-    margin: 30px auto;
+    margin: 25px auto;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 5px;
     background-color: #f7f7f7;
@@ -137,7 +137,12 @@ ul ul a {
 @media screen and (max-width: 700px) {
     .dashboard-numbers {
         flex-basis: 93%;
+        margin: 15px auto;
     }
+}
+
+.marginSidebar {
+    margin-left: 0px !important;
 }
 
 /* Remove dropdown carret */

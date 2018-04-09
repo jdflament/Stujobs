@@ -19,51 +19,41 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }} Admin Panel
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button type="button" id="sidebarCollapse" class="btn btn-light navbar-btn">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
+                <div id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Connexion</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Inscription</a></li>
+                        <li><a class="nav-link" href="{{ route('login') }}">Connexion</a></li>
+                        {{--<li><a class="nav-link" href="{{ route('register') }}">Register</a></li>--}}
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->email }} <span class="caret"></span>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->email }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
+                                    <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
+                                        Dashboard
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('dashboardIndexProfile') }}">
+                                        Mon Profil
+                                    </a>
+                                @endif
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Déconnexion
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
-                                        <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
-                                            Dashboard
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('dashboardIndexProfile') }}">
-                                            Mon Profil
-                                        </a>
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Déconnexion
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>
@@ -74,8 +64,8 @@
         <nav id="sidebar" class="active">
             <!-- Sidebar Header -->
             <div class="sidebar-header">
-                <h3><a href="{{ url('/') }}">{{ config('app.name', 'Stujobs') }}</a></h3>
-                <strong><a href="{{ url('/') }}">{{ config('app.short_name', 'SJ') }}</a></strong>
+                <h3><a href="{{ url('/') }}">{{ config('app.name', 'Stujobs') }} Panel</a></h3>
+                <strong><a href="{{ url('/') }}">{{ config('app.short_name', 'STUJOBS PANEL') }}</a></strong>
             </div>
 
             <!-- Sidebar Links -->
@@ -125,6 +115,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="{{ asset('js/dashboard/admins.js') }}"></script>
+    <script src="{{ asset('js/dashboard/sidebar.js') }}"></script>
     <script src="{{ asset('js/dashboard/companies.js') }}"></script>
     <script src="{{ asset('js/dashboard/offers.js') }}"></script>
     <script src="{{ asset('js/dashboard/profile.js') }}"></script>

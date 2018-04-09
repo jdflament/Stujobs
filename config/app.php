@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Stujobs'),
-    'short_name' => env('APP_SHORT_NAME', 'SJ'),
+    'short_name' => env('APP_SHORT_NAME', 'SJP'),
 
     /*
     |--------------------------------------------------------------------------

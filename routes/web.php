@@ -120,6 +120,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/offers/contracttype', 'Dashboard\HomeController@contractType')->name('dashboardContractType');
     // Get informations of offers
     Route::get('/dashboard/offers/informations', 'Dashboard\HomeController@offersInformations')->name('dashboardOffersInformations');
+    // Get offers rates
+    Route::get('/dashboard/offers/rates', 'Dashboard\HomeController@offersRates')->name('dashboardOffersRates');
 });
 
 /*

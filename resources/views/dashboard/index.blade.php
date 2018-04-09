@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="row justify-content-center" style="margin-top: 25px;">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         Informations sur les offres
@@ -86,21 +86,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Test
+                        Nombre d'offre d'emploi par jour
                     </div>
                     <div class="card-body">
-                        Voici les dernières annonces postées non validées...<br /> <br />
-
-                        Quelques statistiques :
-                        <ul>
-                            <li>Nombre d'email dans la newsletter</li>
-                            <li>Nombre d'entreprise inscrites sur le site</li>
-                            <li>Nombre d'administrateurs et de super administrateur</li>
-                            <li>Nombre de visiteur par mois</li>
-                        </ul>
+                        <canvas id="lineOffersRates"></canvas>
                     </div>
                 </div>
             </div>

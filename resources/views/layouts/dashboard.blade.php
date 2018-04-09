@@ -112,7 +112,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="{{ asset('js/dashboard/admins.js') }}"></script>

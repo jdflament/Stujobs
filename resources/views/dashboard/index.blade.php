@@ -6,15 +6,18 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Offres à valider</div>
-                    <div class="card-body" style="max-height: 350px; overflow-y: scroll;">
+                    <div class="card-body" style="height: 350px; overflow-y: scroll;">
                         <div class="list-group">
                             @if (count($offersToValid) > 0)
                                 @foreach ($offersToValid as $offerToValid)
                                     <a href="/dashboard/offers/{{ $offerToValid->id }}/show" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between" style="display: -webkit-box !important">
-                                            <h5 class="mb-1 text-truncate">{{ $offerToValid->title }} <span style="font-size: 12px">(@lang('vocabulary.' . $offerToValid->contract_type))</span></h5>
-
-                                            <small class="badge badge-primary">{{ (new Carbon\Carbon($offerToValid->created_at))->diffForHumans() }}</small>
+                                        <div class="d-flex w-100 justify-content-between text-truncate" style="display: -webkit-box !important">
+                                            <h5 class="mb-1">{{ $offerToValid->title }} <span style="font-size: 12px">(@lang('vocabulary.' . $offerToValid->contract_type))</span></h5>
+                                            <?php
+                                                $date = new \Carbon\Carbon($offerToValid->created_at);
+                                                $date::setLocale('fr');
+                                            ?>
+                                            <small class="badge badge-primary">{{ $date->diffForHumans() }}</small>
                                         </div>
                                         <p class="mb-1 text-truncate" style="color: inherit;">{{ $offerToValid->description }}</p>
                                         <small>Posté par {{ $offerToValid->name }}</small>

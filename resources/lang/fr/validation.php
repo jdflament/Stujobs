@@ -69,7 +69,7 @@ return [
     'numeric' => 'Le champ :attribute doit contenir un nombre.',
     'present' => 'Le champ :attribute doit être présent.',
     'regex' => 'Le format du champ :attribute est invalide.',
-    'required' => 'Le champ :attribute est obligatoire.',
+    'required' => 'Ce champ est obligatoire.',
     'required_if' => 'Le champ :attribute est obligatoire quand la valeur de :other est :value.',
     'required_unless' => 'Le champ :attribute est obligatoire sauf si :other est :values.',
     'required_with' => 'Le champ :attribute est obligatoire quand :values est présent.',

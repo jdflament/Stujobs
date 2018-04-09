@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -105,6 +106,26 @@ class HomeController extends Controller
                 $data['complete'] += 1;
             } else {
                 $data['incomplete'] += 1;
+            }
+        }
+
+        return $data;
+    }
+
+    public function offersRates() {
+        $offers = DB::table('offers')
+            ->select('offers.created_at')
+            ->get()
+            ->all();
+
+        $data = [];
+
+        foreach($offers as $offer) {
+            $date = Carbon::createFromFormat('Y-m-d H:i:s', $offer->created_at)->format('d/m/Y');
+            if (!isset($data[$date])) {
+                $data[$date] = 1;
+            } else {
+                $data[$date] += 1;
             }
         }
 

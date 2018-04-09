@@ -125,3 +125,65 @@ $(document).ready(function(event) {
         }
     });
 });
+
+$(document).ready(function(event) {
+    $.ajax({
+        type: 'GET',
+        url: '/dashboard/offers/rates',
+        success: function(response) {
+            var values = [];
+            var labels = [];
+
+            $.each(response, function(index, value) {
+                values.push(value);
+                labels.push(index);
+            });
+
+            // Store datas
+            var data = {
+                datasets: [{
+                    data: values,
+                    backgroundColor:"rgba(18, 119, 214, 0.8)",
+                    borderDash:[],
+                    borderDashOffset:0,
+                    borderWidth:1,
+                    pointBackgroundColor:"#fff",
+                    pointBorderWidth:1,
+                    pointHoverRadius:5,
+                    pointHoverBorderColor:"rgba(220,220,220,1)",
+                    pointHoverBorderWidth:2,
+                    pointRadius:3,
+                    pointHitRadius:0
+                }],
+
+                labels: labels
+            };
+
+            // Store options
+            var options = {
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }]
+                }
+            };
+
+            var ctx = document.getElementById("lineOffersRates");
+            var lineOffersRates = new Chart(ctx,{
+                type: 'line',
+                data: data,
+                options: options
+            });
+        },
+        error: function (response) {
+            console.error(response);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données des offres (nombre total).", "alert-danger", 4000);
+        }
+    });
+});

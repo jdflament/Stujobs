@@ -58,7 +58,7 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> créé.", "alert-success", 4000);
+            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> créé. Un email de vérification lui a été envoyé.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalCreateAdmin>*", "");
 

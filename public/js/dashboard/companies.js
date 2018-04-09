@@ -58,7 +58,7 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> crée.", "alert-success", 4000);
+            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> crée. Un email de vérification lui a été envoyé.", "alert-success", 4000);
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalCreateCompany>*", "");
             console.log(response);

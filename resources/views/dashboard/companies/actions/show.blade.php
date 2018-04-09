@@ -27,6 +27,10 @@
                                 <td>{{ $company->role }}</td>
                             </tr>
                             <tr>
+                                <th>Compte vérifié</th>
+                                <td>{{ $company->verified ? 'Oui' : 'Non' }}</td>
+                            </tr>
+                            <tr>
                                 <th>Membre depuis le</th>
                                 <td>{{ $company->created_at }}</td>
                             </tr>

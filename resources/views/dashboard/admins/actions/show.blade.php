@@ -27,6 +27,10 @@
                                 <td>{{ $admin->role }}</td>
                             </tr>
                             <tr>
+                                <th>Compte vérifié</th>
+                                <td>{{ $admin->verified ? 'Oui' : 'Non' }}</td>
+                            </tr>
+                            <tr>
                                 <th>Membre depuis le</th>
                                 <td>{{ $admin->created_at }}</td>
                             </tr>

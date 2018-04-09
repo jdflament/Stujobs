@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Mail\VerifyMail;
 use App\Models\Company;
 use App\Models\Offer;
 use App\Models\User;
+use App\Models\VerifyUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -74,6 +77,13 @@ class CompaniesController extends Controller
         $user->company_siret = $company->siret;
         $user->company_address = $company->address;
         $user->company_phone = $company->phone;
+
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->getAttribute('id'),
+            'token' => str_random(40)
+        ]);
+
+        Mail::to($user->email)->send(new VerifyMail($user));
 
         return $user;
     }
@@ -145,10 +155,29 @@ class CompaniesController extends Controller
     {
         $company = DB::table('users')->where('users.id', $id)
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
             ->get()
             ->first();
 
         return view('dashboard/companies/actions/show', ['company' => $company]);
+    }
+
+    public function verifyUser($token)
+    {
+        $verifyUser = VerifyUser::where('token', $token)->first();
+        if (isset($verifyUser)) {
+            $user = $verifyUser->user;
+            if (!$user->verified) {
+                $verifyUser->user->verified = 1;
+                $verifyUser->user->save();
+                $status = "Votre adresse email est vérifiée. Vous pouvez vous connecter.";
+            } else {
+                $status = "Votre adresse email est déjà vérifiée. Vous pouvez vous connecter";
+            }
+        } else {
+            return redirect('/login')->with('warning', "Désolé, votre email n'est pas valide.");
+        }
+
+        return redirect('/login')->with('status', $status);
     }
 }

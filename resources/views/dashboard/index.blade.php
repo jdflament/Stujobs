@@ -3,6 +3,38 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-3 dashboard-numbers">
+                <i class="fa fa-envelope"></i>
+                <div class="wrapper count-title d-flex" style="justify-content: center;">
+                    <h6>Nombre d'email newsletter</h6>
+                </div>
+                <u>{{ $totalEmailNewsletter }}</u>
+            </div>
+            <div class="col-sm-12 col-md-3 dashboard-numbers">
+                <i class="fa fa-building"></i>
+                <div class="wrapper count-title d-flex" style="justify-content: center;">
+                    <h6>Nombre d'entreprises inscrites</h6>
+                </div>
+                <u>{{ $totalCompanies }}</u>
+            </div>
+            <div class="col-sm-12 col-md-3 dashboard-numbers">
+                <i class="fa fa-user"></i>
+                <div class="wrapper count-title d-flex" style="justify-content: center;">
+                    <h6>Nombre d'administrateurs</h6>
+                </div>
+                <u>{{ $totalAdmins }}</u>
+            </div>
+            <div class="col-sm-12 col-md-3 dashboard-numbers">
+                <i class="fa fa-eye"></i>
+                <div class="wrapper count-title d-flex" style="justify-content: center;">
+                    <h6>Nombre de visiteur ce mois-ci</h6>
+                </div>
+                <u>En cours</u>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Offres à valider</div>

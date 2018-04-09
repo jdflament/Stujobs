@@ -17,7 +17,7 @@ class HomeController extends Controller
      * Show the dashboard index
      */
     public function index() {
-        $offersToValid  = DB::table('offers')
+        $offersToValid = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
@@ -26,7 +26,32 @@ class HomeController extends Controller
             ->get()
             ->all();
 
-        return view('dashboard/index', ['offersToValid' => $offersToValid]);
+        $totalEmailNewsletter = DB::table('newsletter')->count();
+
+        $totalCompanies = DB::table('users')
+            ->where([
+                ['users.role', '=', 'company'],
+                ['users.verified', '=', 1]
+            ])
+            ->count();
+
+        $totalAdmins = DB::table('users')
+            ->where([
+                ['users.role', '=', 'superadmin'],
+                ['users.verified', '=', 1]
+            ])
+            ->orWhere([
+                ['users.role', '=', 'admin'],
+                ['users.verified', '=', 1]
+            ])
+            ->count();
+
+        return view('dashboard/index', [
+            'offersToValid' => $offersToValid,
+            'totalEmailNewsletter' => $totalEmailNewsletter,
+            'totalCompanies' => $totalCompanies,
+            'totalAdmins' => $totalAdmins,
+        ]);
     }
 
     /**

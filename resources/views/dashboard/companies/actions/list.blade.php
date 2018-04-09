@@ -2,7 +2,6 @@
     <thead>
     <tr>
         <th>Nom</th>
-        <th>SIRET</th>
         <th>Email</th>
         <th>Rôle</th>
         <th>Actions</th>
@@ -12,7 +11,6 @@
     @foreach($companies as $company)
         <tr>
             <td>{{ $company->name ? $company->name : 'NC' }}</td>
-            <td>{{ $company->siret ? $company->siret : 'NC' }}</td>
             <td>{{ $company->email }}</td>
             <td>{{ $company->role }}</td>
             <td>

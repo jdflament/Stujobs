@@ -1,3 +1,21 @@
+// Global widget alert function
+function alertWidget(div, message, type, duration) {
+    $(div).fadeIn();
+    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
+    setTimeout(function(){
+        $(div).fadeOut();
+    }, duration);
+}
+
+// Global widget alert close function
+function closeAlert(div) {
+    $(div).fadeOut();
+}
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 $(document).ready(function(event) {
     $.ajax({
         type: 'GET',

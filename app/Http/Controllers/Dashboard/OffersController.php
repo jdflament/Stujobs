@@ -28,7 +28,15 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        return view('dashboard/offers/index', ['offers' => $offers]);
+        $offersType = [
+            "all" => "Toutes",
+            "valid" => "Validées",
+            "invalid" => "Invalidées",
+            "complete" => "Clôturées",
+            "incomplete" => "En cours"
+        ];
+
+        return view('dashboard/offers/index', ['offers' => $offers, 'offersType' => $offersType]);
     }
 
     /**
@@ -232,5 +240,33 @@ class OffersController extends Controller
             ->first();
 
         return view('dashboard/offers/actions/show', ['offer' => $offer]);
+    }
+
+    public function filter($type)
+    {
+        $mapping = [
+            "all" => ["offers.id", '!=', 0],
+            "valid" => ["offers.valid", '=', 1],
+            "invalid" => ["offers.valid", '=', 0],
+            "complete" => ["offers.complete", '=', 1],
+            "incomplete" => ["offers.complete", '=', 0]
+        ];
+
+        $offers = DB::table('offers')->where($mapping[$type][0], $mapping[$type][1], $mapping[$type][2])
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->orderBy('offers.created_at', 'DESC')
+            ->get();
+
+        $offersType = [
+            "all" => "Toutes",
+            "valid" => "Validées",
+            "invalid" => "Invalidées",
+            "complete" => "Clôturées",
+            "incomplete" => "En cours"
+        ];
+
+        return view('dashboard/offers/index', ['offers' => $offers, 'offersType' => $offersType]);
     }
 }

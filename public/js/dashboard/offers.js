@@ -179,3 +179,28 @@ $(document).on('click', '#btn-delete-offer', function(event) {
         }
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Offers filter
+|--------------------------------------------------------------------------
+*/
+
+$(document).on('change', '#filterOffers', function(event) {
+    var value = $(this).val();
+
+    $.ajax({
+        type: 'GET',
+        url: "/dashboard/offers/filter/" + value,
+        beforeSend: function() {
+            $("#offers-content").find('tbody').html('<tr><td colspan="6" align="center"><i class="fa fa-spinner fa-pulse fa-fw fa-3x"></i></td></tr>');
+        },
+        success: function (response) {
+            $("#offers-content").html($(response).find('#offers-content').html());
+        },
+        error: function(response) {
+            console.error(response);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue pendant le filtrage.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+        }
+    });
+});

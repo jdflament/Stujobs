@@ -179,4 +179,6 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/offers/{id}/delete', 'Dashboard\OffersController@delete')->name('dashboardDeleteOffer');
     // Show an offer
     Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
+    // Filter an offer
+    Route::get('/dashboard/offers/filter/{type}', 'Dashboard\OffersController@filter')->name('dashboardFilterOffers');
 });

@@ -19,6 +19,18 @@
                             </div>
                         @endif
 
+                        <div class="row justify-content-end">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <select class="form-control" id="filterOffers">
+                                        @foreach($offersType as $key => $value)
+                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         @include('dashboard/offers/actions/list')
                     </div>
                 </div>

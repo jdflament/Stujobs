@@ -109,6 +109,14 @@ $(document).ready(function(event) {
             var options = {
                 legend: {
                     display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }]
                 }
             };
 

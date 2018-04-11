@@ -38,6 +38,62 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="container">
+                    <div class="row justify-content-center m-3">
+                        <button class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#collapseApplyForm" aria-expanded="true" aria-controls="collapseApplyForm">Je candidate</button>
+                    </div>
+                    <div class="row justify-content-center collapse" id="collapseApplyForm">
+                        <div class="card col-md-8" style="margin: 0 auto;">
+                            <div class="card-body">
+                                <form action="/offers/{{ $offer->offer_id }}/apply" name="applyOffer" method="POST" enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="apply_firstname">Prénom</label>*
+                                            <input type="text" class="form-control" id="apply_firstname" name="apply_firstname" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="apply_lastname">Nom</label>*
+                                            <input type="text" class="form-control" id="apply_lastname" name="apply_lastname" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="apply_email">Email</label>*
+                                            <input type="email" class="form-control" id="apply_email" name="apply_email" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="apply_phone">Téléphone</label>*
+                                            <input type="number" class="form-control" id="apply_phone" name="apply_phone" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="apply_cv">CV</label>
+                                            <input type="file" class="form-control" id="apply_cv" name="apply_cv">
+                                        </div>
+                                        <div class="form-group col-md-8">
+                                            <label for="apply_subject">Sujet</label>*
+                                            <input type="text" class="form-control" id="apply_subject" name="apply_subject" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="apply_message">Message</label>*
+                                            <textarea rows="6" class="form-control" id="apply_message" name="apply_message" required="required"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn btn-dark">Postuler</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
                 <div style="text-align: center; display: table; margin: 15px auto;">
                     <h5>Partager sur les réseaux</h5>
                     <ul class="socials-buttons" style="display: flex; list-style:none; margin-left: 0px; padding-left: 0px;">
@@ -54,12 +110,8 @@
                     </ul>
                 </div>
 
-
-
-<hr>
-
-<small>Mis en ligne par : {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</small>
-</div>
-</div>
-</div>
+                <small>Mis en ligne par : {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</small>
+            </div>
+        </div>
+    </div>
 @endsection

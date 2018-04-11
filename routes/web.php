@@ -33,6 +33,8 @@ Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Route::get('/', 'Website\HomeController@index')->name('home');
 // Show an offer
 Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showValidOffer');
+// Apply to an offer
+Route::post('/offers/{id}/apply', 'Website\ApplyController@apply')->name('applyOffer');
 
 /*
  * Company : Profile manager

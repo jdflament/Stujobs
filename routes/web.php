@@ -196,4 +196,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/applies/{id}/delete', 'Dashboard\AppliesController@delete')->name('dashboardDeleteApply');
     // Show an apply
     Route::get('/dashboard/applies/{id}/show', 'Dashboard\AppliesController@show')->name('dashboardShowApply');
+    // Refuse an apply
+    Route::get('/dashboard/applies/{id}/refuse', 'Dashboard\AppliesController@refuse')->name('dashboardRefuseApply');
+    // Accept an apply
+    Route::get('/dashboard/applies/{id}/accept', 'Dashboard\AppliesController@accept')->name('dashboardAcceptApply');
 });

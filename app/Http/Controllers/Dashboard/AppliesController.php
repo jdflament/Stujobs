@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Mail\SendApply;
 use App\Models\Apply;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class AppliesController extends Controller
 {
@@ -30,12 +33,92 @@ class AppliesController extends Controller
 
     /**
      * @param $id
+     * @return int
      *
-     * Delete an apply
+     * Delete an apply and the attach file (if exist) and return total applies
      */
     public function delete($id)
     {
-        Apply::where('id', $id)->delete();
+        $apply = Apply::where('applies.id', '=', $id)
+            ->get()
+            ->first();
+
+        if (isset($apply->cv_filename)) {
+            File::delete(storage_path('app/public/cv') . '/' . $apply->cv_filename);
+        }
+
+        $apply->delete();
+
+        $applies = DB::table('applies')
+            ->where('valid', '=', 0)
+            ->get();
+
+        $totalApplies = count($applies);
+
+        return $totalApplies;
+    }
+
+    public function accept($id)
+    {
+        $apply = DB::table('applies')->where('applies.id', $id)
+            ->leftJoin('offers', 'applies.offer_id', '=', 'offers.id')
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('applies.id as apply_id', 'applies.firstname as apply_firstname', 'applies.lastname as apply_lastname', 'applies.email as apply_email', 'applies.phone as apply_phone', 'applies.cv_filename as apply_cv_filename', 'applies.subject as apply_subject', 'applies.message as apply_message', 'applies.valid as apply_valid', 'applies.created_at as apply_created_at','offers.id as offer_id', 'users.email as company_email', 'users.role as company_role', 'offers.title as offer_title', 'offers.description as offer_description', 'offers.contract_type as offer_contract_type', 'offers.duration as offer_duration', 'offers.remuneration as offer_remuneration', 'offers.valid as offer_valid', 'offers.complete as offer_complete', 'offers.contact_email as offer_contact_email', 'offers.contact_phone as offer_contact_phone', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.address as company_address', 'companies.phone as company_phone')
+            ->orderBy('applies.created_at', 'DESC')
+            ->get()
+            ->first();
+
+        //Send the email to company with apply informations
+        Mail::to($apply->offer_contact_email)->send(new SendApply((array)$apply));
+
+        // Delete the file
+        File::delete(storage_path('app/public/cv') . '/' . $apply->apply_cv_filename);
+
+        // Save on db that the apply is now valid
+        $apply_db = Apply::where('id', $id)->first();
+        // Reset cv filename and size because he don't even exist
+        $apply_db->setAttribute('cv_filename', null);
+        $apply_db->setAttribute('cv_size', null);
+        $apply_db->setAttribute('valid', 1);
+        $apply_db->save();
+
+        // Count the total applies who need to be manage
+        $applies = DB::table('applies')
+            ->where('valid', '=', 0)
+            ->get();
+
+        $totalApplies = count($applies);
+
+        return $totalApplies;
+    }
+
+    /**
+     * @param $id
+     * @return int
+     *
+     * Refuse an apply and return the total to manage
+     */
+    public function refuse($id)
+    {
+        $apply = Apply::where('id', $id)->first();
+
+        if (isset($apply->cv_filename)) {
+            File::delete(storage_path('app/public/cv') . '/' . $apply->cv_filename);
+        }
+
+        $apply->setAttribute('cv_filename', null);
+        $apply->setAttribute('cv_size', null);
+        $apply->setAttribute('valid', 2);
+        $apply->save();
+
+        $applies = DB::table('applies')
+            ->where('valid', '=', 0)
+            ->get();
+
+        $totalApplies = count($applies);
+
+        return $totalApplies;
     }
 
     /**

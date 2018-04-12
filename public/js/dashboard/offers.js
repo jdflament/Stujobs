@@ -168,6 +168,15 @@ $(document).on('click', '#btn-delete-offer', function(event) {
         success: function(response) {
             alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
             $button.html('<i class="fa fa-check"></i>');
+
+            // Update the offer icon on sidebar
+            if (response > 0) {
+                $(".totalOffersInvalid").html(response);
+                $(".totalOffersInvalid").removeClass('hidden');
+            } else {
+                $(".totalOffersInvalid").addClass('hidden');
+            }
+
             $("#offers-content").load(location.href + " #offers-content>*", "");
             $modal.modal('toggle');
         },

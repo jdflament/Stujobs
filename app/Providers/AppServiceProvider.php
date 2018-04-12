@@ -25,6 +25,16 @@ class AppServiceProvider extends ServiceProvider
             $view->with('total', $total);
         });
 
+        view()->composer('layouts/dashboard', function ($view) {
+            $applies = DB::table('applies')
+                ->where('valid', '=', 0)
+                ->get();
+
+            $totalApplies = count($applies);
+
+            $view->with('totalApplies', $totalApplies);
+        });
+
         Validator::extend('phone', function($attribute, $value, $parameters, $validator) {
             return preg_match('%^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$%i', $value) && strlen($value) >= 10;
         });

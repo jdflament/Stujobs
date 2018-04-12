@@ -95,6 +95,7 @@
                 </li>
                 <li class="{{ strpos(Request::path(), 'applies') !== false ? 'active' : '' }}" style="position: relative;">
                     <a href="{{ route('dashboardIndexApplies') }}">
+                        <div class="totalAppliesInvalid @if ($totalApplies < 1) hidden @endif">{{ $totalApplies }}</div>
                         <i class="fa fa-newspaper-o"></i> Candidatures
                     </a>
                 </li>
@@ -123,6 +124,7 @@
     <script src="{{ asset('js/dashboard/sidebar.js') }}"></script>
     <script src="{{ asset('js/dashboard/companies.js') }}"></script>
     <script src="{{ asset('js/dashboard/offers.js') }}"></script>
+    <script src="{{ asset('js/dashboard/applies.js') }}"></script>
     <script src="{{ asset('js/dashboard/profile.js') }}"></script>
     @yield('scripts')
 </body>

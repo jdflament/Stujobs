@@ -216,12 +216,21 @@ class OffersController extends Controller
 
     /**
      * @param $id
+     * @return int
      *
-     * Delete an offer
+     * Delete an offer and return total offers to valid
      */
     public function delete($id)
     {
         Offer::where('id', $id)->delete();
+
+        $offers = DB::table('offers')
+            ->where('valid', '=', 0)
+            ->get();
+
+        $total = count($offers);
+
+        return $total;
     }
 
     /**

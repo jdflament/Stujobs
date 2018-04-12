@@ -8,18 +8,24 @@
             <div class="col-sm-10 col-md-10 col-lg-10">
 
                 <a href="{{ route('dashboardIndexApplies') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
-                <a href="" class="btn btn-danger btn-sm" style="margin-bottom: 15px; float: right"><i class="fa fa-times"></i> Refuser la candidature</a>
-                <a href="" class="btn btn-success btn-sm" style="margin-bottom: 15px; margin-right: 15px; float: right"><i class="fa fa-envelope"></i> Valider et envoyer la candidature</a>
+                @if ($apply->apply_valid == 0)
+                <div class="applyActions" style="margin-bottom: 15px; float: right">
+                    <button class="btn btn-danger btn-sm btn-pre-refuse-apply" data-href="/dashboard/applies/{{ $apply->apply_id }}/refuse" data-toggle="modal" data-target="#modalRefuseApply" style="margin-right: 10px;"><i class="fa fa-times"></i> Refuser la candidature</button>
+                    <button class="btn btn-success btn-sm btn-pre-accept-apply" data-href="/dashboard/applies/{{ $apply->apply_id }}/accept" data-toggle="modal" data-target="#modalAcceptApply"><i class="fa fa-envelope"></i> Valider et envoyer la candidature</button>
+                </div>
+                @endif
 
                 <div class="card card-default">
                     <div class="card-header">Candidat : {{ $apply->apply_firstname }} {{ $apply->apply_lastname }}
-                        @if ($apply->apply_valid == 0)
-                            <span class="badge badge-info" style="float:right;">En attente</span>
-                        @elseif ($apply->apply_valid == 1)
-                            <span class="badge badge-success" style="float:right;">Acceptée</span>
-                        @elseif ($apply->apply_valid == 2)
-                            <span class="badge badge-danger" style="float:right;">Refusée</span>
-                        @endif
+                        <div class="applyStatus" style="float:right;">
+                            @if ($apply->apply_valid == 0)
+                                <span class="badge badge-info">En attente</span>
+                            @elseif ($apply->apply_valid == 1)
+                                <span class="badge badge-success">Acceptée</span>
+                            @elseif ($apply->apply_valid == 2)
+                                <span class="badge badge-danger">Refusée</span>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="card-body" style="overflow-x:scroll;">
@@ -30,7 +36,7 @@
                         @endif
 
                         <small class="mb-0">
-                            @if ($apply->apply_cv_filename)<span style="margin-right: 50px;"><a href="{{ asset('storage/cv') . '/' . $apply->apply_cv_filename }}" target="_blank" class="btn btn-primary">Voir le CV</a></span> @endif
+                            @if ($apply->apply_cv_filename)<span class="showCv" style="margin-right: 50px;"><a href="{{ asset('storage/cv') . '/' . $apply->apply_cv_filename }}" target="_blank" class="btn btn-primary">Voir le CV</a></span> @endif
                             <span style="margin-right: 50px;">Email du candidat : {{ $apply->apply_email }}</span>
                             <span style="margin-right: 50px;">Téléphone du candidat : {{ $apply->apply_phone }}</span>
                         </small>
@@ -87,4 +93,7 @@
             </div>
         </div>
     </div>
+
+    @include('dashboard/applies/actions/accept')
+    @include('dashboard/applies/actions/refuse')
 @endsection

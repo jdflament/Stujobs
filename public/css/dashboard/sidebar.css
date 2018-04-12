@@ -195,14 +195,14 @@
     content: '\e260';
 }
 
-#sidebar.active .totalOffersInvalid {
+#sidebar.active .totalOffersInvalid, #sidebar.active .totalAppliesInvalid {
     top: 6px !important;
     right: 13px !important;
     padding-top: 3px !important;
     padding-left: 0 !important;
 }
 
-#sidebar .totalOffersInvalid {
+#sidebar .totalOffersInvalid, #sidebar .totalAppliesInvalid {
     position: absolute;
     top: 8px;
     right: 16px;

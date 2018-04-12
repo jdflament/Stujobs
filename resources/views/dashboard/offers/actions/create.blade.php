@@ -22,7 +22,7 @@
                                         <select class="form-control" id="create_company_id" name="create_company_id" required="required">
                                             <option disabled selected value="">Sélectionner une entreprise</option>
                                             @foreach ($companies as $company)
-                                            <option value="{{ $company->id }}">{{ $company->email }} {{ $company->name ? '(' . $company->name . ')' : '(NC)' }}</option>
+                                            <option value="{{ $company->id }}">{{ $company->name }} {{ $company->email ? '(' . $company->email . ')' : '(NC)' }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('create_company_id'))

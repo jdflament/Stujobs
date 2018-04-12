@@ -93,6 +93,11 @@
                         <i class="fa fa-briefcase"></i> Offres
                     </a>
                 </li>
+                <li class="{{ strpos(Request::path(), 'applies') !== false ? 'active' : '' }}" style="position: relative;">
+                    <a href="{{ route('dashboardIndexApplies') }}">
+                        <i class="fa fa-newspaper-o"></i> Candidatures
+                    </a>
+                </li>
             </ul>
         </nav>
         @endif

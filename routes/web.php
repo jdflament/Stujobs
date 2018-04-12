@@ -34,7 +34,7 @@ Route::get('/', 'Website\HomeController@index')->name('home');
 // Show an offer
 Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showValidOffer');
 // Apply to an offer
-Route::post('/offers/{id}/apply', 'Website\ApplyController@apply')->name('applyOffer');
+Route::post('/offers/{id}/apply', 'Website\AppliesController@apply')->name('applyOffer');
 
 /*
  * Company : Profile manager
@@ -183,4 +183,17 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/offers/{id}/show', 'Dashboard\OffersController@show')->name('dashboardShowOffer');
     // Filter an offer
     Route::get('/dashboard/offers/filter/{type}', 'Dashboard\OffersController@filter')->name('dashboardFilterOffers');
+});
+
+/*
+ * Applies manager
+ */
+
+Route::group(['middleware' => 'can:allAdminsAccess'], function() {
+    // Applies list
+    Route::get('/dashboard/applies', 'Dashboard\AppliesController@index')->name('dashboardIndexApplies');
+    // Delete an apply
+    Route::get('/dashboard/applies/{id}/delete', 'Dashboard\AppliesController@delete')->name('dashboardDeleteApply');
+    // Show an apply
+    Route::get('/dashboard/applies/{id}/show', 'Dashboard\AppliesController@show')->name('dashboardShowApply');
 });

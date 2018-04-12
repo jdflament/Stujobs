@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class ApplyController extends Controller
+class AppliesController extends Controller
 {
     public function apply($id, Request $request)
     {

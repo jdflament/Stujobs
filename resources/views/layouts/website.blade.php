@@ -19,6 +19,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+
+<?php
+    if (Auth::user()) {
+        if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin') {
+            $admin = DB::table('users')->where('users.id', Auth::user()->id)
+                ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
+                ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'admins.user_id', 'admins.firstname', 'admins.lastname', 'admins.phone', 'admins.office')
+                ->get()
+                ->first();
+
+        } else if (Auth::user()->role == 'company') {
+            $company = DB::table('users')->where('users.id', Auth::user()->id)
+                ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+                ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
+                ->get()
+                ->first();
+        }
+    }
+?>
+
 <div id="app">
     <nav class="navbarTop">
         <div class="containerLg">
@@ -31,7 +51,11 @@
                         <span class="navbarSpan">Vous êtes recruteur ? <a href="{{ route('login') }}">Connectez-vous</a></span>
                     @else
                         <span class="navbarSpan navbarDropdownAction">
-                            {{ Auth::user()->email }} <span class="caret noRotate"></span>
+                            @if (isset($admin))
+                                {{ $admin->firstname }} {{ $admin->lastname }} <span class="caret noRotate"></span>
+                            @elseif (isset($company))
+                                {{ $company->name }} <span class="caret noRotate"></span>
+                            @endif
                         </span>
                         <div class="navbarDropdownMenu hideDropdown">
                             <ul class="dropdownMenu">
@@ -73,6 +97,12 @@
                         <div class="popupMenuTitle">
                             @guest
                             <h3>Vous êtes recruteur ?</h3>
+                            @else
+                                @if (isset($admin))
+                                    <h3>{{ $admin->firstname }} {{ $admin->lastname }}</h3>
+                                @elseif (isset($company))
+                                    <h3>{{ $company->name }}</h3>
+                                @endif
                             @endguest
                         </div>
                         <ul class="menuActionsList">

@@ -12,69 +12,105 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/website/index.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/website/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Stujobs') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
+    <nav class="navbarTop">
+        <div class="containerLg">
+            <ul class="navbarNavigation">
+                <li class="navbarLogo">
+                    <a href="{{ url('/') }}">{{ config('app.name', 'Stujobs') }}<span class="beta">beta</span></a>
+                </li>
+                <li class="navbarMenu">
                     @guest
-                        <li><a class="nav-link" href="{{ route('login') }}">Connexion</a></li>
-                        <li><a class="nav-link" href="{{ route('register') }}">Inscription</a></li>
+                        <span class="navbarSpan">Vous êtes recruteur ? <a href="{{ route('login') }}">Connectez-vous</a></span>
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->email }} <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <span class="navbarSpan navbarDropdownAction">
+                            {{ Auth::user()->email }} <span class="caret noRotate"></span>
+                        </span>
+                        <div class="navbarDropdownMenu hideDropdown">
+                            <ul class="dropdownMenu">
                                 @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
-                                <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
-                                    Dashboard
-                                </a>
-                                <a class="dropdown-item" href="{{ route('dashboardIndexProfile') }}">
-                                            Mon Profil
-                                </a>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('dashboardIndex') }}"><i class="fa fa-tachometer"></i><span class="dropdownSubtitle">Dashboard</span></a>
+                                    </li>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('dashboardIndexProfile') }}"><i class="fa fa-user"></i><span class="dropdownSubtitle">Mon profil</span></a>
+                                    </li>
                                 @endif
                                 @if ( Auth::user()->role == 'company')
-                                    <a class="dropdown-item" href="{{ route('indexProfile') }}">
-                                        Mon profil
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('indexOffers') }}">
-                                        Mes offres d'emploi
-                                    </a>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('indexProfile') }}"><i class="fa fa-user"></i><span class="dropdownSubtitle">Mon profil</span></a>
+                                    </li>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('indexOffers') }}"><i class="fa fa-briefcase"></i><span class="dropdownSubtitle">Mes offres d'emploi</span></a>
+                                    </li>
                                 @endif
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    Déconnexion
-                                </a>
-
+                                <li class="dropdownMenuItem">
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i><span class="dropdownSubtitle">Déconnexion</span></a>
+                                </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                            </div>
-                        </li>
+                            </ul>
+                        </div>
                     @endguest
-                </ul>
-            </div>
+                </li>
+                <!-- Mobile menu -->
+                <li class="navMobile">
+                    <div class="toggleMenu mobileMenuAction">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <div class="popupMenu hideMenu">
+                        <div class="closeMenu mobileMenuAction">
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <div class="popupMenuTitle">
+                            @guest
+                            <h3>Vous êtes recruteur ?</h3>
+                            @endguest
+                        </div>
+                        <ul class="menuActionsList">
+                            @guest
+                                <li class="menuActionsItem">
+                                    <a href="{{ route('login') }}"><i class="fa fa-sign-in"></i><p class="menuSubtitle">Connectez-vous</p></a>
+                                </li>
+                                <li class="menuActionsItem">
+                                    <a href="{{ route('register') }}"><i class="fa fa-user-plus"></i><p class="menuSubtitle">Inscrivez-vous</p></a>
+                                </li>
+                            @else
+                                @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('dashboardIndex') }}"><i class="fa fa-tachometer"></i><p class="menuSubtitle">Dashboard</p></a>
+                                    </li>
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('dashboardIndexProfile') }}"><i class="fa fa-user"></i><p class="menuSubtitle">Mon profil</p></a>
+                                    </li>
+                                @endif
+                                @if ( Auth::user()->role == 'company')
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('indexProfile') }}"><i class="fa fa-user"></i><p class="menuSubtitle">Mon profil</p></a>
+                                    </li>
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('indexOffers') }}"><i class="fa fa-briefcase"></i><p class="menuSubtitle">Mes offres</p></a>
+                                    </li>
+                                @endif
+                                <li class="menuActionsItem">
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i><p class="menuSubtitle">Déconnexion</p></a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            @endguest
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
 
@@ -94,6 +130,7 @@
 <!-- Scripts -->
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/website/navbar.js') }}"></script>
 <script src="{{ asset('js/website/global.js') }}"></script>
 <script src="{{ asset('js/website/profile.js') }}"></script>
 <script src="{{ asset('js/website/offers.js') }}"></script>

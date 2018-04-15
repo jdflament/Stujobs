@@ -1,3 +1,18 @@
+/**
+Global
+ */
+
+.py-4 {
+    margin-top: 50px;
+}
+
+.containerLg {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
 .socials-buttons {
     text-align: center;
 }

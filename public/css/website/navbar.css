@@ -1,0 +1,408 @@
+/**
+* Navbar Top
+ */
+
+nav.navbarTop {
+    font-family: 'Open Sans' ,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: fixed;
+    left: 0;
+    top: 0px;
+    right: 0;
+    z-index: 90;
+    height: 50px;
+    perspective: 2000px;
+    background: #5681E7;
+    box-shadow: 0px 2px 4px 0px rgba(114, 114, 114, 0.3);
+}
+
+nav.navbarTop ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+@media (min-width: 671px) {
+    .navMobile {
+        display: none;
+    }
+}
+
+.navbarLogo a {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.navbarLogo .beta {
+    font-weight: 400;
+    position: relative;
+    top: -9px;
+    right: -4px;
+    font-size: 9px;
+    color: #5681E7;
+    text-transform: uppercase;
+    background: #F9F9F9;
+    padding: 3px 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px 0px rgba(86,86,86,0.35);
+}
+
+.navbarLogo a:hover {
+    text-decoration: none;
+    color: #f9f9f9;
+}
+
+.navbarNavigation {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.navbarNavigation .navbarLogo {
+    position: static;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    top: 0;
+    left: 0;
+}
+
+@media (max-width: 670px) {
+    .navbarNavigation .navbarMenu {
+        display: none;
+    }
+}
+
+.navbarNavigation .navbarLogo, .navbarNavigation .navbarMenu {
+    justify-content: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.navbarNavigation .navbarMenu .navbarSpan a {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+.navbarSpan {
+    font-size: 14px;
+    color: #ffffff;
+
+}
+
+/**
+Mobile nav menu : Menu button creation
+ */
+
+.navMobile .toggleMenu {
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -webkit-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 24px;
+    margin: 0;
+    padding: 3px 10px;
+}
+
+.navMobile .toggleMenu h2, .navMobile .toggleMenu h2:before, .navMobile .toggleMenu h2:after {
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    border-radius: 1px;
+    background: currentColor;
+}
+
+.navMobile .toggleMenu h2:before, .navMobile .toggleMenu h2:after {
+    content: '';
+    left: 0px;
+}
+
+.navMobile .toggleMenu h2:before {
+    top: -9px;
+}
+
+.navMobile .toggleMenu h2:after {
+    top: 9px;
+}
+
+.navMobile .toggleMenu h2 {
+    font-size: 0;
+    left: 13px;
+    top: 15px;
+}
+
+/**
+Popup menu
+ */
+
+.navMobile .popupMenu {
+    position: absolute;
+    background: white;
+    padding-top: 30px;
+    right: -5px;
+    width: 300px;
+    top: 5px;
+    margin: 0px 20px;
+    -moz-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    -moz-transition: all 200ms;
+    -webkit-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms;
+}
+
+.hideMenu {
+    visibility:hidden;
+    opacity: 0;
+    -moz-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    -o-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.showMenu {
+    visibility:visible;
+    opacity: 1;
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+
+.navMobile .popupMenu > a {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -webkit-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+}
+
+ul.menuActionsList {
+    display: flex;
+    margin-top: 25px;
+}
+
+li.menuActionsItem {
+    flex-basis: 33.33333%;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -webkit-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+    cursor: pointer;
+}
+
+li.menuActionsItem a {
+    text-decoration: none;
+    padding: 20px 0 5px;
+    width: 100%;
+    display: inline-block;
+}
+
+li.menuActionsItem:hover {
+    background: #5580e7;
+}
+
+li.menuActionsItem i {
+    font-size: 25px;
+    color: #5580e7;
+    transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -webkit-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+}
+
+li.menuActionsItem:hover i {
+    color: #FFFFFF;
+}
+
+li.menuActionsItem .menuSubtitle {
+    font-size: 10px;
+    color: #5580e7;
+    text-transform: uppercase;
+    transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -webkit-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+}
+
+li.menuActionsItem:hover .menuSubtitle {
+    color: #FFFFFF;
+}
+
+.popupMenuTitle {
+    position: absolute;
+    top: 18px;
+    left: 15px;
+}
+
+.popupMenuTitle h3 {
+    color: #5580e7;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/**
+Dropdown menu
+ */
+
+.hideDropdown {
+    visibility:hidden;
+    opacity: 0;
+}
+
+.showDropdown {
+    visibility:visible;
+    opacity: 1;
+}
+
+.navbarDropdownAction {
+    cursor: pointer;
+}
+
+.navbarDropdownMenu {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: #fff;
+    width: 100%;
+    -moz-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    -moz-transition: all 200ms;
+    -webkit-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms;
+}
+
+ul.dropdownMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+li.dropdownMenuItem {
+    flex-basis: 100%;
+    width: 100%;
+}
+
+li.dropdownMenuItem a {
+    padding: 7px 10px;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    -moz-transition: all 200ms;
+    -webkit-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms;
+    color: #5580e7;
+}
+
+li.dropdownMenuItem a:hover {
+    color: #fff;
+    background-color: #5580e7;
+}
+
+li.dropdownMenuItem i {
+    width: 20px;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    overflow: hidden;
+    transition: 200ms ease;
+    border-top: 5px solid #fff;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 0 solid #fff;
+}
+
+.caret.noRotate {
+    transform: rotate(0deg);
+}
+
+.caret.rotate {
+    transform: rotate(-180deg);
+    border-width: 5px 5px 0 5px;
+}
+
+/**
+Popup menu : Close button creation
+ */
+
+.closeMenu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 51px;
+    height: 51px;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.closeMenu:hover {
+    color: #5867B6;
+}
+
+.closeMenu:before, .closeMenu:after {
+    content: '';
+    position: absolute;
+    background: #5681E7;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -o-border-radius: 1px;
+    border-radius: 1px;
+    left: 14px;
+    right: 14px;
+    top: 24px;
+    height: 3px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    -webkit-transition: all 100ms ease-in;
+    -o-transition: all 100ms ease-in;
+}
+
+.closeMenu:hover:before, .closeMenu:hover:after {
+    background: #5681E7;
+}
+
+.closeMenu:after {
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}

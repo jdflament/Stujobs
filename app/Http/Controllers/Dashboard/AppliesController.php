@@ -14,7 +14,6 @@ class AppliesController extends Controller
 {
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
      * Show the applies page

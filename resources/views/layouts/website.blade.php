@@ -48,7 +48,7 @@
                 </li>
                 <li class="navbarMenu">
                     @guest
-                        <span class="navbarSpan">Vous êtes recruteur ? <a href="{{ route('login') }}">Connectez-vous</a></span>
+                        <span class="navbarSpan">Vous êtes recruteur ? <a href="{{ route('login') }}">Connectez-vous</a> ou <a href="{{ route('register') }}">Inscrivez-vous</a></span>
                     @else
                         <span class="navbarSpan navbarDropdownAction">
                             @if (isset($admin))

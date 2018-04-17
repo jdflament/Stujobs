@@ -57,7 +57,25 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="create_remuneration">Rémunération</label>* (taux horaire)
-                                    <input type="text" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10€/h" />
+                                    <input type="number" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="create_remuneration">Lieu du poste</label>* (Ville)
+                                    <input type="text" class="form-control" id="create_city" name="create_city" required="required" placeholder="Ex : Lille" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="create_contact_email">Adresse mail à contacter</label>*
+                                    <input type="text" class="form-control" id="create_contact_email" name="create_contact_email" required="required" placeholder="Ex : contact@test.fr" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="create_contact_phone">Téléphone à contacter</label>*
+                                    <input type="text" class="form-control" id="create_contact_phone" name="create_contact_phone" required="required" placeholder="Ex : 06050610233" />
                                 </div>
                             </div>
                         </div>

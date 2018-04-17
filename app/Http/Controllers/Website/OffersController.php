@@ -28,7 +28,7 @@ class OffersController extends Controller
         $offers = DB::table('offers')->where('offers.company_id', $id)
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
@@ -52,7 +52,7 @@ class OffersController extends Controller
      */
     public function create()
     {
-        $data = Input::only('create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_valid');
+        $data = Input::only('create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_city','create_contact_email', 'create_contact_phone', 'create_valid');
 
         $offer = new Offer();
         $offer->setAttribute('company_id', Auth::user()->id);
@@ -61,13 +61,16 @@ class OffersController extends Controller
         $offer->setAttribute('contract_type', $data['create_contract_type']);
         $offer->setAttribute('duration', $data['create_duration']);
         $offer->setAttribute('remuneration', $data['create_remuneration']);
+        $offer->setAttribute('city', $data['create_city']);
         $offer->setAttribute('valid', filter_var($data['create_valid'], FILTER_VALIDATE_BOOLEAN));
+        $offer->setAttribute('contact_email', $data['create_contact_email']);
+        $offer->setAttribute('contact_phone', $data['create_contact_phone']);
         $offer->save();
 
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.contact_email', 'offers.contact_phone', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
@@ -129,7 +132,7 @@ class OffersController extends Controller
         $offer = DB::table('offers')->where('offers.id', $id)
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete')
+            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone')
             ->get()
             ->first();
         
@@ -151,7 +154,7 @@ class OffersController extends Controller
         $offer = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.id as user_id', 'users.role','offers.company_id' , 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.id as user_id', 'users.role','offers.company_id' , 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->where('offers.id', '=', $id)
             ->get()
             ->first();
@@ -167,7 +170,7 @@ class OffersController extends Controller
      */
     public function edit($id)
     {
-        $data = Input::only('edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration');
+        $data = Input::only('edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration', 'edit_city', 'edit_contact_email', 'edit_contact_phone');
 
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('company_id', Auth::user()->id);
@@ -176,12 +179,15 @@ class OffersController extends Controller
         $offer->setAttribute('contract_type', $data['edit_contract_type']);
         $offer->setAttribute('duration', $data['edit_duration']);
         $offer->setAttribute('remuneration', $data['edit_remuneration']);
+        $offer->setAttribute('contact_email', $data['edit_contact_email']);
+        $offer->setAttribute('contact_phone', $data['edit_contact_phone']);
+        $offer->setAttribute('city', $data['edit_city']);
         $offer->save();
 
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->get();
 
         return redirect()->route('indexOffers')->with('offers', $offers);
@@ -208,7 +214,7 @@ class OffersController extends Controller
         $offer = DB::table('offers')->where('offers.id', $id)
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete')
+            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone')
             ->get()
             ->first();
 

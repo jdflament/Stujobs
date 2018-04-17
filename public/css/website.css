@@ -168,6 +168,11 @@ Box effect
     color: #5580e7;
     margin: 10px 0;
 }
+.boxTitleBlack{
+    font-size: 18px;
+    color: #5E5E5E;
+    margin: 10px 0;
+}
 
 /**
 Top Box
@@ -602,4 +607,16 @@ Title section
     color: #ab333f;
     text-align: right;
     margin: 5px;
+}
+
+.smallText {
+    font-size: 12px;
+    color: #BBBBBB;
+}
+.paragraphe {
+    color: #5E5E5E;
+    font-size: 14px;
+}
+.informationsBox h3 {
+    margin-bottom: 20px;
 }

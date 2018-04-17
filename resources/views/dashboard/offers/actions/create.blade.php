@@ -91,10 +91,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="create_remuneration">Rémunération</label>* (taux horaire)
-                                        <input type="text" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10€/h" />
+                                        <input type="number" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10" />
                                     </div>
                                     @if ($errors->has('create_remuneration'))
                                         <div class="error">{{ $errors->first('create_remuneration') }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="create_city">Lieu du poste (Ville)</label>*
+                                        <input type="text" class="form-control" id="create_city" name="create_city" required="required" placeholder="Ex : Lille" />
+                                    </div>
+                                    @if ($errors->has('create_city'))
+                                        <div class="error">{{ $errors->first('create_city') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-md-6">

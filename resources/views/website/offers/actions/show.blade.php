@@ -1,99 +1,47 @@
 @extends('layouts.website')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <a href="{{ route('home') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px; float: right;">Retour à l'accueil</a>
-
-                <h3 style="clear: both; margin-bottom: 30px;">{{ $offer->title }}
-                    @if ($offer->valid == 0)
-                        <small><span class="badge badge-danger">Non valide</span></small>
-                    @else
-                        <small><span class="badge badge-success">Validé</span></small>
-                    @endif
-                </h3>
-
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <small class="mb-0">
-                                <span style="margin-right: 50px;">Type de contrat : @lang('vocabulary.' . $offer->contract_type)</span>
-                                <span style="margin-right: 50px;">Durée : {{ $offer->duration }}</span>
-                                <span style="margin-right: 50px;">Rémunération : {{ $offer->remuneration }}</span>
-                            </small>
+    <!-- <a href="{{ route('home') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px; float: right;">Retour à l'accueil</a> -->
+    <div class="containerLg">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="boxEffect topBox">
+                    <div class="topBoxContent">
+                        <div class="leftSide">
+                        <h3>L'IUT de Lens</h3>
+                            <p>Vous propose des offres d'emploi exclusives par le biais de plusieurs entreprises. <br />
+                            </p>
                         </div>
-
-                        <div class="card-body">
-                            <?php $description = $offer->description; ?>
-                            <p style="margin: 30px;"><?php echo nl2br($description) ?></p>
-
-                            <hr>
-
-                            <div style="display: flex; justify-content: space-around; text-align: center;">
-                                <small style="flex-basis: 30%;">Téléphone de l'entreprise : <b>{{ $offer->company_phone }}</b></small>
-                                <small style="flex-basis: 30%;">Adresse de l'entreprise : <b>{{ $offer->company_address }}</b></small>
-                                <small style="flex-basis: 30%;">Email de l'entreprise : <b>{{ $offer->user_email }}</b></small>
+                        <div class="rightSide">
+                            <input type="text" name="searchOffer" class="searchInput" id="searchOffer" placeholder="Rechercher une offre..." />
+                            <div class="inputRightIcon">
+                                <i class="fa fa-search"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="container">
-                    <div class="row justify-content-center m-3">
-                        <button class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#collapseApplyForm" aria-expanded="true" aria-controls="collapseApplyForm">Je candidate</button>
-                    </div>
-                    <div class="row justify-content-center collapse" id="collapseApplyForm">
-                        <div class="card col-md-8" style="margin: 0 auto;">
-                            <div class="card-body">
-                                <form action="/offers/{{ $offer->offer_id }}/apply" name="applyOffer" method="POST" enctype="multipart/form-data">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="apply_firstname">Prénom</label>*
-                                            <input type="text" class="form-control" id="apply_firstname" name="apply_firstname" required="required">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="apply_lastname">Nom</label>*
-                                            <input type="text" class="form-control" id="apply_lastname" name="apply_lastname" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="apply_email">Email</label>*
-                                            <input type="email" class="form-control" id="apply_email" name="apply_email" required="required">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="apply_phone">Téléphone</label>*
-                                            <input type="number" class="form-control" id="apply_phone" name="apply_phone" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="apply_cv">CV</label>
-                                            <input type="file" class="form-control" id="apply_cv" name="apply_cv">
-                                        </div>
-                                        <div class="form-group col-md-8">
-                                            <label for="apply_subject">Sujet</label>*
-                                            <input type="text" class="form-control" id="apply_subject" name="apply_subject" required="required">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <label for="apply_message">Message</label>*
-                                            <textarea rows="6" class="form-control" id="apply_message" name="apply_message" required="required"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <button type="submit" class="btn btn-dark">Postuler</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="containerLg">
+        <div class="row">
+            <div class="col-xs-12 col-md-8 col-lg-8">
+                <div class="boxEffect">
+                    <h3 class="boxTitleBlack">À propos de l'offre <span class="boxTitle">{{ $offer->title }}</span></h3>
+                    <br />
+                    <?php $description = $offer->description; ?>
+                    <p class="paragraphe"><?php echo nl2br($description) ?></p>
                 </div>
-
-                <hr>
-
+            </div>
+            <div class="col-xs-12 col-md-8 col-lg-4">
+                <div class="boxEffect informationsBox">
+                    <h3 class="boxTitle centerContent">Informations</h3>
+                    <p class="paragraphe"><span class="smallText">Lieu : </span> {{ $offer->city }}</p>                    
+                    <p class="paragraphe"><span class="smallText">Type de contrat : </span> @lang('vocabulary.' . $offer->contract_type)</p>
+                    <p class="paragraphe"><span class="smallText">Durée : </span> {{ $offer->duration }}</p>
+                    <p class="paragraphe"><span class="smallText">Rémunération : </span> {{ $offer->remuneration }}€ / h</p>
+                    <p class="paragraphe"><span class="smallText">Posté par : </span> {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</p>
+                </div>
                 <div style="text-align: center; display: table; margin: 15px auto;">
                     <h5>Partager sur les réseaux</h5>
                     <ul class="socials-buttons" style="display: flex; list-style:none; margin-left: 0px; padding-left: 0px;">
@@ -109,8 +57,58 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="containerLg">
+        <div class="row justify-content-center m-3">
+            <button class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#collapseApplyForm" aria-expanded="true" aria-controls="collapseApplyForm">Je candidate</button>
+        </div>
+        <div class="row justify-content-center collapse" id="collapseApplyForm">
+            <div class="card col-md-8" style="margin: 0 auto;">
+                <div class="card-body">
+                    <form action="/offers/{{ $offer->offer_id }}/apply" name="applyOffer" method="POST" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="apply_firstname">Prénom</label>*
+                                <input type="text" class="form-control" id="apply_firstname" name="apply_firstname" required="required">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="apply_lastname">Nom</label>*
+                                <input type="text" class="form-control" id="apply_lastname" name="apply_lastname" required="required">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="apply_email">Email</label>*
+                                <input type="email" class="form-control" id="apply_email" name="apply_email" required="required">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="apply_phone">Téléphone</label>*
+                                <input type="number" class="form-control" id="apply_phone" name="apply_phone" required="required">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="apply_cv">CV</label>
+                                <input type="file" class="form-control" id="apply_cv" name="apply_cv">
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label for="apply_subject">Sujet</label>*
+                                <input type="text" class="form-control" id="apply_subject" name="apply_subject" required="required">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="apply_message">Message</label>*
+                                <textarea rows="6" class="form-control" id="apply_message" name="apply_message" required="required"></textarea>
+                            </div>
+                        </div>
 
-                <small>Mis en ligne par : {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</small>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-dark">Postuler</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

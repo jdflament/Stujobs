@@ -66,6 +66,24 @@
                                         <input type="text" class="form-control" id="edit_remuneration" name="edit_remuneration" required="required" value="{{ $offer->remuneration }}" placeholder="Ex : 10€/h" />
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="edit_remuneration">Lieu du poste</label>* (Ville)
+                                        <input type="text" class="form-control" id="edit_city" name="edit_city" required="required" value="{{ $offer->city }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="edit_contact_email">Adresse mail à contacter</label>*
+                                        <input type="text" class="form-control" id="edit_contact_email" name="edit_contact_email" required="required" value="{{ $offer->contact_email }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="edit_contact_phone">Téléphone à contacter</label>*
+                                        <input type="text" class="form-control" id="edit_contact_phone" name="edit_contact_phone" required="required" value="{{ $offer->contact_phone }}" />
+                                    </div>
+                                </div>
                             </div>
                             @foreach ($errors->all() as $error)
                                 <p>{{ $error }}</p>

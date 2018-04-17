@@ -51,6 +51,7 @@
                                 <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="cdi"><span class="checkboxSpan">CDI</span></li>
                             </ul>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="companyFilter" id="companyFilter" />
                         </form>
                         <label>Par entreprise</label>
                         <div class="inputGroup">

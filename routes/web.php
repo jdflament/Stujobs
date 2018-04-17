@@ -39,6 +39,8 @@ Route::post('/offers/{id}/apply', 'Website\AppliesController@apply')->name('appl
 Route::get('/offers/list/search', 'Website\OffersController@search')->name('searchOffer');
 // Filter offer
 Route::post('/offers/filter/result', 'Website\OffersController@filterOffers')->name('filterOffers');
+// Filter offers by company and checkboxes
+Route::get('/offers/company/name', 'Website\OffersController@searchByCompany')->name('searchByCompany');
 
 /*
  * Company : Profile manager

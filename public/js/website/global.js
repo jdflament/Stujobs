@@ -103,29 +103,39 @@ $( "#searchOffer" ).autocomplete({
 |--------------------------------------------------------------------------
 */
 
-$( "#searchOfferByCompany" ).autocomplete({
-    source: function (request, response) {
-        console.log(request);
-        return;
+$(document).on('keyup', '#searchOffersByCompany', function(event) {
+    var value = $(this).val();
 
+    if (value == "") {
+        $('#companyFilter').val("");
+        $('form[name=filterOffer]').submit();
+    }
+});
+
+$( "#searchOffersByCompany").autocomplete({
+    minLength: 1,
+    search: function (event, ui) {
+        console.log(event);
+    },
+    source: function (request, response) {
         $.ajax({
-            url: '/offers/company/',
+            url: '/offers/company/name',
             dataType: 'json',
             data: request,
             success: function (data) {
                 response(data.map(function (value) {
                     return {
-                        'label': value.title,
+                        'label': value.name,
                         'id': value.id,
-                        'title': value.title
+                        'name': value.name
                     };
                 }));
             }
         });
     },
-    minLength: 1,
     select: function(event, ui) {
-        location.href="/offers/" + ui.item.id;
+        $('#companyFilter').val(ui.item.name);
+        $('form[name=filterOffer]').submit();
     }
 });
 

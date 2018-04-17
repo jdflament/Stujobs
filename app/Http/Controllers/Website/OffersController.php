@@ -228,7 +228,7 @@ class OffersController extends Controller
         $results = array();
 
         $queries = DB::table('offers')
-            ->where([['offers.title', 'LIKE', '%'.$term.'%'], ['offers.valid', '=', 1]])
+            ->where([['offers.title', 'LIKE', '%'.$term.'%'], ['offers.valid', '=', 1], ['offers.complete', '=', 0]])
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete')
@@ -247,12 +247,19 @@ class OffersController extends Controller
      *
      * Filter offers
      */
-    public function filterOffers()
+    public function filterOffers(Request $request)
     {
         $checkboxes = Input::only('contract_type');
+        $company_name = Input::only('companyFilter');
 
         if (isset($checkboxes['contract_type'])) {
             $checkboxes = $checkboxes['contract_type'];
+        }
+
+        if (isset($company_name['companyFilter'])) {
+            $company_name = $company_name['companyFilter'];
+        } else {
+            $company_name = "";
         }
 
         if (in_array("all", $checkboxes)) {
@@ -260,17 +267,45 @@ class OffersController extends Controller
         }
 
         $offers = DB::table('offers')
-            ->whereIn('offers.contract_type', $checkboxes)
-            ->where([
-                ['offers.valid', '=', true],
-                ['offers.complete', '=', false],
-            ])
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->whereIn('offers.contract_type', $checkboxes)
+            ->where([
+                ['companies.name', 'LIKE', '%'.$company_name.'%'],
+                ['offers.valid', '=', true],
+                ['offers.complete', '=', false],
+            ])
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
         return view('website/index', ['offers' => $offers]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * Search companies
+     */
+    public function searchByCompany(Request $request)
+    {
+        $term = Input::get('term');
+
+        $results = array();
+
+        $queries = DB::table('companies')
+            ->leftJoin('users', 'companies.user_id', '=', 'users.id')
+            ->select('users.id as id_company', 'users.email', 'users.role', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->where('companies.name', 'LIKE', '%'.$term.'%')
+            ->distinct()
+            ->get();
+
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->id_company,'name' => $query->name ];
+        }
+
+        return response()->json($results);
     }
 }

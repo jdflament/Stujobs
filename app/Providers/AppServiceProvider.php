@@ -35,6 +35,16 @@ class AppServiceProvider extends ServiceProvider
             $view->with('totalApplies', $totalApplies);
         });
 
+        view()->composer('website/templates/topbox', function ($view) {
+            $offers = DB::table('offers')
+                ->where([['valid', '=', 1], ['complete', '=', 0]])
+                ->get();
+
+            $countOffers = count($offers);
+
+            $view->with('countOffers', $countOffers);
+        });
+
         Validator::extend('phone', function($attribute, $value, $parameters, $validator) {
             return preg_match('%^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$%i', $value) && strlen($value) >= 10;
         });

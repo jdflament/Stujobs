@@ -241,10 +241,12 @@ Top Box
 }
 
 .topBoxContent .rightSide .inputRightIcon {
+    cursor: pointer;
     background: #5580e7;
     color: #fff;
     width: 38px;
     height: 38px;
+    border: none;
     left: -4px;
     top: -1px;
     border-top-right-radius: 5px;
@@ -257,7 +259,6 @@ Top Box
     -o-border-bottom-right-radius: 5px;
     position: relative;
     vertical-align: middle;
-    padding-top: 7px;
     text-align: center;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);

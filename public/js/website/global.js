@@ -45,57 +45,27 @@ $(function () {
 |--------------------------------------------------------------------------
 */
 
-$( "#searchOffer" ).autocomplete({
-    source: function (request, response) {
-        $.ajax({
-            url: '/offers/list/search',
-            dataType: 'json',
-            data: request,
-            success: function (data) {
-                response(data.map(function (value) {
-                    return {
-                        'label': value.title,
-                        'id': value.id,
-                        'title': value.title
-                    };
-                }));
-            }
-        });
-    },
-    minLength: 1,
-    select: function(event, ui) {
-        location.href="/offers/" + ui.item.id;
-    }
-});
-
-/*
-|--------------------------------------------------------------------------
-| Search offer on top block
-|--------------------------------------------------------------------------
-*/
-
-$( "#searchOffer" ).autocomplete({
-    source: function (request, response) {
-        $.ajax({
-            url: '/offers/list/search',
-            dataType: 'json',
-            data: request,
-            success: function (data) {
-                response(data.map(function (value) {
-                    return {
-                        'label': value.title,
-                        'id': value.id,
-                        'title': value.title
-                    };
-                }));
-            }
-        });
-    },
-    minLength: 1,
-    select: function(event, ui) {
-        location.href="/offers/" + ui.item.id;
-    }
-});
+// $(document).on('submit', 'form[name=searchOffer]', function(event) {
+//     event.preventDefault();
+//
+//     var url = $(this).attr('action');
+//     var type = $(this).attr('type');
+//     var term = $(this).find('input[name=searchOffer]').val();
+//
+//     $.ajax({
+//         type: type,
+//         url: url + '/' + term,
+//         success: function(response) {
+//             console.log(response);
+//             $('html').load(response);
+//             // $('.boxList').hide().html($(response).find('.boxList').html()).fadeIn();
+//         },
+//         error: function (response) {
+//             console.error(response);
+//             alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer le filtre ultérieurement.", "alert-danger", 4000);
+//         },
+//     });
+// });
 
 /*
 |--------------------------------------------------------------------------

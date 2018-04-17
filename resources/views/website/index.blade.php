@@ -1,27 +1,7 @@
 @extends('layouts.website')
 
 @section('content')
-    <div class="containerLg">
-        <div class="row">
-            <div class="col-xs-12 col-md-12 col-lg-12">
-                <div class="boxEffect topBox">
-                    <div class="topBoxContent">
-                        <div class="leftSide">
-                        <h3>L'IUT de Lens</h3>
-                            <p>Vous propose des offres d'emploi exclusives par le biais de plusieurs entreprises. <br />
-                            Notre site vous propose actuellement {{ count($offers) }} offre(s) d'emploi au total.</p>
-                        </div>
-                        <div class="rightSide">
-                            <input type="text" name="searchOffer" class="searchInput" id="searchOffer" placeholder="Rechercher une offre..." />
-                            <div class="inputRightIcon">
-                                <i class="fa fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('website.templates.topbox')
 
     <div class="containerLg">
         <div class="row">

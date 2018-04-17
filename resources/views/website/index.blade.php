@@ -32,6 +32,10 @@
                             </ul>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="companyFilter" id="companyFilter" />
+                            <?php
+                                null !== request()->get('searchOffer') ? $offerFilter = request()->get('searchOffer') : $offerFilter = "";
+                            ?>
+                            <input type="hidden" name="offerFilter" id="offerFilter" value="{{ $offerFilter }}" />
                         </form>
                         <label>Par entreprise</label>
                         <div class="inputGroup">

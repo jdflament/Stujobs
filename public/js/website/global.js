@@ -41,34 +41,6 @@ $(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Search offer on top block
-|--------------------------------------------------------------------------
-*/
-
-// $(document).on('submit', 'form[name=searchOffer]', function(event) {
-//     event.preventDefault();
-//
-//     var url = $(this).attr('action');
-//     var type = $(this).attr('type');
-//     var term = $(this).find('input[name=searchOffer]').val();
-//
-//     $.ajax({
-//         type: type,
-//         url: url + '/' + term,
-//         success: function(response) {
-//             console.log(response);
-//             $('html').load(response);
-//             // $('.boxList').hide().html($(response).find('.boxList').html()).fadeIn();
-//         },
-//         error: function (response) {
-//             console.error(response);
-//             alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer le filtre ultérieurement.", "alert-danger", 4000);
-//         },
-//     });
-// });
-
-/*
-|--------------------------------------------------------------------------
 | Search offers of a company
 |--------------------------------------------------------------------------
 */

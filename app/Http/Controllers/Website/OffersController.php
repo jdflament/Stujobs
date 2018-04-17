@@ -255,6 +255,7 @@ class OffersController extends Controller
     {
         $checkboxes = Input::only('contract_type');
         $company_name = Input::only('companyFilter');
+        $offer_title = Input::only('offerFilter');
 
         if (isset($checkboxes['contract_type'])) {
             $checkboxes = $checkboxes['contract_type'];
@@ -264,6 +265,12 @@ class OffersController extends Controller
             $company_name = $company_name['companyFilter'];
         } else {
             $company_name = "";
+        }
+
+        if (isset($offer_title['offerFilter'])) {
+            $offer_title = $offer_title['offerFilter'];
+        } else {
+            $offer_title = "";
         }
 
         if (in_array("all", $checkboxes)) {
@@ -277,6 +284,7 @@ class OffersController extends Controller
             ->whereIn('offers.contract_type', $checkboxes)
             ->where([
                 ['companies.name', 'LIKE', '%'.$company_name.'%'],
+                ['offers.title', 'LIKE', '%'.$offer_title.'%'],
                 ['offers.valid', '=', true],
                 ['offers.complete', '=', false],
             ])

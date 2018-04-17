@@ -23,6 +23,62 @@ body {
 }
 
 /**
+Autocomplete
+ */
+
+.ui-autocomplete {
+    border: none !important;
+    box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09) !important;
+    -webkit-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09) !important;
+    -moz-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09) !important;
+    -o-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09) !important;
+}
+
+.ui-menu .ui-menu-item {
+    background: #fff;
+    border: none !important;
+    height: 40px;
+    font-size: 14px;
+    font-family: "Open Sans", serif;
+    color: #5580e7;
+    transition: all 140ms ease-in-out;
+    -moz-transition: all 140ms ease-in-out;
+    -webkit-transition: all 140ms ease-in-out;
+    -o-transition: all 140ms ease-in-out;
+}
+
+.ui-menu .ui-menu-item .ui-menu-item-wrapper, .ui-menu .ui-menu-item .ui-menu-item-wrapper:hover {
+    background: inherit;
+    border: none !important;
+}
+
+.ui-widget.ui-widget-content {
+    border: none !important;
+}
+
+.ui-menu .ui-menu-item .ui-menu-item-wrapper {
+    padding-top: 9px;
+}
+
+.ui-menu .ui-menu-item:hover {
+    background: #5580e7;
+    color: #fff;
+}
+
+.ui-state-active {
+    color: #fff !important;
+    background: #5580e7 !important;
+    border: none !important;
+    height: 40px !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    transition: all 140ms ease-in-out;
+    -moz-transition: all 140ms ease-in-out;
+    -webkit-transition: all 140ms ease-in-out;
+    -o-transition: all 140ms ease-in-out;
+}
+
+/**
 Arrows
  */
 
@@ -42,8 +98,8 @@ Arrows
     top: 50%;
     width: 25%;
     height: 25%;
-    border-left: 1px solid #333;
-    border-bottom: 1px solid #333;
+    border-left: 1px solid #5E5E5E;
+    border-bottom: 1px solid #5E5E5E;
     -webkit-transform: translate(-60% -50%) rotate(45deg);
     transform: translate(-60%, -50%) rotate(45deg);
 }
@@ -55,7 +111,7 @@ Arrows
     top: 50%;
     width: 80%;
     height: 1px;
-    background: #333;
+    background: #5E5E5E;
     -webkit-transform: translate(-40%,-50%);
     transform: translate(-40%, -50%);
 }
@@ -67,8 +123,8 @@ Arrows
     top: 50%;
     width: 25%;
     height: 25%;
-    border-right: 1px solid #333;
-    border-top: 1px solid #333;
+    border-right: 1px solid #5E5E5E;
+    border-top: 1px solid #5E5E5E;
     -webkit-transform: translate(-50% -50%) rotate(45deg);
     transform: translate(-50%, -50%) rotate(45deg);
 }
@@ -80,7 +136,7 @@ Arrows
     top: 50%;
     width: 80%;
     height: 1px;
-    background: #333;
+    background: #5E5E5E;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%, -50%);
 }
@@ -179,7 +235,7 @@ Top Box
     outline: 0 !important;
 }
 
-.inputRightIcon {
+.topBoxContent .rightSide .inputRightIcon {
     background: #5580e7;
     color: #fff;
     width: 38px;
@@ -228,7 +284,7 @@ Filters
 }
 
 .filters label {
-    margin: 25px 0 10px;
+    margin: 15px 0 10px;
     font-size: 12px;
     color: #BBBBBB;
 }
@@ -359,7 +415,7 @@ Box offer
 }
 
 .boxContent {
-    height: 40px;
+    max-height: 40px;
     overflow: hidden;
     overflow-y: hidden;
     text-overflow: ellipsis;
@@ -374,7 +430,6 @@ Box offer
 }
 
 .boxFooter {
-    margin-top: 15px;
     display:flex;
     align-items: center;
 }
@@ -411,6 +466,68 @@ Box offer
     .boxSubtitle {
         margin-top: 15px;
     }
+}
+
+/**
+Input search
+ */
+
+.inputGroup {
+    width: 100%;
+    position: relative;
+}
+
+.inputForm, .inputFormRightIcon {
+    display: inline-block;
+}
+
+.inputForm {
+    border: none;
+    padding: 8px 19px 8px 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: #5E5E5E;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    width: 100%;
+}
+
+.inputForm::placeholder {
+    color: #a3a3a3;
+}
+
+.inputForm:focus, .inputForm:active {
+    outline: 0 !important;
+}
+
+.inputFormRightIcon {
+    background: #5580e7;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    right: 0px;
+    top: 0;
+    padding-top: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    -o-border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -o-border-bottom-right-radius: 5px;
+    position: absolute;
+    vertical-align: middle;
+    text-align: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 /**

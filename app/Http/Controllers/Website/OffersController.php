@@ -214,4 +214,63 @@ class OffersController extends Controller
 
         return view('website/profile/offers/actions/show', ['offer' => $offer]);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * Search an offer and return id + title
+     */
+    public function search(Request $request)
+    {
+        $term = Input::get('term');
+
+        $results = array();
+
+        $queries = DB::table('offers')
+            ->where([['offers.title', 'LIKE', '%'.$term.'%'], ['offers.valid', '=', 1]])
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete')
+            ->get();
+
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->offer_id, 'title' => $query->title ];
+        }
+
+        return response()->json($results);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Filter offers
+     */
+    public function filterOffers()
+    {
+        $checkboxes = Input::only('contract_type');
+
+        if (isset($checkboxes['contract_type'])) {
+            $checkboxes = $checkboxes['contract_type'];
+        }
+
+        if (in_array("all", $checkboxes)) {
+            $checkboxes = ["nc", "sj", "interim", "stage", "ca", "cp", "cdd", "cdi"];
+        }
+
+        $offers = DB::table('offers')
+            ->whereIn('offers.contract_type', $checkboxes)
+            ->where([
+                ['offers.valid', '=', true],
+                ['offers.complete', '=', false],
+            ])
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->orderBy('offers.created_at', 'DESC')
+            ->get();
+
+        return view('website/index', ['offers' => $offers]);
+    }
 }

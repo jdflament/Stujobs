@@ -35,6 +35,10 @@ Route::get('/', 'Website\HomeController@index')->name('home');
 Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showValidOffer');
 // Apply to an offer
 Route::post('/offers/{id}/apply', 'Website\AppliesController@apply')->name('applyOffer');
+// Search offer
+Route::get('/offers/list/search', 'Website\OffersController@search')->name('searchOffer');
+// Filter offer
+Route::post('/offers/filter/result', 'Website\OffersController@filterOffers')->name('filterOffers');
 
 /*
  * Company : Profile manager

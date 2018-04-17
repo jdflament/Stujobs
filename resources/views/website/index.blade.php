@@ -39,7 +39,7 @@
                     <div class="filters">
                         <label>Types de contrat</label>
                         <ul>
-                            <li><input type="checkbox" name="contract[][all]" class="checkboxInput"><span class="checkboxSpan">Tous</span></li>
+                            <li><input type="checkbox" name="contract[][all]" class="checkboxInput" checked="checked"><span class="checkboxSpan">Tous</span></li>
                             <li><input type="checkbox" name="contract[][interim]" class="checkboxInput"><span class="checkboxSpan">Intérim</span></li>
                             <li><input type="checkbox" name="contract[][sj]" class="checkboxInput"><span class="checkboxSpan">Job Étudiant</span></li>
                             <li><input type="checkbox" name="contract[][stage]" class="checkboxInput"><span class="checkboxSpan">Stage</span></li>
@@ -53,26 +53,36 @@
             </div>
             <div class="col-xs-12 col-md-8 col-lg-8">
             @if (count($offers) > 0)
-                <div class="card-deck">
+                    <div class="boxList">
                     @foreach ($offers as $offer)
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $offer->title }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Contrat : @lang('vocabulary.' . $offer->contract_type)</h6>
-                                <hr>
-                                <p class="card-text">{{ $offer->description }}</p>
-                                <hr>
-                                <p class="card-text"><small class="text-muted">Posté par : {{ $offer->name ? $offer->name : $offer->email }} le {{ $offer->created_at }}</small></p>
-                                <a href="/offers/{{ $offer->id_offer }}" class="card-link">Voir plus</a>
+                        <a class="boxEffect boxOffer" href="/offers/{{ $offer->id_offer }}">
+                            <div class="boxHeader">
+                                <h3 class="boxTitle">{{ $offer->title }}</h3>
+                                <span class="boxLabel">@lang('vocabulary.' . $offer->contract_type)</span>
+                                <?php
+                                    $date = new \Carbon\Carbon($offer->created_at);
+                                    $date::setLocale('fr');
+                                ?>
+                                <span class="boxDate">{{ $date->diffForHumans() }}</span>
                             </div>
-                        </div>
+                            <div class="boxSubtitle">
+                                <p>Villeneuve d'Ascq</p>
+                            </div>
+                            <div class="boxContent">
+                                <p>{{ $offer->description }}</p>
+                            </div>
+                            <div class="boxFooter">
+                                <div class="boxLeftSide">
+                                    <span>Posté par : <small>{{ $offer->name ? $offer->name : $offer->email }}</small></span>
+                                </div>
+                                <div class="boxRightSide rightArrow"></div>
+                            </div>
+                        </a>
                     @endforeach
                 </div>
             @else
-                <div class="card">
-                    <div class="card-body">
-                        Il n'y a aucune offre d'emploi en ligne, inscrivez vous à la newsletter si vous souhaitez être notifié lors d'une nouvelle annonce.
-                    </div>
+                <div class="noOffers">
+                    <p>Aucune offre n'a été trouvée.</p>
                 </div>
             @endif
             </div>

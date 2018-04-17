@@ -97,6 +97,24 @@
                                         <div class="error">{{ $errors->first('create_remuneration') }}</div>
                                     @endif
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="create_contact_email">Adresse mail à contacter</label>*
+                                        <input type="text" class="form-control" id="create_contact_email" name="create_contact_email" required="required" placeholder="Ex : contact@test.fr" />
+                                    </div>
+                                    @if ($errors->has('create_contact_email'))
+                                        <div class="error">{{ $errors->first('create_contact_email') }}</div>
+                                    @endif
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="create_contact_phone">Téléphone à contacter</label>*
+                                        <input type="text" class="form-control" id="create_contact_phone" name="create_contact_phone" required="required" placeholder="Ex : 06050610233" />
+                                    </div>
+                                    @if ($errors->has('create_contact_phone'))
+                                        <div class="error">{{ $errors->first('create_contact_phone') }}</div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer" style="text-align: right">

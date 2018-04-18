@@ -16,6 +16,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+
+<?php
+if (Auth::user()) {
+    if (Auth::user()->role == 'superadmin' || Auth::user()->role == 'admin') {
+        $admin = DB::table('users')->where('users.id', Auth::user()->id)
+            ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'admins.user_id', 'admins.firstname', 'admins.lastname', 'admins.phone', 'admins.office')
+            ->get()
+            ->first();
+
+    } else if (Auth::user()->role == 'company') {
+        $company = DB::table('users')->where('users.id', Auth::user()->id)
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
+            ->get()
+            ->first();
+    }
+}
+?>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -32,7 +52,9 @@
                         @else
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ $admin->firstname && $admin->lastname ? $admin->firstname . " " . $admin->lastname : $admin->email }}
+                                @if (isset($admin))
+                                    {{ $admin->firstname && $admin->lastname ? $admin->firstname . " " . $admin->lastname : $admin->email }} <span class="caret noRotate"></span>
+                                @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )

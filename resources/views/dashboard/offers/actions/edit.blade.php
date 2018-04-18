@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Éditer une annonce
                     </div>
@@ -64,21 +64,10 @@
                                         <label for="edit_contract_type">Type de contrat</label>*
                                         <select class="form-control" id="edit_contract_type" name="edit_contract_type" required="required">
                                             <option disabled selected value="">Sélectionner un type de contrat</option>
-                                            <?php
-                                                $contracts = [
-                                                    "nc" => "Non précisé",
-                                                    "ctt" => "Intérim",
-                                                    "sj" => "Job Étudiant",
-                                                    "stage" => "Stage",
-                                                    "ca" => "Contrat d'apprentissage",
-                                                    "cp" => "Contrat de professionnalisation",
-                                                    "cdd" => "CDD",
-                                                    "cdi" => "CDI"
-                                                ]
-                                            ?>
-                                            <?php foreach($contracts as $key => $contract): ?>
-                                            <option value="<?= $key ?>" @if($offer->contract_type == $key) selected @endif><?= $contract ?></option>
-                                            <?php endforeach; ?>
+                                            <?php $contract_types = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
+                                            @foreach($contract_types as $key => $contract_type)
+                                                <option value="{{ $key }}" @if($offer->contract_type == $key) selected @endif><?= $contract_type ?></option>
+                                            @endforeach
                                         </select>
                                         @if ($errors->has('edit_contract_type'))
                                             <div class="error">{{ $errors->first('edit_contract_type') }}</div>
@@ -103,7 +92,7 @@
                                             <div class="error">{{ $errors->first('edit_remuneration') }}</div>
                                     @endif
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="edit_city">Lieu du poste</label>* (Ville)
                                         <input type="text" class="form-control" id="edit_city" name="edit_city" required="required" value="{{ $offer->city }}" />
@@ -112,17 +101,32 @@
                                             <div class="error">{{ $errors->first('edit_city') }}</div>
                                     @endif
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="edit_contact_email">Adresse mail à contacter</label>*
                                         <input type="text" class="form-control" id="edit_contact_email" name="edit_contact_email" required="required" value="{{ $offer->contact_email }}" />
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="edit_contact_phone">Téléphone à contacter</label>*
                                         <input type="text" class="form-control" id="edit_contact_phone" name="edit_contact_phone" required="required" value="{{ $offer->contact_phone }}" />
                                     </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="edit_sector">Secteur d'activité</label>*
+                                        <select class="form-control" id="edit_sector" name="edit_sector" required="required">
+                                            <option disabled selected value="">Sélectionner un secteur</option>
+                                            <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
+                                            @foreach($sectors as $key => $sector)
+                                                <option value="{{ $key }}" <?php if ($offer->sector == $key): ?>selected="selected"<?php endif; ?>>{{ $sector }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @if ($errors->has('edit_sector'))
+                                        <div class="error">{{ $errors->first('edit_sector') }}</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

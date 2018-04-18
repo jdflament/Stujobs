@@ -74,7 +74,8 @@ class OffersController extends Controller
             'create_remuneration' => 'required',
             'create_city' => 'required|string|max:255',
             'create_contact_email' => 'required|email',
-            'create_contact_phone' => 'required|phone'
+            'create_contact_phone' => 'required|phone',
+            'create_sector' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -83,7 +84,7 @@ class OffersController extends Controller
             ->withInput();
         }
 
-        $data = Input::only('create_company_id', 'create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_city', 'create_contact_email', 'create_contact_phone', 'create_valid');
+        $data = Input::only('create_company_id', 'create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_city', 'create_contact_email', 'create_contact_phone', 'create_valid', 'create_sector');
 
         $offer = new Offer();
         $offer->setAttribute('company_id', $data['create_company_id']);
@@ -96,12 +97,13 @@ class OffersController extends Controller
         $offer->setAttribute('valid', filter_var($data['create_valid'], FILTER_VALIDATE_BOOLEAN));
         $offer->setAttribute('contact_email', $data['create_contact_email']);
         $offer->setAttribute('contact_phone', $data['create_contact_phone']);
+        $offer->setAttribute('sector', $data['create_sector']);
         $offer->save();
 
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'offers.sector', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
@@ -161,7 +163,7 @@ class OffersController extends Controller
         $offer = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.id as user_id', 'users.role','offers.company_id' , 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.id as user_id', 'users.role','offers.company_id' , 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'offers.sector', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->where('offers.id', '=', $id)
             ->get()
             ->first();
@@ -194,7 +196,8 @@ class OffersController extends Controller
             'edit_remuneration' => 'required',
             'edit_city' => 'required|string|max:255',
             'edit_contact_email' => 'required|email',
-            'edit_contact_phone' => 'required|phone'
+            'edit_contact_phone' => 'required|phone',
+            'edit_sector' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -203,7 +206,7 @@ class OffersController extends Controller
             ->withInput();
         }
 
-        $data = Input::only('edit_company_id', 'edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration', 'edit_city', 'edit_contact_email', 'edit_contact_phone');
+        $data = Input::only('edit_company_id', 'edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration', 'edit_city', 'edit_contact_email', 'edit_contact_phone', 'edit_sector');
 
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('company_id', $data['edit_company_id']);
@@ -215,12 +218,13 @@ class OffersController extends Controller
         $offer->setAttribute('contact_email', $data['edit_contact_email']);
         $offer->setAttribute('contact_phone', $data['edit_contact_phone']);
         $offer->setAttribute('city', $data['edit_city']);
+        $offer->setAttribute('sector', $data['edit_sector']);
         $offer->save();
 
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'offers.sector', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->get();
 
         return redirect()->route('dashboardIndexOffers')->with('offers', $offers);
@@ -280,14 +284,6 @@ class OffersController extends Controller
             ->orderBy('offers.created_at', 'DESC')
             ->get();
 
-        $offersType = [
-            "all" => "Toutes",
-            "valid" => "Validées",
-            "invalid" => "Invalidées",
-            "complete" => "Clôturées",
-            "incomplete" => "En cours"
-        ];
-
-        return view('dashboard/offers/index', ['offers' => $offers, 'offersType' => $offersType]);
+        return view('dashboard/offers/index', ['offers' => $offers]);
     }
 }

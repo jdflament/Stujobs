@@ -43,14 +43,10 @@
                                     <label for="create_contract_type">Type de contrat</label>*
                                     <select class="form-control" id="create_contract_type" name="create_contract_type" required="required">
                                         <option disabled selected value="">Sélectionner un type de contrat</option>
-                                        <option value="nc">Non précisé</option>
-                                        <option value="ctt">Intérim</option>
-                                        <option value="sj">Job Étudiant</option>
-                                        <option value="stage">Stage</option>
-                                        <option value="ca">Contrat d'apprentissage</option>
-                                        <option value="cp">Contrat de professionnalisation</option>
-                                        <option value="cdd">CDD</option>
-                                        <option value="cdi">CDI</option>
+                                        <?php $contract_types = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
+                                        @foreach($contract_types as $key => $contract_type)
+                                            <option value="{{ $key }}">{{ $contract_type }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 @if ($errors->has('create_contract_type'))
@@ -75,7 +71,7 @@
                                     <div class="error">{{ $errors->first('create_remuneration') }}</div>
                                 @endif
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="create_city">Lieu du poste</label>* (Ville)
                                     <input type="text" class="form-control" id="create_city" name="create_city" required="required" placeholder="Ex : Lille" />
@@ -84,7 +80,7 @@
                                     <div class="error">{{ $errors->first('create_city') }}</div>
                                 @endif
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="create_contact_email">Adresse mail à contacter</label>*
                                     <input type="text" class="form-control" id="create_contact_email" name="create_contact_email" required="required" placeholder="Ex : contact@test.fr" />
@@ -93,13 +89,28 @@
                                     <div class="error">{{ $errors->first('create_contact_email') }}</div>
                                 @endif
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="create_contact_phone">Téléphone à contacter</label>*
                                     <input type="text" class="form-control" id="create_contact_phone" name="create_contact_phone" required="required" placeholder="Ex : 06050610233" />
                                 </div>
                                 @if ($errors->has('create_contact_phone'))
                                     <div class="error">{{ $errors->first('create_contact_phone') }}</div>
+                                @endif
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="create_sector">Secteur d'activité</label>*
+                                    <select class="form-control" id="create_sector" name="create_sector" required="required">
+                                        <option disabled selected value="">Sélectionner un secteur</option>
+                                        <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
+                                        @foreach($sectors as $key => $sector)
+                                            <option value="{{ $key }}">{{ $sector }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @if ($errors->has('create_sector'))
+                                    <div class="error">{{ $errors->first('create_sector') }}</div>
                                 @endif
                             </div>
                         </div>

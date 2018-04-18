@@ -18,7 +18,7 @@
                 <div class="boxEffect informationsBox">
                     <h3 class="boxTitle centerContent">Informations</h3>
                     <p class="paragraphe"><span class="smallText">Lieu : </span> {{ $offer->city }}</p>                    
-                    <p class="paragraphe"><span class="smallText">Type de contrat : </span> @lang('vocabulary.' . $offer->contract_type)</p>
+                    <p class="paragraphe"><span class="smallText">Type de contrat : </span> @lang('vocabulary.contract_type.' . $offer->contract_type)</p>
                     <p class="paragraphe"><span class="smallText">Durée : </span> {{ $offer->duration }}</p>
                     <p class="paragraphe"><span class="smallText">Rémunération : </span> {{ $offer->remuneration }}€ / h</p>
                     <p class="paragraphe"><span class="smallText">Posté par : </span> {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</p>
@@ -29,7 +29,7 @@
                         <li>
                             <a class="customer share btn btn-social btn-facebook" href="https://www.facebook.com/sharer.php?u={{ urlencode(Request::fullUrl()) }}" title="Facebook share" target="_blank"><i class="fa fa-facebook"></i></a>
                         </li>
-                        <?php $contract_type = __('vocabulary.' . $offer->contract_type) ?>
+                        <?php $contract_type = __('vocabulary.contract_type.' . $offer->contract_type) ?>
                         <li>
                             <a class=" customer share btn btn-social btn-twitter" href="https://twitter.com/share?url={{ urlencode(Request::fullUrl()) }}&amp;text={{ $offer->title }} &amp;hashtags={{ str_replace(' ', '', $contract_type) }}" title="Twitter share" target="_blank"><i class="fa fa-twitter"></i></a>
                         </li>

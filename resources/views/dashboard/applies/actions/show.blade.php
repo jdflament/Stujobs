@@ -69,7 +69,7 @@
                             </div>
                         @endif
                         <small class="mb-0">
-                            <span style="margin-right: 50px;">Type de contrat : @lang('vocabulary.' . $apply->offer_contract_type)</span>
+                            <span style="margin-right: 50px;">Type de contrat : @lang('vocabulary.contract_type.' . $apply->offer_contract_type)</span>
                             <span style="margin-right: 50px;">Durée : {{ $apply->offer_duration }}</span>
                             <span style="margin-right: 50px;">Rémunération : {{ $apply->offer_remuneration }}</span>
                         </small>

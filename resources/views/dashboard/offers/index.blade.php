@@ -23,8 +23,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <select class="form-control" id="filterOffers">
-                                        @foreach($offersType as $key => $value)
-                                            <option value="{{ $key }}">{{ $value }}</option>
+                                        <?php $offersType = \Illuminate\Support\Facades\Lang::get('vocabulary.offers_type'); ?>
+                                        @foreach($offersType as $key => $offerType)
+                                            <option value="{{ $key }}">{{ $offerType }}</option>
                                         @endforeach
                                     </select>
                                 </div>

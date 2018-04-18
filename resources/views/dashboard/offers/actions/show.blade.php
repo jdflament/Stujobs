@@ -21,7 +21,7 @@
                             </div>
                         @endif
                         <small class="mb-0">
-                            <span style="margin-right: 50px;">Type de contrat : @lang('vocabulary.' . $offer->contract_type)</span>
+                            <span style="margin-right: 50px;">Type de contrat : @lang('vocabulary.contract_type.' . $offer->contract_type)</span>
                             <span style="margin-right: 50px;">Durée : {{ $offer->duration }}</span>
                             <span style="margin-right: 50px;">Rémunération : {{ $offer->remuneration }}</span>
                             <span style="margin-right: 50px;">Lieu du poste : {{ $offer->city }}</span>

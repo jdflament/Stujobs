@@ -20,15 +20,10 @@
                         <form method="post" action="/offers/filter/result" name="filterOffer" role="form">
                             <label>Types de contrat</label>
                             <ul>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="nc"><span class="checkboxSpan">Non précisé</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="interim"><span class="checkboxSpan">Intérim</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="sj"><span class="checkboxSpan">Job Étudiant</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="stage"><span class="checkboxSpan">Stage</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="ca"><span class="checkboxSpan">Contrat d'apprentissage</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="cp"><span class="checkboxSpan">Contrat de professionnalisation</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="cdd"><span class="checkboxSpan">CDD</span></li>
-                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput" value="cdi"><span class="checkboxSpan">CDI</span></li>
+                                <?php $contract_types = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
+                                @foreach($contract_types as $key => $contract_type)
+                                        <li><input type="checkbox" name="contract_type[]" class="checkboxInput" @if ($key == 'all')checked="checked"@endif value="{{ $key }}"><span class="checkboxSpan">{{ $contract_type }}</span></li>
+                                @endforeach
                             </ul>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="companyFilter" id="companyFilter" />
@@ -54,7 +49,7 @@
                         <a class="boxEffect boxOffer" href="/offers/{{ $offer->id_offer }}">
                             <div class="boxHeader">
                                 <h3 class="boxTitle">{{ $offer->title }}</h3>
-                                <span class="boxLabel">@lang('vocabulary.' . $offer->contract_type)</span>
+                                <span class="boxLabel">@lang('vocabulary.contract_type.' . $offer->contract_type)</span>
                                 <?php
                                     $date = new \Carbon\Carbon($offer->created_at);
                                     $date::setLocale('fr');

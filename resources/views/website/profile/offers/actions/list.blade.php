@@ -19,7 +19,7 @@
             <td><span class="badge badge-danger">Non</span></td>
             @endif
             <td><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
-            <td>@lang('vocabulary.' . $offer->contract_type)</td>
+            <td>@lang('vocabulary.contract_type.' . $offer->contract_type)</td>
             <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
             <td>{{ $offer->remuneration ? $offer->remuneration : 'NC'}}</td>
 

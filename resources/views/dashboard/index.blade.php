@@ -44,7 +44,7 @@
                                 @foreach ($offersToValid as $offerToValid)
                                     <a href="/dashboard/offers/{{ $offerToValid->id }}/show" class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="d-flex w-100 justify-content-between text-truncate" style="display: -webkit-box !important">
-                                            <h5 class="mb-1">{{ $offerToValid->title }} <span style="font-size: 12px">(@lang('vocabulary.' . $offerToValid->contract_type))</span></h5>
+                                            <h5 class="mb-1">{{ $offerToValid->title }} <span style="font-size: 12px">(@lang('vocabulary.contract_type.' . $offerToValid->contract_type))</span></h5>
                                             <?php
                                                 $date = new \Carbon\Carbon($offerToValid->created_at);
                                                 $date::setLocale('fr');

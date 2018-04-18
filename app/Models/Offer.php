@@ -18,6 +18,6 @@ class Offer extends Model
      * @var array
      */
     protected $fillable = [
-        'company_id', 'title', 'description', 'contract_type', 'duration', 'remuneration', 'valid', 'complete', 'contact_email', 'contact_phone', 'city'
+        'company_id', 'title', 'description', 'contract_type', 'duration', 'remuneration', 'valid', 'complete', 'contact_email', 'contact_phone', 'city', 'sector'
     ];
 }

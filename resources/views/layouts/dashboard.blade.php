@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/global.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard/sidebar.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -37,48 +39,101 @@ if (Auth::user()) {
 ?>
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <button type="button" id="sidebarCollapse" class="btn btn-light navbar-btn">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div id="navbarSupportedContent">
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav">
-                        <!-- Authentication Links -->
-                        @guest
-                        <li><a class="nav-link" href="{{ route('login') }}">Connexion</a></li>
-                        <li><a class="nav-link" href="{{ route('register') }}">Inscription</a></li>
-                        @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if (isset($admin))
-                                    {{ $admin->firstname && $admin->lastname ? $admin->firstname . " " . $admin->lastname : $admin->email }} <span class="caret noRotate"></span>
-                                @endif
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <nav class="navbarTop">
+            <div class="containerLg">
+                <ul class="navbarNavigation">
+                    <li class="navbarLogo">
+                        <a href="{{ url('/') }}">{{ config('app.name', 'Stujobs') }}<span class="beta">beta</span></a>
+                    </li>
+                    <li class="navbarMenu">
+                        <span class="navbarSpan navbarDropdownAction">
+                            @if (isset($admin))
+                                {{ $admin->firstname && $admin->lastname ? $admin->firstname . " " . $admin->lastname : $admin->email }} <span class="caret noRotate"></span>
+                            @endif
+                        </span>
+                        <div class="navbarDropdownMenu hideDropdown">
+                            <ul class="dropdownMenu">
                                 @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
-                                    <a class="dropdown-item" href="{{ route('dashboardIndex') }}">
-                                        Dashboard
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('dashboardIndexProfile') }}">
-                                        Mon Profil
-                                    </a>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('dashboardIndex') }}"><i class="fa fa-tachometer"></i><span class="dropdownSubtitle">Dashboard</span></a>
+                                    </li>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('dashboardIndexProfile') }}"><i class="fa fa-user"></i><span class="dropdownSubtitle">Mon profil</span></a>
+                                    </li>
                                 @endif
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Déconnexion
-                                </a>
-
+                                @if ( Auth::user()->role == 'company')
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('indexProfile') }}"><i class="fa fa-user"></i><span class="dropdownSubtitle">Mon profil</span></a>
+                                    </li>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('indexOffers') }}"><i class="fa fa-briefcase"></i><span class="dropdownSubtitle">Mes offres d'emploi</span></a>
+                                    </li>
+                                @endif
+                                <li class="dropdownMenuItem">
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i><span class="dropdownSubtitle">Déconnexion</span></a>
+                                </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Mobile menu -->
+                    <li class="navMobile">
+                        <div class="toggleMenu mobileMenuAction">
+                            <i class="fa fa-bars"></i>
+                        </div>
+                        <div class="popupMenu hideMenu">
+                            <div class="closeMenu mobileMenuAction">
+                                <i class="fa fa-times"></i>
                             </div>
-                        </li>
-                        @endguest
-                    </ul>
-                </div>
+                            <div class="popupMenuTitle">
+                                @guest
+                                    <h3>Vous êtes recruteur ?</h3>
+                                    @else
+                                        @if (isset($admin))
+                                            <h3>{{ $admin->firstname }} {{ $admin->lastname }}</h3>
+                                        @elseif (isset($company))
+                                            <h3>{{ $company->name }}</h3>
+                                        @endif
+                                        @endguest
+                            </div>
+                            <ul class="menuActionsList">
+                                @guest
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('login') }}"><i class="fa fa-sign-in"></i><p class="menuSubtitle">Connectez-vous</p></a>
+                                    </li>
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('register') }}"><i class="fa fa-user-plus"></i><p class="menuSubtitle">Inscrivez-vous</p></a>
+                                    </li>
+                                @else
+                                    @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )
+                                        <li class="menuActionsItem">
+                                            <a href="{{ route('dashboardIndex') }}"><i class="fa fa-tachometer"></i><p class="menuSubtitle">Dashboard</p></a>
+                                        </li>
+                                        <li class="menuActionsItem">
+                                            <a href="{{ route('dashboardIndexProfile') }}"><i class="fa fa-user"></i><p class="menuSubtitle">Mon profil</p></a>
+                                        </li>
+                                    @endif
+                                    @if ( Auth::user()->role == 'company')
+                                        <li class="menuActionsItem">
+                                            <a href="{{ route('indexProfile') }}"><i class="fa fa-user"></i><p class="menuSubtitle">Mon profil</p></a>
+                                        </li>
+                                        <li class="menuActionsItem">
+                                            <a href="{{ route('indexOffers') }}"><i class="fa fa-briefcase"></i><p class="menuSubtitle">Mes offres</p></a>
+                                        </li>
+                                    @endif
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i><p class="menuSubtitle">Déconnexion</p></a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                @endguest
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
 
@@ -141,6 +196,8 @@ if (Auth::user()) {
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/global.js') }}"></script>
+    <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="{{ asset('js/dashboard/admins.js') }}"></script>
     <script src="{{ asset('js/dashboard/sidebar.js') }}"></script>

@@ -89,12 +89,6 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #eaeaea;
-}
-
 #btn-delete-address, #btn-delete-parcel, #btn-delete-shipment, #btn-delete-label {
     -webkit-appearance: inherit !important;
 }

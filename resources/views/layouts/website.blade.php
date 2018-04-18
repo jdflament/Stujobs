@@ -12,10 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/global.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
-    <link href="{{ asset('css/website/index.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/navbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/website.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/website/filters.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/website/box_offer.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -162,8 +164,9 @@
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="{{ asset('js/website/navbar.js') }}"></script>
-<script src="{{ asset('js/website/global.js') }}"></script>
+<script src="{{ asset('js/global.js') }}"></script>
+<script src="{{ asset('js/navbar.js') }}"></script>
+<script src="{{ asset('js/website/filters.js') }}"></script>
 <script src="{{ asset('js/website/profile.js') }}"></script>
 <script src="{{ asset('js/website/offers.js') }}"></script>
 </body>

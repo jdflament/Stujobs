@@ -268,9 +268,9 @@ class OffersController extends Controller
      *
      * Search an offer and return id + title
      */
-    public function search(Request $request)
+    public function search( $result)
     {
-        $term = $request->get('searchOffer');
+        $term = $result;
 
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')

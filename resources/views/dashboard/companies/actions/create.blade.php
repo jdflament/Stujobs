@@ -19,7 +19,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_email">Email de l'entreprise</label>*
-                                <input type="text" class="form-control" id="create_email" name="create_email" required="required" placeholder="Ex : company@mail.com"/>
+                                <input type="text" class="form-control" id="create_email" name="create_email" required="required" placeholder="Ex : company@mail.com" value="{{ old('create_email') }}"/>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_password">Mot de passe</label>*
-                                <input type="password" class="form-control" id="create_password" name="create_password" required="required" placeholder="Mot de passe..."/>
+                                <input type="password" class="form-control" id="create_password" name="create_password" required="required" placeholder="Mot de passe..." value="{{ old('create_password') }}"/>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                 <label for="create_role">Rôle</label>*
                                 <select class="form-control" id="create_role" name="create_role" required="required">
                                     <option disabled selected value="">Sélectionner un rôle</option>
-                                    <option value="company">Entreprise</option>
+                                    <option @if(old('create_role') && old('create_role') == 'company') selected="selected" @endif value="company">Entreprise</option>
                                 </select>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_name">Nom de l'entreprise</label>
-                                <input type="text" class="form-control" id="create_name" name="create_name" />
+                                <input type="text" class="form-control" id="create_name" name="create_name" value="{{ old('create_name') }}" />
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_siret">SIRET</label>
-                                <input type="text" class="form-control" id="create_siret" name="create_siret" />
+                                <input type="text" class="form-control" id="create_siret" name="create_siret" value="{{ old('create_siret') }}" />
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_address">Adresse</label>
-                                <input type="text" class="form-control" id="create_address" name="create_address" />
+                                <input type="text" class="form-control" id="create_address" name="create_address" value="{{ old('create_address') }}" />
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="create_phone">Téléphone</label>
-                                <input type="text" class="form-control" id="create_phone" name="create_phone" />
+                                <input type="text" class="form-control" id="create_phone" name="create_phone" value="{{ old('create_phone') }}" />
                             </div>
                         </div>
                     </div>

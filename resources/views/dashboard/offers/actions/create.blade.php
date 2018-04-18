@@ -22,7 +22,7 @@
                                         <select class="form-control" id="create_company_id" name="create_company_id" required="required">
                                             <option disabled selected value="">Sélectionner une entreprise</option>
                                             @foreach ($companies as $company)
-                                            <option value="{{ $company->id }}">{{ $company->name }} {{ $company->email ? '(' . $company->email . ')' : '(NC)' }}</option>
+                                            <option @if(old('create_company_id') && old('create_company_id') == $company->id) selected="selected" @endif value="{{ $company->id }}">{{ $company->name }} {{ $company->email ? '(' . $company->email . ')' : '(NC)' }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('create_company_id'))
@@ -41,7 +41,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="create_title">Titre de l'annonce</label>*
-                                        <input type="text" class="form-control" id="create_title" name="create_title" required="required"/>
+                                        <input type="text" class="form-control" id="create_title" name="create_title" required="required" value="{{ old('create_title') }}"/>
                                         @if ($errors->has('create_title'))
                                             <div class="error">{{ $errors->first('create_title') }}</div>
                                         @endif
@@ -52,7 +52,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="create_description">Description de l'annonce</label>*
-                                        <textarea class="form-control" id="create_description" name="create_description" rows="5" required="required"></textarea>
+                                        <textarea class="form-control" id="create_description" name="create_description" rows="5" required="required">{{ old('create_description') }}</textarea>
                                         @if ($errors->has('create_description'))
                                             <div class="error">{{ $errors->first('create_description') }}</div>
                                         @endif
@@ -67,7 +67,7 @@
                                             <option disabled selected value="">Sélectionner un type de contrat</option>
                                             <?php $contract_types = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
                                             @foreach($contract_types as $key => $contract_type)
-                                                <option value="{{ $key }}">{{ $contract_type }}</option>
+                                                <option @if(old('create_contract_type') && old('create_contract_type') == $key) selected="selected" @endif value="{{ $key }}">{{ $contract_type }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('create_contract_type'))
@@ -78,7 +78,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="create_duration">Durée</label>*
-                                        <input type="text" class="form-control" id="create_duration" name="create_duration" required="required" placeholder="Ex : 6 mois" />
+                                        <input type="text" class="form-control" id="create_duration" name="create_duration" required="required" placeholder="Ex : 6 mois" value="{{ old('create_duration') }}" />
                                     </div>
                                     @if ($errors->has('create_duration'))
                                         <div class="error">{{ $errors->first('create_duration') }}</div>
@@ -87,7 +87,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="create_remuneration">Rémunération</label>* (taux horaire)
-                                        <input type="number" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10" />
+                                        <input type="number" class="form-control" id="create_remuneration" name="create_remuneration" required="required" placeholder="Ex : 10" value="{{ old('create_remuneration') }}" />
                                     </div>
                                     @if ($errors->has('create_remuneration'))
                                         <div class="error">{{ $errors->first('create_remuneration') }}</div>
@@ -96,7 +96,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="create_city">Lieu du poste (Ville)</label>*
-                                        <input type="text" class="form-control" id="create_city" name="create_city" required="required" placeholder="Ex : Lille" />
+                                        <input type="text" class="form-control" id="create_city" name="create_city" required="required" placeholder="Ex : Lille" value="{{ old('create_city') }}" />
                                     </div>
                                     @if ($errors->has('create_city'))
                                         <div class="error">{{ $errors->first('create_city') }}</div>
@@ -105,7 +105,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="create_contact_email">Adresse mail à contacter</label>*
-                                        <input type="text" class="form-control" id="create_contact_email" name="create_contact_email" required="required" placeholder="Ex : contact@test.fr" />
+                                        <input type="text" class="form-control" id="create_contact_email" name="create_contact_email" required="required" placeholder="Ex : contact@test.fr" value="{{ old('create_contact_email') }}" />
                                     </div>
                                     @if ($errors->has('create_contact_email'))
                                         <div class="error">{{ $errors->first('create_contact_email') }}</div>
@@ -114,7 +114,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="create_contact_phone">Téléphone à contacter</label>*
-                                        <input type="text" class="form-control" id="create_contact_phone" name="create_contact_phone" required="required" placeholder="Ex : 06050610233" />
+                                        <input type="text" class="form-control" id="create_contact_phone" name="create_contact_phone" required="required" placeholder="Ex : 06050610233" value="{{ old('create_contact_phone') }}" />
                                     </div>
                                     @if ($errors->has('create_contact_phone'))
                                         <div class="error">{{ $errors->first('create_contact_phone') }}</div>

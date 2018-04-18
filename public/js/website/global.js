@@ -117,3 +117,15 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
         },
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Search URL
+|--------------------------------------------------------------------------
+*/
+$(document).ready(function() {
+    $("#search").on('submit', function(e) {
+        e.preventDefault();
+        window.location.href = '/offers/search/'+$('#valsearch').val();
+    })
+});

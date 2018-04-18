@@ -9,11 +9,11 @@
                             Notre site vous propose actuellement {{ $countOffers }} offre(s) d'emploi au total.</p>
                     </div>
                     <div class="rightSide">
-                        <form method="get" action="/offers/search/result" name="searchOffer">
+                        <form id='search' method="get" action="/offers/search/result" name="searchOffer">
                             <?php
                                 null !== request()->get('searchOffer') ? $term = request()->get('searchOffer') : $term = "";
                             ?>
-                            <input type="text" name="searchOffer" class="searchInput" id="searchOffer" placeholder="Rechercher une offre..." autocomplete="off" value="{{ $term }}" />
+                            <input id='valsearch' type="text" name="searchOffer" class="searchInput" id="searchOffer" placeholder="Rechercher une offre..." autocomplete="off" value="{{ $term }}" />
                             <button class="inputRightIcon" type="submit">
                                 <i class="fa fa-search"></i>
                             </button>

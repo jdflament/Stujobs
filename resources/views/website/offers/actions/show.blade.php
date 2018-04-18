@@ -6,7 +6,7 @@
     
     <div class="containerLg">
         <div class="row">
-            <div class="col-xs-12 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-md-8 col-lg-8 marginTop">
                 <div class="boxEffect">
                     <h3 class="boxTitleBlack">À propos de l'offre <span class="boxTitle">{{ $offer->title }}</span></h3>
                     <br />
@@ -14,7 +14,7 @@
                     <p class="paragraphe"><?php echo nl2br($description) ?></p>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-8 col-lg-4">
+            <div class="col-xs-12 col-md-4 col-lg-4 marginTop">
                 <div class="boxEffect informationsBox">
                     <h3 class="boxTitle centerContent">Informations</h3>
                     <p class="paragraphe"><span class="smallText">Lieu : </span> {{ $offer->city }}</p>                    
@@ -24,7 +24,7 @@
                     <p class="paragraphe"><span class="smallText">Posté par : </span> {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</p>
                 </div>
                 <div style="text-align: center; display: table; margin: 15px auto;">
-                    <h5>Partager sur les réseaux</h5>
+                    <h3 class="boxTitle">Partager sur les réseaux</h3>
                     <ul class="socials-buttons" style="display: flex; list-style:none; margin-left: 0px; padding-left: 0px;">
                         <li>
                             <a class="customer share btn btn-social btn-facebook" href="https://www.facebook.com/sharer.php?u={{ urlencode(Request::fullUrl()) }}" title="Facebook share" target="_blank"><i class="fa fa-facebook"></i></a>

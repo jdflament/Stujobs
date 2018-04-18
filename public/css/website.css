@@ -472,6 +472,9 @@ Box offer
     .boxSubtitle {
         margin-top: 15px;
     }
+    .informationsBox {
+        margin-top: 15px;
+    }
 }
 
 /**
@@ -624,4 +627,7 @@ Title section
 }
 .informationsBox h3 {
     margin-bottom: 20px;
+}
+.marginTop {
+    margin-top: 15px;
 }

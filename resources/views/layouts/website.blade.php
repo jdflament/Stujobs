@@ -53,9 +53,9 @@
                     @else
                         <span class="navbarSpan navbarDropdownAction">
                             @if (isset($admin))
-                                {{ $admin->firstname }} {{ $admin->lastname }} <span class="caret noRotate"></span>
+                                {{ $admin->firstname && $admin->lastname ? $admin->firstname . " " . $admin->lastname : $admin->email }} <span class="caret noRotate"></span>
                             @elseif (isset($company))
-                                {{ $company->name }} <span class="caret noRotate"></span>
+                                {{ $company->name ? $company->name : $company->email }} <span class="caret noRotate"></span>
                             @endif
                         </span>
                         <div class="navbarDropdownMenu hideDropdown">

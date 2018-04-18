@@ -32,7 +32,7 @@
                         @else
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->email }}
+                            {{ $admin->firstname && $admin->lastname ? $admin->firstname . " " . $admin->lastname : $admin->email }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @if ( Auth::user()->role == 'admin' ||  Auth::user()->role == 'superadmin' )

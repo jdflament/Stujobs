@@ -43,7 +43,7 @@ $(document).ready(function(event) {
             var data = {
                 datasets: [{
                     data: values,
-                    backgroundColor: ["#0074D9", "#fc416a", "#fd9e4b", "#fecc60", "#32cecd", "#B10DC9", "#FFDC00", "#001f3f"],
+                    backgroundColor: ["#5580e5", "#ffb64d", "#26dad2", "#fc6180", "#74b9ff", "#e17055", "#e84393", "#a29bfe"],
                 }],
 
                 labels: labels
@@ -99,7 +99,7 @@ $(document).ready(function(event) {
             var data = {
                 datasets: [{
                     data: values,
-                    backgroundColor: ["#0074D9", "#fc416a", "#fd9e4b", "#fecc60", "#32cecd", "#B10DC9", "#FFDC00", "#001f3f"],
+                    backgroundColor: ["#5580e5", "#ffb64d", "#26dad2", "#fc6180", "#74b9ff", "#e17055", "#e84393", "#a29bfe"],
                 }],
 
                 labels: labels
@@ -151,7 +151,7 @@ $(document).ready(function(event) {
             var data = {
                 datasets: [{
                     data: values,
-                    backgroundColor:"rgba(18, 119, 214, 0.8)",
+                    backgroundColor:"rgba(85, 128, 229, 0.8)",
                     borderDash:[],
                     borderDashOffset:0,
                     borderWidth:1,

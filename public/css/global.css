@@ -34,16 +34,36 @@ Colors
     color: #26dad2;
 }
 
+.bgSuccess {
+    color: #ffffff;
+    background: #26dad2;
+}
+
 .colorWarning {
     color: #ffb64d;
+}
+
+.bgWarning {
+    color: #ffffff;
+    background: #ffb64d;
 }
 
 .colorDanger {
     color: #fc6180;
 }
 
+.bgDanger {
+    color: #ffffff;
+    background: #fc6180;
+}
+
 .colorPrimary {
     color: #5580e5;
+}
+
+.bgPrimary {
+    color: #ffffff;
+    background: #5580e5;
 }
 
 /**

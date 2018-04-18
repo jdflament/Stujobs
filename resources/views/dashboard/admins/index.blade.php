@@ -1,15 +1,19 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
+        <div class="rowActions">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <button data-destination="admins-content" class="buttonActionLg bgPrimary btn-pre-create-admin" data-toggle="modal" data-target="#modalCreateAdmin">
+                    <i class="fa fa-plus"></i> Ajouter un administrateur
+                </button>
+            </div>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header">Liste des administrateurs
-                    <!-- Button trigger modal -->
-                    <button style="float: right;" data-destination="admins-content" class="btn btn-primary btn-sm btn-pre-create-admin" data-toggle="modal" data-target="#modalCreateAdmin">
-                        Ajouter un administrateur
-                    </button>
+            <div class="col-md-12">
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Liste des administrateurs</h3>
                     </div>
 
                     <div class="card-body">

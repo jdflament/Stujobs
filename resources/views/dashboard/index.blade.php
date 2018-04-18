@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-3">
                 <div class="boxEffect boxNumber">
@@ -41,65 +41,65 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="containerLg">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Offres à valider</div>
-                    <div class="card-body" style="height: 350px; overflow-y: scroll;">
-                        <div class="list-group">
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Offres à valider</h3>
+                    </div>
+                    <div class="boxEffectContent">
+                        <div class="listGroup">
                             @if (count($offersToValid) > 0)
                                 @foreach ($offersToValid as $offerToValid)
-                                    <a href="/dashboard/offers/{{ $offerToValid->id }}/show" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between text-truncate" style="display: -webkit-box !important">
-                                            <h5 class="mb-1">{{ $offerToValid->title }} <span style="font-size: 12px">(@lang('vocabulary.contract_type.' . $offerToValid->contract_type))</span></h5>
-                                            <?php
-                                                $date = new \Carbon\Carbon($offerToValid->created_at);
-                                                $date::setLocale('fr');
-                                            ?>
-                                            <small class="badge badge-primary">{{ $date->diffForHumans() }}</small>
-                                        </div>
-                                        <p class="mb-1 text-truncate" style="color: inherit;">{{ $offerToValid->description }}</p>
-                                        <small>Posté par {{ $offerToValid->name }}</small>
+                                    <a class="listItem" href="/dashboard/offers/{{ $offerToValid->id }}/show">
+                                        <span class="listTitle">{{ $offerToValid->title }}</span>
+                                        <span class="listSubtitle">posté par {{ $offerToValid->name ? $offerToValid->name : $offerToValid->email }}</span>
+                                        <span class="listLabel">@lang('vocabulary.contract_type.' . $offerToValid->contract_type)</span>
+                                        <?php
+                                            $date = new \Carbon\Carbon($offerToValid->created_at);
+                                            $date::setLocale('fr');
+                                        ?>
+                                        <span class="listDate">{{ $date->diffForHumans() }}</span>
                                     </a>
                                 @endforeach
                             @else
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <p>Aucune offre en cours à valider.</p>
-                                </a>
+                                <div class="noOffers">
+                                    <p>Aucune offre n'a été trouvée.</p>
+                                </div>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        Types de contrats proposés
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Types de contrats proposés</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="boxEffectContent">
                         <canvas id="pieContractType"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center" style="margin-top: 25px;">
+        <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Informations sur les offres
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Informations sur les offres</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="boxEffectContent">
                         <canvas id="pieOffersInfos"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Nombre d'offre d'emploi par jour
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Nombre d'offre d'emploi par jour</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="boxEffectContent">
                         <canvas id="lineOffersRates"></canvas>
                     </div>
                 </div>

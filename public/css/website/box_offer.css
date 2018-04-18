@@ -109,3 +109,15 @@ Box offer
         margin-top: 15px;
     }
 }
+
+.boxTitle {
+    font-size: 18px;
+    color: #5580e7;
+    margin: 10px 0;
+}
+
+.boxTitleBlack{
+    font-size: 18px;
+    color: #5E5E5E;
+    margin: 10px 0;
+}

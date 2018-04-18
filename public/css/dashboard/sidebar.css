@@ -14,7 +14,7 @@
     min-height: 100vh;
     transition: all 0.3s;
     background: #FAFAFA;
-    padding-top: 50px;
+    padding: 25px 0;
 }
 
 .sidebar {

@@ -22,15 +22,18 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_email">Adresse email</label>*
-                                        <input type="text" class="form-control" id="edit_email" name="edit_email" value="{{ $company->email }}" />
+                                        <input type="text" class="form-control" id="edit_email" name="edit_email" value="{{ old('edit_email') ? old('edit_email') : $company->email }}" />
                                     </div>
+                                    @if ($errors->has('edit_email'))
+                                        <div class="error">{{ $errors->first('edit_email') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_name">Raison Sociale</label>
-                                        <input type="text" class="form-control" id="edit_name" name="edit_name" value="{{ $company->name }}" />
+                                        <input type="text" class="form-control" id="edit_name" name="edit_name" value="{{ old('edit_name') ? old('edit_name') : $company->name }}" />
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +41,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_siret">SIRET</label>
-                                        <input type="text" class="form-control" id="edit_siret" name="edit_siret" value="{{ $company->siret }}" />
+                                        <input type="text" class="form-control" id="edit_siret" name="edit_siret" value="{{ old('edit_siret') ? old('edit_siret') : $company->siret }}" />
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +49,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_address">Adresse</label>
-                                        <input type="text" class="form-control" id="edit_address" name="edit_address" value="{{ $company->address }}" />
+                                        <input type="text" class="form-control" id="edit_address" name="edit_address" value="{{ old('edit_address') ? old('edit_address') : $company->address }}" />
                                     </div>
                                 </div>
                             </div>
@@ -54,13 +57,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_phone">Téléphone</label>
-                                        <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="{{ $company->phone }}" />
+                                        <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="{{ old('edit_phone') ? old('edit_phone') : $company->phone }}" />
                                     </div>
                                 </div>
                             </div>
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
                         </div>
                         <div class="card-footer" style="text-align: right">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

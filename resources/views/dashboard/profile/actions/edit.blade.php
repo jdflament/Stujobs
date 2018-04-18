@@ -22,10 +22,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_email">Adresse email</label>*
-                                        <input type="text" class="form-control" id="edit_email" name="edit_email" value="{{ $admin->email }}" />
+                                        <input type="text" class="form-control" id="edit_email" name="edit_email" value="{{ old('edit_email') ? old('edit_email') : $admin->email }}" />
                                     </div>
                                     @if ($errors->has('edit_email'))
-                                            <div class="error">{{ $errors->first('edit_email') }}</div>
+                                        <div class="error">{{ $errors->first('edit_email') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_lastname">Nom</label>
-                                        <input type="text" class="form-control" id="edit_lastname" name="edit_lastname" value="{{ $admin->lastname }}" />
+                                        <input type="text" class="form-control" id="edit_lastname" name="edit_lastname" value="{{ old('edit_lastname') ? old('edit_lastname') : $admin->lastname }}" />
                                     </div>
                                     @if ($errors->has('edit_lastname'))
                                             <div class="error">{{ $errors->first('edit_lastname') }}</div>
@@ -45,7 +45,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_firstname">Prénom</label>
-                                        <input type="text" class="form-control" id="edit_firstname" name="edit_firstname" value="{{ $admin->firstname }}" />
+                                        <input type="text" class="form-control" id="edit_firstname" name="edit_firstname" value="{{ old('edit_firstname') ? old('edit_firstname') : $admin->firstname }}" />
                                     </div>
                                     @if ($errors->has('edit_firstname'))
                                             <div class="error">{{ $errors->first('edit_firstname') }}</div>
@@ -56,7 +56,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_phone">Téléphone</label>
-                                        <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="{{ $admin->phone }}" />
+                                        <input type="text" class="form-control" id="edit_phone" name="edit_phone" value="{{ old('edit_phone') ? old('edit_phone') : $admin->phone }}" />
                                     </div>
                                     @if ($errors->has('edit_phone'))
                                             <div class="error">{{ $errors->first('edit_phone') }}</div>
@@ -67,7 +67,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_office">Poste</label>
-                                        <input type="text" class="form-control" id="edit_office" name="edit_office" value="{{ $admin->office }}" />
+                                        <input type="text" class="form-control" id="edit_office" name="edit_office" value="{{ old('edit_office') ? old('edit_office') : $admin->office }}" />
                                     </div>
                                     @if ($errors->has('edit_office'))
                                             <div class="error">{{ $errors->first('edit_office') }}</div>

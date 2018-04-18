@@ -20,8 +20,8 @@
                                         <label for="edit_company_id">Entreprise</label>*
                                         <select class="form-control" id="edit_company_id" name="edit_company_id" required="required">
                                             <option disabled selected value="">Sélectionner une entreprise</option>
-                                            @foreach ($companies as $company)
-                                                <option value="{{ $company->id }}" @if($offer->user_id == $company->id) selected @endif>{{ $company->email }} {{ $company->name ? '(' . $company->name . ')' : '(NC)' }}</option>
+                                            @foreach ($companies as $company)                                            
+                                                <option value="{{ $company->id }}" @if(old('edit_company_id') == $company->id) selected @elseif($offer->user_id == $company->id) selected @endif>{{ $company->email }} {{ $company->name ? '(' . $company->name . ')' : '(NC)' }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('edit_company_id'))
@@ -40,10 +40,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_title">Titre de l'annonce</label>*
-                                        <input type="text" class="form-control" id="edit_title" name="edit_title" required="required" value="{{ $offer->title }}" />
+                                        <input type="text" class="form-control" id="edit_title" name="edit_title" required="required" value="{{ old('edit_title') ? old('edit_title') : $offer->title }}" />
                                     </div>
                                     @if ($errors->has('edit_title'))
-                                            <div class="error">{{ $errors->first('edit_title') }}</div>
+                                        <div class="error">{{ $errors->first('edit_title') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -51,10 +51,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="edit_description">Description de l'annonce</label>*
-                                        <textarea class="form-control" id="edit_description" name="edit_description" required="required" rows="5">{{ $offer->description }}</textarea>
+                                        <textarea class="form-control" id="edit_description" name="edit_description" required="required" rows="5">{{ old('edit_description') ? old('edit_description') : $offer->description }}</textarea>
                                     </div>
                                     @if ($errors->has('edit_description'))
-                                            <div class="error">{{ $errors->first('edit_description') }}</div>
+                                        <div class="error">{{ $errors->first('edit_description') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                             <option disabled selected value="">Sélectionner un type de contrat</option>
                                             <?php $contract_types = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
                                             @foreach($contract_types as $key => $contract_type)
-                                                <option value="{{ $key }}" @if($offer->contract_type == $key) selected @endif><?= $contract_type ?></option>
+                                                <option value="{{ $key }}" @if(old('edit_contract_type') == $key) selected @elseif($offer->contract_type == $key) selected @endif><?= $contract_type ?></option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('edit_contract_type'))
@@ -77,41 +77,47 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="edit_duration">Durée</label>*
-                                        <input type="text" class="form-control" id="edit_duration" name="edit_duration" required="required" placeholder="Ex : 6 mois" value="{{ $offer->duration }}" />
+                                        <input type="text" class="form-control" id="edit_duration" name="edit_duration" required="required" placeholder="Ex : 6 mois" value="{{ old('edit_duration') ? old('edit_duration') : $offer->duration }}" />
                                     </div>
                                     @if ($errors->has('edit_duration'))
-                                            <div class="error">{{ $errors->first('edit_duration') }}</div>
+                                        <div class="error">{{ $errors->first('edit_duration') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="edit_remuneration">Rémunération</label>* (taux horaire)
-                                        <input type="number" class="form-control" id="edit_remuneration" name="edit_remuneration" required="required" value="{{ $offer->remuneration }}" placeholder="Ex : 10€/h" />
+                                        <input type="number" class="form-control" id="edit_remuneration" name="edit_remuneration" required="required" value="{{ old('edit_remuneration') ? old('edit_remuneration') : $offer->remuneration }}" placeholder="Ex : 10€/h" />
                                     </div>
                                     @if ($errors->has('edit_remuneration'))
-                                            <div class="error">{{ $errors->first('edit_remuneration') }}</div>
+                                        <div class="error">{{ $errors->first('edit_remuneration') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="edit_city">Lieu du poste</label>* (Ville)
-                                        <input type="text" class="form-control" id="edit_city" name="edit_city" required="required" value="{{ $offer->city }}" />
+                                        <input type="text" class="form-control" id="edit_city" name="edit_city" required="required" value="{{ old('edit_city') ? old('edit_city') : $offer->city }}" />
                                     </div>
                                     @if ($errors->has('edit_city'))
-                                            <div class="error">{{ $errors->first('edit_city') }}</div>
+                                        <div class="error">{{ $errors->first('edit_city') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="edit_contact_email">Adresse mail à contacter</label>*
-                                        <input type="text" class="form-control" id="edit_contact_email" name="edit_contact_email" required="required" value="{{ $offer->contact_email }}" />
+                                        <input type="text" class="form-control" id="edit_contact_email" name="edit_contact_email" required="required" value="{{ old('edit_contact_email') ? old('edit_contact_email') : $offer->contact_email }}" />
                                     </div>
+                                    @if ($errors->has('edit_contact_email'))
+                                        <div class="error">{{ $errors->first('edit_contact_email') }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="edit_contact_phone">Téléphone à contacter</label>*
-                                        <input type="text" class="form-control" id="edit_contact_phone" name="edit_contact_phone" required="required" value="{{ $offer->contact_phone }}" />
+                                        <input type="text" class="form-control" id="edit_contact_phone" name="edit_contact_phone" required="required" value="{{ old('edit_contact_phone') ? old('edit_contact_phone') : $offer->contact_phone }}" />
                                     </div>
+                                    @if ($errors->has('edit_contact_phone'))
+                                        <div class="error">{{ $errors->first('edit_contact_phone') }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -120,7 +126,7 @@
                                             <option disabled selected value="">Sélectionner un secteur</option>
                                             <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
                                             @foreach($sectors as $key => $sector)
-                                                <option value="{{ $key }}" <?php if ($offer->sector == $key): ?>selected="selected"<?php endif; ?>>{{ $sector }}</option>
+                                                <option value="{{ $key }}" @if(old('edit_sector') == $key) selected @elseif($offer->sector == $key) selected @endif>{{ $sector }}</option>
                                             @endforeach
                                         </select>
                                     </div>

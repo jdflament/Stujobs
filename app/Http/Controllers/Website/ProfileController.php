@@ -43,9 +43,21 @@ class ProfileController extends Controller
      *
      * Edit the company profile
      */
-    public function edit()
+    public function edit(Request $request)
     {
         $id = Auth::user()->id;
+        
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'edit_email' => 'required|email|min:6|max:255|unique:users,email,'.$id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('profile/edit')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
         $user_data = Input::only('edit_email');
         $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone');
 

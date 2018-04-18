@@ -1,0 +1,56 @@
+/**
+Box effect
+ */
+
+.boxEffect {
+    transition: all 140ms ease-in;
+    -moz-transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.12);
+    -o-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    padding: 20px 25px;
+    width: 100%;
+}
+
+.boxNumber {
+    margin: 0 0 25px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 25px;
+}
+
+.boxNumberRight {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    flex: 1;
+}
+
+.boxNumberRight h6 {
+    font-size: 14px;
+    color: #BBBBBB;
+    font-weight: 600;
+}
+
+.boxNumberRight u {
+    font-size: 28px;
+    text-decoration: none;
+    color: #5E5E5E;
+}
+
+.boxNumber i {
+    font-size: 35px;
+}

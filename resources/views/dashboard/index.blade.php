@@ -3,33 +3,41 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-3 dashboard-numbers">
-                <i class="fa fa-envelope"></i>
-                <div class="wrapper count-title d-flex" style="justify-content: center;">
-                    <h6>Nombre d'email newsletter</h6>
+            <div class="col-sm-12 col-md-3">
+                <div class="boxEffect boxNumber">
+                    <i class="fa fa-envelope colorPrimary"></i>
+                    <div class="boxNumberRight">
+                        <h6>Emails newsletter</h6>
+                        <u>{{ $totalEmailNewsletter }}</u>
+                    </div>
                 </div>
-                <u>{{ $totalEmailNewsletter }}</u>
             </div>
-            <div class="col-sm-12 col-md-3 dashboard-numbers">
-                <i class="fa fa-building"></i>
-                <div class="wrapper count-title d-flex" style="justify-content: center;">
-                    <h6>Nombre d'entreprises inscrites</h6>
+            <div class="col-sm-12 col-md-3">
+                <div class="boxEffect boxNumber">
+                    <i class="fa fa-building colorSuccess"></i>
+                    <div class="boxNumberRight">
+                        <h6>Entreprises inscrites</h6>
+                        <u>{{ $totalCompanies }}</u>
+                    </div>
                 </div>
-                <u>{{ $totalCompanies }}</u>
             </div>
-            <div class="col-sm-12 col-md-3 dashboard-numbers">
-                <i class="fa fa-user"></i>
-                <div class="wrapper count-title d-flex" style="justify-content: center;">
-                    <h6>Nombre d'administrateurs</h6>
+            <div class="col-sm-12 col-md-3">
+                <div class="boxEffect boxNumber">
+                    <i class="fa fa-user colorWarning"></i>
+                    <div class="boxNumberRight">
+                        <h6>Administrateurs</h6>
+                        <u>{{ $totalAdmins }}</u>
+                    </div>
                 </div>
-                <u>{{ $totalAdmins }}</u>
             </div>
-            <div class="col-sm-12 col-md-3 dashboard-numbers">
-                <i class="fa fa-eye"></i>
-                <div class="wrapper count-title d-flex" style="justify-content: center;">
-                    <h6>Nombre de visiteur ce mois-ci</h6>
+            <div class="col-sm-12 col-md-3">
+                <div class="boxEffect boxNumber">
+                    <i class="fa fa-eye colorDanger"></i>
+                    <div class="boxNumberRight">
+                        <h6>Visiteurs ce mois</h6>
+                        <u>120</u>
+                    </div>
                 </div>
-                <u>En cours</u>
             </div>
         </div>
     </div>

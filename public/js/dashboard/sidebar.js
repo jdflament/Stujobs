@@ -5,3 +5,7 @@ $(document).ready(function () {
     });
 
 });
+
+$(document).on('click', '.toggleSidebar', function(event) {
+    $('.sidebar').toggleClass('showSidebar hideSidebar');
+});

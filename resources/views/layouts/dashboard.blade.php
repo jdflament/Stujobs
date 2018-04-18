@@ -12,9 +12,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard/sidebar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard/dashboard.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
@@ -137,61 +140,66 @@ if (Auth::user()) {
             </div>
         </nav>
 
-        @if ( Auth::user() )
-        <nav id="sidebar" class="active">
-            <!-- Sidebar Header -->
-            <div class="sidebar-header">
-                <h3><a href="{{ url('/') }}">{{ config('app.name', 'Stujobs') }} Panel</a></h3>
-                <strong><a href="{{ url('/') }}">{{ config('app.short_name', 'STUJOBS PANEL') }}</a></strong>
-            </div>
-
-            <!-- Sidebar Links -->
-            <ul class="list-unstyled components">
-                <li class="{{ Request::path() == 'dashboard' ? 'active' : '' }}">
-                    <a href="{{ route('dashboardIndex') }}">
-                        <i class="fa fa-compass"></i> Dashboard
-                    </a>
-                </li>
-                @if ( Auth::user()->role == 'superadmin' )
-                <li class="{{ strpos(Request::path(), 'admins') !== false ? 'active' : '' }}">
-                    <a href="{{ route('dashboardIndexAdmins') }}">
-                        <i class="fa fa-user"></i> Admins
-                    </a>
-                </li>
-                @endif
-                <li class="{{ strpos(Request::path(), 'companies') !== false ? 'active' : '' }}">
-                    <a href="{{ route('dashboardIndexCompanies') }}">
-                        <i class="fa fa-building"></i> Entreprises
-                    </a>
-                </li>
-                <li class="{{ strpos(Request::path(), 'offers') !== false ? 'active' : '' }}" style="position: relative;">
-                    <a href="{{ route('dashboardIndexOffers') }}">
-                        <div class="totalOffersInvalid @if ($total < 1) hidden @endif">{{ $total }}</div>
-                        <i class="fa fa-briefcase"></i> Offres
-                    </a>
-                </li>
-                <li class="{{ strpos(Request::path(), 'applies') !== false ? 'active' : '' }}" style="position: relative;">
-                    <a href="{{ route('dashboardIndexApplies') }}">
-                        <div class="totalAppliesInvalid @if ($totalApplies < 1) hidden @endif">{{ $totalApplies }}</div>
-                        <i class="fa fa-newspaper-o"></i> Candidatures
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        @endif
-
-        <main class="py-4">
-            <div id="alerts"></div>
-            <div id="alertsBack">
-                @if (\Session::has('error'))
-                    <div class="alert alert-danger">
-                        {!! \Session::get('error') !!}
+        <div class="contentDashboard">
+            @if ( Auth::user() )
+                <nav class="sidebar showSidebar">
+                    <div class="toggleSidebar">
+                        <i class="fa fa-chevron-left"></i>
                     </div>
-                @endif
+
+                    <div class="sidebarHeader">
+                        <h3 class="centerContent">Dashboard</h3>
+                    </div>
+
+                    <div class="sidebarContent">
+                        <ul class="sidebarList">
+                            <li class="sidebarItem">
+                                <a class="sidebarLink {{ Request::path() == 'dashboard' ? 'active' : '' }}" href="{{ route('dashboardIndex') }}">
+                                    <i class="fa fa-compass"></i> Dashboard
+                                </a>
+                            </li>
+                            @if ( Auth::user()->role == 'superadmin' )
+                                <li class="sidebarItem">
+                                    <a class="sidebarLink {{ strpos(Request::path(), 'admins') !== false ? 'active' : '' }}" href="{{ route('dashboardIndexAdmins') }}">
+                                        <i class="fa fa-user"></i> Admins
+                                    </a>
+                                </li>
+                            @endif
+                            <li class="sidebarItem">
+                                <a class="sidebarLink {{ strpos(Request::path(), 'companies') !== false ? 'active' : '' }}" href="{{ route('dashboardIndexCompanies') }}">
+                                    <i class="fa fa-building"></i> Entreprises
+                                </a>
+                            </li>
+                            <li class="sidebarItem">
+                                <a class="sidebarLink {{ strpos(Request::path(), 'offers') !== false ? 'active' : '' }}" href="{{ route('dashboardIndexOffers') }}">
+                                    <div class="tagAlert totalOffersInvalid @if ($total < 1) hidden @endif">{{ $total }}</div>
+                                    <i class="fa fa-briefcase"></i> Offres
+                                </a>
+                            </li>
+                            <li class="sidebarItem">
+                                <a class="sidebarLink {{ strpos(Request::path(), 'applies') !== false ? 'active' : '' }}" href="{{ route('dashboardIndexApplies') }}">
+                                    <div class="tagAlert totalAppliesInvalid @if ($totalApplies < 1) hidden @endif">{{ $totalApplies }}</div>
+                                    <i class="fa fa-newspaper-o"></i> Candidatures
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            @endif
+
+            <div class="content withSidebar">
+                <div id="alerts"></div>
+                <div id="alertsBack">
+                    @if (\Session::has('error'))
+                        <div class="alert alert-danger">
+                            {!! \Session::get('error') !!}
+                        </div>
+                    @endif
+                </div>
+                <div class="overlay"></div>
+                @yield('content')
             </div>
-            <div class="overlay"></div>
-            @yield('content')
-        </main>
+        </div>
     </div>
 
     <!-- Scripts -->

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class OffersController extends Controller
 {
@@ -50,8 +51,27 @@ class OffersController extends Controller
      *
      * Create a job offer
      */
-    public function create()
+    public function create(Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'create_company_id' => 'required',
+            'create_title' => 'required|string|max:255',
+            'create_description' => 'required|string',
+            'create_contract_type' => 'required',
+            'create_duration' => 'required|string|max:100',
+            'create_remuneration' => 'required',
+            'create_city' => 'required|string|max:255',
+            'create_contact_email' => 'required|email',
+            'create_contact_phone' => 'required|phone'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('profile/offer/create')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
         $data = Input::only('create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_city','create_contact_email', 'create_contact_phone', 'create_valid');
 
         $offer = new Offer();
@@ -168,8 +188,26 @@ class OffersController extends Controller
      *
      * Edit an offer
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'edit_company_id' => 'required',
+            'edit_title' => 'required|string|max:255',
+            'edit_description' => 'required|string',
+            'edit_contract_type' => 'required',
+            'edit_duration' => 'required|string|max:100',
+            'edit_remuneration' => 'required',
+            'edit_city' => 'required|string|max:255',
+            'edit_contact_email' => 'required|email',
+            'edit_contact_phone' => 'required|phone'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('profile/offers/'.$id.'/edit')
+            ->withErrors($validator)
+            ->withInput();
+        }
+
         $data = Input::only('edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration', 'edit_city', 'edit_contact_email', 'edit_contact_phone');
 
         $offer = Offer::where('id', $id)->first();

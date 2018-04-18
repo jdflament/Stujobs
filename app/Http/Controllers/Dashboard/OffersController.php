@@ -193,10 +193,12 @@ class OffersController extends Controller
             'edit_duration' => 'required|string|max:100',
             'edit_remuneration' => 'required',
             'edit_city' => 'required|string|max:255',
+            'edit_contact_email' => 'required|email',
+            'edit_contact_phone' => 'required|phone'
         ]);
 
         if ($validator->fails()) {
-            return redirect('dashboard/offers/create')
+            return redirect('dashboard/offers/'.$id.'/edit')
             ->withErrors($validator)
             ->withInput();
         }

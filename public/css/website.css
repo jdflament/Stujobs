@@ -609,6 +609,10 @@ Title section
     text-align: right;
     margin: 5px;
 }
+.error {
+    margin: 10px 0px;
+    color: #ab333f;    
+}
 
 .smallText {
     font-size: 12px;

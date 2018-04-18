@@ -19,10 +19,21 @@
                     <div class="filters">
                         <form method="post" action="/offers/filter/result" name="filterOffer" role="form">
                             <label>Types de contrat</label>
-                            <ul>
+                            <button class="collapseButton" type="button" data-toggle="collapse" data-target="#collapseContractTypes" aria-expanded="false" aria-controls="collapseContractTypes">Voir les types de contrat <i class="fa fa-chevron-right"></i></button>
+                            <ul id="collapseContractTypes" class="collapse">
+                                <li><input type="checkbox" name="contract_type[]" class="checkboxInput checkboxContract" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
                                 <?php $contract_types = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
                                 @foreach($contract_types as $key => $contract_type)
-                                        <li><input type="checkbox" name="contract_type[]" class="checkboxInput" @if ($key == 'all')checked="checked"@endif value="{{ $key }}"><span class="checkboxSpan">{{ $contract_type }}</span></li>
+                                        <li><input type="checkbox" name="contract_type[]" class="checkboxInput checkboxContract" value="{{ $key }}"><span class="checkboxSpan">{{ $contract_type }}</span></li>
+                                @endforeach
+                            </ul>
+                            <label>Secteur d'activité</label>
+                            <button class="collapseButton" type="button" data-toggle="collapse" data-target="#collapseSectors" aria-expanded="false" aria-controls="collapseSectors">Voir les secteurs d'activité <i class="fa fa-chevron-right"></i></button>
+                            <ul id="collapseSectors" class="collapse">
+                                <li><input type="checkbox" name="sectors[]" class="checkboxInput checkboxSector" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
+                                <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
+                                @foreach($sectors as $key => $sector)
+                                    <li><input type="checkbox" name="sectors[]" class="checkboxInput checkboxSector" value="{{ $key }}"><span class="checkboxSpan">{{ $sector }}</span></li>
                                 @endforeach
                             </ul>
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

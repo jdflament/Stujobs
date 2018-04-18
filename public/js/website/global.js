@@ -87,17 +87,30 @@ $( "#searchOffersByCompany").autocomplete({
 |--------------------------------------------------------------------------
 */
 
-$(document).on('change', '.checkboxInput', function(event) {
+$(document).on('change', '.checkboxContract', function(event) {
     if ($(this).val() == "all") {
-        $('.checkboxInput:checked').filter(function() { return $(this).val() !== "all"; }).prop('checked', false);
+        $('.checkboxContract:checked').filter(function() { return $(this).val() !== "all"; }).prop('checked', false);
     }
 
     if ($(this).val() !== "all") {
-        $('.checkboxInput:checked').filter(function() { return $(this).val() == "all"; }).prop('checked', false);
+        $('.checkboxContract:checked').filter(function() { return $(this).val() == "all"; }).prop('checked', false);
     }
 
     $(this).closest('form').submit();
 });
+
+$(document).on('change', '.checkboxSector', function(event) {
+    if ($(this).val() == "all") {
+        $('.checkboxSector:checked').filter(function() { return $(this).val() !== "all"; }).prop('checked', false);
+    }
+
+    if ($(this).val() !== "all") {
+        $('.checkboxSector:checked').filter(function() { return $(this).val() == "all"; }).prop('checked', false);
+    }
+
+    $(this).closest('form').submit();
+});
+
 
 $(document).on('submit', 'form[name=filterOffer]', function(event) {
     event.preventDefault();

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 
 class OffersController extends Controller
@@ -321,12 +322,17 @@ class OffersController extends Controller
      */
     public function filterOffers(Request $request)
     {
-        $checkboxes = Input::only('contract_type');
+        $contracts = Input::only('contract_type');
+        $sectors = Input::only('sectors');
         $company_name = Input::only('companyFilter');
         $offer_title = Input::only('offerFilter');
 
-        if (isset($checkboxes['contract_type'])) {
-            $checkboxes = $checkboxes['contract_type'];
+        if (isset($contracts['contract_type'])) {
+            $contracts = $contracts['contract_type'];
+        }
+
+        if (isset($sectors['sectors'])) {
+            $sectors = $sectors['sectors'];
         }
 
         if (isset($company_name['companyFilter'])) {
@@ -341,15 +347,30 @@ class OffersController extends Controller
             $offer_title = "";
         }
 
-        if (in_array("all", $checkboxes)) {
-            $checkboxes = ["nc", "sj", "ctt", "stage", "ca", "cp", "cdd", "cdi"];
+        if (in_array("all", $contracts)) {
+            $contractsFile = Lang::get('vocabulary.contract_type');
+            $contractsKey = array();
+            foreach ($contractsFile as $key => $value) {
+                array_push($contractsKey, $key);
+            }
+            $contracts = $contractsKey;
+        }
+
+        if (in_array("all", $sectors)) {
+            $sectorsFile = Lang::get('vocabulary.sector_activity');
+            $sectorsKeys = array();
+            foreach ($sectorsFile as $key => $value) {
+                array_push($sectorsKeys, $key);
+            }
+            $sectors = $sectorsKeys;
         }
 
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
-            ->whereIn('offers.contract_type', $checkboxes)
+            ->whereIn('offers.contract_type', $contracts)
+            ->whereIn('offers.sector', $sectors)
             ->where([
                 ['companies.name', 'LIKE', '%'.$company_name.'%'],
                 ['offers.title', 'LIKE', '%'.$offer_title.'%'],

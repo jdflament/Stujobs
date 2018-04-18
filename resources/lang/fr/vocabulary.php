@@ -23,7 +23,6 @@ return [
 
     // Contract type
     'contract_type' => [
-        'all' => 'Tous',
         'nc' => 'Non précisé',
         'sj' => 'Job Étudiant',
         'ctt' => 'Intérim',

@@ -1,25 +1,30 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
+        <div class="rowActions">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <!-- Button trigger modal -->
+                <button data-destination="companies-content" class="buttonActionLg bgPrimary btn-pre-create-company" data-toggle="modal" data-target="#modalCreateCompany">
+                    <i class="fa fa-plus"></i> Ajouter une entreprise
+                </button>
+            </div>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header">Liste des entreprises
-                        <!-- Button trigger modal -->
-                        <button style="float: right;" data-destination="companies-content" class="btn btn-primary btn-sm btn-pre-create-company" data-toggle="modal" data-target="#modalCreateCompany">
-                            Ajouter une entreprise
-                        </button>
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Liste des entreprises</h3>
                     </div>
 
-                    <div class="card-body">
+                    <div class="boxEffectContent">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        @include('dashboard/companies/actions/list')
+                            @include('dashboard/companies/actions/list')
                     </div>
                 </div>
             </div>

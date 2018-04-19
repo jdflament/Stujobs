@@ -79,6 +79,12 @@ Box number style
 List style
  */
 
+.emptyList p {
+    text-align: center;
+    color: #5E5E5E;
+    font-size: 14px;
+}
+
 .listGroup {
     display: flex;
     flex-direction: column;
@@ -198,6 +204,7 @@ Buttons and actions
     font-size: 12px;
     padding: 7px 15px;
     border-radius: 5px;
+    display: inline-block;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
@@ -244,6 +251,7 @@ Buttons and actions
     -o-border-radius: 5px;
     border: none;
     margin: 0px 3px;
+    display: inline-block;
 }
 
 .buttonAction:active, .buttonAction:focus, .buttonActionLg:active, .buttonActionLg:focus {

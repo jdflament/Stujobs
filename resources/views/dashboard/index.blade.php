@@ -64,7 +64,7 @@
                                     </a>
                                 @endforeach
                             @else
-                                <div class="noOffers">
+                                <div class="emptyList">
                                     <p>Aucune offre n'a été trouvée.</p>
                                 </div>
                             @endif
@@ -97,7 +97,7 @@
             <div class="col-md-6">
                 <div class="boxEffect">
                     <div class="boxEffectHeader">
-                        <h3 class="boxEffectTitle">Nombre d'offre d'emploi par jour</h3>
+                        <h3 class="boxEffectTitle">Nombre d'offres d'emploi par jour</h3>
                     </div>
                     <div class="boxEffectContent">
                         <canvas id="lineOffersRates"></canvas>

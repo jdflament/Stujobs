@@ -148,7 +148,7 @@ if (Auth::user()) {
                     </div>
 
                     <div class="sidebarHeader">
-                        <h3 class="centerContent">Dashboard</h3>
+                        <h3 class="centerContent">Administration</h3>
                     </div>
 
                     <div class="sidebarContent">

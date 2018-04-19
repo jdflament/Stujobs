@@ -1,4 +1,4 @@
-<table id="admins-content" class="responsive-table" style="width: 100%;">
+<table id="admins-content" class="responsive-table">
     <thead>
     <tr>
         <th scope="col">Nom</th>

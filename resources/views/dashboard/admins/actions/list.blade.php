@@ -1,21 +1,21 @@
-<table id="admins-content" class="table table-response table-bordered table-striped table-hover table-responsive-lg" style="width: 100%;">
+<table id="admins-content" class="responsive-table" style="width: 100%;">
     <thead>
     <tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Rôle</th>
-        <th>Actions</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Rôle</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     @foreach($admins as $admin)
         <tr>
-            <td>{{ $admin->lastname ? $admin->lastname : 'NC' }}</td>
-            <td>{{ $admin->firstname ? $admin->firstname : 'NC'}}</td>
-            <td>{{ $admin->email }}</td>
-            <td>{{ $admin->role }}</td>
-            <td>
+            <td scope="row" data-label="Nom">{{ $admin->lastname ? $admin->lastname : 'NC' }}</td>
+            <td scope="row" data-label="Prénom">{{ $admin->firstname ? $admin->firstname : 'NC'}}</td>
+            <td scope="row" data-label="Email">{{ $admin->email }}</td>
+            <td scope="row" data-label="Rôle">{{ $admin->role }}</td>
+            <td scope="row" data-label="Actions">
                 <a href="/dashboard/admins/{{ $admin->id }}/show" class="buttonAction bgPrimary btn-sm" data-toggle="tooltip" data-placement="top" title="Voir le profil">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>

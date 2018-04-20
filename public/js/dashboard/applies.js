@@ -64,9 +64,9 @@ $(document).on('click', '#btn-accept-apply', function(event) {
                 $(".totalAppliesInvalid").addClass('hidden');
             }
 
-            $('.showCv').remove();
+            $('.showCv').html('<span class="smallText">CV : </span>Non');
             $('.applyActions').remove();
-            $('.applyStatus').html('<span class="badge badge-success" style="float:right;">Acceptée</span>');
+            $('.applyStatus').html('<span class="badge bgSuccess">Acceptée</span>');
 
             $modal.modal('toggle');
         },
@@ -124,8 +124,9 @@ $(document).on('click', '#btn-refuse-apply', function(event) {
                 $(".totalAppliesInvalid").addClass('hidden');
             }
 
+            $('.showCv').html('<span class="smallText">CV : </span>Non');
             $('.applyActions').remove();
-            $('.applyStatus').html('<span class="badge badge-danger" style="float:right;">Refusée</span>');
+            $('.applyStatus').html('<span class="badge bgDanger">Refusée</span>');
 
             $modal.modal('toggle');
         },

@@ -1,6 +1,7 @@
 <table id="applies-content" class="responsive-table">
     <thead>
     <tr>
+        <th scope="col">Date</th>
         <th scope="col">Candidat</th>
         <th scope="col">CV</th>
         <th scope="col">Offre</th>
@@ -11,6 +12,11 @@
     <tbody>
     @foreach($applies as $apply)
         <tr>
+            <?php
+            $date = new \Carbon\Carbon($apply->apply_created_at);
+            $date::setLocale('fr');
+            ?>
+            <td scope="row" data-label="Date">{{ $date->diffForHumans() }}</td>
             <td scope="row" data-label="Candidat">{{ $apply->apply_firstname }} {{ $apply->apply_lastname }}</td>
             <td scope="row" data-label="CV">{{ $apply->apply_cv_filename ? 'Oui' : 'Non'}}</td>
             <td scope="row" data-label="Offre"><a style="color: #3f8adc" href="/dashboard/offers/{{ $apply->offer_id }}/show">{{ $apply->offer_title }}</a></td>

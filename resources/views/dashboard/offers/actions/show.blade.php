@@ -47,7 +47,21 @@
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <div class="boxEffect">
                     <div class="boxEffectHeader">
-                        <h3 class="boxEffectTitle">À propos de l'offre :  <span class="colorPrimary">{{ $offer->title }}</span></h3>
+                        <h3 class="boxEffectTitle">
+                            À propos de l'offre :  <span class="colorPrimary">{{ $offer->title }}</span>
+
+                            @if ($offer->complete == 0)
+                                <span class="infoBoxEffectHeader badge bgWarning">En cours</span>
+                            @else
+                                <span class="infoBoxEffectHeader badge bgInfo">Terminée</span>
+                            @endif
+
+                            @if ($offer->valid == 0)
+                                <span class="infoBoxEffectHeader badge bgDanger">Non validée</span>
+                            @else
+                                <span class="infoBoxEffectHeader badge bgSuccess">Validée</span>
+                            @endif
+                        </h3>
                     </div>
                     <div class="boxEffectContent">
                         <?php $description = $offer->description; ?>

@@ -1,21 +1,26 @@
 <table id="offers-content" class="responsive-table">
     <thead>
     <tr>
+        <th scope="col">Date</th>
         <th scope="col">Titre</th>
         <th scope="col">Type de contrat</th>
         <th scope="col">Durée</th>
-        <th scope="col">Rémunération</th>
         <th scope="col">Validée</th>
+        <th scope="col">État</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     @foreach($offers as $offer)
         <tr>
-            <td scope="row" data-label="Titre"><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
-            <td scope="row" data-label="Contrat"><span class="@lang('vocabulary.contract_type_colors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span></td>
+            <?php
+            $date = new \Carbon\Carbon($offer->created_at);
+            $date::setLocale('fr');
+            ?>
+            <td scope="row" data-label="Date">{{ $date->diffForHumans() }}</td>
+            <td scope="row" data-label="Titre"><div class="truncateText">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
+            <td scope="row" data-label="Contrat"><div class="truncateText"><span class="@lang('vocabulary.contract_type_colors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span></div></td>
             <td scope="row" data-label="Durée">{{ $offer->duration ? $offer->duration : 'NC'}}</td>
-            <td scope="row" data-label="Rémunération">{{ $offer->remuneration ? $offer->remuneration : 'NC'}}€ / h</td>
             <td scope="row" data-label="Validée">
                 @if ($offer->valid == 0)
                     <span class="badge bgDanger">Non</span>
@@ -23,6 +28,13 @@
                     <span class="badge bgSuccess">Oui</span>
                 @endif
             </td>
+                <td scope="row" data-label="État">
+                    @if ($offer->complete == 0)
+                        <span class="badge bgWarning">En cours</span>
+                    @else
+                        <span class="badge bgInfo">Clôturée</span>
+                    @endif
+                </td>
             <td scope="row" data-label="Actions">
                 @if ($offer->valid == 0)
                 <span data-toggle="tooltip" data-placement="top" title="Approuver l'offre">

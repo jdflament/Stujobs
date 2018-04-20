@@ -24,6 +24,12 @@ Box effect
     overflow-x: scroll;
 }
 
+@media screen and (max-width: 670px) {
+    .boxEffectContent {
+        padding: 20px 10px;
+    }
+}
+
 .boxEffectHeader {
     padding: 15px;
     border-top-left-radius: 5px;
@@ -36,6 +42,13 @@ Box effect
     color: #5E5E5E;
     font-weight: 600;
     margin: 0;
+}
+
+.boxEffectSubtitle {
+    font-size: 14px;
+    color: #5E5E5E;
+    font-weight: 600;
+    margin: 0 0 30px;
 }
 
 .boxEffectFooter {
@@ -217,6 +230,22 @@ Buttons and actions
     text-align: right;
 }
 
+@media screen and (max-width: 670px) {
+    .rowActions .buttonActionLg {
+        display: block !important;
+        width: max-content !important;
+        margin: 10px 0 10px auto !important;
+    }
+
+    .rowActions .applyActions {
+        display:block;
+    }
+}
+
+p .buttonActionLg {
+    line-height: 1.6 !important;
+}
+
 .buttonActionLg {
     font-size: 12px;
     padding: 7px 15px;
@@ -381,6 +410,12 @@ Modal
 
 .modalBody {
     padding: 20px 25px;
+}
+
+@media screen and (max-width: 670px) {
+    .modalBody {
+        padding: 20px 10px;
+    }
 }
 
 .modalBody .row {
@@ -590,4 +625,38 @@ select::-ms-expand {
     text-align: right;
     font-size: 10px;
     margin: 5px;
+}
+
+.applyActions {
+    display: inline-block;
+}
+
+.applyStatus {
+    float: right;
+}
+
+@media screen and (max-width: 670px) {
+    .applyStatus {
+        float:none;
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+.infoBoxEffectHeader {
+    float: right;
+    margin: 0 5px;
+}
+
+.truncateText {
+    width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 670px) {
+    .truncateText {
+        margin-left: auto;
+    }
 }

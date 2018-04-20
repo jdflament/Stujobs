@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-8 col-lg-8 marginTop">
                 <div class="boxEffect">
-                    <h3 class="boxTitleBlack">À propos de l'offre <span class="boxTitle">{{ $offer->title }}</span></h3>
+                    <h3 class="boxTitleBlack">À propos de l'offre :  <span class="boxTitle">{{ $offer->title }}</span></h3>
                     <br />
                     <?php $description = $offer->description; ?>
                     <p class="paragraphe"><?php echo nl2br($description) ?></p>
@@ -18,7 +18,7 @@
                 <div class="boxEffect informationsBox">
                     <h3 class="boxTitle centerContent">Informations</h3>
                     <p class="paragraphe"><span class="smallText">Lieu : </span> {{ $offer->city }}</p>                    
-                    <p class="paragraphe"><span class="smallText">Type de contrat : </span> @lang('vocabulary.contract_type.' . $offer->contract_type)</p>
+                    <p class="paragraphe"><span class="smallText">Type de contrat : </span> <span class="@lang('vocabulary.contract_type_colors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span></p>
                     <p class="paragraphe"><span class="smallText">Durée : </span> {{ $offer->duration }}</p>
                     <p class="paragraphe"><span class="smallText">Rémunération : </span> {{ $offer->remuneration }}€ / h</p>
                     <p class="paragraphe"><span class="smallText">Posté par : </span> {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</p>

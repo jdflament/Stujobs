@@ -60,7 +60,7 @@
                         <a class="boxEffect boxOffer" href="/offers/{{ $offer->id_offer }}">
                             <div class="boxHeader">
                                 <h3 class="boxTitle">{{ $offer->title }}</h3>
-                                <span class="boxLabel">@lang('vocabulary.contract_type.' . $offer->contract_type)</span>
+                                <span class="boxLabel @lang('vocabulary.contract_type_bgcolors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span>
                                 <?php
                                     $date = new \Carbon\Carbon($offer->created_at);
                                     $date::setLocale('fr');

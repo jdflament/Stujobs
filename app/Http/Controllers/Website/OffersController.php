@@ -269,23 +269,27 @@ class OffersController extends Controller
      *
      * Search an offer and return id + title
      */
-    public function search( $result)
+    public function search($result)
     {
         $term = $result;
 
-        $offers = DB::table('offers')
-            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
-            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
-            ->where([
-                ['offers.title', 'LIKE', '%'.$term.'%'],
-                ['offers.valid', '=', true],
-                ['offers.complete', '=', false],
-            ])
-            ->orderBy('offers.created_at', 'DESC')
-            ->get();
+        if ($term) {
+            $offers = DB::table('offers')
+                ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+                ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+                ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+                ->where([
+                    ['offers.title', 'LIKE', '%' . $term . '%'],
+                    ['offers.valid', '=', true],
+                    ['offers.complete', '=', false],
+                ])
+                ->orderBy('offers.created_at', 'DESC')
+                ->get();
 
-        return view('website/index', ['offers' => $offers]);
+            return view('website/index', ['offers' => $offers, 'term' => $term]);
+        } else {
+            return redirect()->back()->withErrors();
+        }
     }
 
     /**

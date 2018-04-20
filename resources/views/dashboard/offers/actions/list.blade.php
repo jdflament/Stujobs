@@ -13,9 +13,9 @@
     @foreach($offers as $offer)
         <tr>
             <td scope="row" data-label="Titre"><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
-            <td scope="row" data-label="Contrat">@lang('vocabulary.contract_type.' . $offer->contract_type)</td>
+            <td scope="row" data-label="Contrat"><span class="@lang('vocabulary.contract_type_colors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span></td>
             <td scope="row" data-label="Durée">{{ $offer->duration ? $offer->duration : 'NC'}}</td>
-            <td scope="row" data-label="Rémunération">{{ $offer->remuneration ? $offer->remuneration : 'NC'}}</td>
+            <td scope="row" data-label="Rémunération">{{ $offer->remuneration ? $offer->remuneration : 'NC'}}€ / h</td>
             <td scope="row" data-label="Validée">
                 @if ($offer->valid == 0)
                     <span class="badge bgDanger">Non</span>

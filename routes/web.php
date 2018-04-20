@@ -36,7 +36,7 @@ Route::get('/offers/{id}', 'Website\OffersController@showValid')->name('showVali
 // Apply to an offer
 Route::post('/offers/{id}/apply', 'Website\AppliesController@apply')->name('applyOffer');
 // Search offer
-Route::get("/offers/search/{result}", 'Website\OffersController@search')->name('searchOffer');
+Route::get('/offers/search/{result}', 'Website\OffersController@search')->name('searchOffer');
 // Filter offer
 Route::post('/offers/filter/result', 'Website\OffersController@filterOffers')->name('filterOffers');
 // Filter offers by company and checkboxes

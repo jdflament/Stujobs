@@ -96,9 +96,18 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
 | Search URL
 |--------------------------------------------------------------------------
 */
+
 $(document).ready(function() {
     $("#search").on('submit', function(e) {
         e.preventDefault();
-        window.location.href = '/offers/search/'+$('#valsearch').val();
+
+        var url = $(this).attr('action');
+        var search = $('#valsearch').val();
+
+        if (search) {
+            window.location.href = url + '/' + search;
+        } else {
+            window.location.href = '/';
+        }
     })
 });

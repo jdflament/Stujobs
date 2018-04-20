@@ -33,6 +33,28 @@ return [
         'cdi' => "CDI"
     ],
 
+    'contract_type_bgcolors' => [
+        'nc' => 'bgDefault',
+        'sj' => 'bgWarning',
+        'ctt' => 'bgDark',
+        'stage' => 'bgPrimary',
+        'ca' => 'bgPurple',
+        'cp' => 'bgDanger',
+        'cdd' => 'bgInfo',
+        'cdi' => 'bgSuccess',
+    ],
+
+    'contract_type_colors' => [
+        'nc' => 'colorDefault',
+        'sj' => 'colorWarning',
+        'ctt' => 'colorDark',
+        'stage' => 'colorPrimary',
+        'ca' => 'colorPurple',
+        'cp' => 'colorDanger',
+        'cdd' => 'colorInfo',
+        'cdi' => 'colorSuccess',
+    ],
+
     // Sector activity
     'sector_activity' => [
         'administration' => 'Administration / Gestion / Secrétariat',

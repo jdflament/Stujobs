@@ -30,6 +30,28 @@ body {
 Colors
  */
 
+.colorDark {
+    color: #5E5E5E;
+}
+
+.bgDark {
+    color: #ffffff;
+    background: #5E5E5E;
+}
+
+.colorInfo {
+    color: #6ae4f7;
+}
+
+.bgInfo {
+    color: #ffffff;
+    background: #6ae4f7;
+}
+
+.colorLight {
+
+}
+
 .colorDefault {
     color: #5E5E5E;
 }
@@ -46,6 +68,15 @@ Colors
 .bgSuccess {
     color: #ffffff;
     background: #26dad2;
+}
+
+.colorPurple {
+    color: #bf74f2;
+}
+
+.bgPurple {
+    color: #ffffff;
+    background: #bf74f2;
 }
 
 .colorWarning {

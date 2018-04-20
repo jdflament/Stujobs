@@ -55,7 +55,7 @@
                                     <a class="listItem" href="/dashboard/offers/{{ $offerToValid->id }}/show">
                                         <span class="listTitle">{{ $offerToValid->title }}</span>
                                         <span class="listSubtitle">posté par {{ $offerToValid->name ? $offerToValid->name : $offerToValid->email }}</span>
-                                        <span class="listLabel">@lang('vocabulary.contract_type.' . $offerToValid->contract_type)</span>
+                                        <span class="listLabel @lang('vocabulary.contract_type_bgcolors.' . $offerToValid->contract_type)">@lang('vocabulary.contract_type.' . $offerToValid->contract_type)</span>
                                         <?php
                                             $date = new \Carbon\Carbon($offerToValid->created_at);
                                             $date::setLocale('fr');

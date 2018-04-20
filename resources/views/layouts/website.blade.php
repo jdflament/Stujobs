@@ -16,7 +16,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/website.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/website/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/filters.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/box_offer.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">

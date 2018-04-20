@@ -68,7 +68,7 @@
                                 <span class="boxDate">{{ $date->diffForHumans() }}</span>
                             </div>
                             <div class="boxSubtitle">
-                                <p>Villeneuve d'Ascq</p>
+                                <p>{{ $offer->city }}</p>
                             </div>
                             <div class="boxContent">
                                 <p>{{ $offer->description }}</p>

@@ -30,6 +30,15 @@ body {
 Colors
  */
 
+.colorDefault {
+    color: #5E5E5E;
+}
+
+.bgDefault {
+    color: #5E5E5E;
+    background: #ffffff;
+}
+
 .colorSuccess {
     color: #26dad2;
 }
@@ -64,6 +73,14 @@ Colors
 .bgPrimary {
     color: #ffffff;
     background: #5580e5;
+}
+
+.bgDanger:hover, .bgPrimary:hover, .bgSuccess:hover, .bgWarning:hover {
+    color: #ffffff;
+}
+
+.bgDefault:hover {
+    color: #5E5E5E;
 }
 
 /**

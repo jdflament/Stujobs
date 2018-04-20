@@ -5,9 +5,9 @@
         <div class="rowActions">
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <!-- Button trigger modal -->
-                <button href="{{ route('dashboardCreateOfferPage') }}" class="buttonActionLg bgPrimary">
+                <a href="{{ route('dashboardCreateOfferPage') }}" class="buttonActionLg bgPrimary">
                     <i class="fa fa-plus"></i> Ajouter une offre
-                </button>
+                </a>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -24,13 +24,15 @@
                             </div>
                         @endif
 
-                        <div class="form-group">
-                            <select class="form-control" id="filterOffers">
-                                <?php $offersType = \Illuminate\Support\Facades\Lang::get('vocabulary.offers_type'); ?>
-                                @foreach($offersType as $key => $offerType)
-                                    <option value="{{ $key }}">{{ $offerType }}</option>
-                                @endforeach
-                            </select>
+                        <div class="rowActions">
+                            <div class="formSelect">
+                                <select class="selectInput" id="filterOffers">
+                                    <?php $offersType = \Illuminate\Support\Facades\Lang::get('vocabulary.offers_type'); ?>
+                                    @foreach($offersType as $key => $offerType)
+                                        <option value="{{ $key }}">{{ $offerType }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         @include('dashboard/offers/actions/list')

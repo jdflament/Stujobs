@@ -1,39 +1,43 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="containerLg">
+        <div class="rowActions">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <a href="{{ route('dashboardIndexAdmins') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <a href="{{ route('dashboardIndexAdmins') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
-                <div class="card card-default">
-                    <div class="card-header">Compte administrateur
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Compte administrateur</h3>
                     </div>
-
-                    <div class="card-body" style="overflow-x:scroll;">
+                    <div class="boxEffectContent">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <table class="table table-responsive-sm table-hover table-bordered">
+                        <table>
                             <tbody>
-                            <tr>
-                                <th>Email</th>
-                                <td>{{ $admin->email }}</td>
-                            </tr>
-                            <tr>
-                                <th>Rôle</th>
-                                <td>{{ $admin->role }}</td>
-                            </tr>
-                            <tr>
-                                <th>Compte vérifié</th>
-                                <td>{{ $admin->verified ? 'Oui' : 'Non' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Membre depuis le</th>
-                                <td>{{ $admin->created_at }}</td>
-                            </tr>
+                                <tr>
+                                    <th scope="col">Email</th>
+                                    <td scope="row" data-label="Email">{{ $admin->email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Rôle</th>
+                                    <td scope="row" data-label="Rôle">{{ $admin->role }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Compte vérifié</th>
+                                    <td scope="row" data-label="Compte vérifié">{{ $admin->verified ? 'Oui' : 'Non' }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Membre depuis le</th>
+                                    <td scope="row" data-label="Membre depuis le">{{ $admin->created_at }}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -41,18 +45,19 @@
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card card-default" style="margin-top: 42px;">
-                    <div class="card-header">Informations complémentaires
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Informations complémentaires</h3>
                     </div>
 
-                    <div class="card-body" style="overflow-x:scroll;">
+                    <div class="boxEffectContent">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <table class="table table-responsive-sm table-hover table-bordered">
+                        <table>
                             <tbody>
                             <tr>
                                 <th>Nom</th>

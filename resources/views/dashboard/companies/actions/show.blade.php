@@ -1,22 +1,27 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
+        <div class="rowActions">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <a href="{{ route('dashboardIndexCompanies') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <a href="{{ route('dashboardIndexCompanies') }}" class="btn btn-dark btn-sm" style="margin-bottom: 15px;">Retour à la liste</a>
-                <div class="card card-default">
-                    <div class="card-header">Compte entreprise
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Compte entreprise</h3>
                     </div>
 
-                    <div class="card-body" style="overflow-x:scroll;">
+                    <div class="boxEffectContent">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <table class="table table-responsive-sm table-hover table-bordered">
+                        <table>
                             <tbody>
                             <tr>
                                 <th>Email</th>
@@ -41,18 +46,19 @@
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <div class="card card-default" style="margin-top: 42px;">
-                    <div class="card-header">Informations complémentaires
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Informations complémentaires</h3>
                     </div>
 
-                    <div class="card-body" style="overflow-x:scroll;">
+                    <div class="boxEffectContent">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
                             </div>
                         @endif
 
-                        <table class="table table-responsive-sm table-hover table-bordered">
+                        <table>
                             <tbody>
                             <tr>
                                 <th>Nom</th>

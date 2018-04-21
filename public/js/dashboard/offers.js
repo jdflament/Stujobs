@@ -44,6 +44,7 @@ $(document).on('click', '#btn-approve-offer', function(event) {
     var $button = $(this);
     var $buttonValue = $button.html();
     var url = $(this).attr('href');
+    var offer_id = $(this).attr('data-offerid');
 
     $.ajax({
         type: 'GET',
@@ -64,6 +65,10 @@ $(document).on('click', '#btn-approve-offer', function(event) {
                 $(".totalOffersInvalid").addClass('hidden');
             }
 
+            $('.offerActions').html('<button data-href="/dashboard/offers/' + offer_id + '/disapprove" data-offerid="' + offer_id + '" class="buttonAction bgDanger btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer">\n' +
+                '                       <i class="fa fa-times"></i> Désapprouver l\'offre\n' +
+                '                    </button>');
+            $('.validStatus').html('<span class="badge bgSuccess">Aprouvée</span>');
             $modal.modal('toggle');
         },
         error: function (response) {
@@ -101,6 +106,7 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
     var $button = $(this);
     var $buttonValue = $button.html();
     var url = $(this).attr('href');
+    var offer_id = $(this).attr('data-offerid');
 
     $.ajax({
         type: 'GET',
@@ -120,7 +126,11 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
             } else {
                 $(".totalOffersInvalid").addClass('hidden');
             }
-            
+
+            $('.offerActions').html('<button data-href="/dashboard/offers/' + offer_id + '/approve" data-offerid="' + offer_id + '" class="buttonAction bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">\n' +
+                '                       <i class="fa fa-check"></i> Approuver l\'offre\n' +
+                '                    </button>');
+            $('.validStatus').html('<span class="badge bgDanger">Désapprouvée</span>');
             $modal.modal('toggle');
         },
         error: function (response) {

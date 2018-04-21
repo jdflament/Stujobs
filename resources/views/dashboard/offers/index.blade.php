@@ -42,7 +42,5 @@
         </div>
     </div>
 
-    @include('dashboard/offers/actions/approve')
-    @include('dashboard/offers/actions/disapprove')
     @include('dashboard/offers/actions/delete')
 @endsection

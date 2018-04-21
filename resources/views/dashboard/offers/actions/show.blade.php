@@ -5,6 +5,20 @@
         <div class="rowActions">
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="{{ route('dashboardIndexOffers') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
+
+                @if ($offer->valid == 0)
+                    <div class="offerActions">
+                        <button data-href="/dashboard/offers/{{ $offer->offer_id }}/approve" data-offerid="{{ $offer->offer_id }}" class="buttonAction bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">
+                            <i class="fa fa-check"></i> Approuver l'offre
+                        </button>
+                    </div>
+                @else
+                    <div class="offerActions">
+                        <button data-href="/dashboard/offers/{{ $offer->offer_id }}/disapprove" data-offerid="{{ $offer->offer_id }}" class="buttonAction bgDanger btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer">
+                            <i class="fa fa-times"></i> Désapprouver l'offre
+                        </button>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -50,17 +64,21 @@
                         <h3 class="boxEffectTitle">
                             À propos de l'offre :  <span class="colorPrimary">{{ $offer->title }}</span>
 
-                            @if ($offer->complete == 0)
-                                <span class="infoBoxEffectHeader badge bgWarning">En cours</span>
-                            @else
-                                <span class="infoBoxEffectHeader badge bgInfo">Terminée</span>
-                            @endif
+                            <div class="offerStatus">
+                                <span class="validStatus">
+                                    @if ($offer->valid == 0)
+                                        <span class="badge bgDanger">Désapprouvée</span>
+                                    @else
+                                        <span class="badge bgSuccess">Approuvée</span>
+                                    @endif
+                                </span>
 
-                            @if ($offer->valid == 0)
-                                <span class="infoBoxEffectHeader badge bgDanger">Non validée</span>
-                            @else
-                                <span class="infoBoxEffectHeader badge bgSuccess">Validée</span>
-                            @endif
+                                @if ($offer->complete == 0)
+                                    <span class="badge bgWarning">En cours</span>
+                                @else
+                                    <span class="badge bgInfo">Terminée</span>
+                                @endif
+                            </div>
                         </h3>
                     </div>
                     <div class="boxEffectContent">
@@ -71,4 +89,7 @@
             </div>
         </div>
     </div>
+
+    @include('dashboard/offers/actions/approve')
+    @include('dashboard/offers/actions/disapprove')
 @endsection

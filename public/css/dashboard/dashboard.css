@@ -627,16 +627,16 @@ select::-ms-expand {
     margin: 5px;
 }
 
-.applyActions {
+.applyActions, .offerActions {
     display: inline-block;
 }
 
-.applyStatus {
+.applyStatus, .offerStatus {
     float: right;
 }
 
 @media screen and (max-width: 670px) {
-    .applyStatus {
+    .applyStatus, .offerStatus {
         float:none;
         display: block;
         margin: 5px 0;

@@ -76,7 +76,7 @@
                                 @if ($offer->complete == 0)
                                     <span class="badge bgWarning">En cours</span>
                                 @else
-                                    <span class="badge bgInfo">Terminée</span>
+                                    <span class="badge bgInfo">Clôturée</span>
                                 @endif
                             </div>
                         </h3>

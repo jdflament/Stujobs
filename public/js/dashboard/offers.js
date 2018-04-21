@@ -28,8 +28,10 @@ function closeAlert(div) {
 $(document).on('click', '.btn-pre-approve-offer', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
+    var offerid = $(this).data('offerid');
 
     $('#btn-approve-offer').attr('href', route);
+    $('#btn-approve-offer').attr('data-offerid', offerid)
 });
 
 // Reset approve button href
@@ -65,10 +67,10 @@ $(document).on('click', '#btn-approve-offer', function(event) {
                 $(".totalOffersInvalid").addClass('hidden');
             }
 
-            $('.offerActions').html('<button data-href="/dashboard/offers/' + offer_id + '/disapprove" data-offerid="' + offer_id + '" class="buttonAction bgDanger btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer">\n' +
+            $('.offerActions').html('<button data-href="/dashboard/offers/' + offer_id + '/disapprove" data-offerid="' + offer_id + '" class="buttonActionLg bgDanger btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer">\n' +
                 '                       <i class="fa fa-times"></i> Désapprouver l\'offre\n' +
                 '                    </button>');
-            $('.validStatus').html('<span class="badge bgSuccess">Aprouvée</span>');
+            $('.validStatus').html('<span class="badge bgSuccess">Approuvée</span>');
             $modal.modal('toggle');
         },
         error: function (response) {
@@ -90,8 +92,10 @@ $(document).on('click', '#btn-approve-offer', function(event) {
 $(document).on('click', '.btn-pre-disapprove-offer', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
+    var offerid = $(this).data('offerid');
 
     $('#btn-disapprove-offer').attr('href', route);
+    $('#btn-disapprove-offer').attr('data-offerid', offerid);
 });
 
 // Reset approve button href
@@ -127,7 +131,7 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
                 $(".totalOffersInvalid").addClass('hidden');
             }
 
-            $('.offerActions').html('<button data-href="/dashboard/offers/' + offer_id + '/approve" data-offerid="' + offer_id + '" class="buttonAction bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">\n' +
+            $('.offerActions').html('<button data-href="/dashboard/offers/' + offer_id + '/approve" data-offerid="' + offer_id + '" class="buttonActionLg bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">\n' +
                 '                       <i class="fa fa-check"></i> Approuver l\'offre\n' +
                 '                    </button>');
             $('.validStatus').html('<span class="badge bgDanger">Désapprouvée</span>');

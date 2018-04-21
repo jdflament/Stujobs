@@ -8,13 +8,13 @@
 
                 @if ($offer->valid == 0)
                     <div class="offerActions">
-                        <button data-href="/dashboard/offers/{{ $offer->offer_id }}/approve" data-offerid="{{ $offer->offer_id }}" class="buttonAction bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">
+                        <button data-href="/dashboard/offers/{{ $offer->offer_id }}/approve" data-offerid="{{ $offer->offer_id }}" class="buttonActionLg bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">
                             <i class="fa fa-check"></i> Approuver l'offre
                         </button>
                     </div>
                 @else
                     <div class="offerActions">
-                        <button data-href="/dashboard/offers/{{ $offer->offer_id }}/disapprove" data-offerid="{{ $offer->offer_id }}" class="buttonAction bgDanger btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer">
+                        <button data-href="/dashboard/offers/{{ $offer->offer_id }}/disapprove" data-offerid="{{ $offer->offer_id }}" class="buttonActionLg bgDanger btn-pre-disapprove-offer" data-toggle="modal" data-target="#modalDisapproveOffer">
                             <i class="fa fa-times"></i> Désapprouver l'offre
                         </button>
                     </div>

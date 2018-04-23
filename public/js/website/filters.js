@@ -47,29 +47,33 @@ $( "#searchOffersByCompany").autocomplete({
 |--------------------------------------------------------------------------
 */
 
-$(document).on('change', '.checkboxContract', function(event) {
-    if ($(this).val() == "all") {
-        $('.checkboxContract:checked').filter(function() { return $(this).val() !== "all"; }).prop('checked', false);
-    }
+// Check the "all" checkbox or specifics checkboxes, check "all" if nothing checked
+function checkManager(checkboxesClass) {
+    $(document).on('change', checkboxesClass, function (event) {
+        if ($(this).val() == "all") {
+            $(checkboxesClass + ':checked').filter(function () {
+                return $(this).val() !== "all";
+            }).prop('checked', false);
+        }
 
-    if ($(this).val() !== "all") {
-        $('.checkboxContract:checked').filter(function() { return $(this).val() == "all"; }).prop('checked', false);
-    }
+        if ($(this).val() !== "all") {
+            $(checkboxesClass + ':checked').filter(function () {
+                return $(this).val() == "all";
+            }).prop('checked', false);
+        }
 
-    $(this).closest('form').submit();
-});
+        var totalChecked = $(checkboxesClass + ':checkbox:checked').length;
 
-$(document).on('change', '.checkboxSector', function(event) {
-    if ($(this).val() == "all") {
-        $('.checkboxSector:checked').filter(function() { return $(this).val() !== "all"; }).prop('checked', false);
-    }
+        if (totalChecked === 0) {
+            $(checkboxesClass + ":checkbox[value=all]").prop("checked","true");
+        }
 
-    if ($(this).val() !== "all") {
-        $('.checkboxSector:checked').filter(function() { return $(this).val() == "all"; }).prop('checked', false);
-    }
+        $(this).closest('form').submit();
+    });
+}
 
-    $(this).closest('form').submit();
-});
+checkManager('.checkboxContract');
+checkManager('.checkboxSector');
 
 
 $(document).on('submit', 'form[name=filterOffer]', function(event) {

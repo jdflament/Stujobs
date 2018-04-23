@@ -180,15 +180,24 @@ $(document).on('click', '#btn-delete-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
+            console.log(response);
             alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
             $button.html('<i class="fa fa-check"></i>');
 
             // Update the offer icon on sidebar
-            if (response > 0) {
-                $(".totalOffersInvalid").html(response);
+            if (response[0] > 0) {
+                $(".totalOffersInvalid").html(response[0]);
                 $(".totalOffersInvalid").removeClass('hidden');
             } else {
                 $(".totalOffersInvalid").addClass('hidden');
+            }
+
+            // Update the apply icon on sidebar
+            if (response[1] > 0) {
+                $(".totalAppliesInvalid").html(response[1]);
+                $(".totalAppliesInvalid").removeClass('hidden');
+            } else {
+                $(".totalAppliesInvalid").addClass('hidden');
             }
 
             $("#offers-content").load(location.href + " #offers-content>*", "");

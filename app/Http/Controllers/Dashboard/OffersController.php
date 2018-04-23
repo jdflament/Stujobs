@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Apply;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class OffersController extends Controller
@@ -232,7 +234,7 @@ class OffersController extends Controller
 
     /**
      * @param $id
-     * @return int
+     * @return array
      *
      * Delete an offer and return total offers to valid
      */
@@ -240,13 +242,31 @@ class OffersController extends Controller
     {
         Offer::where('id', $id)->delete();
 
+        // Delete the associated applies if exist (and the CV if exist)
+        $applies = Apply::where('offer_id', '=', $id)->get();
+        if ($applies) {
+            foreach ($applies as $apply) {
+                if (isset($apply->cv_filename)) {
+                    File::delete(storage_path('app/public/cv') . '/' . $apply->cv_filename);
+                }
+
+                $apply->delete();
+            }
+        }
+
         $offers = DB::table('offers')
             ->where('valid', '=', 0)
             ->get();
 
-        $total = count($offers);
+        $applies = DB::table('applies')
+            ->where('valid', '=', 0)
+            ->get();
 
-        return $total;
+
+        $totalOffers = count($offers);
+        $totalApplies = count($applies);
+
+        return [$totalOffers, $totalApplies];
     }
 
     /**

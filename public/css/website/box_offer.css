@@ -77,6 +77,10 @@ Box offer
     font-weight: 100;
 }
 
+.boxFooter .boxLeftSide span:first-child {
+    margin-right: 15px;
+}
+
 .boxFooter .boxLeftSide small {
     font-size: 10px;
     color: #5e5e5e;
@@ -105,6 +109,15 @@ Box offer
     }
     .informationsBox {
         margin-top: 15px;
+    }
+
+    .boxFooter .boxLeftSide {
+        display: flex;
+        flex-direction:column;
+    }
+
+    .boxFooter .boxLeftSide span:first-child {
+        margin: 15px 0;
     }
 }
 

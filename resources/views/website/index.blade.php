@@ -76,6 +76,7 @@
                             <div class="boxFooter">
                                 <div class="boxLeftSide">
                                     <span>Posté par : <small>{{ $offer->name ? $offer->name : $offer->email }}</small></span>
+                                    <span>Secteur : <small>@lang('vocabulary.sector_activity.' . $offer->sector)</small></span>
                                 </div>
                                 <div class="boxRightSide rightArrow"></div>
                             </div>

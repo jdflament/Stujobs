@@ -130,6 +130,10 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/offers/informations', 'Dashboard\HomeController@offersInformations')->name('dashboardOffersInformations');
     // Get offers rates
     Route::get('/dashboard/offers/rates', 'Dashboard\HomeController@offersRates')->name('dashboardOffersRates');
+    // Get informations of applies
+    Route::get('/dashboard/applies/informations', 'Dashboard\HomeController@appliesInformations')->name('dashboardAppliesInformations');
+    // Get offers rates
+    Route::get('/dashboard/applies/rates', 'Dashboard\HomeController@appliesRates')->name('dashboardAppliesRates');
 });
 
 /*

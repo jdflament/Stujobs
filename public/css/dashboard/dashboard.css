@@ -2,6 +2,7 @@
 Box effect
  */
 
+
 .boxEffect {
     transition: all 140ms ease-in;
     -moz-transition: all 140ms ease-in;

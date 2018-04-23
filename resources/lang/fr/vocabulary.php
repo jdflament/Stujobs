@@ -15,8 +15,8 @@ return [
     // Offers type
     'offers_type' => [
         "all" => "Toutes",
-        "valid" => "Validées",
-        "invalid" => "Invalidées",
+        "valid" => "Approuvées",
+        "invalid" => "Désapprouvées",
         "complete" => "Clôturées",
         "incomplete" => "En cours"
     ],

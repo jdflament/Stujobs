@@ -16,7 +16,18 @@
                             </div>
                         @endif
 
-                            @include('dashboard/applies/actions/list')
+                        <div class="rowActions">
+                            <div class="formSelect largeSelect">
+                                <select class="selectInput" id="filterApplies">
+                                    <option value="all" selected>Toutes</option>
+                                    @foreach($offers as $offer)
+                                        <option value="{{ $offer->id }}">{{ $offer->title }} (par {{ $offer->company_name }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        @include('dashboard/applies/actions/list')
                     </div>
                 </div>
             </div>

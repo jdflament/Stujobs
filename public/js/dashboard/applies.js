@@ -197,3 +197,28 @@ $(document).on('click', '#btn-delete-apply', function(event) {
         }
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Applies filter
+|--------------------------------------------------------------------------
+*/
+
+$(document).on('change', '#filterApplies', function(event) {
+    var value = $(this).val();
+
+    $.ajax({
+        type: 'GET',
+        url: "/dashboard/applies/filter/" + value,
+        beforeSend: function() {
+            $("#applies-content").find('tbody').html('<tr><td colspan="6" align="center"><i class="fa fa-spinner fa-pulse fa-fw fa-3x"></i></td></tr>');
+        },
+        success: function (response) {
+            $("#applies-content").html($(response).find('#applies-content').html());
+        },
+        error: function(response) {
+            console.error(response);
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue pendant le filtrage.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+        }
+    });
+});

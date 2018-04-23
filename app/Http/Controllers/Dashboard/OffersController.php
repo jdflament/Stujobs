@@ -287,6 +287,12 @@ class OffersController extends Controller
         return view('dashboard/offers/actions/show', ['offer' => $offer]);
     }
 
+    /**
+     * @param $type
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Filter offers by status
+     */
     public function filter($type)
     {
         $mapping = [

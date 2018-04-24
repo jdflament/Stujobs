@@ -6,6 +6,10 @@
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="{{ route('dashboardIndexOffers') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
 
+                @if (count($totalApplies) > 0)
+                    <a href="{{ '/dashboard/applies/filter/' . $offer->offer_id }}" class="buttonActionLg bgPrimary"><i class="fa fa-eye"></i> Voir les candidatures</a>
+                @endif
+
                 @if ($offer->valid == 0)
                     <div class="offerActions">
                         <button data-href="/dashboard/offers/{{ $offer->offer_id }}/approve" data-offerid="{{ $offer->offer_id }}" class="buttonActionLg bgSuccess btn-pre-approve-offer" data-toggle="modal" data-target="#modalApproveOffer">

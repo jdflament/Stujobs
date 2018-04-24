@@ -284,7 +284,14 @@ class OffersController extends Controller
             ->get()
             ->first();
 
-        return view('dashboard/offers/actions/show', ['offer' => $offer]);
+        $totalApplies = DB::table('applies')
+            ->leftJoin('offers', 'applies.offer_id', '=', 'offers.id')
+            ->select('applies.id')
+            ->where('offers.id', $id)
+            ->get()
+            ->all();
+
+        return view('dashboard/offers/actions/show', ['offer' => $offer, 'totalApplies' => $totalApplies]);
     }
 
     /**

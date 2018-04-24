@@ -55,13 +55,7 @@
             </div>
             <div class="col-xs-12 col-md-8 col-lg-8">
                 <div class="boxList showMenu" id="loadOffersContent">
-                    {{--@if (count($offers) > 0)--}}
                         @include ('website/offers/actions/load')
-                    {{--@else--}}
-                        {{--<div class="noOffers">--}}
-                            {{--<p>Aucune offre n'a été trouvée.</p>--}}
-                        {{--</div>--}}
-                    {{--@endif--}}
                 </div>
 
                 <div class="loadScroll">

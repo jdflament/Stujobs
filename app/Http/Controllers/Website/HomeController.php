@@ -13,7 +13,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $offers = DB::table('offers')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
@@ -24,7 +24,12 @@ class HomeController extends Controller
             ])
             ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'offers.city', 'offers.sector', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
-            ->get();
+            ->paginate(2);
+
+        if ($request->ajax()) {
+            $view = view('website/offers/actions/load',compact('offers'))->render();
+            return response()->json(['html' => $view]);
+        }
 
         return view('website/index', ['offers' => $offers]);
     }

@@ -45,6 +45,42 @@ function closeAlert(div) {
 
 }(jQuery));
 
+/*
+|--------------------------------------------------------------------------
+| Load offers on homepage
+|--------------------------------------------------------------------------
+*/
+
+var page = 1;
+
+$(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        page++;
+        loadMoreData(page);
+    }
+});
+
+function loadMoreData(page) {
+    $.ajax({
+        type: 'GET',
+        url: '?page=' + page,
+        beforeSend: function() {
+            $('.loadScroll').show();
+        },
+        success: function(response) {
+            if (response.html == "") {
+                $('.loadScroll').html("<span class='colorPrimary'>Aucune autre offre d'emploi n'a été trouvée.</span>");
+                return;
+            }
+
+            $('.loadScroll').hide();
+            $("#loadOffersContent").append(response.html);
+        },
+        error: function (response) {
+            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Aucune autre donnée n'est disponible.", "alert-danger", 4000);
+        }
+    });
+}
 
 /*
 |--------------------------------------------------------------------------

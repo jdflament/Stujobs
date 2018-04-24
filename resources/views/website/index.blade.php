@@ -54,39 +54,18 @@
                 </div>
             </div>
             <div class="col-xs-12 col-md-8 col-lg-8">
-                <div class="boxList showMenu">
-                @if (count($offers) > 0)
-                    @foreach ($offers as $offer)
-                        <a class="boxEffect boxOffer" href="/offers/{{ $offer->id_offer }}">
-                            <div class="boxHeader">
-                                <h3 class="boxTitle">{{ $offer->title }}</h3>
-                                <span class="boxLabel @lang('vocabulary.contract_type_bgcolors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span>
-                                <?php
-                                    $date = new \Carbon\Carbon($offer->created_at);
-                                    $date::setLocale('fr');
-                                ?>
-                                <span class="boxDate">{{ $date->diffForHumans() }}</span>
-                            </div>
-                            <div class="boxSubtitle">
-                                <p>{{ $offer->city }}</p>
-                            </div>
-                            <div class="boxContent">
-                                <p>{{ $offer->description }}</p>
-                            </div>
-                            <div class="boxFooter">
-                                <div class="boxLeftSide">
-                                    <span>Posté par : <small>{{ $offer->name ? $offer->name : $offer->email }}</small></span>
-                                    <span>Secteur : <small>@lang('vocabulary.sector_activity.' . $offer->sector)</small></span>
-                                </div>
-                                <div class="boxRightSide rightArrow"></div>
-                            </div>
-                        </a>
-                    @endforeach
-                @else
-                    <div class="noOffers">
-                        <p>Aucune offre n'a été trouvée.</p>
-                    </div>
-                @endif
+                <div class="boxList showMenu" id="loadOffersContent">
+                    {{--@if (count($offers) > 0)--}}
+                        @include ('website/offers/actions/load')
+                    {{--@else--}}
+                        {{--<div class="noOffers">--}}
+                            {{--<p>Aucune offre n'a été trouvée.</p>--}}
+                        {{--</div>--}}
+                    {{--@endif--}}
+                </div>
+
+                <div class="loadScroll">
+                    <button class="buttonActionLg bgPrimary"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Chargement des offres...</button>
                 </div>
             </div>
         </div>

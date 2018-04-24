@@ -15,7 +15,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12 col-md-12 col-lg-12">
-                        <p>Voulez-vous vraiment accepter et envoyer cette candidature à l'entreprise ?</p>
+                        <p>Voulez-vous vraiment accepter et envoyer cette candidature à l'entreprise (<strong>{{ $apply->offer_contact_email }}</strong>) ?</p>
                         <p>Après cette action, l'entreprise ayant proposé cette offre recevra par email la candidature.</p>
                     </div>
                 </div>

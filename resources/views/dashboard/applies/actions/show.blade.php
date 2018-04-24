@@ -81,6 +81,8 @@
                         <p class="paragraphe"><span class="smallText">Type de contrat : </span> @lang('vocabulary.contract_type.' . $apply->offer_contract_type)</p>
                         <p class="paragraphe"><span class="smallText">Durée : </span> {{ $apply->offer_duration }}</p>
                         <p class="paragraphe"><span class="smallText">Rémunération : </span> {{ $apply->offer_remuneration }}€ / h</p>
+                        <p class="paragraphe"><span class="smallText">Email de contact : </span> <strong>{{ $apply->offer_contact_email }}</strong></p>
+                        <p class="paragraphe"><span class="smallText">Tél de contact : </span> {{ $apply->offer_contact_phone }}</p>
                     </div>
                 </div>
             </div>

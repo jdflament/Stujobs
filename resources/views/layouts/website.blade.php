@@ -18,6 +18,7 @@
     <link href="{{ asset('css/website/website.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/filters.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/box_offer.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/website/footer.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -160,6 +161,7 @@
     </main>
 </div>
 
+<<<<<<< Updated upstream
     <!-- Scripts -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script src="{{ asset('js/app.js') }}"></script>
@@ -170,5 +172,42 @@
     <script src="{{ asset('js/website/profile.js') }}"></script>
     <script src="{{ asset('js/website/offers.js') }}"></script>
     @yield('scripts')
+=======
+<!-- Scripts -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{ asset('js/global.js') }}"></script>
+<script src="{{ asset('js/navbar.js') }}"></script>
+<script src="{{ asset('js/website/filters.js') }}"></script>
+<script src="{{ asset('js/website/profile.js') }}"></script>
+<script src="{{ asset('js/website/offers.js') }}"></script>
+<script src="{{ asset('js/website/newsletter.js') }}"></script>
+
+
+<footer class="col-xs-12 footer">
+    <div class="row footer-container">
+        <div class="footer-left col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <p>Stujobs, tous droits réservés 2018</p>
+        </div>
+        <div class="footer-center col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <span class="smallText">Être alerté lors d’une nouvelle offre</span>
+            <form id='newsletter' method="post" role="form" action="/newsletter/email" name="newsletterRegister">
+                <input id='newsletter_email' type="mail" name="newsletter_email" placeholder="Votre adresse mail..." />
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <button class="inputRightIcon" type="submit">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+        <div class="footer-right col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <a href="">Plan du site</a>
+            <a href="">Mentions légales</a>
+        </div>
+    </div>
+</footer>
+
+
+>>>>>>> Stashed changes
 </body>
 </html>

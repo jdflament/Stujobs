@@ -15,7 +15,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        
+
                         <div class="rowActions">
                             <div class="formSelect largeSelect">
                                 <select class="selectInput" id="filterApplies">

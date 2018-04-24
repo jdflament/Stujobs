@@ -161,18 +161,7 @@
     </main>
 </div>
 
-<<<<<<< Updated upstream
-    <!-- Scripts -->
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ asset('js/global.js') }}"></script>
-    <script src="{{ asset('js/navbar.js') }}"></script>
-    <script src="{{ asset('js/website/filters.js') }}"></script>
-    <script src="{{ asset('js/website/profile.js') }}"></script>
-    <script src="{{ asset('js/website/offers.js') }}"></script>
-    @yield('scripts')
-=======
+
 <!-- Scripts -->
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="{{ asset('js/app.js') }}"></script>
@@ -183,6 +172,7 @@
 <script src="{{ asset('js/website/profile.js') }}"></script>
 <script src="{{ asset('js/website/offers.js') }}"></script>
 <script src="{{ asset('js/website/newsletter.js') }}"></script>
+@yield('scripts')
 
 
 <footer class="col-xs-12 footer">
@@ -208,6 +198,5 @@
 </footer>
 
 
->>>>>>> Stashed changes
 </body>
 </html>

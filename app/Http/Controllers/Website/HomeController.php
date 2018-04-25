@@ -24,7 +24,7 @@ class HomeController extends Controller
             ])
             ->select('offers.id as id_offer', 'users.id as id_company', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.valid', 'offers.complete', 'offers.created_at', 'offers.city', 'offers.sector', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
-            ->paginate(2);
+            ->paginate(5);
 
         if ($request->ajax()) {
             $view = view('website/offers/actions/load',compact('offers'))->render();

@@ -229,6 +229,7 @@ $(document).on('change', '#filterOffers', function(event) {
         },
         success: function (response) {
             $("#offers-content").html($(response).find('#offers-content').html());
+            $(".paginationBlock").html($(response).find('.paginationBlock').html());
         },
         error: function(response) {
             console.error(response);

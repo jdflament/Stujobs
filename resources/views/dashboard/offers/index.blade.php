@@ -29,13 +29,17 @@
                                 <select class="selectInput" id="filterOffers">
                                     <?php $offersType = \Illuminate\Support\Facades\Lang::get('vocabulary.offers_type'); ?>
                                     @foreach($offersType as $key => $offerType)
-                                        <option value="{{ $key }}">{{ $offerType }}</option>
+                                        <option value="{{ $key }}" @if(isset($typeOffer) && $typeOffer === $key) selected="selected" @endif>{{ $offerType }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                         @include('dashboard/offers/actions/list')
+                    </div>
+
+                    <div class="boxEffectFooter paginationBlock">
+                        {{ $offers->links('dashboard/templates/pagination') }}
                     </div>
                 </div>
             </div>

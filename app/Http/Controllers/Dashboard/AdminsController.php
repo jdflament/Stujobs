@@ -31,7 +31,7 @@ class AdminsController extends Controller
             ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
             ->whereIn('role', $roles)
             ->select('users.id', 'users.email', 'users.role', 'admins.user_id', 'admins.firstname', 'admins.lastname', 'admins.phone', 'admins.office')
-            ->get();
+            ->paginate(10);
 
         return view('dashboard/admins/index', ['admins' => $admins]);
     }

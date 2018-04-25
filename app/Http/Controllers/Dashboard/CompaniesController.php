@@ -33,7 +33,7 @@ class CompaniesController extends Controller
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->whereIn('role', $roles)
             ->select('users.id', 'users.email', 'users.role', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
-            ->get();
+            ->paginate(10);
 
         return view('dashboard/companies/index', ['companies' => $companies]);
     }

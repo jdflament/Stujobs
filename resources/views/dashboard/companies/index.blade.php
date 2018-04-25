@@ -26,6 +26,10 @@
 
                             @include('dashboard/companies/actions/list')
                     </div>
+
+                    <div class="boxEffectFooter paginationBlock">
+                        {{ $companies->links('dashboard/templates/pagination') }}
+                    </div>
                 </div>
             </div>
         </div>

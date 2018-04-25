@@ -215,6 +215,7 @@ $(document).on('change', '#filterApplies', function(event) {
         },
         success: function (response) {
             $("#applies-content").html($(response).find('#applies-content').html());
+            $(".paginationBlock").html($(response).find('.paginationBlock').html());
         },
         error: function(response) {
             console.error(response);

@@ -10,3 +10,8 @@ $(document).on('click', '#alertsBack', function(event) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
+
+// Prevent default disabled class on click
+$(document).on('click', '.disabled', function(event) {
+    event.preventDefault();
+});

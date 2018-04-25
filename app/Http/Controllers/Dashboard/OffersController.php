@@ -28,7 +28,7 @@ class OffersController extends Controller
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.created_at', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
-            ->get();
+            ->paginate(1);
 
         $offersType = [
             "all" => "Toutes",
@@ -315,8 +315,8 @@ class OffersController extends Controller
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'offers.created_at', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
-            ->get();
+            ->paginate(1);
 
-        return view('dashboard/offers/index', ['offers' => $offers]);
+        return view('dashboard/offers/index', ['offers' => $offers, 'typeOffer' => $type]);
     }
 }

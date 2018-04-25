@@ -26,6 +26,10 @@
 
                         @include('dashboard/admins/actions/list')
                     </div>
+
+                    <div class="boxEffectFooter paginationBlock">
+                        {{ $admins->links('dashboard/templates/pagination') }}
+                    </div>
                 </div>
             </div>
         </div>

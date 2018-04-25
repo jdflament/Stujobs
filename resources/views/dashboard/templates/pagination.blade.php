@@ -35,7 +35,7 @@ $link_limit = 5;
         <li class="{{ ($paginator->currentPage() == 1) ? 'disabled' : '' }} paginationItem paginationArrow">
             <a href="{{ $paginator->url($paginator->currentPage() - 1) }}">&laquo;</a>
         </li>
-        <li class="disabled paginationItem paginationArrow">
+        <li class="active paginationItem">
             <a href="{{ $paginator->url($paginator->currentPage()) }}">1</a>
         </li>
         <li class="{{ ($paginator->currentPage() == $paginator->lastPage()) ? 'disabled' : '' }} paginationItem paginationArrow">

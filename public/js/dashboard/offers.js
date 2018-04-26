@@ -1,25 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Alerts
-|--------------------------------------------------------------------------
-*/
-
-// Global widget alert function
-function alertWidget(div, message, type, duration) {
-    $(div).fadeIn();
-    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
-    setTimeout(function(){
-        $(div).fadeOut();
-    }, duration);
-}
-
-// Global widget alert close function
-function closeAlert(div) {
-    $(div).fadeOut();
-}
-
-/*
-|--------------------------------------------------------------------------
 | Offer approve
 |--------------------------------------------------------------------------
 */
@@ -55,7 +35,7 @@ $(document).on('click', '#btn-approve-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> approuvée.", "alert-success", 4000);
+            notification('success', "L'offre a été approuvée.");
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
 
@@ -74,7 +54,8 @@ $(document).on('click', '#btn-approve-offer', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -119,7 +100,7 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> désapprouvée.", "alert-success", 4000);
+            notification('success', "L'offre a été désapprouvée.");
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
 
@@ -138,7 +119,8 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -180,8 +162,7 @@ $(document).on('click', '#btn-delete-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            console.log(response);
-            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
+            notification('success', "L'offre a été supprimée.");
             $button.html('<i class="fa fa-check"></i>');
 
             // Update the offer icon on sidebar
@@ -204,7 +185,8 @@ $(document).on('click', '#btn-delete-offer', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -233,7 +215,7 @@ $(document).on('change', '#filterOffers', function(event) {
         },
         error: function(response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue pendant le filtrage.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue lors du filtre.");
         }
     });
 });

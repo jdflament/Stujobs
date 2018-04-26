@@ -1,29 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Alerts
-|--------------------------------------------------------------------------
-*/
-
-// Global widget alert function
-function alertWidget(div, message, type, duration) {
-    $(div).fadeIn();
-    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
-    setTimeout(function(){
-        $(div).fadeOut();
-    }, duration);
-}
-
-// Global widget alert close function
-function closeAlert(div) {
-    $(div).fadeOut();
-}
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-/*
-|--------------------------------------------------------------------------
 | Company creation
 |--------------------------------------------------------------------------
 */
@@ -58,10 +34,10 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> crée. Un email de vérification lui a été envoyé.", "alert-success", 4000);
+            notification('success', "L'entreprise a été créée. Un email de vérification a été envoyé.");
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalCreateCompany>*", "");
-            console.log(response);
+
             if (destination == "companies-content") {
                 $("#" + destination).load(location.href + " #" + destination + ">*", "");
             } else {
@@ -72,8 +48,7 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            console.log(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue. Merci de vérifier les champs.");
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
                     $('#' + i).after('<div class="error-message">' + val + '</div>');
@@ -126,14 +101,14 @@ $(document).on('submit', 'form[name=editCompany]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> modifée.", "alert-success", 4000);
+            notification('success', "L'entreprise a été modifiée.");
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalEditCompany>*", "");
             $("#companies-content").load(location.href + " #companies-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue. Merci de vérifier les champs.");
             $('.error-message').remove();
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
@@ -181,13 +156,13 @@ $(document).on('click', '#btn-delete-company', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'entreprise a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
+            notification('success', "L'entreprise a été supprimée.");
             $button.html('<i class="fa fa-check"></i>');
             $("#companies-content").load(location.href + " #companies-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);

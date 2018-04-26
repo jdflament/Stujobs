@@ -1,20 +1,8 @@
-// Global widget alert function
-function alertWidget(div, message, type, duration) {
-    $(div).fadeIn();
-    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
-    setTimeout(function(){
-        $(div).fadeOut();
-    }, duration);
-}
-
-// Global widget alert close function
-function closeAlert(div) {
-    $(div).fadeOut();
-}
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
+/*
+|--------------------------------------------------------------------------
+| Get offers contracts type (Pie Chart)
+|--------------------------------------------------------------------------
+*/
 
 $(document).ready(function(event) {
     $.ajax({
@@ -70,10 +58,16 @@ $(document).ready(function(event) {
         },
         error: function (response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données de type de contrat.", "alert-danger", 4000);
+            notification('error', "Une erreur est survenue lors du chargement des graphiques.");
         }
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Get offers informations (Bars)
+|--------------------------------------------------------------------------
+*/
 
 $(document).ready(function(event) {
     $.ajax({
@@ -129,10 +123,16 @@ $(document).ready(function(event) {
         },
         error: function (response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données des offres.", "alert-danger", 4000);
+            notification('error', "Une erreur est survenue lors du chargement des graphiques.");
         }
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Get offers rates (Lines)
+|--------------------------------------------------------------------------
+*/
 
 $(document).ready(function(event) {
     $.ajax({
@@ -191,11 +191,16 @@ $(document).ready(function(event) {
         },
         error: function (response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données des offres (nombre total).", "alert-danger", 4000);
+            notification('error', "Une erreur est survenue lors du chargement des graphiques.");
         }
     });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Get applies informations (Horizontal Bars)
+|--------------------------------------------------------------------------
+*/
 
 $(document).ready(function(event) {
     $.ajax({
@@ -250,10 +255,16 @@ $(document).ready(function(event) {
         },
         error: function (response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données des candidatures.", "alert-danger", 4000);
+            notification('error', "Une erreur est survenue lors du chargement des graphiques.");
         }
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Get applies rates (Lines)
+|--------------------------------------------------------------------------
+*/
 
 $(document).ready(function(event) {
     $.ajax({
@@ -312,7 +323,7 @@ $(document).ready(function(event) {
         },
         error: function (response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue</strong> pendant l'upload des données des candidatures (nombre total).", "alert-danger", 4000);
+            notification('error', "Une erreur est survenue lors du chargement des graphiques.");
         }
     });
 });

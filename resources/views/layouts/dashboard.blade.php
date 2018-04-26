@@ -15,6 +15,7 @@
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/notification.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard/sidebar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard/dashboard.css') }}" rel="stylesheet">
@@ -189,7 +190,6 @@ if (Auth::user()) {
             @endif
 
             <div class="content withSidebar">
-                <div id="alerts"></div>
                 <div id="alertsBack">
                     @if (\Session::has('error'))
                         <div class="alert alert-danger">
@@ -205,6 +205,7 @@ if (Auth::user()) {
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/notification.js') }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>

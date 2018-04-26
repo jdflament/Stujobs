@@ -1,29 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Alerts
-|--------------------------------------------------------------------------
-*/
-
-// Global widget alert function
-function alertWidget(div, message, type, duration) {
-    $(div).fadeIn();
-    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
-    setTimeout(function(){
-        $(div).fadeOut();
-    }, duration);
-}
-
-// Global widget alert close function
-function closeAlert(div) {
-    $(div).fadeOut();
-}
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-/*
-|--------------------------------------------------------------------------
 | Admin creation
 |--------------------------------------------------------------------------
 */
@@ -58,7 +34,7 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> créé. Un email de vérification lui a été envoyé.", "alert-success", 4000);
+            notification('success', "L'administrateur a été créé. Un email de vérification lui a été envoyé.");
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalCreateAdmin>*", "");
 
@@ -67,8 +43,8 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            console.log(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue. Merci de vérifier les champs.");
             $('.error-message').remove();
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
@@ -122,15 +98,14 @@ $(document).on('submit', 'form[name=editAdmin]', function(event) {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            console.log(response);
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> modifé.", "alert-success", 4000);
+            notification('success', "L'administrateur a été modifié.");
             $submit.html('<i class="fa fa-check"></i>');
             $modal.load(location.href + " #modalEditAdmin>*", "");
             $("#admins-content").load(location.href + " #admins-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de vérifier les champs.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue. Merci de vérifier les champs.");
             $('.error-message').remove();
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
@@ -178,13 +153,14 @@ $(document).on('click', '#btn-delete-admin', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'administrateur a été <strong>correctement</strong> supprimé.", "alert-success", 4000);
+            notification('success', "L'administrateur a été supprimé.");
             $button.html('<i class="fa fa-check"></i>');
             $("#admins-content").load(location.href + " #admins-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);

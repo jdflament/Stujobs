@@ -1,26 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Alerts
-|--------------------------------------------------------------------------
-*/
-
-// Global widget alert function
-function alertWidget(div, message, type, duration) {
-    $(div).fadeIn();
-    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
-    setTimeout(function(){
-        $(div).fadeOut();
-    }, duration);
-}
-
-// Global widget alert close function
-function closeAlert(div) {
-    $(div).fadeOut();
-}
-
-
-/*
-|--------------------------------------------------------------------------
 | Apply accept
 |--------------------------------------------------------------------------
 */
@@ -53,7 +32,7 @@ $(document).on('click', '#btn-accept-apply', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"La candidature a été <strong>correctement</strong> acceptée et envoyée.", "alert-success", 4000);
+            notification('success', "La candidature a été acceptée et envoyée.");
             $button.html('<i class="fa fa-check"></i>');
 
             // Update the apply icon on sidebar
@@ -71,7 +50,8 @@ $(document).on('click', '#btn-accept-apply', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -113,7 +93,7 @@ $(document).on('click', '#btn-refuse-apply', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"La candidature a été <strong>correctement</strong> refusée.", "alert-success", 4000);
+            notification('success', "La candidature a été refusée.");
             $button.html('<i class="fa fa-check"></i>');
 
             // Update the apply icon on sidebar
@@ -131,7 +111,8 @@ $(document).on('click', '#btn-refuse-apply', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -174,11 +155,10 @@ $(document).on('click', '#btn-delete-apply', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"La candidature a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
+            notification('success', "La candidature a été supprimée.");
             $button.html('<i class="fa fa-check"></i>');
 
             // Update the apply icon on sidebar
-            console.log(response);
             if (response > 0) {
                 $(".totalAppliesInvalid").html(response);
                 $(".totalAppliesInvalid").removeClass('hidden');
@@ -190,7 +170,8 @@ $(document).on('click', '#btn-delete-apply', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -219,7 +200,7 @@ $(document).on('change', '#filterApplies', function(event) {
         },
         error: function(response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue pendant le filtrage.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue lors du filtre.");
         }
     });
 });

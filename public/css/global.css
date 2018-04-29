@@ -235,9 +235,14 @@ Arrows
 Input search
  */
 
-.inputGroup {
+.inputGroup, .inputGroupSidebar {
     width: 100%;
     position: relative;
+}
+
+.captchaGroup {
+    width: 304px;
+    margin: 20px auto 0;
 }
 
 .inputForm, .inputFormRightIcon {
@@ -291,6 +296,151 @@ Input search
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     -o-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Select */
+
+.formSelect {
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #ffffff;
+    margin-bottom: 15px;
+    overflow: hidden;
+    border: 1px solid #f3f3f3;
+    border-radius: 3px;
+    transition: all 140ms ease-in;
+    -moz-transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    -o-transition: all 140ms ease-in;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    position: relative;
+    display: inline-block;
+}
+
+.largeSelect {
+    width: 350px !important;
+}
+
+.formSelect:focus, .formSelect:hover {
+    box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -o-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.formSelect:after {
+    content: '▾';
+    position: absolute;
+    top: 0;
+    right: 12px;
+    z-index: 1;
+    color: #bbbbbb;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.ie .formSelect:after {
+    display: none;
+}
+
+select {
+    position: relative;
+    background: transparent;
+    background-image: none;
+    display: block;
+    width: 100%;
+    outline: none;
+    color: #888888;
+    cursor: pointer;
+    z-index: 2;
+    border: none;
+    padding: 10px 10px 10px 5px;
+    text-overflow: '';
+    text-indent: 5px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+select[multiple=multiple] {
+    height: auto;
+    border: 1px solid #cbcbcb;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+    -moz-transition: box-shadow 0.2s;
+    -o-transition: box-shadow 0.2s;
+    -webkit-transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s;
+}
+
+select[multiple=multiple]:hover {
+    border-color: #cccccc;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+select option[disabled] {
+    color: #eeeeee;
+    text-shadow: none;
+    border: none;
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #888888;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.inputGroup label {
+    display: block;
+    margin: 15px 0 10px;
+    font-size: 12px;
+    color: #BBBBBB;
+}
+
+.inputGroup .formSelect {
+    width: 100%;
+}
+
+.inputGroup input, .inputGroup textarea {
+    width: 100%;
+    padding: 10px;
+    color: #5e5e5e;
+    resize: none;
+    display: block;
+    background: #ffffff;
+    border: 1px solid #f3f3f3;
+    border-radius: 3px;
+    transition: all 140ms ease-in;
+    -moz-transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    -o-transition: all 140ms ease-in;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup input:hover, .inputGroup textarea:hover {
+    box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -o-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.inputGroup input:active, .inputGroup input:focus, .inputGroup textarea:active, .inputGroup textarea:focus {
+    outline: none;
+    box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
+    -o-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 /**
@@ -394,8 +544,17 @@ Title section
 Buttons and actions
  */
 
+.buttonLink {
+    color: #5580e5;
+}
+
+.buttonLink:hover, .buttonLink:active, .buttonLink:focus {
+    text-decoration: underline;
+    color: #5580e5;
+}
 
 .buttonActionLg {
+    cursor: pointer;
     font-size: 12px;
     padding: 7px 15px;
     border-radius: 5px;

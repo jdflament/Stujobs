@@ -15,6 +15,8 @@
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/auth.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/notification.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/website.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/filters.css') }}" rel="stylesheet">
     <link href="{{ asset('css/website/box_offer.css') }}" rel="stylesheet">
@@ -188,6 +190,7 @@
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{ asset('js/notification.js') }}"></script>
 <script src="{{ asset('js/global.js') }}"></script>
 <script src="{{ asset('js/navbar.js') }}"></script>
 <script src="{{ asset('js/website/filters.js') }}"></script>

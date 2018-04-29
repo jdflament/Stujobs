@@ -88,6 +88,8 @@ class AdminsController extends Controller
 
     /**
      * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      *
      * Edit an admin
      */
@@ -149,6 +151,12 @@ class AdminsController extends Controller
         return view('dashboard/admins/actions/show', ['admin' => $admin]);
     }
 
+    /**
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * Verify user token
+     */
     public function verifyUser($token)
     {
         $verifyUser = VerifyUser::where('token', $token)->first();

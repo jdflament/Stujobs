@@ -44,7 +44,7 @@
                             <input type="hidden" name="offerFilter" id="offerFilter" value="{{ $offerFilter }}" />
                         </form>
                         <label>Par entreprise</label>
-                        <div class="inputGroup">
+                        <div class="inputGroupSidebar">
                             <input type="text" name="searchOffersByCompany" class="inputForm" id="searchOffersByCompany" placeholder="Rechercher une entreprise..." />
                             <div class="inputFormRightIcon">
                                 <i class="fa fa-search"></i>

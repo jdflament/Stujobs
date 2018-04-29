@@ -1,98 +1,120 @@
 @extends('layouts.website')
 
 @section('content')
-<div class="container">
+<div class="containerLg">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">S'inscrire</div>
+        <div class="col-xs-12 col-md-8 col-lg-8">
+            <div class="authForm">
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                    <div class="authFormHeader">
+                        <h3 class="authFormTitle">Stujobs <span class="beta">Beta</span></h3>
+                        <h3 class="authFormSubtitle">Inscription</h3>
+                    </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">Adresse E-Mail*</label>
+                    <div class="authFormContent">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <div class="inputGroup">
+                                    <label for="email">Adresse E-Mail *</label>
+                                    <input id="email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                <div class="inputGroup">
+                                    <label for="password">Mot de passe *</label>
+                                    <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                <div class="inputGroup">
+                                    <label for="password-confirm">Confirmation du mot de passe *</label>
+                                    <input id="password-confirm" type="password" class="{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                <div class="inputGroup">
+                                    <label for="name">Nom de l'entreprise *</label>
+                                    <input id="name" type="text" name="name" class="{{ $errors->has('name') ? ' is-invalid' : '' }}" required>
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                <div class="inputGroup">
+                                    <label for="siret">SIRET</label>
+                                    <input id="siret" type="number" class="{{ $errors->has('siret') ? ' is-invalid' : '' }}" name="siret">
+                                    @if ($errors->has('siret'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('siret') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                <div class="inputGroup">
+                                    <label for="address">Adresse</label>
+                                    <input id="address" class="{{ $errors->has('address') ? ' is-invalid' : '' }}" type="text" name="address">
+                                    @if ($errors->has('address'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('address') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 col-lg-6">
+                                <div class="inputGroup">
+                                    <label for="phone">Téléphone</label>
+                                    <input id="phone" class="{{ $errors->has('phone') ? ' is-invalid' : '' }}" type="text" name="phone">
+                                    @if ($errors->has('phone'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <div class="captchaGroup">
+                                    <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_SITE_KEY') }}"></div>
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <span class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe*</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirmation du mot de passe*</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Nom de l'entreprise*</label>
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="siret" class="col-md-4 col-form-label text-md-right">SIRET</label>
-                            <div class="col-md-6">
-                                <input id="siret" type="number" class="form-control" name="siret">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="address" class="col-md-4 col-form-label text-md-right">Adresse</label>
-                            <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">Téléphone</label>
-                            <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="g-recaptcha" data-sitekey="{{ env('CAPTCHA_SITE_KEY') }}"></div>
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <span class="invalid-feedback" style="display: block;">
-                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    S'inscrire
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="authFormFooter">
+                        <button type="submit" class="buttonActionLg bgPrimary">S'inscrire</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

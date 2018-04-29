@@ -1,0 +1,86 @@
+.authForm {
+    transition: all 140ms ease-in;
+    -moz-transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09);
+    -o-box-shadow: 0 3px 7px 1px rgba(0, 0, 0, 0.09);
+    background: #FCFCFC;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    width: 100%;
+    margin: 25px 0;
+}
+
+.authForm h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.authFormContent {
+    padding: 20px 25px;
+}
+
+@media screen and (max-width: 670px) {
+    .authFormContent {
+        padding: 20px 10px;
+    }
+}
+
+.authFormHeader {
+    text-align: center;
+    padding: 25px 0 0 0;
+}
+
+.authFormTitle {
+    font-size: 28px;
+    color: #5580e5;
+    font-weight: 600;
+    margin-right: -45px !important;
+}
+
+.authFormTitle .beta {
+    font-weight: 400;
+    position: relative;
+    top: -20px;
+    right: 3px;
+    font-size: 9px;
+    color: #ffffff;
+    text-transform: uppercase;
+    background: #5580e5;
+    padding: 5px 7px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px 0px rgba(86,86,86,0.35);
+}
+
+.authFormSubtitle {
+    font-size: 18px;
+    color: #5E5E5E;
+    font-weight: 400;
+    margin: 10px 0 0 0 !important;
+    display: inline-block;
+}
+
+.authFormFooter {
+    padding: 15px;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    -o-border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -o-border-bottom-right-radius: 5px;
+}
+
+.authFormFooter button {
+    display: block;
+    width: 200px;
+    padding: 15px 0;
+    margin: 0 auto 10px auto;
+}

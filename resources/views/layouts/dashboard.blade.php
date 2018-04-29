@@ -16,9 +16,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/notification.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard/sidebar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard/sidebar.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>

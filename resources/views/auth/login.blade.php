@@ -1,79 +1,51 @@
 @extends('layouts.website')
 
 @section('content')
-<div class="container">
+<div class="containerLg">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-            @if (session('warning'))
-                <div class="alert alert-warning">
-                    {{ session('warning') }}
-                </div>
-            @endif
-
-            <div class="card">
-                <div class="card-header">Connexion</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">Adresse E-Mail</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <div class="authForm">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="authFormHeader">
+                        <h3 class="authFormTitle">Stujobs <span class="beta">Beta</span></h3>
+                        <h3 class="authFormSubtitle">Connexion</h3>
+                    </div>
+                    <div class="authFormContent">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <div class="inputGroup">
+                                    <label for="email">Adresse email</label>
+                                    <input id="email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="inputGroup">
+                                    <label for="password">Mot de passe</label>
+                                    <input id="password" type="password" class="{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Garder la session
-                                    </label>
+                                    @endif
                                 </div>
+                                <div class="inputGroup">
+                                    <label for="remember">Garder la session</label>
+                                </div>
+                                <input type="checkbox" name="remember" class="checkboxInput" {{ old('remember') ? 'checked' : '' }}>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Connexion
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Mot de passe oublié ?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="authFormFooter">
+                        <button type="submit" class="buttonActionLg bgPrimary submit-btn">Connexion</button>
+                        <a class="buttonLink" href="{{ route('password.request') }}">
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

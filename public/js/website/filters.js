@@ -90,7 +90,7 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
         },
         error: function (response) {
             console.error(response);
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer le filtre ultérieurement.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue.");
         },
     });
 });

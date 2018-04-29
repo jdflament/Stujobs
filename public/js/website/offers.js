@@ -1,16 +1,3 @@
-// Global widget alert function
-function alertWidget(div, message, type, duration) {
-    $(div).fadeIn();
-    $(div).html('<div class="alert '+ type +'" style="cursor:pointer;" onclick="closeAlert(this)">' + message + '</div>');
-    setTimeout(function(){
-        $(div).fadeOut();
-    }, duration);
-}
-
-// Global widget alert close function
-function closeAlert(div) {
-    $(div).fadeOut();
-}
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +64,8 @@ function loadMoreData(page) {
             $("#loadOffersContent").append(response.html);
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Aucune autre donnée n'est disponible.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         }
     });
 }
@@ -116,13 +104,14 @@ $(document).on('click', '#btn-complete-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> terminée.", "alert-success", 4000);
+            notification('success', "L'offre a été terminée.");
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            console.error(response);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -164,14 +153,14 @@ $(document).on('click', '#btn-uncomplete-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> ré-activée.", "alert-success", 4000);
+            notification('success', "L'offre a été réactivée.");
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
 
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);
@@ -213,13 +202,13 @@ $(document).on('click', '#btn-delete-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            alertWidget("#alerts" ,"L'offre a été <strong>correctement</strong> supprimée.", "alert-success", 4000);
+            notification('success', "L'offre a été supprimée.");
             $button.html('<i class="fa fa-check"></i>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
             $modal.modal('toggle');
         },
         error: function (response) {
-            alertWidget("#alerts" ,"<strong>Une erreur est survenue.</strong> Merci de réessayer ultérieurement.", "alert-danger", 4000);
+            notification('danger', "Une erreur est survenue.");
         },
         complete: function() {
             $button.html($buttonValue);

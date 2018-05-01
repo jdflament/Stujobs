@@ -29,6 +29,11 @@
                             À propos de votre offre :  <span class="colorPrimary">{{ $offer->title }}</span>
 
                             <div class="offerStatus">
+                                @if ($offer->valid == 1)
+                                    <span class="badge bgSuccess">Validée</span>
+                                @else
+                                    <span class="badge bgDanger">Non-validée</span>
+                                @endif
                                 <span class="completeStatus">
                                     @if ($offer->complete == 0)
                                         <span class="badge bgWarning">En cours</span>

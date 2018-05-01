@@ -50,6 +50,7 @@ class ProfileController extends Controller
         // Inputs errors
         $validator = Validator::make($request->all(), [
             'edit_email' => 'required|email|min:6|max:255|unique:users,email,'.$id,
+            'edit_name' => 'required',
         ]);
 
         if ($validator->fails()) {

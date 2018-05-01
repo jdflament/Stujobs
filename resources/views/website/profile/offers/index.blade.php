@@ -1,17 +1,22 @@
 @extends('layouts.website')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
+        <div class="rowActions">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <a href="{{ route('createOfferPage') }}" class="buttonActionLg bgPrimary">
+                    <i class="fa fa-plus"></i> Créer une nouvelle offre
+                </a>
+            </div>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Mes offres d'emploi
-                    <a href="{{ route('createOfferPage') }}" style="float: right;" class="btn btn-primary btn-sm">
-                        Créer une nouvelle offre
-                    </a>
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Mes offres d'emploi</h3>
                     </div>
 
-                    <div class="card-body">
+                    <div class="boxEffectContent">
                         @include('website/profile/offers/actions/list')
                     </div>
                 </div>
@@ -19,7 +24,5 @@
         </div>
     </div>
 
-    @include('website/profile/offers/actions/complete')
-    @include('website/profile/offers/actions/uncomplete')
     @include('website/profile/offers/actions/delete')
 @endsection

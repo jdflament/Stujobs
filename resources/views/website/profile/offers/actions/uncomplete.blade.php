@@ -1,21 +1,20 @@
 <!-- Modal -->
 <div class="modal fade" id="modalUncompleteOffer" role="dialog">
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+        <div class="modalContent">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modalHeader">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Ré-activer une offre</h4>
+                <h4 class="modalTitle" id="myModalLabel">Ré-activer une offre</h4>
             </div>
 
             <!-- Modal Body -->
-            <div class="modal-body">
-                <p class="statusMsg"></p>
+            <div class="modalBody">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12 col-md-12 col-lg-12">
                         <p>Voulez-vous vraiment ré-activer cette offre ?</p>
                         <p>Après cette action, l'offre sera de nouveau en attente de modération.</p>
                     </div>
@@ -23,9 +22,9 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <a href="#" id="btn-uncomplete-offer" type="submit" class="btn btn-danger submit-btn" style="-webkit-appearance: initial;">Valider</a>
+            <div class="modalFooter">
+                <button type="button" class="buttonActionLg bgDefault" data-dismiss="modal">Annuler</button>
+                <a href="#" id="btn-uncomplete-offer" type="submit" class="buttonActionLg bgSuccess submit-btn" style="-webkit-appearance: initial;">Valider</a>
             </div>
         </div>
     </div>

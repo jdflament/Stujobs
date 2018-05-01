@@ -1,17 +1,20 @@
 @extends('layouts.website')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
+        <div class="rowActions">
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <a href="{{ route('editProfilePage') }}" class="buttonActionLg bgPrimary"><i class="fa fa-pencil"></i> Modifier mes informations</a>
+            </div>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Mon profil
-                        <a style="float: right; margin-right: 10px;" href="{{ route('editProfilePage') }}" class="btn btn-primary btn-sm">
-                            Modifier mes informations
-                        </a>
+            <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="boxEffect">
+                    <div class="boxEffectHeader">
+                        <h3 class="boxEffectTitle">Mon profil</h3>
                     </div>
 
-                    <div class="card-body">
+                    <div class="boxEffectContent">
                         @include('website/profile/actions/list')
                     </div>
                 </div>

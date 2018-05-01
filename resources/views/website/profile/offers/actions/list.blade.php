@@ -1,12 +1,12 @@
-<table id="offers-content" class="table table-response table-bordered table-striped table-hover table-responsive-lg" style="width: 100%;">
+<table id="offers-content" class="responsive-table">
     <thead>
     <tr>
-        <th>En ligne</th>
-        <th>Titre</th>
-        <th>Type de contrat</th>
-        <th>Durée</th>
-        <th>Rémunération</th>
-        <th>Actions</th>
+        <th scope="col">En ligne</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Type de contrat</th>
+        <th scope="col">Durée</th>
+        <th scope="col">Rémunération</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -14,37 +14,23 @@
     @foreach($offers as $offer)
         <tr>
             @if ($offer->valid == 1 && $offer->complete == 0)
-            <td><span class="badge badge-success">Oui</span></td>
+            <td scope="row" data-label="En ligne"><span class="badge bgSuccess">Oui</span></td>
             @else
-            <td><span class="badge badge-danger">Non</span></td>
+            <td scope="row" data-label="En ligne"><span class="badge bgDanger">Non</span></td>
             @endif
-            <td><div style="width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
-            <td>@lang('vocabulary.contract_type.' . $offer->contract_type)</td>
-            <td>{{ $offer->duration ? $offer->duration : 'NC'}}</td>
-            <td>{{ $offer->remuneration ? $offer->remuneration : 'NC'}}</td>
-
-            <td>
-                @if ($offer->complete == 0)
-                    <span data-toggle="tooltip" data-placement="top" title="Terminer l'offre">
-                        <button data-href="/profile/offers/{{ $offer->id }}/complete" class="btn btn-success btn-sm btn-pre-complete-offer" data-toggle="modal" data-target="#modalCompleteOffer" style="margin-right: 30px;">
-                            <i style="color: white;" class="fa fa-check"></i>
-                        </button>
-                    </span>
-                @else
-                    <span data-toggle="tooltip" data-placement="top" title="Ré-activer l'offre">
-                        <button data-href="/profile/offers/{{ $offer->id }}/uncomplete" class="btn btn-danger btn-sm btn-pre-uncomplete-offer" data-toggle="modal" data-target="#modalUncompleteOffer" style="margin-right: 30px;">
-                            <i style="color: white;" class="fa fa-refresh"></i>
-                        </button>
-                    </span>
-                @endif
-                <a href="/profile/offers/{{ $offer->id }}/show" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Voir l'offre">
+            <td scope="row" data-label="Titre"><div class="truncateText">{{ $offer->title ? $offer->title : 'NC' }}</div></td>
+            <td scope="row" data-label="Type de contrat">@lang('vocabulary.contract_type.' . $offer->contract_type)</td>
+            <td scope="row" data-label="Durée">{{ $offer->duration ? $offer->duration : 'NC'}}</td>
+            <td scope="row" data-label="Rémunération">{{ $offer->remuneration ? $offer->remuneration : 'NC'}}€ / h</td>
+            <td scope="row" data-label="Actions">
+                <a href="/profile/offers/{{ $offer->id }}/show" class="buttonAction bgPrimary" data-toggle="tooltip" data-placement="top" title="Voir l'offre">
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>
-                <a href="/profile/offers/{{ $offer->id }}/edit" class="btn btn-warning btn-sm btn-pre-edit-offer" data-toggle="tooltip" data-placement="top" title="Modifier">
+                <a href="/profile/offers/{{ $offer->id }}/edit" class="buttonAction bgWarning btn-pre-edit-offer" data-toggle="tooltip" data-placement="top" title="Modifier">
                     <i style="color: white;" class="fa fa-pencil"></i>
                 </a>
                 <span data-toggle="tooltip" data-placement="top" title="Supprimer">
-                    <button data-href="/profile/offers/{{ $offer->id }}/delete" class="btn btn-danger btn-sm btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer">
+                    <button data-href="/profile/offers/{{ $offer->id }}/delete" class="buttonAction bgDanger btn-pre-delete-offer" data-toggle="modal" data-target="#modalDeleteOffer" style="cursor: pointer;">
                         <i class="fa fa-trash"></i>
                     </button>
                 </span>

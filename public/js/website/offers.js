@@ -80,8 +80,10 @@ function loadMoreData(page) {
 $(document).on('click', '.btn-pre-complete-offer', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
+    var offerid = $(this).data('offerid');
 
     $('#btn-complete-offer').attr('href', route);
+    $('#btn-complete-offer').attr('data-offerid', offerid);
 });
 
 // Reset approve button href
@@ -96,6 +98,7 @@ $(document).on('click', '#btn-complete-offer', function(event) {
     var $button = $(this);
     var $buttonValue = $button.html();
     var url = $(this).attr('href');
+    var offer_id = $(this).attr('data-offerid');
 
     $.ajax({
         type: 'GET',
@@ -105,7 +108,10 @@ $(document).on('click', '#btn-complete-offer', function(event) {
         },
         success: function(response) {
             notification('success', "L'offre a été terminée.");
-            $button.html('<i class="fa fa-check"></i>');
+            $('.offerActions').html('<button data-href="/profile/offers/' + offer_id + '/uncomplete" data-offerid="' + offer_id + '" class="buttonActionLg bgWarning btn-pre-uncomplete-offer" data-toggle="modal" data-target="#modalUncompleteOffer">\n' +
+                '                <i style="color: white;" class="fa fa-refresh"></i> Ré-activer l\'offre' +
+                '                </button>');
+            $('.completeStatus').html('<span class="badge bgInfo">Clôturée</span>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
             $modal.modal('toggle');
         },
@@ -129,8 +135,10 @@ $(document).on('click', '#btn-complete-offer', function(event) {
 $(document).on('click', '.btn-pre-uncomplete-offer', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
+    var offerid = $(this).data('offerid');
 
     $('#btn-uncomplete-offer').attr('href', route);
+    $('#btn-uncomplete-offer').attr('data-offerid', offerid);
 });
 
 // Reset approve button href
@@ -145,6 +153,7 @@ $(document).on('click', '#btn-uncomplete-offer', function(event) {
     var $button = $(this);
     var $buttonValue = $button.html();
     var url = $(this).attr('href');
+    var offer_id = $(this).attr('data-offerid');
 
     $.ajax({
         type: 'GET',
@@ -153,8 +162,11 @@ $(document).on('click', '#btn-uncomplete-offer', function(event) {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         success: function(response) {
-            notification('success', "L'offre a été réactivée.");
-            $button.html('<i class="fa fa-check"></i>');
+            notification('success', "L'offre a été ré-activée.");
+            $('.offerActions').html('<button data-href="/profile/offers/' + offer_id + '/complete" data-offerid="' + offer_id + '" class="buttonActionLg bgSuccess btn-pre-complete-offer" data-toggle="modal" data-target="#modalCompleteOffer">\n' +
+                '                      <i style="color: white;" class="fa fa-check"></i> Terminer l\'offre' +
+                '                    </button>');
+            $('.completeStatus').html('<span class="badge bgWarning">En cours</span>');
             $("#offers-content").load(location.href + " #offers-content>*", "");
 
             $modal.modal('toggle');

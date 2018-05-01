@@ -19,14 +19,14 @@
                         <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="inputGroup">
                                 <label for="current-password">Veuillez saisir votre mot de passe actuel *</label>
-                                <input type="password" id="current_password" name="current_password" placeholder="Mot de passe actuel..."/>
+                                <input type="password" id="current_password" name="current_password" required="required" placeholder="Mot de passe actuel..."/>
                             </div>
                         </div>
 
                         <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="inputGroup">
                                 <label for="new-password">Veuillez saisir votre nouveau mot de passe *</label>
-                                <input type="password" id="new_password" name="new_password" placeholder="Mot de passe..."/>
+                                <input type="password" id="new_password" name="new_password" required="required" placeholder="Mot de passe..."/>
                             </div>
                         </div>
 

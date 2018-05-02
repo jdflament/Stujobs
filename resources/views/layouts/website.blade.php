@@ -151,14 +151,14 @@
     </nav>
 
     <main class="py-4">
-        <div id="alerts"></div>
-        <div id="alertsBack">
-            @if (\Session::has('error'))
-                <div class="alert alert-danger">
-                    {!! \Session::get('error') !!}
-                </div>
+        @foreach (['danger', 'warning', 'success', 'info', 'status', 'message'] as $key)
+            @if (session($key))
+            <div class="notificationAlert {{ $key }}Alert showAlert">
+                {{ session($key) }}<span aria-hidden="true">&times;</span>
+            </div>
             @endif
-        </div>
+        @endforeach
+
         @yield('content')
     </main>
 </div>

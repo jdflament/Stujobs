@@ -48,7 +48,7 @@ class LoginController extends Controller
     {
         if (!$user->verified) {
             auth()->logout();
-            return back()->with('warning', 'Vous devez confirmer votre adresse email. Nous vous avons déjà envoyé un email de vérification.');
+            return back()->with('warning', 'Vous devez confirmer votre adresse email. Un email de vérification a déjà été envoyé.');
         }
         return redirect()->intended($this->redirectPath());
     }

@@ -4,6 +4,15 @@
 |--------------------------------------------------------------------------
 */
 
+
+
+
+$( "#newsletterButton" ).on( "click", function(e) {
+    e.preventDefault();
+    var modal = $('#modalNewsletter');
+    modal.modal('toggle');
+});
+
 $(document).on('submit', 'form[name=newsletterRegister]', function(event) {
     event.preventDefault();
 
@@ -18,7 +27,7 @@ $(document).on('submit', 'form[name=newsletterRegister]', function(event) {
         data: data,
 
         success: function(response) {
-            alert("coucou");
+            modal.modal('toggle');
         },
         error: function (response) {
             console.error(response);

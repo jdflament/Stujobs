@@ -170,14 +170,7 @@
             <p>Stujobs, tous droits réservés 2018</p>
         </div>
         <div class="footer-center col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <span class="smallText">Être alerté lors d’une nouvelle offre</span>
-            <form id='newsletter' method="post" role="form" action="/newsletter/email" name="newsletterRegister">
-                <input id='newsletter_email' type="mail" name="newsletter_email" placeholder="Votre adresse mail..." />
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                <button class="inputRightIcon" type="submit">
-                    <i class="fa fa-arrow-right"></i>
-                </button>
-            </form>
+            <span class="smallText"><a id="newsletterButton" href="">Être alerté lors d’une nouvelle offre <i class="fa fa-arrow-right"></i></a></span>
         </div>
         <div class="footer-right col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <a href="">Plan du site</a>
@@ -198,6 +191,7 @@
 <script src="{{ asset('js/website/offers.js') }}"></script>
 <script src="{{ asset('js/website/newsletter.js') }}"></script>
 @yield('scripts')
+
 
 </body>
 </html>

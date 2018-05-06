@@ -64,4 +64,6 @@
             </div>
         </div>
     </div>
+    @include('website.newsletter.newsletter')    
+    
 @endsection

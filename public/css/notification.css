@@ -30,7 +30,9 @@
 }
 
 .notificationAlert span {
-    margin-left: 15px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
 }
 
 .successAlert {

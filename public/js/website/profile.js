@@ -31,10 +31,10 @@ $(document).on('submit', 'form[name=changePassword]', function(event) {
         },
         error: function (response) {
             notification('danger', "Une erreur est survenue.");
-            $('.error-message').remove();
+            $('.error').remove();
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
-                    $('#' + i).after('<div class="error-message">' + val + '</div>');
+                    $('#' + i).after('<div class="error">' + val + '</div>');
                 });
             });
         },

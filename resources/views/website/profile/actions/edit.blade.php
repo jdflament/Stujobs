@@ -43,6 +43,9 @@
                                     <div class="inputGroup">
                                         <label for="edit_siret">SIRET</label>
                                         <input type="text" id="edit_siret" name="edit_siret" value="{{ old('edit_siret') ? old('edit_siret') : $company->siret }}" />
+                                        @if ($errors->has('edit_siret'))
+                                            <div class="error">{{ $errors->first('edit_siret') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -50,6 +53,9 @@
                                     <div class="inputGroup">
                                         <label for="edit_address">Adresse</label>
                                         <input type="text" id="edit_address" name="edit_address" value="{{ old('edit_address') ? old('edit_address') : $company->address }}" />
+                                        @if ($errors->has('edit_address'))
+                                            <div class="error">{{ $errors->first('edit_address') }}</div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -57,6 +63,9 @@
                                     <div class="inputGroup">
                                         <label for="edit_phone">Téléphone</label>
                                         <input type="text" id="edit_phone" name="edit_phone" value="{{ old('edit_phone') ? old('edit_phone') : $company->phone }}" />
+                                        @if ($errors->has('edit_phone'))
+                                            <div class="error">{{ $errors->first('edit_phone') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

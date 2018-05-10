@@ -56,7 +56,8 @@ class ProfileController extends Controller
         if ($validator->fails()) {
             return redirect('profile/edit')
             ->withErrors($validator)
-            ->withInput();
+            ->withInput()
+            ->with('danger', "Vos changements n'ont pas été pris en compte. Veuillez vérifier vos champs.");
         }
 
         $user_data = Input::only('edit_email');

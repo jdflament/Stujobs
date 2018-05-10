@@ -27,7 +27,8 @@ class AppliesController extends Controller
         if ($validator->fails()) {
             return redirect('/offers/' . $id)
                 ->withErrors($validator)
-                ->withInput();
+                ->withInput()
+                ->with('danger', "Votre candidature n'a pas été prise en compte. Veuillez vérifier vos champs.");
         }
 
         if (isset(request()->apply_cv)) {

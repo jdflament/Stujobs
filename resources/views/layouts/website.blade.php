@@ -164,6 +164,7 @@
 </div>
 
 
+@if (Request::url() !== route('login') && Request::url() !== route('register'))
 <footer class="col-xs-12 footer">
     <div class="row footer-container">
         <div class="footer-left col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -178,6 +179,7 @@
         </div>
     </div>
 </footer>
+@endif
 
 <!-- Scripts -->
 <script src='https://www.google.com/recaptcha/api.js'></script>

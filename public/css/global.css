@@ -887,3 +887,47 @@ th, td {
         color: #5E5E5E;
     }
 }
+
+/**
+Error page
+ */
+
+.errorPage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #FCFCFC;
+    bottom: 0;
+}
+
+.boxError {
+    text-align: center;
+    position: relative;
+    transform: translateY(-50%);
+    top: 50%;
+}
+
+.boxErrorHeader {
+    margin: -15px 0 40px;
+}
+
+.boxErrorTitle {
+    font-size: 10rem;
+    font-weight: bold;
+}
+
+.boxErrorContent {
+    margin: 40px;
+    font-size: 18px;
+    color: #5E5E5E;
+    font-weight: 300;
+}
+
+.boxErrorFooter {
+    margin: 40px 0;
+}
+
+.boxErrorFooter a {
+    display: inline-block;
+}

@@ -46,6 +46,7 @@
 ?>
 
 <div id="app">
+    @if (!isset($exception))
     <nav class="navbarTop">
         <div class="containerLg">
             <ul class="navbarNavigation">
@@ -149,6 +150,7 @@
             </ul>
         </div>
     </nav>
+    @endif
 
     <main class="py-4">
         @foreach (['danger', 'warning', 'success', 'info', 'status', 'message'] as $key)
@@ -164,7 +166,7 @@
 </div>
 
 
-@if (Request::url() !== route('login') && Request::url() !== route('register'))
+@if (Request::url() !== route('login') && Request::url() !== route('register') && !isset($exception))
 <footer class="col-xs-12 footer">
     <div class="row footer-container">
         <div class="footer-left col-xs-12 col-sm-12 col-md-4 col-lg-4">

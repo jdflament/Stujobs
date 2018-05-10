@@ -9,7 +9,6 @@ $(document).on('submit', 'form[name=applyOffer]', function(event) {
     var url = form.attr('action');
     var headers = $(this).find('input[name=_token]').val();
     var formData = new FormData(form[0]);
-    console.log(formData);
 
     $.ajax({
         type: 'POST',

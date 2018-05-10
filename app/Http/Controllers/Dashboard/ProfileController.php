@@ -59,7 +59,8 @@ class ProfileController extends Controller
         if ($validator->fails()) {
             return redirect('dashboard/profile/edit')
             ->withErrors($validator)
-            ->withInput();
+            ->withInput()
+            ->with('danger', "Une erreur est survenue. Veuillez vérifier vos champs.");
         }
         
         $user = User::where('id', $id)->first();        
@@ -130,7 +131,6 @@ class ProfileController extends Controller
                     $user->save();
                 } else {
                     // New passwords don't match
-//                    return response()->json(['error' => Lang::get('errors.' . 468)], 468);
                     return response()->json(['error' => Lang::get('errors.' . 468)], 468);
                 }
             }

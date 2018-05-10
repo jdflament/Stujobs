@@ -83,7 +83,8 @@ class OffersController extends Controller
         if ($validator->fails()) {
             return redirect('dashboard/offers/create')
             ->withErrors($validator)
-            ->withInput();
+            ->withInput()
+            ->with('danger', "Une erreur est survenue. Veuillez vérifier vos champs.");
         }
 
         $data = Input::only('create_company_id', 'create_title', 'create_description', 'create_contract_type', 'create_duration', 'create_remuneration', 'create_city', 'create_contact_email', 'create_contact_phone', 'create_valid', 'create_sector');
@@ -205,7 +206,8 @@ class OffersController extends Controller
         if ($validator->fails()) {
             return redirect('dashboard/offers/'.$id.'/edit')
             ->withErrors($validator)
-            ->withInput();
+            ->withInput()
+            ->with('danger', "Une erreur est survenue. Veuillez vérifier vos champs.");
         }
 
         $data = Input::only('edit_company_id', 'edit_title', 'edit_description', 'edit_contract_type', 'edit_duration', 'edit_remuneration', 'edit_city', 'edit_contact_email', 'edit_contact_phone', 'edit_sector');

@@ -139,7 +139,7 @@
                                 <li class="menuActionsItem">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i><p class="menuSubtitle">Déconnexion</p></a>
                                 </li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             @endguest
@@ -191,6 +191,7 @@
 <script src="{{ asset('js/website/filters.js') }}"></script>
 <script src="{{ asset('js/website/profile.js') }}"></script>
 <script src="{{ asset('js/website/offers.js') }}"></script>
+<script src="{{ asset('js/website/apply.js') }}"></script>
 <script src="{{ asset('js/website/newsletter.js') }}"></script>
 @yield('scripts')
 

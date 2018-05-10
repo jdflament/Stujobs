@@ -45,10 +45,10 @@ $(document).on('submit', 'form[name=createAdmin]', function(event) {
         error: function (response) {
             console.error(response);
             notification('danger', "Une erreur est survenue. Merci de vérifier les champs.");
-            $('.error-message').remove();
+            $('.error').remove();
             $.each(response.responseJSON.errors, function (i) {
                 $.each(response.responseJSON.errors[i], function (key, val) {
-                    $('#' + i).after('<div class="error-message">' + val + '</div>');
+                    $('#' + i).after('<div class="error">' + val + '</div>');
                 });
             });
         },

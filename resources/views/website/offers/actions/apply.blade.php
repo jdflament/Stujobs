@@ -2,7 +2,7 @@
 <div class="modal fade" id="modalApply" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modalContent">
-            <form action="/offers/{{ $offer->offer_id }}/apply" name="applyOffer" method="POST" enctype="multipart/form-data">
+            <form action="/offers/{{ $offer->offer_id }}/apply" name="applyOffer" id="applyOffer" method="POST" enctype="multipart/form-data">
                 <!-- Modal Header -->
                 <div class="modalHeader">
                     <button type="button" class="close" data-dismiss="modal">

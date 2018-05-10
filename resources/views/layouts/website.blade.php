@@ -167,21 +167,21 @@
 
 
 @if (Request::url() !== route('login') && Request::url() !== route('register') && !isset($exception))
-<footer class="col-xs-12 footer">
-    <div class="row footer-container">
-        <div class="footer-left col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<footer class="footer">
+    <div class="footerContent">
+        <div class="leftSide">
             <p>Stujobs, tous droits réservés 2018</p>
+            <button class="buttonActionLg bgPrimary" data-toggle="modal" data-target="#modalNewsletter"><i class="fa fa-bell"></i> Être alerté lors d'une nouvelle offre</button>
         </div>
-        <div class="footer-center col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <span class="smallText"><a id="newsletterButton" href="">Être alerté lors d’une nouvelle offre <i class="fa fa-arrow-right"></i></a></span>
-        </div>
-        <div class="footer-right col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="rightSide">
             <a href="">Plan du site</a>
             <a href="">Mentions légales</a>
         </div>
     </div>
 </footer>
 @endif
+
+@include('website.newsletter.newsletter')
 
 <!-- Scripts -->
 <script src='https://www.google.com/recaptcha/api.js'></script>

@@ -21,7 +21,7 @@
                                 <input type="text" id="newsletter_email" name="newsletter_email" required="required"  placeholder="Ex : thomas.laigneau@mail.com" value="{{ old('newsletter_email') }}" />
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-12 col-lg-12">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
                             <label class="labelInput">Choisissez un ou plusieurs secteur d'activité (optionnel)</label>
                             <button class="collapseButton" type="button" data-toggle="collapse" data-target="#collapseNewsletterSectors" aria-expanded="false" aria-controls="collapseNewsletterSectors">Voir les secteurs d'activité <i class="fa fa-chevron-right"></i></button>
                             <ul id="collapseNewsletterSectors" class="listNewsletter collapse">
@@ -34,7 +34,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="col-xs-12 col-md-12 col-lg-12">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
                             <label class="labelInput">Choisissez un ou plusieurs type de contrat (optionnel)</label>
                             <button class="collapseButton" type="button" data-toggle="collapse" data-target="#collapseNewsletterContractTypes" aria-expanded="false" aria-controls="collapseNewsletterContractTypes">Voir les types de contrat <i class="fa fa-chevron-right"></i></button>
                             <ul id="collapseNewsletterContractTypes" class="listNewsletter collapse">

@@ -107,7 +107,9 @@
                                                 <option disabled selected value="">Sélectionner un secteur</option>
                                                 <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
                                                 @foreach($sectors as $key => $sector)
-                                                    <option value="{{ $key }}" @if(old('edit_sector') == $key) selected @elseif($offer->sector == $key) selected @endif>{{ $sector }}</option>
+                                                    @if ($sector['display'] == 1)
+                                                    <option value="{{ $key }}" @if(old('edit_sector') == $key) selected @elseif($offer->sector == $key) selected @endif>{{ $sector['name'] }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>

@@ -28,7 +28,9 @@
                             <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
                             <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
                             @foreach($sectors as $key => $sector)
-                                <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput" value="{{ $key }}"><span class="checkboxSpan">{{ $sector }}</span></li>
+                                @if ($sector['display'] == 1)
+                                <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput" value="{{ $key }}"><span class="checkboxSpan">{{ $sector['name'] }}</span></li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>

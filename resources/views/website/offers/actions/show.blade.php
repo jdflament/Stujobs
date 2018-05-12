@@ -23,7 +23,7 @@
                     <h3 class="boxTitle centerContent">Informations</h3>
                     <p class="paragraphe"><span class="smallText">Lieu : </span> {{ $offer->city }}</p>                    
                     <p class="paragraphe"><span class="smallText">Type de contrat : </span> <span class="@lang('vocabulary.contract_type_colors.' . $offer->contract_type)">@lang('vocabulary.contract_type.' . $offer->contract_type)</span></p>
-                    <p class="paragraphe"><span class="smallText">Secteur : </span> @lang('vocabulary.sector_activity.' . $offer->sector)</p>
+                    <p class="paragraphe"><span class="smallText">Secteur : </span> @lang('vocabulary.sector_activity.' . $offer->sector . '.name')</p>
                     <p class="paragraphe"><span class="smallText">Durée : </span> {{ $offer->duration }}</p>
                     <p class="paragraphe"><span class="smallText">Rémunération : </span> {{ $offer->remuneration }}€ / h</p>
                     <p class="paragraphe"><span class="smallText">Posté par : </span> {{ $offer->company_name ? $offer->company_name : $offer->user_email }}</p>

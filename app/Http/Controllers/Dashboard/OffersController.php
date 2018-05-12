@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Apply;
 use App\Models\Offer;
+use App\Mail\OfferValidated;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class OffersController extends Controller
 {
@@ -124,6 +126,15 @@ class OffersController extends Controller
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('valid', 1);
         $offer->save();
+
+        $users = DB::table('newsletter')
+                    ->whereIn('params_sector', ['all',$offer->sector])
+                    ->whereIn('params_contract', ['all',$offer->contract_type])
+                    ->get();
+        
+        foreach($users as $user){
+            Mail::to($user->email)->send(new OfferValidated($offer));
+        }
 
         $offers = DB::table('offers')
             ->where('valid', '=', 0)

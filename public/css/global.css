@@ -477,7 +477,7 @@ select::-ms-expand {
     display: none;
 }
 
-.inputGroup label {
+.inputGroup label, .labelInput {
     display: block;
     margin: 15px 0 10px;
     font-size: 12px;

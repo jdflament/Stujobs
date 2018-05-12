@@ -14,35 +14,37 @@
                 <!-- Modal Body -->
                 <div class="modalBody">
                     {{-- <h3 class="modalTitle">S'inscrire à notre newsletter</h3>--}}
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6 col-lg-6">
+                    <div class="row filters">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="inputGroup">
                                 <label for="newsletter_email">Votre adresse email</label>
                                 <input type="text" id="newsletter_email" name="newsletter_email" required="required"  placeholder="Ex : thomas.laigneau@mail.com" value="{{ old('newsletter_email') }}" />
                             </div>
                         </div>
-                    </div>
-                    <h3 class="modalTitle">Choissisez un secteur d'activité (optionnel)</h3>                    
-                    <div class="row">
-                        <ul class="listNewsletter">
-                            <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
-                            <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
-                            @foreach($sectors as $key => $sector)
-                                @if ($sector['display'] == 1)
-                                <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput" value="{{ $key }}"><span class="checkboxSpan">{{ $sector['name'] }}</span></li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                    <h3 class="modalTitle">Choissisez un type de contrat (optionnel)</h3>                    
-                    <div class="row">
-                        <ul class="listNewsletter">
-                            <li><input type="checkbox" name="newsletter_contract_type[]" class="checkboxInput" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
-                            <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
-                            @foreach($sectors as $key => $sector)
-                                <li><input type="checkbox" name="newsletter_contract_type[]" class="checkboxInput" value="{{ $key }}"><span class="checkboxSpan">{{ $sector }}</span></li>
-                            @endforeach
-                        </ul>
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label class="labelInput">Choisissez un ou plusieurs secteur d'activité (optionnel)</label>
+                            <button class="collapseButton" type="button" data-toggle="collapse" data-target="#collapseNewsletterSectors" aria-expanded="false" aria-controls="collapseNewsletterSectors">Voir les secteurs d'activité <i class="fa fa-chevron-right"></i></button>
+                            <ul id="collapseNewsletterSectors" class="listNewsletter collapse">
+                                <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput checkboxNewsletterSector" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
+                                <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.sector_activity'); ?>
+                                @foreach($sectors as $key => $sector)
+                                    @if ($sector['display'] == 1)
+                                        <li><input type="checkbox" name="newsletter_sectors[]" class="checkboxInput checkboxNewsletterSector" value="{{ $key }}"><span class="checkboxSpan">{{ $sector['name'] }}</span></li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label class="labelInput">Choisissez un ou plusieurs type de contrat (optionnel)</label>
+                            <button class="collapseButton" type="button" data-toggle="collapse" data-target="#collapseNewsletterContractTypes" aria-expanded="false" aria-controls="collapseNewsletterContractTypes">Voir les types de contrat <i class="fa fa-chevron-right"></i></button>
+                            <ul id="collapseNewsletterContractTypes" class="listNewsletter collapse">
+                                <li><input type="checkbox" name="newsletter_contract_type[]" class="checkboxInput checkboxNewsletterContract" checked="checked" value="all"><span class="checkboxSpan">Tous</span></li>
+                                <?php $sectors = \Illuminate\Support\Facades\Lang::get('vocabulary.contract_type'); ?>
+                                @foreach($sectors as $key => $sector)
+                                    <li><input type="checkbox" name="newsletter_contract_type[]" class="checkboxInput checkboxNewsletterContract" value="{{ $key }}"><span class="checkboxSpan">{{ $sector }}</span></li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!-- Modal Footer -->

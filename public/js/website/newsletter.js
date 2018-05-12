@@ -34,3 +34,6 @@ $(document).on('submit', 'form[name=newsletterRegister]', function(event) {
         }
     });
 });
+
+checkManager('.checkboxNewsletterContract');
+checkManager('.checkboxNewsletterSector');

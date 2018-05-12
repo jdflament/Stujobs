@@ -68,7 +68,9 @@ function checkManager(checkboxesClass) {
             $(checkboxesClass + ":checkbox[value=all]").prop("checked","true");
         }
 
-        $(this).closest('form').submit();
+        if (checkboxesClass === ".checkboxContract" || checkboxesClass === ".checkboxSector") {
+            $(this).closest('form').submit();
+        }
     });
 }
 

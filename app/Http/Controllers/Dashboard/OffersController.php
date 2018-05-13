@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Apply;
 use App\Models\Offer;
 use App\Mail\OfferValidated;
+use App\Jobs\SendEmailOfferValidated;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -131,9 +132,10 @@ class OffersController extends Controller
                     ->whereIn('params_sector', ['all',$offer->sector])
                     ->whereIn('params_contract', ['all',$offer->contract_type])
                     ->get();
-        
+
         foreach($users as $user){
-            Mail::to($user->email)->send(new OfferValidated($offer));
+            SendEmailOfferValidated::dispatch($offer, $user)
+                ->delay(now()->addMinutes(2));
         }
 
         $offers = DB::table('offers')

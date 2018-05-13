@@ -31,12 +31,7 @@ class OfferValidated extends Mailable
     {
         return $this->view('emails.offerValidated')
                     ->with([
-                        'offerTitle' => $this->offer->title,
-                        'offerDescription' => $this->offer->description,
-                        'offerContractType' => $this->offer->contract_type,
-                        'offerDuration' => $this->offer->duration,
-                        'offerRemuneration' => $this->offer->remuneration,
-                        'offerCity' => $this->offer->sector,
+                        'offer' => $this->offer
                     ]);
     }
 }

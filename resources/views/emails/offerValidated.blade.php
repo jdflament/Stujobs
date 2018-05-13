@@ -1,6 +1,6 @@
-<h1>{{ $offerTitle }}</h1>
-<p>{{ $offerDescription }}</p>
-<p>{{ $offerContractType }}</p>
-<p>{{ $offerDuration }}</p>
-<p>{{ $offerRemuneration }}</p>
-<p>{{ $offerCity }}</p>
+<h1>{{ $offer->title }}</h1>
+<p>{{ $offer->description }}</p>
+<p>{{ $offer->contract_type }}</p>
+<p>{{ $offer->duration }}</p>
+<p>{{ $offer->remuneration }}</p>
+<p>{{ $offer->city }}</p>

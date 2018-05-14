@@ -214,3 +214,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     // Filter the applies
     Route::get('/dashboard/applies/filter/{id}', 'Dashboard\AppliesController@filter')->name('dashboardFilterApplies');
 });
+
+/*
+ * Legals
+ */
+Route::get('/legals', 'Website\LegalsController@index')->name('legals');

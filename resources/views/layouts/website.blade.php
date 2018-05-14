@@ -174,8 +174,8 @@
             <button class="buttonActionLg bgPrimary" data-toggle="modal" data-target="#modalNewsletter"><i class="fa fa-bell"></i> Être alerté lors d'une nouvelle offre</button>
         </div>
         <div class="rightSide">
-            <a href="">Plan du site</a>
-            <a href="">Mentions légales</a>
+            <a href="mailto:team.stujobs@gmail.com">Contact</a>
+            <a href="{{ route('legals') }}">Mentions légales</a>
         </div>
     </div>
 </footer>

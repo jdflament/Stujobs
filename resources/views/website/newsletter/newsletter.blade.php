@@ -13,7 +13,6 @@
                 </div>
                 <!-- Modal Body -->
                 <div class="modalBody">
-                    {{-- <h3 class="modalTitle">S'inscrire à notre newsletter</h3>--}}
                     <div class="row filters">
                         <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="inputGroup">

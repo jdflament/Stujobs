@@ -67,17 +67,39 @@ $(document).on('submit', 'form[name=createCompany]', function(event) {
 |--------------------------------------------------------------------------
 */
 
+// Upload preview logo
+$(document).on('click', '.logoHover', function(event) {
+    $(this).parent().next().click();
+});
+
+function fasterPreview(uploader) {
+    if (uploader.files && uploader.files[0]){
+        $('.logoBox').css("background-image", "url(" + window.URL.createObjectURL(uploader.files[0]) + ")");
+    }
+}
+
+$("#edit_logo").change(function(){
+    fasterPreview(this);
+});
+
 // Set inputs values and form action to current address
 $(document).on('click', '.btn-pre-edit-company', function(event) {
     event.preventDefault();
 
     var $company = $(this).data('company');
+    var $storage = $(this).data('storage');
     var $modal = $('#modalEditCompany');
     $modal.find('form').attr('action', '/dashboard/companies/' + $company.id + '/edit');
 
     for (var key in $company) {
         var value = $company[key];
+        if (key == 'logo_filename' && value !== null) {
+            $('.logoBox').css('background-image', "url(" + $storage + '/' + value + ")");
+        } else if (key == 'logo_filename' && value == null) {
+            $('.logoBox').css('background-image', "url(" + $storage + "/default-image.png)");
+        }
         $modal.find('input[name=edit_' + key + ']').val(value);
+        $modal.find('textarea[name=edit_' + key + ']').val(value);
         $modal.find('select[name=edit_' + key + ']').val(value);
     }
 });
@@ -91,12 +113,20 @@ $(document).on('submit', 'form[name=editCompany]', function(event) {
     var $submitValue = $submit.html();
     var form = $(this);
     var url = form.attr('action');
-    var data = form.serialize();
+    var headers = $(this).find('input[name=_token]').val();
+    var formData = new FormData(form[0]);
 
     $.ajax({
         type: 'POST',
+        enctype: 'multipart/form-data',
         url: url,
-        data: data,
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        headers: {
+            'X-CSRF-TOKEN': headers
+        },
         beforeSend: function() {
             $submit.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },

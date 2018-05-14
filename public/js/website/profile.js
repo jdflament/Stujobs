@@ -43,3 +43,23 @@ $(document).on('submit', 'form[name=changePassword]', function(event) {
         }
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Upload logo preview
+|--------------------------------------------------------------------------
+*/
+
+$(document).on('click', '.logoHover', function(event) {
+    $(this).parent().next().click();
+});
+
+function fasterPreview(uploader) {
+    if (uploader.files && uploader.files[0]){
+        $('.logoBox').css("background-image", "url(" + window.URL.createObjectURL(uploader.files[0]) + ")");
+    }
+}
+
+$("#edit_logo").change(function(){
+    fasterPreview(this);
+});

@@ -931,3 +931,99 @@ Error page
 .boxErrorFooter a {
     display: inline-block;
 }
+
+/** Box logo **/
+
+.boxTitleLogo {
+    display: flex;
+    align-items: center;
+}
+
+.boxTitleLogo span {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 670px) {
+    .boxTitleLogo {
+        flex-direction: column;
+    }
+
+    .boxTitleLogo span {
+        margin: 10px 0 0 0;
+    }
+}
+
+.logoBox + input {
+    display: none;
+}
+
+.logoBox {
+    width: 150px;
+    margin: auto;
+    height: 150px;
+    padding: 5px;
+    overflow: hidden;
+    position: relative;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #f3f3f3;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.smallLogo {
+    width:110px;
+    height: 55px;
+    display: inline-block;
+    margin: 0 15px 0 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+}
+
+@media screen and (max-width: 670px) {
+    .smallLogo {
+        margin: 0 0 10px 0;
+    }
+}
+
+.logoHover {
+    opacity: 0.01;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 10px 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 12px;
+    transition: all 120ms ease-in;
+    -moz-transition: all 120ms ease-in;
+    -o-transition: all 120ms ease-in;
+    -webkit-transition: all 120ms ease-in;
+}
+
+.logoBox:hover .logoHover {
+    opacity: 1;
+}
+
+.logoHover:hover, .logoHover:active {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 670px) {
+    .logoHover {
+        opacity: 1;
+    }
+}

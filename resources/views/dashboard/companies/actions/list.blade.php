@@ -18,7 +18,7 @@
                     <i style="color: white;" class="fa fa-eye"></i>
                 </a>
                 <span data-toggle="tooltip" data-placement="top" title="Modifier">
-                    <button data-company="{{ json_encode($company) }}" class="buttonAction bgWarning btn-sm btn-pre-edit-company" data-toggle="modal" data-target="#modalEditCompany">
+                    <button data-company="{{ json_encode($company) }}" data-storage="{{ asset('storage/logos/') }}" class="buttonAction bgWarning btn-sm btn-pre-edit-company" data-toggle="modal" data-target="#modalEditCompany">
                         <i style="color: white;" class="fa fa-pencil"></i>
                     </button>
                 </span>

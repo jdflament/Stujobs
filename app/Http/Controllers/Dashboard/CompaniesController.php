@@ -32,7 +32,7 @@ class CompaniesController extends Controller
         $companies = DB::table('users')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->whereIn('role', $roles)
-            ->select('users.id', 'users.email', 'users.role', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('users.id', 'users.email', 'users.role', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone', 'companies.description', 'companies.logo_filename', 'companies.logo_size')
             ->paginate(10);
 
         return view('dashboard/companies/index', ['companies' => $companies]);
@@ -99,15 +99,23 @@ class CompaniesController extends Controller
         $validator = Validator::make($request->all(), [
             'edit_email' => 'required|email|unique:users,email,'.$id,
             'edit_role' => 'required',
+            'edit_logo' => 'image|mimes:jpg,jpeg,png,gif,svg,bmp|max:2048',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
         }
 
+        if (isset(request()->edit_logo)) {
+            $logoName = "logo_" . time() . '.' . request()->edit_logo->getClientOriginalExtension();
+            $logoSize = $request->edit_logo->getClientSize();
+
+            $request->edit_logo->storeAs('public/logos', $logoName);
+        }
+
         $user = User::where('id', '=', $id)->first();        
         $user_data = Input::only('edit_email', 'edit_role');
-        $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone');
+        $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone', 'edit_description');
 
         $user->setAttribute('email', $user_data['edit_email']);
         $user->setAttribute('role', $user_data['edit_role']);
@@ -118,6 +126,13 @@ class CompaniesController extends Controller
         $company->setAttribute('siret', $company_data['edit_siret']);
         $company->setAttribute('address', $company_data['edit_address']);
         $company->setAttribute('phone', $company_data['edit_phone']);
+
+        if (isset(request()->edit_logo)) {
+            $company->setAttribute('logo_filename', $logoName);
+            $company->setAttribute('logo_size', $logoSize);
+        }
+
+        $company->setAttribute('description', $company_data['edit_description']);
         $company->save();
     }
 
@@ -155,7 +170,7 @@ class CompaniesController extends Controller
     {
         $company = DB::table('users')->where('users.id', $id)
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'users.verified', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.phone', 'companies.address', 'companies.description', 'companies.logo_filename', 'companies.logo_size')
             ->get()
             ->first();
 

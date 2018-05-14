@@ -11,7 +11,9 @@
             <div class="col-sm-12 col-md-6 col-lg-6">
                 <div class="boxEffect">
                     <div class="boxEffectHeader">
-                        <h3 class="boxEffectTitle">Compte entreprise</h3>
+                        <h3 class="boxEffectTitle boxTitleLogo">
+                            Compte entreprise
+                        </h3>
                     </div>
 
                     <div class="boxEffectContent">
@@ -23,6 +25,10 @@
 
                         <table>
                             <tbody>
+                            <tr>
+                                <th>Logo</th>
+                                <td><div class="logoBox smallLogo" style="{{ $company->logo_filename ? 'background-size: contain;' : 'background-size: cover;' }} background-image:url('{{ $company->logo_filename ? asset('storage/logos') . '/' . $company->logo_filename : asset('storage/logos/default-image.png') }}')"></div></td>
+                            </tr>
                             <tr>
                                 <th>Email</th>
                                 <td>{{ $company->email }}</td>
@@ -75,6 +81,10 @@
                             <tr>
                                 <th>Adresse</th>
                                 <td>{{ $company->address ? $company->address : 'NC' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>{{ $company->description ? $company->description : 'NC' }}</td>
                             </tr>
                             </tbody>
                         </table>

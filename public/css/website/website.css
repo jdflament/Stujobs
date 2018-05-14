@@ -99,13 +99,30 @@ Box effect
     margin: 10px 0;
 }
 
-.boxTitleBlack{
+.boxTitleBlack {
     font-size: 18px;
     color: #5E5E5E;
     margin: 10px 0;
 }
 
+.boxTitleLogo {
+    display: flex;
+    align-items: center;
+}
+
+.boxTitleLogo span {
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 670px) {
+    .boxTitleLogo {
+        flex-direction: column;
+    }
+
+    .boxTitleLogo span {
+        margin: 10px 0 0 0;
+    }
+
     .boxEffectContent {
         padding: 20px 10px;
     }

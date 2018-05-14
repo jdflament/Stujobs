@@ -156,6 +156,10 @@ Box effect
 .boxEffectContent {
     padding: 20px 25px;
     overflow-x: scroll;
+    word-break: break-word;
+    -moz-word-break: break-word;
+    -o-word-break: break-word;
+    -webkit-word-break: break-word;
 }
 
 @media screen and (max-width: 670px) {

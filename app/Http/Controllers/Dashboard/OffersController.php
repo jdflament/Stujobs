@@ -135,7 +135,7 @@ class OffersController extends Controller
 
         foreach($users as $user){
             SendEmailOfferValidated::dispatch($offer, $user)
-                ->delay(now()->addMinutes(2));
+                ->delay(now()->addSeconds(10));
         }
 
         $offers = DB::table('offers')

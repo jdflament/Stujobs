@@ -16,10 +16,23 @@
                     <div class="boxEffectHeader">
                         <div class="boxEffectTitle">Éditer mon profil</div>
                     </div>
-                    <form name="editProfile" role="form" method="post" action="/profile/edit">
+                    <form name="editProfile" role="form" method="post" action="/profile/edit" enctype="multipart/form-data">
                         <div class="boxEffectContent">
                             <div class="row">
-                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                <div class="col-xs-12 col-md-4 col-lg-4">
+                                    <label class="labelInput">Logo</label>
+                                    <div class="logoBox" style="background-image:url('{{ $company->logo_filename ? asset('storage/logos') . '/' . $company->logo_filename : asset('storage/logos/default-image.png') }}');">
+                                        <div class="logoHover">
+                                            <i class="fa fa-camera"></i> Modifier
+                                        </div>
+                                    </div>
+                                    <input id="edit_logo" type="file" name="edit_logo" placeholder="Votre logo" capture>
+                                    @if ($errors->has('edit_logo'))
+                                        <div class="error">{{ $errors->first('edit_logo') }}</div>
+                                    @endif
+                                </div>
+
+                                <div class="col-xs-12 col-md-8 col-lg-8">
                                     <div class="inputGroup">
                                         <label for="edit_email">Adresse email *</label>
                                         <input type="text" id="edit_email" name="edit_email" value="{{ old('edit_email') ? old('edit_email') : $company->email }}" required="required" />
@@ -27,9 +40,7 @@
                                             <div class="error">{{ $errors->first('edit_email') }}</div>
                                         @endif
                                     </div>
-                                </div>
 
-                                <div class="col-xs-12 col-md-12 col-lg-12">
                                     <div class="inputGroup">
                                         <label for="edit_name">Raison Sociale *</label>
                                         <input type="text" id="edit_name" name="edit_name" value="{{ old('edit_name') ? old('edit_name') : $company->name }}" required="required" />
@@ -65,6 +76,16 @@
                                         <input type="text" id="edit_phone" name="edit_phone" value="{{ old('edit_phone') ? old('edit_phone') : $company->phone }}" />
                                         @if ($errors->has('edit_phone'))
                                             <div class="error">{{ $errors->first('edit_phone') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                    <div class="inputGroup">
+                                        <label for="edit_description">Description de l'entreprise</label>
+                                        <textarea id="edit_description" name="edit_description" rows="6">{{ old('edit_description') ? old('edit_description') : $company->description }}</textarea>
+                                        @if ($errors->has('edit_description'))
+                                            <div class="error">{{ $errors->first('edit_description') }}</div>
                                         @endif
                                     </div>
                                 </div>

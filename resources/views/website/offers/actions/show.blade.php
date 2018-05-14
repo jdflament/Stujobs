@@ -12,7 +12,9 @@
         <div class="row">
             <div class="col-xs-12 col-md-8 col-lg-8 marginTop">
                 <div class="boxEffect">
-                    <h3 class="boxTitleBlack">À propos de l'offre :  <span class="boxTitle">{{ $offer->title }}</span></h3>
+                    <h3 class="boxTitleBlack boxTitleLogo">
+                        <div class="logoBox smallLogo" style="{{ $offer->company_logo_filename ? 'background-size: contain;' : 'background-size: cover;' }} background-image:url('{{ $offer->company_logo_filename ? asset('storage/logos') . '/' . $offer->company_logo_filename : asset('storage/logos/default-image.png') }}')"></div>
+                        À propos de l'offre :  <span class="boxTitle">{{ $offer->title }}</span></h3>
                     <br />
                     <?php $description = $offer->description; ?>
                     <p class="paragraphe"><?php echo nl2br($description) ?></p>

@@ -30,7 +30,7 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         $company = DB::table('users')->where('users.id', $id)
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone', 'companies.description', 'companies.logo_filename', 'companies.logo_size')
             ->get()
             ->first();
 
@@ -51,6 +51,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             'edit_email' => 'required|email|min:6|max:255|unique:users,email,'.$id,
             'edit_name' => 'required',
+            'edit_logo' => 'image|mimes:jpg,jpeg,png,gif,svg,bmp|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -60,8 +61,15 @@ class ProfileController extends Controller
             ->with('danger', "Vos changements n'ont pas été pris en compte. Veuillez vérifier vos champs.");
         }
 
+        if (isset(request()->edit_logo)) {
+            $logoName = "logo_" . time() . '.' . request()->edit_logo->getClientOriginalExtension();
+            $logoSize = $request->edit_logo->getClientSize();
+
+            $request->edit_logo->storeAs('public/logos', $logoName);
+        }
+
         $user_data = Input::only('edit_email');
-        $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone');
+        $company_data = Input::only('edit_name', 'edit_siret', 'edit_address', 'edit_phone', 'edit_description');
 
         $user = User::where('id', $id)->first();
         $user->setAttribute('email', $user_data['edit_email']);
@@ -72,9 +80,16 @@ class ProfileController extends Controller
         $company->setAttribute('siret', $company_data['edit_siret']);
         $company->setAttribute('address', $company_data['edit_address']);
         $company->setAttribute('phone', $company_data['edit_phone']);
+
+        if (isset(request()->edit_logo)) {
+            $company->setAttribute('logo_filename', $logoName);
+            $company->setAttribute('logo_size', $logoSize);
+        }
+
+        $company->setAttribute('description', $company_data['edit_description']);
         $company->save();
 
-        return redirect()->route('indexProfile');
+        return redirect()->route('indexProfile')->with('success', 'Votre profil a été correctement modifié.');
     }
 
     /**
@@ -87,7 +102,7 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         $company = DB::table('users')->where('users.id', $id)
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
+            ->select('users.id', 'users.email', 'users.role', 'users.created_at', 'companies.user_id', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone', 'companies.description', 'companies.logo_filename', 'companies.logo_size')
             ->get()
             ->first();
 

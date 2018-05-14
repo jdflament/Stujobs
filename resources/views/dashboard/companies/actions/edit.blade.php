@@ -2,7 +2,7 @@
 <div class="modal fade" id="modalEditCompany" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modalContent">
-            <form name="editCompany" role="form" method="post" action="#">
+            <form name="editCompany" role="form" method="post" action="#" enctype="multipart/form-data">
                 <!-- Modal Header -->
                 <div class="modalHeader">
                     <button type="button" class="close" data-dismiss="modal">
@@ -15,13 +15,20 @@
                 <!-- Modal Body -->
                 <div class="modalBody">
                     <div class="row">
-                        <div class="col-xs-12 col-md-12 col-lg-12">
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label class="labelInput">Logo</label>
+                            <div class="logoBox" style="{{ asset('storage/logos/default-image.png') }}">
+                                <div class="logoHover">
+                                    <i class="fa fa-camera"></i> Modifier
+                                </div>
+                            </div>
+                            <input id="edit_logo" type="file" name="edit_logo" placeholder="Votre logo" capture>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8">
                             <div class="inputGroup">
                                 <label for="edit_email">Email de l'entreprise *</label>
                                 <input type="text" id="edit_email" name="edit_email" required="required" placeholder="Ex : company@mail.com"/>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-md-12 col-lg-12">
                             <div class="inputGroup">
                                 <label for="edit_role">Rôle *</label>
                                 <div class="formSelect">
@@ -54,6 +61,12 @@
                             <div class="inputGroup">
                                 <label for="edit_phone">Téléphone</label>
                                 <input type="text" id="edit_phone" name="edit_phone" placeholder="Ex : 0301020304" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="inputGroup">
+                                <label for="edit_phone">Description de l'entreprise</label>
+                                <textarea id="edit_description" name="edit_description" placeholder="Ex : Notre entreprise..." rows="6"></textarea>
                             </div>
                         </div>
                     </div>

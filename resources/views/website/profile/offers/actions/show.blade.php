@@ -27,7 +27,6 @@
                     <div class="boxEffectHeader">
                         <h3 class="boxEffectTitle">
                             À propos de votre offre :  <span class="colorPrimary">{{ $offer->title }}</span>
-
                             <div class="offerStatus">
                                 @if ($offer->valid == 1)
                                     <span class="badge bgSuccess">Validée</span>

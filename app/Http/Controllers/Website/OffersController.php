@@ -32,7 +32,7 @@ class OffersController extends Controller
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->select('offers.id', 'users.email', 'users.role', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.sector', 'companies.name', 'companies.siret', 'companies.address', 'companies.phone')
             ->orderBy('offers.created_at', 'DESC')
-            ->get();
+            ->paginate(10);
 
         return view('website/profile/offers/index', ['offers' => $offers]);
     }

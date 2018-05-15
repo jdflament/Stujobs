@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container">
+    <div class="containerLg">
         <div class="rowActions">
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="{{ route('dashboardIndexApplies') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>

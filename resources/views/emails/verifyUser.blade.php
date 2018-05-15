@@ -103,7 +103,7 @@
               <!-- PERMISSION REMINDER -->
               <tr>
                 <td bgcolor="#f4f4f4" align="left" style="padding: 0px 30px 30px 30px; color: #666666;font-size: 14px; font-weight: 400; line-height: 18px;" >
-                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous vous êtes inscrit sur Stujobs. Si ce n'est pas le cas, <a href="{{ env('APP_URL') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
+                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous vous êtes inscrit sur Stujobs. Si ce n'est pas le cas, <a href="mailto:{{ env('MAIL_USERNAME') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
                 </td>
               </tr>
               

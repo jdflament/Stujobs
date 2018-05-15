@@ -22,7 +22,7 @@
                             $date = new \Carbon\Carbon($company->created_at);
                             $date::setLocale('fr');
                         ?>
-                        <h5 class="boxEffectSubtitle">Membre depuis le : {{ $date->diffForHumans() }}</h5>
+                        <h5 class="boxEffectSubtitle">Membre inscrit {{ $date->diffForHumans() }}</h5>
 
                         <?php $description = $company->description; ?>
                         <p><?php echo nl2br($description) ?></p>

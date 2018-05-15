@@ -17,36 +17,15 @@
                     </div>
 
                     <div class="boxEffectContent">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <table>
-                            <tbody>
-                            <tr>
-                                <th>Logo</th>
-                                <td><div class="logoBox smallLogo" style="{{ $company->logo_filename ? 'background-size: contain;' : 'background-size: cover;' }} background-image:url('{{ $company->logo_filename ? asset('storage/logos') . '/' . $company->logo_filename : asset('storage/logos/default-image.png') }}')"></div></td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td>{{ $company->email }}</td>
-                            </tr>
-                            <tr>
-                                <th>Rôle</th>
-                                <td>{{ $company->role }}</td>
-                            </tr>
-                            <tr>
-                                <th>Compte vérifié</th>
-                                <td>{{ $company->verified ? 'Oui' : 'Non' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Membre depuis le</th>
-                                <td>{{ $company->created_at }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <p class="paragraphe"><div class="logoBox smallLogo" style="display: inline-block; {{ $company->logo_filename ? 'background-size: contain;' : 'background-size: cover;' }} background-image:url('{{ $company->logo_filename ? asset('storage/logos') . '/' . $company->logo_filename : asset('storage/logos/default-image.png') }}')"></div></p>
+                        <p class="paragraphe"><span class="smallText">Email : </span> {{ $company->email }}</p>
+                        <p class="paragraphe"><span class="smallText">Rôle : </span> {{ $company->role }}</p>
+                        <p class="paragraphe"><span class="smallText">Compte vérifié : </span> {{ $company->verified ? 'Oui' : 'Non' }}</p>
+                        <?php
+                        $date = new \Carbon\Carbon($company->created_at);
+                        $date::setLocale('fr');
+                        ?>
+                        <p class="paragraphe"><span class="smallText">Membre inscrit : </span> {{ $date->diffForHumans() }}</p>
                     </div>
                 </div>
             </div>
@@ -58,30 +37,11 @@
                     </div>
 
                     <div class="boxEffectContent">
-                        <table>
-                            <tbody>
-                            <tr>
-                                <th>Nom</th>
-                                <td>{{ $company->name ? $company->name : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>SIRET</th>
-                                <td>{{ $company->siret ? $company->siret : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Téléphone</th>
-                                <td>{{ $company->phone ? $company->phone : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Adresse</th>
-                                <td>{{ $company->address ? $company->address : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Description</th>
-                                <td>{{ $company->description ? $company->description : 'NC' }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <p class="paragraphe"><span class="smallText">Raison sociale : </span> {{ $company->name ? $company->name : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">SIRET : </span> {{ $company->siret ? $company->siret : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">Téléphone : </span> {{ $company->phone ? $company->phone : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">Adresse : </span> {{ $company->address ? $company->address : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">Description : </span> {{ $company->description ? $company->description : 'NC' }}</p>
                     </div>
                 </div>
             </div>

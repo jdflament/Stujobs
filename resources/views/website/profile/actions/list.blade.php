@@ -15,5 +15,6 @@
         <p class="paragraphe"><span class="smallText">SIRET : </span> {{ $company->siret ? $company->siret : 'NC' }}</p>
         <p class="paragraphe"><span class="smallText">Adresse : </span> {{ $company->address ? $company->address : 'NC' }}</p>
         <p class="paragraphe"><span class="smallText">Téléphone : </span> {{ $company->phone ? $company->phone : 'NC' }}</p>
+        <p class="paragraphe"><span class="smallText">Description : </span> {{ $company->description ? $company->description : 'NC' }}</p>
     </div>
 </div>

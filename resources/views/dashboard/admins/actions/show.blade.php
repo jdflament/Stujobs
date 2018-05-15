@@ -14,32 +14,14 @@
                         <h3 class="boxEffectTitle">Compte administrateur</h3>
                     </div>
                     <div class="boxEffectContent">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th scope="col">Email</th>
-                                    <td scope="row" data-label="Email">{{ $admin->email }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Rôle</th>
-                                    <td scope="row" data-label="Rôle">{{ $admin->role }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Compte vérifié</th>
-                                    <td scope="row" data-label="Compte vérifié">{{ $admin->verified ? 'Oui' : 'Non' }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Membre depuis le</th>
-                                    <td scope="row" data-label="Membre depuis le">{{ $admin->created_at }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <p class="paragraphe"><span class="smallText">Email : </span> {{ $admin->email }}</p>
+                        <p class="paragraphe"><span class="smallText">Rôle : </span> {{ $admin->role }}</p>
+                        <p class="paragraphe"><span class="smallText">Compte vérifié : </span> {{ $admin->verified ? 'Oui' : 'Non' }}</p>
+                        <?php
+                        $date = new \Carbon\Carbon($admin->created_at);
+                        $date::setLocale('fr');
+                        ?>
+                        <p class="paragraphe"><span class="smallText">Membre inscrit : </span> {{ $date->diffForHumans() }}</p>
                     </div>
                 </div>
             </div>
@@ -51,32 +33,10 @@
                     </div>
 
                     <div class="boxEffectContent">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <table>
-                            <tbody>
-                            <tr>
-                                <th>Nom</th>
-                                <td>{{ $admin->firstname ? $admin->firstname : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Prénom</th>
-                                <td>{{ $admin->lastname ? $admin->lastname : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Téléphone</th>
-                                <td>{{ $admin->phone ? $admin->phone : 'NC' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Poste</th>
-                                <td>{{ $admin->office ? $admin->office : 'NC' }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <p class="paragraphe"><span class="smallText">Nom : </span> {{ $admin->firstname ? $admin->firstname : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">Prénom : </span> {{ $admin->lastname ? $admin->lastname : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">Téléphone : </span> {{ $admin->phone ? $admin->phone : 'NC' }}</p>
+                        <p class="paragraphe"><span class="smallText">Poste : </span> {{ $admin->office ? $admin->office : 'NC' }}</p>
                     </div>
                 </div>
             </div>

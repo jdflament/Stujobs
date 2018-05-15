@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Offer;
 use App\Models\User;
 use App\Models\VerifyUser;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -128,6 +129,9 @@ class CompaniesController extends Controller
         $company->setAttribute('phone', $company_data['edit_phone']);
 
         if (isset(request()->edit_logo)) {
+            if (isset($company->logo_filename)) {
+                File::delete(storage_path('app/public/logos') . '/' . $company->logo_filename);
+            }
             $company->setAttribute('logo_filename', $logoName);
             $company->setAttribute('logo_size', $logoSize);
         }
@@ -145,9 +149,12 @@ class CompaniesController extends Controller
     {
         User::where('id', $id)->delete();
 
-        // Delete the associated company info if exist
+        // Delete the associated company info and logo if exist
         $company = Company::where('user_id', '=', $id)->get()->first();
         if ($company) {
+            if (isset($company->logo_filename)) {
+                File::delete(storage_path('app/public/logos') . '/' . $company->logo_filename);
+            }
             $company->delete();
         }
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -82,6 +83,9 @@ class ProfileController extends Controller
         $company->setAttribute('phone', $company_data['edit_phone']);
 
         if (isset(request()->edit_logo)) {
+            if (isset($company->logo_filename)) {
+                File::delete(storage_path('app/public/logos') . '/' . $company->logo_filename);
+            }
             $company->setAttribute('logo_filename', $logoName);
             $company->setAttribute('logo_size', $logoSize);
         }

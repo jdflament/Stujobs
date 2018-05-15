@@ -91,8 +91,8 @@
               </tr>
               <tr>
                 <td style="padding: 0px 30px 20px 30px;">
-                    <span style="font-size: 10px;color: #BBBBBB;font-weight: 100;">Type de contrat : </span><span style="margin-right: 35px;font-size: 10px;color: #5e5e5e;font-weight: 600;">{{ $offer->contract_type }}</span>
-                    <span style="font-size: 10px;color: #BBBBBB;font-weight: 100;">Secteur : </span><span style="font-size: 10px;color: #5e5e5e;font-weight: 600;">{{ $offer->sector }}</span>                    
+                    <span style="font-size: 10px;color: #BBBBBB;font-weight: 100;">Type de contrat : </span><span style="margin-right: 35px;font-size: 10px;color: #5e5e5e;font-weight: 600;">@lang('vocabulary.contract_type.' . $offer->contract_type)</span>
+                    <span style="font-size: 10px;color: #BBBBBB;font-weight: 100;">Secteur : </span><span style="font-size: 10px;color: #5e5e5e;font-weight: 600;">@lang('vocabulary.sector_activity.' . $offer->sector . '.name')</span>                    
                 </td>
               </tr>
               <!-- BULLETPROOF BUTTON -->

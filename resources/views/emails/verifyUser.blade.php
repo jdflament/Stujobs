@@ -43,7 +43,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="480">
                 <tr>
                     <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
-                        <a href="http://litmus.com" style="color:#ffffff;font-size:24px;font-weight:400;text-decoration:none;" target="_blank">
+                        <a href="{{ env('APP_URL') }}" style="color:#ffffff;font-size:24px;font-weight:400;text-decoration:none;" target="_blank">
                             Stujobs
                             <span style="font-weight:400;font-size: 9px;color: #5681E7;text-transform: uppercase;background: #F9F9F9;padding: 3px 5px;border-radius: 5px;">    
                                 beta
@@ -84,7 +84,7 @@
                       <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                         <table border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                              <td align="center" style="border-radius: 3px;" bgcolor="#5681E7"><a href="https://litmus.com" target="_blank" style="font-size: 20px;color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Vérifier votre adresse</a></td>
+                              <td align="center" style="border-radius: 3px;" bgcolor="#5681E7"><a href="{{url('user/verify', $user->verifyUser->token)}}" target="_blank" style="font-size: 20px;color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Vérifier votre adresse</a></td>
                           </tr>
                         </table>
                       </td>
@@ -103,7 +103,7 @@
               <!-- PERMISSION REMINDER -->
               <tr>
                 <td bgcolor="#f4f4f4" align="left" style="padding: 0px 30px 30px 30px; color: #666666;font-size: 14px; font-weight: 400; line-height: 18px;" >
-                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous vous êtes inscrit sur Stujobs. Si ce n'est pas le cas, <a href="http://litmus.com" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
+                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous vous êtes inscrit sur Stujobs. Si ce n'est pas le cas, <a href="{{ env('APP_URL') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
                 </td>
               </tr>
               

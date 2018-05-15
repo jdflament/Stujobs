@@ -19,6 +19,10 @@
                     <div class="boxEffectContent">
                         @include('website/profile/offers/actions/list')
                     </div>
+
+                    <div class="boxEffectFooter paginationBlock">
+                        {{ $offers->links('dashboard/templates/pagination') }}
+                    </div>
                 </div>
             </div>
         </div>

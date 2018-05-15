@@ -41,8 +41,12 @@ Route::get('/offers/search/{result}', 'Website\OffersController@search')->name('
 Route::post('/offers/filter/result', 'Website\OffersController@filterOffers')->name('filterOffers');
 // Filter offers by company and checkboxes
 Route::get('/offers/company/name', 'Website\OffersController@searchByCompany')->name('searchByCompany');
+// Show an offer
+Route::get('/companies/{id}', 'Website\CompaniesController@show')->name('showCompany');
 // Get Newsletter data
 Route::post('/newsletter/email', 'Website\NewsletterController@getEmail')->name('getNewsletterEmail');
+
+
 /*
  * Company : Profile manager
  */

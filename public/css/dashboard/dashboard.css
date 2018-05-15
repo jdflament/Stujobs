@@ -241,20 +241,13 @@ Box number style
     font-size: 35px;
 }
 
+.row {
+    margin: 25px 0;
+}
+
 /**
-List style
+List item
  */
-
-.emptyList p {
-    text-align: center;
-    color: #5E5E5E;
-    font-size: 14px;
-}
-
-.listGroup {
-    display: flex;
-    flex-direction: column;
-}
 
 .listItem {
     flex-basis: 100%;
@@ -276,74 +269,6 @@ List style
     -webkit-transition: all 140ms ease-in;
     -moz-transition: all 140ms ease-in;
     -o-transition: all 140ms ease-in;
-}
-
-.listItem:hover {
-    transform: translateY(-1px);
-    -moz-transform: translateY(-1px);
-    -webkit-transform: translateY(-1px);
-    -o-transform: translateY(-1px);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    -o-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-}
-
-.listItem:active {
-    transform: translateY(1px);
-    -webkit-transform: translateY(1px);
-    -moz-transform: translateY(1px);
-    -o-transform: translateY(1px);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-    -o-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-}
-
-.listTitle {
-    font-size: 14px;
-    color: #5580e7;
-}
-
-.listSubtitle {
-    margin-left: 5px;
-    font-size: 10px;
-    color: #BBBBBB;
-}
-
-.listLabel {
-    margin-left: 15px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 10px;
-}
-
-.listDate {
-    margin-left: auto;
-    font-size: 10px;
-    color: #BBBBBB;
-}
-
-@media screen and (max-width: 768px) {
-    .listItem {
-        flex-direction: column;
-    }
-
-    .listSubtitle {
-        margin: 8px 0;
-    }
-
-    .listLabel {
-        margin-left: 0;
-    }
-
-    .listDate {
-        margin: 8px 0 0;
-    }
-}
-
-.row {
-    margin: 25px 0;
 }
 
 @media screen and (max-width: 768px) {

@@ -346,3 +346,29 @@ Modal
     font-weight: 600;
     margin: 0;
 }
+
+/**
+List item
+ */
+
+.listItem {
+    flex-basis: 100%;
+    display: flex;
+    padding: 15px;
+    cursor: pointer;
+    margin: 5px 0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    transition: all 140ms ease-in;
+    -webkit-transition: all 140ms ease-in;
+    -moz-transition: all 140ms ease-in;
+    -o-transition: all 140ms ease-in;
+}

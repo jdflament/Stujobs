@@ -30,9 +30,11 @@
                     <p class="paragraphe"><span class="smallText">Rémunération : </span> {{ $offer->remuneration }}€ / h</p>
                     <p class="paragraphe"><span class="smallText">Posté par : </span> <a href="/companies/{{ $offer->user_id }}" class="buttonLink">{{ $offer->company_name ? $offer->company_name : $offer->user_email }}</a></p>
                 </div>
+                @if (!\Illuminate\Support\Facades\Auth::user())
                 <div style="text-align: center; margin: 30px auto 15px;">
                     <button class="buttonActionLg bgPrimary largeButton" data-toggle="modal" data-target="#modalApply"><i class="fa fa-file-text"></i> Je candidate</button>
                 </div>
+                @endif
                 <div style="text-align: center; display: table; margin: 15px auto;">
                     <h3 class="boxTitle">Partager sur les réseaux</h3>
                     <ul class="socials-buttons" style="display: flex; list-style:none; margin-left: 0px; padding-left: 0px;">
@@ -52,5 +54,7 @@
         </div>
     </div>
 
+    @if (!\Illuminate\Support\Facades\Auth::user())
     @include('website/offers/actions/apply')
+    @endif
 @endsection

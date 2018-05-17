@@ -5,6 +5,11 @@
         <div class="rowActions">
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="{{ route('indexOffers') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
+
+                @if (count($totalApplies) > 0)
+                    <a href="{{ '/profile/applies/filter/' . $offer->offer_id }}" class="buttonActionLg bgPrimary"><i class="fa fa-eye"></i> Voir les candidatures</a>
+                @endif
+
                 @if ($offer->complete == 0)
                     <div class="offerActions">
                         <button data-href="/profile/offers/{{ $offer->offer_id }}/complete" data-offerid="{{ $offer->offer_id }}" class="buttonActionLg bgSuccess btn-pre-complete-offer" data-toggle="modal" data-target="#modalCompleteOffer">

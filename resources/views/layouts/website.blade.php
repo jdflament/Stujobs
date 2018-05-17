@@ -81,6 +81,9 @@
                                     <li class="dropdownMenuItem">
                                         <a href="{{ route('indexOffers') }}"><i class="fa fa-briefcase"></i><span class="dropdownSubtitle">Mes offres d'emploi</span></a>
                                     </li>
+                                    <li class="dropdownMenuItem">
+                                        <a href="{{ route('indexApplies') }}"><i class="fa fa-newspaper-o"></i><span class="dropdownSubtitle">Candidatures</span></a>
+                                    </li>
                                 @endif
                                 <li class="dropdownMenuItem">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i><span class="dropdownSubtitle">Déconnexion</span></a>
@@ -135,6 +138,9 @@
                                     </li>
                                     <li class="menuActionsItem">
                                         <a href="{{ route('indexOffers') }}"><i class="fa fa-briefcase"></i><p class="menuSubtitle">Mes offres</p></a>
+                                    </li>
+                                    <li class="menuActionsItem">
+                                        <a href="{{ route('indexApplies') }}"><i class="fa fa-newspaper-o"></i><p class="menuSubtitle">Candidatures</p></a>
                                     </li>
                                 @endif
                                 <li class="menuActionsItem">
@@ -193,7 +199,7 @@
 <script src="{{ asset('js/website/filters.js') }}"></script>
 <script src="{{ asset('js/website/profile.js') }}"></script>
 <script src="{{ asset('js/website/offers.js') }}"></script>
-<script src="{{ asset('js/website/apply.js') }}"></script>
+<script src="{{ asset('js/website/applies.js') }}"></script>
 <script src="{{ asset('js/website/newsletter.js') }}"></script>
 @yield('scripts')
 

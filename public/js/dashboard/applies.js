@@ -190,7 +190,7 @@ $(document).on('change', '#filterApplies', function(event) {
 
     $.ajax({
         type: 'GET',
-        url: "/dashboard/applies/filter/" + value,
+        url: "/profile/applies/filter/" + value,
         beforeSend: function() {
             $("#applies-content").find('tbody').html('<tr><td colspan="6" align="center"><i class="fa fa-spinner fa-pulse fa-fw fa-3x"></i></td></tr>');
         },

@@ -88,6 +88,19 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
 });
 
 /*
+ * Company : Applies manager
+ */
+
+Route::group(['middleware' => 'can:companyAccess'], function() {
+    // Applies (of a company) index page
+    Route::get('/profile/applies', 'Website\AppliesController@index')->name('indexApplies');
+    // Show an apply
+    Route::get('/profile/applies/{id}/show', 'Website\AppliesController@show')->name('showApply');
+    // Filter the applies
+    Route::get('/profile/applies/filter/{id}', 'Website\AppliesController@filter')->name('filterApplies');
+});
+
+/*
 |--------------------------------------------------------------------------
 | Dashboard (super admin) routes
 |--------------------------------------------------------------------------

@@ -81,14 +81,8 @@ class AppliesController extends Controller
         //Send the email to company with apply informations
         Mail::to($apply->offer_contact_email)->send(new SendApply((array)$apply));
 
-        // Delete the file
-        File::delete(storage_path('app/public/cv') . '/' . $apply->apply_cv_filename);
-
         // Save on db that the apply is now valid
         $apply_db = Apply::where('id', $id)->first();
-        // Reset cv filename and size because he don't even exist
-        $apply_db->setAttribute('cv_filename', null);
-        $apply_db->setAttribute('cv_size', null);
         $apply_db->setAttribute('valid', 1);
         $apply_db->save();
 

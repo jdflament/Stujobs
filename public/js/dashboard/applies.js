@@ -42,8 +42,7 @@ $(document).on('click', '#btn-accept-apply', function(event) {
             } else {
                 $(".totalAppliesInvalid").addClass('hidden');
             }
-
-            $('.showCv').html('<span class="smallText">CV : </span>Non');
+            
             $('.applyActions').remove();
             $('.applyStatus').html('<span class="badge bgSuccess">Acceptée</span>');
 

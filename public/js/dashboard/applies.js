@@ -42,7 +42,7 @@ $(document).on('click', '#btn-accept-apply', function(event) {
             } else {
                 $(".totalAppliesInvalid").addClass('hidden');
             }
-            
+
             $('.applyActions').remove();
             $('.applyStatus').html('<span class="badge bgSuccess">Acceptée</span>');
 
@@ -189,7 +189,7 @@ $(document).on('change', '#filterApplies', function(event) {
 
     $.ajax({
         type: 'GET',
-        url: "/profile/applies/filter/" + value,
+        url: "/dashboard/applies/filter/" + value,
         beforeSend: function() {
             $("#applies-content").find('tbody').html('<tr><td colspan="6" align="center"><i class="fa fa-spinner fa-pulse fa-fw fa-3x"></i></td></tr>');
         },

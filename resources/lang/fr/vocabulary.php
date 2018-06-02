@@ -11,7 +11,12 @@ return [
     | differents words than you can find in the website, according to job offers.
     |
     */
-
+    // Role
+    'user_role' => [
+        "company" => "Entreprise",
+        "admin" => "Administrateur",
+        "superadmin" => "Super-Administrateur"
+    ],
     // Offers type
     'offers_type' => [
         "all" => "Toutes",

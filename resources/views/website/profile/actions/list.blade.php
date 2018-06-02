@@ -5,7 +5,7 @@
     </div>
     <div class="col-xs-12 col-md-8 col-lg-8">
         <p class="paragraphe"><span class="smallText">Email : </span> {{ $company->email }}</p>
-        <p class="paragraphe"><span class="smallText">Rôle : </span> {{ $company->role }}</p>
+        <p class="paragraphe"><span class="smallText">Rôle : </span> @lang('vocabulary.user_role.' . $company->role)</p>
         <?php
         $date = new \Carbon\Carbon($company->created_at);
         $date::setLocale('fr');

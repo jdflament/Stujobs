@@ -77,6 +77,16 @@ function checkManager(checkboxesClass) {
 checkManager('.checkboxContract');
 checkManager('.checkboxSector');
 
+// Detect if an element is in the viewport (screen)
+$.fn.isInViewport = function() {
+    var elementTop = $(this).offset().top;
+    var elementBottom = elementTop + $(this).outerHeight();
+
+    var viewportTop = $(window).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+
+    return elementBottom > viewportTop && elementTop < viewportBottom;
+};
 
 $(document).on('submit', 'form[name=filterOffer]', function(event) {
     event.preventDefault();

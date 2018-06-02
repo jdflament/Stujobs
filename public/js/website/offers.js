@@ -48,9 +48,12 @@ $(window).scroll(function() {
 });
 
 function loadMoreData(page) {
+    var filterData = $('form[name=filterOffer]').serialize();
+
     $.ajax({
         type: 'GET',
         url: '?page=' + page,
+        data: filterData,
         beforeSend: function() {
             $('.loadScroll').show();
         },
@@ -65,6 +68,7 @@ function loadMoreData(page) {
         },
         error: function (response) {
             console.error(response);
+            $('.py-4').append(response.responseText);
             notification('danger', "Une erreur est survenue.");
         }
     });

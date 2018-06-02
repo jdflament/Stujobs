@@ -391,8 +391,8 @@ class OffersController extends Controller
                 ['offers.complete', '=', false],
             ])
             ->orderBy('offers.created_at', 'DESC')
-            ->get();
+            ->paginate(5);
 
-        return view('website/index', ['offers' => $offers]);
+        return view('website/index')->with(['offers' => $offers]);
     }
 }

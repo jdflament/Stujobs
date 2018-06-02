@@ -82,6 +82,7 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
     event.preventDefault();
     var url = $(this).attr('action');
     var data = $(this).serialize();
+    page = 1;
 
     $.ajax({
         type: 'POST',
@@ -89,9 +90,11 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
         data: data,
         success: function(response) {
             $('.boxList').hide().html($(response).find('.boxList').html()).fadeIn();
+            $('.loadScroll').html('<button class="buttonActionLg bgPrimary"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Chargement des offres...</button>').show();
         },
         error: function (response) {
             console.error(response);
+            $('.py-4').append(response.responseText);
             notification('danger', "Une erreur est survenue.");
         },
     });

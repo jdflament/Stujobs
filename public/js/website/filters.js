@@ -94,7 +94,6 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
         },
         error: function (response) {
             console.error(response);
-            $('.py-4').append(response.responseText);
             notification('danger', "Une erreur est survenue.");
         },
     });

@@ -11,6 +11,7 @@ $(document).ready(function(event) {
         success: function(response) {
             var values = [];
             var labels = [];
+            var colors = [];
             var mapping = {
                 "nc": 'Non précisé',
                 'sj': 'Job Étudiant',
@@ -22,16 +23,28 @@ $(document).ready(function(event) {
                 'cdi': "CDI"
             };
 
+            var mapping_colors = {
+                "nc": '#ffffff',
+                'sj': '#ffb64d',
+                'ctt': '#5E5E5E',
+                'stage': '#5580e5',
+                'ca': '#bf74f2',
+                'cp': "#fc6180",
+                'cdd': '#6ae4f7',
+                'cdi': "#26dad2"
+            };
+
             $.each(response, function(index, value) {
                 values.push(value);
                 labels.push(mapping[index]);
+                colors.push(mapping_colors[index]);
             });
 
             // Store datas
             var data = {
                 datasets: [{
                     data: values,
-                    backgroundColor: ["#5580e5", "#ffb64d", "#26dad2", "#fc6180", "#74b9ff", "#e17055", "#e84393", "#a29bfe"],
+                    backgroundColor: colors,
                 }],
 
                 labels: labels

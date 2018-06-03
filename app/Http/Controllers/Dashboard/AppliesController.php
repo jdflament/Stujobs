@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Mail\SendApply;
+use App\Mail\SendCandidateApplyAlert;
 use App\Models\Apply;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -80,6 +81,9 @@ class AppliesController extends Controller
 
         //Send the email to company with apply informations
         Mail::to($apply->offer_contact_email)->send(new SendApply((array)$apply));
+        
+        // Alert the candidate that his apply was sent
+        Mail::to($apply->apply_email)->send(new SendCandidateApplyAlert((array)$apply));        
 
         // Save on db that the apply is now valid
         $apply_db = Apply::where('id', $id)->first();

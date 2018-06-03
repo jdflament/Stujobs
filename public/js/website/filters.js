@@ -102,6 +102,7 @@ $(document).on('submit', 'form[name=filterOffer]', function(event) {
             $('.boxList').hide().html($(response).find('.boxList').html()).fadeIn();
             $('.loadScroll').html('<button class="buttonActionLg bgPrimary"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Chargement des offres...</button>').show();
 
+            // If the load block is on the screen, then load more offers
             if ($('.loadScroll').isInViewport()) {
                 page++;
                 loadMoreData(page);

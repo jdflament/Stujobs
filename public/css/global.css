@@ -104,7 +104,7 @@ Colors
     background: #5580e5;
 }
 
-.bgDanger:hover, .bgPrimary:hover, .bgSuccess:hover, .bgWarning:hover {
+.bgDanger:hover, .bgPrimary:hover, .bgSuccess:hover, .bgWarning:hover, .bgDark:hover {
     color: #ffffff;
 }
 

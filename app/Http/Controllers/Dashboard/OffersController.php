@@ -6,8 +6,10 @@ use App\Models\Apply;
 use App\Models\Offer;
 use App\Mail\OfferValidated;
 use App\Jobs\SendEmailOfferValidated;
+use App\Models\OffersHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Hash;
@@ -124,9 +126,19 @@ class OffersController extends Controller
      */
     public function approve($id)
     {
+        $user_id = Auth::user()->id;
+
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('valid', 1);
         $offer->save();
+
+        // Update history of this offer
+        $history = new OffersHistory();
+        $history->setAttribute('offer_id', $id);
+        $history->setAttribute('user_id', $user_id);
+        $history->setAttribute('column_change', 'valid');
+        $history->setAttribute('column_value', 1);
+        $history->save();
 
         $users = DB::table('newsletter')
                     ->whereIn('params_sector', ['all',$offer->sector])
@@ -155,9 +167,19 @@ class OffersController extends Controller
      */
     public function disapprove($id)
     {
+        $user_id = Auth::user()->id;
+
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('valid', 0);
         $offer->save();
+
+        // Update history of this offer
+        $history = new OffersHistory();
+        $history->setAttribute('offer_id', $id);
+        $history->setAttribute('user_id', $user_id);
+        $history->setAttribute('column_change', 'valid');
+        $history->setAttribute('column_value', 0);
+        $history->save();
 
         $offers = DB::table('offers')
             ->where('valid', '=', 0)
@@ -307,6 +329,33 @@ class OffersController extends Controller
             ->all();
 
         return view('dashboard/offers/actions/show', ['offer' => $offer, 'totalApplies' => $totalApplies]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show the offer history page
+     */
+    public function historyPage($id)
+    {
+        $offer = DB::table('offers')->where('offers.id', $id)
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('users.id as user_id', 'users.email as user_email', 'users.role as user_role', 'users.created_at as user_created_at', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'offers.id as offer_id', 'offers.title', 'offers.description', 'offers.contract_type', 'offers.duration', 'offers.remuneration', 'offers.city', 'offers.valid', 'offers.complete', 'offers.contact_email', 'offers.contact_phone', 'offers.created_at')
+            ->get()
+            ->first();
+
+        $history = DB::table('offers_history')
+            ->leftJoin('users', 'offers_history.user_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
+            ->select('offers_history.id as history_id', 'offers_history.column_change as history_column_change', 'offers_history.column_value as history_column_value', 'offers_history.created_at as history_created_at', 'users.email as history_user_email', 'users.id as history_user_id', 'users.role as history_user_role', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'admins.firstname as admin_firstname', 'admins.lastname as admin_lastname', 'admins.phone as admin_phone', 'admins.office as admin_office')
+            ->where('offers_history.offer_id', '=', $id)
+            ->orderBy('offers_history.created_at', 'DESC')
+            ->get();
+
+        return view('dashboard/offers/actions/history', ['offer' => $offer, 'history' => $history]);
     }
 
     /**

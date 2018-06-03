@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Models\Offer;
+use App\Models\OffersHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -109,9 +110,19 @@ class OffersController extends Controller
      */
     public function complete($id)
     {
+        $user_id = Auth::user()->id;
+
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('complete', true);
         $offer->save();
+
+        // Update history of this offer
+        $history = new OffersHistory();
+        $history->setAttribute('offer_id', $id);
+        $history->setAttribute('user_id', $user_id);
+        $history->setAttribute('column_change', 'complete');
+        $history->setAttribute('column_value', 1);
+        $history->save();
 
         $offers = DB::table('offers')
             ->where('complete', '=', true)
@@ -131,10 +142,20 @@ class OffersController extends Controller
      */
     public function uncomplete($id)
     {
+        $user_id = Auth::user()->id;
+
         $offer = Offer::where('id', $id)->first();
         $offer->setAttribute('complete', false);
         $offer->setAttribute('valid', false);
         $offer->save();
+
+        // Update history of this offer
+        $history = new OffersHistory();
+        $history->setAttribute('offer_id', $id);
+        $history->setAttribute('user_id', $user_id);
+        $history->setAttribute('column_change', 'complete');
+        $history->setAttribute('column_value', 0);
+        $history->save();
 
         $offers = DB::table('offers')
             ->where('complete', '=', false)

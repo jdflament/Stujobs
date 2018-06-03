@@ -6,6 +6,8 @@
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="{{ route('dashboardIndexOffers') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
 
+                <a href="{{ '/dashboard/offers/' . $offer->offer_id . '/history' }}" class="buttonActionLg bgDark"><i class="fa fa-history"></i> Historique</a>
+
                 @if (count($totalApplies) > 0)
                     <a href="{{ '/dashboard/applies/filter/' . $offer->offer_id }}" class="buttonActionLg bgPrimary"><i class="fa fa-eye"></i> Voir les candidatures</a>
                 @endif

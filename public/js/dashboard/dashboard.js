@@ -89,6 +89,8 @@ $(document).ready(function(event) {
         success: function(response) {
             var values = [];
             var labels = [];
+            var colors = [];
+
             var mapping = {
                 'total': 'Total',
                 'complete': 'Clôturée',
@@ -97,16 +99,25 @@ $(document).ready(function(event) {
                 'invalid': 'Invalidée'
             };
 
+            var mapping_colors = {
+                'total': '#5580e5',
+                'complete': '#6ae4f7',
+                'incomplete': '#ffb64d',
+                'valid': '#26dad2',
+                'invalid': '#fc6180'
+            }
+
             $.each(response, function(index, value) {
                 values.push(value);
                 labels.push(mapping[index]);
+                colors.push(mapping_colors[index]);
             });
 
             // Store datas
             var data = {
                 datasets: [{
                     data: values,
-                    backgroundColor: ["#5580e5", "#ffb64d", "#26dad2", "#fc6180", "#74b9ff", "#e17055", "#e84393", "#a29bfe"],
+                    backgroundColor: colors,
                 }],
 
                 labels: labels
@@ -222,6 +233,7 @@ $(document).ready(function(event) {
         success: function(response) {
             var values = [];
             var labels = [];
+            var colors = [];
             var mapping = {
                 'total': 'Total',
                 'pending': 'En attente',
@@ -229,16 +241,24 @@ $(document).ready(function(event) {
                 'refuse': 'Refusée'
             };
 
+            var mapping_colors = {
+                'total': '#5580e5',
+                'pendinf': '#ffb64d',
+                'valid': '#26dad2',
+                'refuse': '#fc6180'
+            }
+
             $.each(response, function(index, value) {
                 values.push(value);
                 labels.push(mapping[index]);
+                colors.push(mapping_colors[index]);
             });
 
             // Store datas
             var data = {
                 datasets: [{
                     data: values,
-                    backgroundColor: ["#5580e5", "#ffb64d", "#26dad2", "#fc6180", "#74b9ff", "#e17055", "#e84393", "#a29bfe"],
+                    backgroundColor: colors,
                 }],
 
                 labels: labels

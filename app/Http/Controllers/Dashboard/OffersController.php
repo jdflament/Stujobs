@@ -291,6 +291,13 @@ class OffersController extends Controller
             }
         }
 
+        $history = OffersHistory::where('offer_id', '=', $id)->get();
+        if ($history) {
+            foreach ($history as $value) {
+                $value->delete();
+            }
+        }
+
         $offers = DB::table('offers')
             ->where('valid', '=', 0)
             ->get();

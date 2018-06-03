@@ -58,9 +58,9 @@
                                     <h2 class="boxEffectTitle colorPrimary">
                                        L'offre a été
                                         @if ($value->history_column_change == 'valid' && $value->history_column_value == 1)
-                                            validée
+                                            approuvée
                                         @elseif ($value->history_column_change == 'valid' && $value->history_column_value == 0)
-                                            refusée
+                                            désapprouvée
                                         @elseif ($value->history_column_change == 'complete' && $value->history_column_value == 1)
                                             terminée
                                         @elseif ($value->history_column_change == 'complete' && $value->history_column_value == 0)

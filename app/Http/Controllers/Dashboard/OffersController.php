@@ -352,7 +352,7 @@ class OffersController extends Controller
             ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
             ->select('offers_history.id as history_id', 'offers_history.column_change as history_column_change', 'offers_history.column_value as history_column_value', 'offers_history.created_at as history_created_at', 'users.email as history_user_email', 'users.id as history_user_id', 'users.role as history_user_role', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'admins.firstname as admin_firstname', 'admins.lastname as admin_lastname', 'admins.phone as admin_phone', 'admins.office as admin_office')
             ->where('offers_history.offer_id', '=', $id)
-            ->orderBy('offers_history.created_at', 'DESC')
+            ->orderBy('offers_history.created_at', 'ASC')
             ->get();
 
         return view('dashboard/offers/actions/history', ['offer' => $offer, 'history' => $history]);

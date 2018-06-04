@@ -5,6 +5,9 @@
         <div class="rowActions">
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <a href="{{ route('dashboardIndexApplies') }}" class="buttonActionLg bgDefault"><i class="fa fa-arrow-left"></i> Retour à la liste</a>
+
+                <a href="{{ '/dashboard/applies/' . $apply->apply_id . '/history' }}" class="buttonActionLg bgDark"><i class="fa fa-history"></i> Historique</a>
+
                 <a href="/dashboard/offers/{{ $apply->offer_id }}/show" class="buttonActionLg bgPrimary"><i class="fa fa-eye"></i> Voir l'offre</a>
 
                 @if ($apply->apply_valid == 0)

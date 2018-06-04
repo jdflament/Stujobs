@@ -156,7 +156,7 @@
     font-size: 14px;
 }
 
-.timelineContent a:hover {
+.timelineContent a:not(.buttonActionLg):hover {
     text-decoration: underline;
 }
 

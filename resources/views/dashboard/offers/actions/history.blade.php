@@ -26,12 +26,7 @@
                                         Création de l'offre
                                     </h2>
                                     <p>
-                                        Par
-                                        @if ($offer->user_role == 'company')
-                                            l'entreprise <a href="{{ "/dashboard/companies/" . $offer->user_id . "/show" }}"><span class="colorPrimary">{{ $offer->company_name ? $offer->company_name : $offer->user_email }}</span></a>
-                                        @else
-                                            l'administrateur <a href="{{ "/dashboard/admins/" . $value->history_user_id . "/show" }}"><span class="colorPrimary">{{ $value->admin_firstname ? $value->admin_firstname : $value->history_user_email }} {{ $value->admin_lastname ? $value->admin_lastname : '' }}</span></a>
-                                        @endif
+                                        Par l'entreprise <a href="{{ "/dashboard/companies/" . $offer->user_id . "/show" }}"><span class="colorPrimary">{{ $offer->company_name ? $offer->company_name : $offer->user_email }}</span></a>
                                     </p>
 
                                     <?php

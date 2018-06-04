@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Mail\SendApply;
 use App\Mail\SendCandidateApplyAlert;
+use App\Models\AppliesHistory;
 use App\Models\Apply;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
@@ -59,6 +61,13 @@ class AppliesController extends Controller
 
         $apply->delete();
 
+        $history = AppliesHistory::where('apply_id', '=', $id)->get();
+        if ($history) {
+            foreach ($history as $value) {
+                $value->delete();
+            }
+        }
+
         $applies = DB::table('applies')
             ->where('valid', '=', 0)
             ->get();
@@ -70,6 +79,8 @@ class AppliesController extends Controller
 
     public function accept($id)
     {
+        $user_id = Auth::user()->id;
+
         $apply = DB::table('applies')->where('applies.id', $id)
             ->leftJoin('offers', 'applies.offer_id', '=', 'offers.id')
             ->leftJoin('users', 'offers.company_id', '=', 'users.id')
@@ -90,10 +101,19 @@ class AppliesController extends Controller
         $apply_db->setAttribute('valid', 1);
         $apply_db->save();
 
+        // Update history of this apply
+        $history = new AppliesHistory();
+        $history->setAttribute('apply_id', $id);
+        $history->setAttribute('user_id', $user_id);
+        $history->setAttribute('column_change', 'valid');
+        $history->setAttribute('column_value', 1);
+        $history->save();
+
         // Count the total applies who need to be manage
         $applies = DB::table('applies')
             ->where('valid', '=', 0)
             ->get();
+
 
         $totalApplies = count($applies);
 
@@ -108,6 +128,8 @@ class AppliesController extends Controller
      */
     public function refuse($id)
     {
+        $user_id = Auth::user()->id;
+
         $apply = Apply::where('id', $id)->first();
 
         if (isset($apply->cv_filename)) {
@@ -118,6 +140,14 @@ class AppliesController extends Controller
         $apply->setAttribute('cv_size', null);
         $apply->setAttribute('valid', 2);
         $apply->save();
+
+        // Update history of this apply
+        $history = new AppliesHistory();
+        $history->setAttribute('apply_id', $id);
+        $history->setAttribute('user_id', $user_id);
+        $history->setAttribute('column_change', 'valid');
+        $history->setAttribute('column_value', 2);
+        $history->save();
 
         $applies = DB::table('applies')
             ->where('valid', '=', 0)
@@ -146,6 +176,35 @@ class AppliesController extends Controller
             ->first();
 
         return view('dashboard/applies/actions/show', ['apply' => $apply]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Show the apply history page
+     */
+    public function historyPage($id)
+    {
+        $apply = DB::table('applies')->where('applies.id', $id)
+            ->leftJoin('offers', 'applies.offer_id', '=', 'offers.id')
+            ->leftJoin('users', 'offers.company_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->select('applies.id as apply_id', 'applies.firstname as apply_firstname', 'applies.lastname as apply_lastname', 'applies.email as apply_email', 'applies.phone as apply_phone', 'applies.cv_filename as apply_cv_filename', 'applies.subject as apply_subject', 'applies.message as apply_message', 'applies.valid as apply_valid', 'applies.created_at as apply_created_at','offers.id as offer_id', 'users.email as company_email', 'users.role as company_role', 'offers.title as offer_title', 'offers.description as offer_description', 'offers.contract_type as offer_contract_type', 'offers.duration as offer_duration', 'offers.remuneration as offer_remuneration', 'offers.valid as offer_valid', 'offers.complete as offer_complete', 'offers.contact_email as offer_contact_email', 'offers.contact_phone as offer_contact_phone', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.address as company_address', 'companies.phone as company_phone')
+            ->orderBy('applies.created_at', 'DESC')
+            ->get()
+            ->first();
+
+        $history = DB::table('applies_history')
+            ->leftJoin('users', 'applies_history.user_id', '=', 'users.id')
+            ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+            ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
+            ->select('applies_history.id as history_id', 'applies_history.column_change as history_column_change', 'applies_history.column_value as history_column_value', 'applies_history.created_at as history_created_at', 'users.email as history_user_email', 'users.id as history_user_id', 'users.role as history_user_role', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'admins.firstname as admin_firstname', 'admins.lastname as admin_lastname', 'admins.phone as admin_phone', 'admins.office as admin_office')
+            ->where('applies_history.apply_id', '=', $id)
+            ->orderBy('applies_history.created_at', 'ASC')
+            ->get();
+
+        return view('dashboard/applies/actions/history', ['apply' => $apply, 'history' => $history]);
     }
 
     /**

@@ -230,6 +230,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/applies/{id}/refuse', 'Dashboard\AppliesController@refuse')->name('dashboardRefuseApply');
     // Accept an apply
     Route::get('/dashboard/applies/{id}/accept', 'Dashboard\AppliesController@accept')->name('dashboardAcceptApply');
+    // Show history of an apply
+    Route::get('/dashboard/applies/{id}/history', 'Dashboard\AppliesController@historyPage')->name('dashboardShowHistoryApply');
     // Filter the applies
     Route::get('/dashboard/applies/filter/{id}', 'Dashboard\AppliesController@filter')->name('dashboardFilterApplies');
 });

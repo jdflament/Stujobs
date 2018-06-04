@@ -60,6 +60,8 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
     Route::post('/profile/edit', 'Website\ProfileController@edit')->name('editProfile');
     // Change Password
     Route::post('/profile/password/update', 'Website\ProfileController@changePassword')->name('profileUpdatePassword');
+    // Change Password
+    Route::get('/profile/settings', 'Website\ProfileController@settings')->name('profileSettings');
 });
 
 /*

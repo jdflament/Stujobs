@@ -4,6 +4,7 @@
     <div class="containerLg">
         <div class="rowActions">
             <div class="col-xs-12 col-md-12 col-lg-12">
+                <a href="{{ route('profileSettings') }}" class="buttonActionLg bgDark"><i class="fa fa-cog"></i> Paramètres de confidentialité</a>
                 <a href="{{ route('editProfilePage') }}" class="buttonActionLg bgPrimary"><i class="fa fa-pencil"></i> Modifier mes informations</a>
             </div>
         </div>

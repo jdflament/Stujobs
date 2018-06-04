@@ -165,4 +165,8 @@ class ProfileController extends Controller
         return redirect()->route('indexProfile');
 
     }
+    public function settings()
+    {
+        return view('website/profile/settings');
+    }
 }

@@ -59,7 +59,7 @@ p .buttonActionLg {
     display: inline-block;
 }
 
-.offerStatus {
+.offerStatus, .applyStatus {
     float: right;
 }
 

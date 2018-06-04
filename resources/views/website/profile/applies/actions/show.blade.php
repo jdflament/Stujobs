@@ -11,10 +11,20 @@
 
         <div class="row justify-content-center">
             <div class="col-xs-12 col-md-8 col-lg-8">
-                <div class="boxEffect">
+                <div class="boxEffect" style="margin-bottom: 30px;">
                     <div class="boxEffectHeader">
                         <h3 class="boxEffectTitle">
                             Candidature de <span class="colorPrimary">{{ $apply->apply_firstname }} {{ $apply->apply_lastname }}</span>
+
+                            <div class="applyStatus">
+                                @if ($apply->apply_valid == 0)
+                                    <span class="badge bgWarning">En attente</span>
+                                @elseif ($apply->apply_valid == 1)
+                                    <span class="badge bgSuccess">Acceptée</span>
+                                @elseif ($apply->apply_valid == 2)
+                                    <span class="badge bgDanger">Refusée</span>
+                                @endif
+                            </div>
                         </h3>
                     </div>
 
@@ -37,6 +47,14 @@
                         <p class="paragraphe"><span class="smallText">Nom : </span> {{ $apply->apply_lastname }}</p>
                         <p class="paragraphe"><span class="smallText">Email : </span> {{ $apply->apply_email }}</p>
                         <p class="paragraphe"><span class="smallText">Tél : </span> {{ $apply->apply_phone }}</p>
+                        <p class="paragraphe showCv">
+                            <span class="smallText">CV : </span>
+                            @if ($apply->apply_cv_filename)
+                                <a href="{{ asset('storage/cv') . '/' . $apply->apply_cv_filename }}" target="_blank" class="buttonActionLg bgPrimary"><i class="fa fa-file-text"></i> Voir le CV</a>
+                            @else
+                                Non
+                            @endif
+                        </p>
                     </div>
                 </div>
 

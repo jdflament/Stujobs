@@ -54,14 +54,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Réinitialiser le mot de passe
-                                </button>
-                            </div>
-                        </div>
-
                         <div class="row centerContent" style="margin-top: 25px;">
                             <div class="col-xs-12 col-md-12 col-lg-12">
                                 <button type="submit" class="buttonActionLg bgPrimary">

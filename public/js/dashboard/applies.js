@@ -9,25 +9,27 @@ $(document).on('click', '.btn-pre-accept-apply', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
 
-    $('#btn-accept-apply').attr('href', route);
+    $('form[name=acceptApply]').attr('action', route);
 });
 
 // Reset approve button href
 $(document).on('hidden.bs.modal', '#modalAcceptApply', function() {
-    $(this).find('#btn-accept-apply').attr('href', '#');
+    $(this).find('form[name=acceptApply]').attr('action', '#');
 });
 
-$(document).on('click', '#btn-accept-apply', function(event) {
+$(document).on('submit', 'form[name=acceptApply]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
-    var $button = $(this);
+    var $button = $(this).find('button[type=submit]');
     var $buttonValue = $button.html();
-    var url = $(this).attr('href');
+    var url = $(this).attr('action');
+    var data = $(this).serialize();
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
+        data: data,
         beforeSend: function() {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
@@ -51,6 +53,12 @@ $(document).on('click', '#btn-accept-apply', function(event) {
         error: function (response) {
             console.error(response);
             notification('danger', "Une erreur est survenue.");
+            $('.error').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $button.html($buttonValue);
@@ -69,25 +77,27 @@ $(document).on('click', '.btn-pre-refuse-apply', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
 
-    $('#btn-refuse-apply').attr('href', route);
+    $('form[name=refuseApply]').attr('action', route);
 });
 
 // Reset refuse button href
 $(document).on('hidden.bs.modal', '#modalRefuseApply', function() {
-    $(this).find('#btn-refuse-apply').attr('href', '#');
+    $(this).find('form[name=refuseApply]').attr('action', '#');
 });
 
-$(document).on('click', '#btn-refuse-apply', function(event) {
+$(document).on('submit', 'form[name=refuseApply]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
-    var $button = $(this);
+    var $button = $(this).find('button[type=submit]');
     var $buttonValue = $button.html();
-    var url = $(this).attr('href');
+    var url = $(this).attr('action');
+    var data = $(this).serialize();
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
+        data: data,
         beforeSend: function() {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
@@ -112,6 +122,12 @@ $(document).on('click', '#btn-refuse-apply', function(event) {
         error: function (response) {
             console.error(response);
             notification('danger', "Une erreur est survenue.");
+            $('.error').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $button.html($buttonValue);

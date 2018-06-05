@@ -76,9 +76,9 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
     // Create a job offer
     Route::post('/profile/offer/create', 'Website\OffersController@create')->name('createOffer');
     // Complete an offer
-    Route::get('/profile/offers/{id}/complete', 'Website\OffersController@complete')->name('completeOffer');
+    Route::post('/profile/offers/{id}/complete', 'Website\OffersController@complete')->name('completeOffer');
     // Uncomplete an offer
-    Route::get('/profile/offers/{id}/uncomplete', 'Website\OffersController@uncomplete')->name('uncompleteOffer');
+    Route::post('/profile/offers/{id}/uncomplete', 'Website\OffersController@uncomplete')->name('uncompleteOffer');
     // Edit offer page
     Route::get('/profile/offers/{id}/edit', 'Website\OffersController@editPage')->name('editOfferPage');
     // Edit an offer
@@ -200,9 +200,9 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     // Create an offer
     Route::post('/dashboard/offers', 'Dashboard\OffersController@create')->name('dashboardCreateOffer');
     // Approve an offer
-    Route::get('/dashboard/offers/{id}/approve', 'Dashboard\OffersController@approve')->name('dashboardApproveOffer');
+    Route::post('/dashboard/offers/{id}/approve', 'Dashboard\OffersController@approve')->name('dashboardApproveOffer');
     // Disapprove an offer
-    Route::get('/dashboard/offers/{id}/disapprove', 'Dashboard\OffersController@disapprove')->name('dashboardDisapproveOffer');
+    Route::post('/dashboard/offers/{id}/disapprove', 'Dashboard\OffersController@disapprove')->name('dashboardDisapproveOffer');
     // Edit offer page
     Route::get('/dashboard/offers/{id}/edit', 'Dashboard\OffersController@editPage')->name('dashboardEditOfferPage');
     // Edit an offer
@@ -228,10 +228,10 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
     Route::get('/dashboard/applies/{id}/delete', 'Dashboard\AppliesController@delete')->name('dashboardDeleteApply');
     // Show an apply
     Route::get('/dashboard/applies/{id}/show', 'Dashboard\AppliesController@show')->name('dashboardShowApply');
-    // Refuse an apply
-    Route::get('/dashboard/applies/{id}/refuse', 'Dashboard\AppliesController@refuse')->name('dashboardRefuseApply');
     // Accept an apply
-    Route::get('/dashboard/applies/{id}/accept', 'Dashboard\AppliesController@accept')->name('dashboardAcceptApply');
+    Route::post('/dashboard/applies/{id}/accept', 'Dashboard\AppliesController@accept')->name('dashboardAcceptApply');
+    // Refuse an apply
+    Route::post('/dashboard/applies/{id}/refuse', 'Dashboard\AppliesController@refuse')->name('dashboardRefuseApply');
     // Show history of an apply
     Route::get('/dashboard/applies/{id}/history', 'Dashboard\AppliesController@historyPage')->name('dashboardShowHistoryApply');
     // Filter the applies

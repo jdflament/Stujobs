@@ -70,6 +70,12 @@
                                             l'administrateur <a href="{{ "/dashboard/admins/" . $value->history_user_id . "/show" }}"><span class="colorPrimary">{{ $value->admin_firstname ? $value->admin_firstname : $value->history_user_email }} {{ $value->admin_lastname ? $value->admin_lastname : '' }}</span></a>
                                         @endif
                                     </p>
+                                    @if (null !== $value->history_reason)
+                                    <p>
+                                        <?php $reason = $value->history_reason; ?>
+                                        <b>Raison : </b><?php echo nl2br($reason) ?>
+                                    </p>
+                                    @endif
                                     <?php
                                     $value_date = new \Carbon\Carbon($value->history_created_at);
                                     $value_date::setLocale('fr');

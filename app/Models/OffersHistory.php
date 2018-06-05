@@ -18,7 +18,7 @@ class OffersHistory extends Model
      * @var array
      */
     protected $fillable = [
-        'offer_id', 'user_id', 'column_change', 'column_value'
+        'offer_id', 'user_id', 'column_change', 'column_value', 'reason'
     ];
 
     protected $table = "offers_history";

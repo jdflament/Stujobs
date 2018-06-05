@@ -79,33 +79,35 @@ function loadMoreData(page) {
 |--------------------------------------------------------------------------
 */
 
-// Set approve button href
+// Set approve form action
 $(document).on('click', '.btn-pre-complete-offer', function(event) {
     event.preventDefault();
     var route = $(this).data('href');
     var offerid = $(this).data('offerid');
 
-    $('#btn-complete-offer').attr('href', route);
-    $('#btn-complete-offer').attr('data-offerid', offerid);
+    $('form[name=completeOffer]').attr('action', route);
+    $('form[name=completeOffer]').attr('data-offerid', offerid);
 });
 
-// Reset approve button href
+// Reset approve form action
 $(document).on('hidden.bs.modal', '#modalCompleteOffer', function() {
-    $(this).find('#btn-complete-offer').attr('href', '#');
+    $(this).find('form[name=completeOffer]').attr('action', '#');
 });
 
-$(document).on('click', '#btn-complete-offer', function(event) {
+$(document).on('submit', 'form[name=completeOffer]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
-    var $button = $(this);
+    var $button = $(this).find('button[type=submit]');
     var $buttonValue = $button.html();
-    var url = $(this).attr('href');
+    var url = $(this).attr('action');
     var offer_id = $(this).attr('data-offerid');
+    var data = $(this).serialize();
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
+        data: data,
         beforeSend: function() {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
@@ -121,6 +123,12 @@ $(document).on('click', '#btn-complete-offer', function(event) {
         error: function (response) {
             console.error(response);
             notification('danger', "Une erreur est survenue.");
+            $('.error').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $button.html($buttonValue);
@@ -140,27 +148,29 @@ $(document).on('click', '.btn-pre-uncomplete-offer', function(event) {
     var route = $(this).data('href');
     var offerid = $(this).data('offerid');
 
-    $('#btn-uncomplete-offer').attr('href', route);
-    $('#btn-uncomplete-offer').attr('data-offerid', offerid);
+    $('form[name=uncompleteOffer]').attr('action', route);
+    $('form[name=uncompleteOffer]').attr('data-offerid', offerid);
 });
 
 // Reset approve button href
 $(document).on('hidden.bs.modal', '#modalUncompleteOffer', function() {
-    $(this).find('#btn-uncomplete-offer').attr('href', '#');
+    $(this).find('form[name=uncompleteOffer]').attr('action', '#');
 });
 
-$(document).on('click', '#btn-uncomplete-offer', function(event) {
+$(document).on('submit', 'form[name=uncompleteOffer]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
-    var $button = $(this);
+    var $button = $(this).find('button[type=submit]');
     var $buttonValue = $button.html();
-    var url = $(this).attr('href');
+    var url = $(this).attr('action');
     var offer_id = $(this).attr('data-offerid');
+    var data = $(this).serialize();
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
+        data: data,
         beforeSend: function() {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
@@ -175,7 +185,14 @@ $(document).on('click', '#btn-uncomplete-offer', function(event) {
             $modal.modal('toggle');
         },
         error: function (response) {
+            console.error(response);
             notification('danger', "Une erreur est survenue.");
+            $('.error').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $button.html($buttonValue);

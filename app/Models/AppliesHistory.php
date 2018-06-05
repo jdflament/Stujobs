@@ -18,7 +18,7 @@ class AppliesHistory extends Model
      * @var array
      */
     protected $fillable = [
-        'apply_id', 'user_id', 'column_change', 'column_value'
+        'apply_id', 'user_id', 'column_change', 'column_value', 'reason'
     ];
 
     protected $table = "applies_history";

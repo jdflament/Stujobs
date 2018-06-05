@@ -10,27 +10,28 @@ $(document).on('click', '.btn-pre-approve-offer', function(event) {
     var route = $(this).data('href');
     var offerid = $(this).data('offerid');
 
-    $('#btn-approve-offer').attr('href', route);
-    $('#btn-approve-offer').attr('data-offerid', offerid)
+    $('form[name=approveOffer]').attr('action', route);
+    $('form[name=approveOffer]').attr('data-offerid', offerid)
 });
 
-// Reset approve button href
 $(document).on('hidden.bs.modal', '#modalApproveOffer', function() {
-    $(this).find('#btn-approve-offer').attr('href', '#');
+    $(this).find('form[name=approveOffer]').attr('action', '#');
 });
 
-$(document).on('click', '#btn-approve-offer', function(event) {
+$(document).on('submit', 'form[name=approveOffer]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
-    var $button = $(this);
+    var $button = $(this).find('button[type=submit]');
     var $buttonValue = $button.html();
-    var url = $(this).attr('href');
+    var url = $(this).attr('action');
     var offer_id = $(this).attr('data-offerid');
+    var data = $(this).serialize();
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
+        data: data,
         beforeSend: function() {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
@@ -56,6 +57,12 @@ $(document).on('click', '#btn-approve-offer', function(event) {
         error: function (response) {
             console.error(response);
             notification('danger', "Une erreur est survenue.");
+            $('.error').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $button.html($buttonValue);
@@ -75,27 +82,30 @@ $(document).on('click', '.btn-pre-disapprove-offer', function(event) {
     var route = $(this).data('href');
     var offerid = $(this).data('offerid');
 
-    $('#btn-disapprove-offer').attr('href', route);
-    $('#btn-disapprove-offer').attr('data-offerid', offerid);
+    $('form[name=disapproveOffer]').attr('action', route);
+    $('form[name=disapproveOffer]').attr('data-offerid', offerid);
 });
 
 // Reset approve button href
 $(document).on('hidden.bs.modal', '#modalDisapproveOffer', function() {
-    $(this).find('#btn-disapprove-offer').attr('href', '#');
+    $(this).find('form[name=disapproveOffer]').attr('action', '#');
 });
 
-$(document).on('click', '#btn-disapprove-offer', function(event) {
+
+$(document).on('submit', 'form[name=disapproveOffer]', function(event) {
     event.preventDefault();
 
     var $modal = $(this).closest('.modal');
-    var $button = $(this);
+    var $button = $(this).find('button[type=submit]');
     var $buttonValue = $button.html();
-    var url = $(this).attr('href');
+    var url = $(this).attr('action');
     var offer_id = $(this).attr('data-offerid');
+    var data = $(this).serialize();
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: url,
+        data: data,
         beforeSend: function() {
             $button.html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
@@ -121,6 +131,12 @@ $(document).on('click', '#btn-disapprove-offer', function(event) {
         error: function (response) {
             console.error(response);
             notification('danger', "Une erreur est survenue.");
+            $('.error').remove();
+            $.each(response.responseJSON.errors, function (i) {
+                $.each(response.responseJSON.errors[i], function (key, val) {
+                    $('#' + i).after('<div class="error">' + val + '</div>');
+                });
+            });
         },
         complete: function() {
             $button.html($buttonValue);

@@ -11,7 +11,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class AppliesController extends Controller
 {
@@ -77,8 +79,17 @@ class AppliesController extends Controller
         return $totalApplies;
     }
 
-    public function accept($id)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return int
+     *
+     * Accept an apply and return the total not valid
+     */
+    public function accept($id, Request $request)
     {
+        $data = Input::only('accept_reason');
+
         $user_id = Auth::user()->id;
 
         $apply = DB::table('applies')->where('applies.id', $id)
@@ -107,6 +118,7 @@ class AppliesController extends Controller
         $history->setAttribute('user_id', $user_id);
         $history->setAttribute('column_change', 'valid');
         $history->setAttribute('column_value', 1);
+        $history->setAttribute('reason', $data['accept_reason']);
         $history->save();
 
         // Count the total applies who need to be manage
@@ -122,12 +134,24 @@ class AppliesController extends Controller
 
     /**
      * @param $id
-     * @return int
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|int
      *
      * Refuse an apply and return the total to manage
      */
-    public function refuse($id)
+    public function refuse($id, Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'refuse_reason' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 500);
+        }
+
+        $data = Input::only('refuse_reason');
+
         $user_id = Auth::user()->id;
 
         $apply = Apply::where('id', $id)->first();
@@ -147,6 +171,7 @@ class AppliesController extends Controller
         $history->setAttribute('user_id', $user_id);
         $history->setAttribute('column_change', 'valid');
         $history->setAttribute('column_value', 2);
+        $history->setAttribute('reason', $data['refuse_reason']);
         $history->save();
 
         $applies = DB::table('applies')
@@ -199,7 +224,7 @@ class AppliesController extends Controller
             ->leftJoin('users', 'applies_history.user_id', '=', 'users.id')
             ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
             ->leftJoin('admins', 'users.id', '=', 'admins.user_id')
-            ->select('applies_history.id as history_id', 'applies_history.column_change as history_column_change', 'applies_history.column_value as history_column_value', 'applies_history.created_at as history_created_at', 'users.email as history_user_email', 'users.id as history_user_id', 'users.role as history_user_role', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'admins.firstname as admin_firstname', 'admins.lastname as admin_lastname', 'admins.phone as admin_phone', 'admins.office as admin_office')
+            ->select('applies_history.id as history_id', 'applies_history.column_change as history_column_change', 'applies_history.column_value as history_column_value', 'applies_history.reason as history_reason', 'applies_history.created_at as history_created_at', 'users.email as history_user_email', 'users.id as history_user_id', 'users.role as history_user_role', 'companies.name as company_name', 'companies.siret as company_siret', 'companies.phone as company_phone', 'companies.address as company_address', 'admins.firstname as admin_firstname', 'admins.lastname as admin_lastname', 'admins.phone as admin_phone', 'admins.office as admin_office')
             ->where('applies_history.apply_id', '=', $id)
             ->orderBy('applies_history.created_at', 'ASC')
             ->get();

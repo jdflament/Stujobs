@@ -108,8 +108,19 @@ class OffersController extends Controller
      *
      * Complete an offer
      */
-    public function complete($id)
+    public function complete($id, Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'complete_reason' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 500);
+        }
+
+        $data = Input::only('complete_reason');
+
         $user_id = Auth::user()->id;
 
         $offer = Offer::where('id', $id)->first();
@@ -122,6 +133,7 @@ class OffersController extends Controller
         $history->setAttribute('user_id', $user_id);
         $history->setAttribute('column_change', 'complete');
         $history->setAttribute('column_value', 1);
+        $history->setAttribute('reason', $data['complete_reason']);
         $history->save();
 
         $offers = DB::table('offers')
@@ -133,15 +145,25 @@ class OffersController extends Controller
         return $total;
     }
 
-
     /**
      * @param $id
      * @return int
      *
      * Uncomplete a complete offer
      */
-    public function uncomplete($id)
+    public function uncomplete($id, Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'uncomplete_reason' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 500);
+        }
+
+        $data = Input::only('uncomplete_reason');
+
         $user_id = Auth::user()->id;
 
         $offer = Offer::where('id', $id)->first();
@@ -155,6 +177,7 @@ class OffersController extends Controller
         $history->setAttribute('user_id', $user_id);
         $history->setAttribute('column_change', 'complete');
         $history->setAttribute('column_value', 0);
+        $history->setAttribute('reason', $data['uncomplete_reason']);
         $history->save();
 
         $offers = DB::table('offers')
@@ -294,8 +317,8 @@ class OffersController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param $result
+     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *
      * Search an offer and return id + title
      */

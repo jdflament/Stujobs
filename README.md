@@ -21,6 +21,4 @@ This project has the particularity of allowing the university to manage student 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 This project is licensed under the Attribution-NonCommercial - NoDerivatives 4.0 International (CC-BY-NC-ND) - see the [LICENSE.md](LICENSE.md) file for details

@@ -227,10 +227,10 @@ class ProfileController extends Controller
             }
             // Delete form company table
             Company::where('user_id', $id)->delete();
-            // Delete form users table
-            User::where('id', $id)->delete();
             // Delete form verify_users table            
             DB::table('verify_users')->where('user_id', $id)->delete();
+            // Delete form users table
+            User::where('id', $id)->delete();
 
         }
         else {

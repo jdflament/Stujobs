@@ -64,6 +64,8 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
     Route::get('/profile/settings', 'Website\ProfileController@settings')->name('profileSettings');
     // Delete all data from Stujobs
     Route::post('/settings/delete', 'Website\ProfileController@deleteData')->name('profileDeleteData');
+    // Export all data from Stujobs
+    Route::post('/settings/download', 'Website\ProfileController@downloadData')->name('profileDownloadData');
 });
 
 /*

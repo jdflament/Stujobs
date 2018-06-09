@@ -238,6 +238,35 @@ class ProfileController extends Controller
             return response()->json(['error' => Lang::get('errors.' . 470)], 470);
         }
 
-        return redirect()->route('home');
+        return redirect()->to('/');
+    }
+    public function downloadData()
+    {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'download_password' => 'required|string|min:6|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
+        }
+        $id = Auth::user()->id;    
+        $pass = Auth::user()->password;
+        $download_password = Input::only('download_password');
+
+
+        if(Hash::check($delete_password["download_password"], $pass)) {
+            // Password correct, delete all data form all tables in DB
+            
+            $company = Company::where('user_id', $id)->get()->first();
+            $id_company = $company->id;
+            $offers = Offer::where('company_id', '=', $id)->get();
+
+        }
+        else {
+            // User password invalid
+            return response()->json(['error' => Lang::get('errors.' . 470)], 470);
+        }
+
     }
 }

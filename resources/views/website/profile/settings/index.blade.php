@@ -14,7 +14,7 @@
                 <div class="boxEffect">
                     <h3 class="boxTitle centerContent">Télécharger vos informations</h3>
                     <p class="paragraphe">Vous pouvez télécharger une copie de vos informations à tout moment. Le téléchargement de vos informations est un processus protégé par un mot de passe connu de vous uniquement. Si vous souhaitez télécharger vos informations, cliquez sur Télécharger mes informations.</p> 
-                    <a href="" class="buttonActionLg bgPrimary"><i class="fa fa-download"></i> Télécharger mes informations</a>                   
+                    <a data-toggle="modal" data-target="#modalDownloadData" href="" class="buttonActionLg bgPrimary"><i class="fa fa-download"></i> Télécharger mes informations</a>                   
                 </div>
             </div>
             <div class="col-xs-12 col-md-4 col-lg-4 marginTop">
@@ -28,4 +28,5 @@
     </div>
 </div>
     @include('website/profile/settings/delete')
+    @include('website/profile/settings/download')
 @endsection

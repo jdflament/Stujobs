@@ -21,10 +21,11 @@
                 <div class="boxEffect">
                     <h3 class="boxTitle centerContent">Supprimer votre compte</h3>
                     <p class="paragraphe">Si vous ne pensez jamais réutiliser Stujobs et souhaitez effacer complètement votre compte, nous pouvons nous en charger. Sachez cependant que vous ne pourrez ni réactiver votre compte ni récupérer son contenu ou ses informations. Si vous souhaitez tout de même supprimer votre compte, cliquez sur Supprimer mon compte.</p> 
-                    <a href="" class="buttonActionLg bgDanger"><i class="fa fa-trash"></i> Supprimer mon compte</a>                   
+                    <a data-toggle="modal" data-target="#modalDeleteAccount" href="" class="buttonActionLg bgDanger"><i class="fa fa-trash"></i> Supprimer mon compte</a>                   
                 </div>
             </div>
         </div>
     </div>
 </div>
+    @include('website/profile/settings/delete')
 @endsection

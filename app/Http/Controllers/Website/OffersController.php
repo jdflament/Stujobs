@@ -57,7 +57,6 @@ class OffersController extends Controller
     {
         // Inputs errors
         $validator = Validator::make($request->all(), [
-            'create_company_id' => 'required',
             'create_title' => 'required|string|max:255',
             'create_description' => 'required|string',
             'create_contract_type' => 'required',

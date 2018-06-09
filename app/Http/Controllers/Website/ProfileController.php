@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Website;
 
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Offer;
+use App\Models\Apply;
+use App\Models\OffersHistory;
+use App\Models\AppliesHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -167,6 +171,73 @@ class ProfileController extends Controller
     }
     public function settings()
     {
-        return view('website/profile/settings');
+        return view('website/profile/settings/index');
+    }
+    public function deleteData(Request $request)
+    {
+        
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'delete_password' => 'required|string|min:6|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
+        }
+        $id = Auth::user()->id;    
+        $pass = Auth::user()->password;
+        $delete_password = Input::only('delete_password');
+
+
+        if(Hash::check($delete_password["delete_password"], $pass)) {
+            // Password correct, delete all data form all tables in DB
+            $company = Company::where('user_id', $id)->get()->first();
+            $id_company = $company->id;
+            $offers = Offer::where('company_id', '=', $id)->get();
+            if ($offers) {
+                foreach ($offers as $value) {
+                    $offer_history = OffersHistory::where('offer_id', '=', $value->id)->get();
+                    if ($offer_history) {
+                        foreach ($offer_history as $line) {
+                            // Delete offer history
+                            $line->delete();
+                        }
+                    }
+                    $applies = Apply::where('offer_id', '=', $value->id)->get();
+                    if ($applies) {
+                        foreach ($applies as $apply) {
+                            if (isset($apply->cv_filename)) {
+                                // Delete CV file
+                                File::delete(storage_path('app/public/cv') . '/' . $apply->cv_filename);
+                            }
+                            $apply_history = AppliesHistory::where('apply_id', '=', $apply->id)->get();
+                            if ($apply_history) {
+                                foreach ($apply_history as $val) {
+                                    // Delete apply history
+                                    $val->delete();
+                                }
+                            }
+                            // Delete apply
+                            $apply->delete();
+                        }
+                    }
+                    // Delete offer
+                    $value->delete();
+                }
+            }
+            // Delete form company table
+            Company::where('user_id', $id)->delete();
+            // Delete form users table
+            User::where('id', $id)->delete();
+            // Delete form verify_users table            
+            DB::table('verify_users')->where('user_id', $id)->delete();
+
+        }
+        else {
+            // User password invalid
+            return response()->json(['error' => Lang::get('errors.' . 470)], 470);
+        }
+
+        return redirect()->route('home');
     }
 }

@@ -240,7 +240,7 @@ class ProfileController extends Controller
 
         return redirect()->to('/');
     }
-    public function downloadData()
+    public function downloadData(Request $request)
     {
         // Inputs errors
         $validator = Validator::make($request->all(), [
@@ -255,12 +255,41 @@ class ProfileController extends Controller
         $download_password = Input::only('download_password');
 
 
-        if(Hash::check($delete_password["download_password"], $pass)) {
+        if(Hash::check($download_password["download_password"], $pass)) {
             // Password correct, delete all data form all tables in DB
-            
-            $company = Company::where('user_id', $id)->get()->first();
-            $id_company = $company->id;
-            $offers = Offer::where('company_id', '=', $id)->get();
+            $data = array();
+            $user = Auth::user()->toArray();
+            array_push($data, $user);            
+            $company = Company::where('user_id', $id)->get()->first()->toArray();
+            array_push($data, $company);            
+            $id_company = $company["id"];
+            $offers = Offer::where('company_id', '=', $id)->get()->toArray();
+            if($offers){
+                foreach($offers as $offer){
+                    array_push($data, $offer);
+                    $offer_history = OffersHistory::where('offer_id', '=', $offer["id"])->get()->toArray();
+                    if ($offer_history) {
+                        foreach ($offer_history as $line) {
+                            array_push($data, $line);
+                        }
+                    }
+                    $applies = Apply::where('offer_id', '=', $offer["id"])->get()->toArray();
+                    if ($applies) {
+                        foreach ($applies as $apply) {
+                            $apply_history = AppliesHistory::where('apply_id', '=', $apply["id"])->get()->toArray();
+                            if ($apply_history) {
+                                foreach ($apply_history as $val) {
+                                    array_push($data, $val);
+                                }
+                            }
+                            array_push($data, $apply);
+                        }
+                    }
+                }
+            }
+            $this->outputCSV($data, 'download.csv');
+
+            // return redirect()->route('profileSettings')->with('success', 'Vos données ont été exportées'); 
 
         }
         else {
@@ -269,4 +298,26 @@ class ProfileController extends Controller
         }
 
     }
+    public function outputCSV($data,$file_name = 'data_stujobs.csv') {
+        # output headers so that the file is downloaded rather than displayed
+         header("Content-Type: text/csv");
+         header("Content-Disposition: attachment; filename=$file_name");
+         # Disable caching - HTTP 1.1
+         header("Cache-Control: no-cache, no-store, must-revalidate");
+         # Disable caching - HTTP 1.0
+         header("Pragma: no-cache");
+         # Disable caching - Proxies
+         header("Expires: 0");
+     
+         # Start the ouput
+         $output = fopen("php://output", "w");
+         
+          # Then loop through the rows
+         foreach ($data as $row) {
+             # Add the rows to the body
+             fputcsv($output, $row); // here you can change delimiter/enclosure
+         }
+         # Close the stream off
+         fclose($output);
+     }
 }

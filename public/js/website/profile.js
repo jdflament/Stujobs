@@ -90,6 +90,7 @@ $(document).on('submit', 'form[name=deleteData]', function(event) {
         success: function(response) {
             notification('success', "Vos données ont totalement été supprimées.");
             $submit.html('<i class="fa fa-check"></i>');
+            window.location.reload();
         },
         error: function (response) {
             notification('danger', "Une erreur est survenue.");

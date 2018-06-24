@@ -238,7 +238,7 @@ class ProfileController extends Controller
             return response()->json(['error' => Lang::get('errors.' . 470)], 470);
         }
 
-        return redirect()->to('/');
+        return response()->json("ok");
     }
     public function downloadData(Request $request)
     {

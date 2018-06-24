@@ -27,6 +27,6 @@
         </div>
     </div>
 </div>
-    @include('website/profile/settings/delete')
-    @include('website/profile/settings/download')
+    @include('website/informations/delete')
+    @include('website/informations/download')
 @endsection

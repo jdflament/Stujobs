@@ -2,7 +2,7 @@
 <div class="modal fade" id="modalDownloadData" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modalContent">
-            <form name="downloadData" role="form" method="post" action="/settings/download">
+            <form name="downloadData" role="form" method="post" action="/informations/download">
                 <!-- Modal Header -->
                 <div class="modalHeader">
                     <button type="button" class="close" data-dismiss="modal">
@@ -17,10 +17,10 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-6 col-lg-6">
                             <div class="inputGroup">
-                                <label for="download_password">Mot de passe *</label>
-                                <input type="password" id="download_password" name="download_password" required="required" placeholder="Mot de passe..." />
-                                @if ($errors->has('download_password'))
-                                    <div class="error">{{ $errors->first('download_password') }}</div>
+                                <label for="download_password">Votre adresse email</label>
+                                <input type="email" id="download_email" name="download_email" required="required" placeholder="Votre adresse email" />
+                                @if ($errors->has('download_email'))
+                                    <div class="error">{{ $errors->first('download_email') }}</div>
                                  @endif
                             </div>
                         </div>

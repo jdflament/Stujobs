@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DownloadDataVerify;
 
 class DataController extends Controller
 {
@@ -30,6 +32,30 @@ class DataController extends Controller
 
     public function downloadData(Request $request)
     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'download_email' => 'required|email|',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
+        }
+        $download_email = Input::only('download_email');
+        $code = $this->generateRandomString(5);
+
+        Mail::to($download_email['download_email'])->send(new DownloadDataVerify($code));
+
+        return redirect()->route('informations')->with('success', 'Votre code de vérification à été envoyé');
+        
+    }
+    public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
     public function outputCSV($data,$file_name = 'data_stujobs.csv') {
         # output headers so that the file is downloaded rather than displayed

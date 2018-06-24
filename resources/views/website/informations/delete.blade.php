@@ -2,7 +2,7 @@
 <div class="modal fade" id="modalDeleteAccount" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modalContent">
-            <form name="deleteData" role="form" method="post" action="/settings/delete">
+            <form name="deleteData" role="form" method="post" action="/informations/delete">
                 <!-- Modal Header -->
                 <div class="modalHeader">
                     <button type="button" class="close" data-dismiss="modal">

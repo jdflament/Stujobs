@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <div class="boxEffect">
                     <div class="boxEffectHeader">
-                        <h3 class="boxEffectTitle">Paramètres et outils de confidentialité</h3>
+                        <h3 class="boxEffectTitle">Vos données sur Stujobs :</h3>
                     </div>
                 </div>
             </div>

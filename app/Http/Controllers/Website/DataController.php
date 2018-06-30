@@ -151,7 +151,42 @@ class DataController extends Controller
             // return redirect()->back()->with('success', 'Votre fichier à été téléchargé');
         }
         else {
-            dd("error -> code pas ok");
+            dd('Le code ne correspond pas');
+        }
+        
+     }
+     public function checkCodeDelete(Request $request)
+     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'code_check' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
+        }
+        $code = Input::only('code_check');
+        $guest_email= Input::only('guest_email');
+
+        $check = GuestData::where('email', '=', $guest_email['guest_email'])->first();
+
+        if (strcmp($code['code_check'], $check->code) == 0) {
+            $applies = Apply::where('email', '=', $check->email)->get();
+            foreach($applies as $apply){
+                $apply_history = AppliesHistory::where('apply_id', '=', $apply["id"])->get();
+                    if ($apply_history) {
+                        foreach ($apply_history as $val) {
+                            $val->delete();
+                        }
+                    }
+                    $apply->delete();
+            }
+            $check->delete();
+            
+            // return redirect()->back()->with('success', 'Vos données ont été totalement supprimées');
+        }
+        else {
+            dd('Le code ne correspond pas');
         }
         
      }

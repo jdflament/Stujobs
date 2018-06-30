@@ -8,6 +8,7 @@ use App\Models\Offer;
 use App\Models\Apply;
 use App\Models\OffersHistory;
 use App\Models\AppliesHistory;
+use App\Models\GuestData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -43,12 +44,18 @@ class DataController extends Controller
         $download_email = Input::only('download_email');
         $code = $this->generateRandomString(5);
 
-        Mail::to($download_email['download_email'])->send(new DownloadDataVerify($code));
+        $guestData = new GuestData();
+        $guestData->setAttribute('email', $download_email['download_email']);
+        $guestData->setAttribute('code', $code);
+        $guestData->save(); 
+
+        Mail::to($download_email['download_email'])->send(new DownloadDataVerify($code, $download_email['download_email']));
 
         return redirect()->route('informations')->with('success', 'Votre code de vérification à été envoyé');
         
     }
-    public function generateRandomString($length = 10) {
+    public function generateRandomString($length = 10) 
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -57,7 +64,8 @@ class DataController extends Controller
         }
         return $randomString;
     }
-    public function outputCSV($data,$file_name = 'data_stujobs.csv') {
+    public function outputCSV($data,$file_name = 'data_stujobs.csv') 
+    {
         # output headers so that the file is downloaded rather than displayed
          header("Content-Type: text/csv");
          header("Content-Disposition: attachment; filename=$file_name");
@@ -78,6 +86,45 @@ class DataController extends Controller
          }
          # Close the stream off
          fclose($output);
+     }
+     public function checkPage()
+     {
+        return view('website/informations/check');
+
+     }
+     public function checkCode(Request $request)
+     {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'code_check' => 'required|',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
+        }
+        $code = Input::only('code_check');
+        $guest_email= Input::only('guest_email');
+
+        $check = GuestData::where('email', '=', $guest_email['guest_email'])->first();
+        $data_export = array();
+        if (strcmp($code['code_check'], $check->code) == 0) {
+            $applies = Apply::where('email', '=', $check->email)->get()->toArray();
+            foreach($applies as $apply){
+                $apply_history = AppliesHistory::where('apply_id', '=', $apply["id"])->get()->toArray();
+                    if ($apply_history) {
+                        foreach ($apply_history as $val) {
+                            array_push($data_export, $val);
+                        }
+                    }
+                array_push($data_export, $apply);
+            }
+            $check->delete();
+            $this->outputCSV($data_export, 'download.csv');
+        }
+        else {
+            dd("error -> code pas ok");
+        }
+        
      }
 
 }

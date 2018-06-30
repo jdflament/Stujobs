@@ -19,9 +19,10 @@ class DownloadDataVerify extends Mailable
      *
      * Email verify constructor
      */
-    public function __construct($code)
+    public function __construct($code, $email)
     {
         $this->code = $code;
+        $this->email = $email;
     }
 
     /**
@@ -33,6 +34,7 @@ class DownloadDataVerify extends Mailable
     {
         return $this->view('emails.downloadDataVerify')
                     ->with([
+                        'email' => $this->email,
                         'code' => $this->code
                     ]);
     }

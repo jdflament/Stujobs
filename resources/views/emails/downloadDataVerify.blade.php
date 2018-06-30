@@ -73,7 +73,8 @@
               <!-- COPY -->
               <tr>
                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666;font-size: 18px; font-weight: 400; line-height: 25px;" >
-                  <p style="margin: 0;">Voici le code de vérification nécessaire pour pouvoir obtenir une copie de vos données présentes sur Stujobs.</p>
+                <p style="margin: 0;">Voici le code de vérification nécessaire pour pouvoir obtenir une copie de vos données présentes sur Stujobs : <b>{{ $code }}</b></p>
+                <p>Veuillez cliquer sur le bouton ci-dessous pour obtenir vos données.</p>
                 </td>
               </tr>
               <!-- BULLETPROOF BUTTON -->
@@ -84,7 +85,7 @@
                       <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                         <table border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                              <td align="center" style="border-radius: 3px;" bgcolor="#5681E7"><a style="font-size: 20px;color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">{{ $code }}</a></td>
+                          <td align="center" style="border-radius: 3px;" bgcolor="#5681E7"><a href="{{ env('APP_URL') }}/informations/check?email={{ $email }}" style="font-size: 20px;color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Valider votre demande</a></td>
                           </tr>
                         </table>
                       </td>
@@ -103,7 +104,7 @@
               <!-- PERMISSION REMINDER -->
               <tr>
                 <td bgcolor="#f4f4f4" align="left" style="padding: 0px 30px 30px 30px; color: #666666;font-size: 14px; font-weight: 400; line-height: 18px;" >
-                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous vous êtes inscrit sur Stujobs. Si ce n'est pas le cas, <a href="mailto:{{ env('MAIL_USERNAME') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
+                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous avez souhaité obtenir une copie de vos données Stujobs. Si ce n'est pas le cas, <a href="mailto:{{ env('MAIL_USERNAME') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
                 </td>
               </tr>
               

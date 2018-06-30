@@ -20,15 +20,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DownloadDataVerify;
+use App\Mail\DeleteDataVerify;
 
 class DataController extends Controller
 {
     public function index()
     {
         return view('website/informations/index');
-    }
-    public function deleteData(Request $request)
-    {
     }
 
     public function downloadData(Request $request)
@@ -54,6 +52,30 @@ class DataController extends Controller
         return redirect()->route('informations')->with('success', 'Votre code de vérification à été envoyé');
         
     }
+    public function deleteData(Request $request)
+    {
+        // Inputs errors
+        $validator = Validator::make($request->all(), [
+            'delete_email' => 'required|email|',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->getMessages()], 422);
+        }
+        $delete_email = Input::only('delete_email');
+        $code = $this->generateRandomString(5);
+
+        $guestData = new GuestData();
+        $guestData->setAttribute('email', $delete_email['delete_email']);
+        $guestData->setAttribute('code', $code);
+        $guestData->save(); 
+
+        Mail::to($delete_email['delete_email'])->send(new DeleteDataVerify($code, $delete_email['delete_email']));
+
+        return redirect()->route('informations')->with('success', 'Votre code de vérification à été envoyé');
+        
+    }
+
     public function generateRandomString($length = 10) 
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -87,16 +109,21 @@ class DataController extends Controller
          # Close the stream off
          fclose($output);
      }
-     public function checkPage()
+     public function checkPageDownload()
      {
-        return view('website/informations/check');
+        return view('website/informations/check/download');
 
      }
-     public function checkCode(Request $request)
+     public function checkPageDelete()
+     {
+        return view('website/informations/check/delete');
+
+     }
+     public function checkCodeDownload(Request $request)
      {
         // Inputs errors
         $validator = Validator::make($request->all(), [
-            'code_check' => 'required|',
+            'code_check' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -120,6 +147,8 @@ class DataController extends Controller
             }
             $check->delete();
             $this->outputCSV($data_export, 'download.csv');
+            
+            // return redirect()->back()->with('success', 'Votre fichier à été téléchargé');
         }
         else {
             dd("error -> code pas ok");

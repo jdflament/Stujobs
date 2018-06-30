@@ -9,18 +9,18 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <h3 class="modalTitle" id="myModalLabel">Supprimer définitivement votre compte</h3>
+                    <h3 class="modalTitle" id="myModalLabel">Supprimer définitivement mes données</h3>
                 </div>
                 <!-- Modal Body -->
                 <div class="modalBody">
-                    <p>Nous vous rappellons que vous ne pourrez ni réactiver votre compte ni récupérer son contenu ou ses informations en cas de suppression définitive. Si vous souhaitez tout de même poursuivre, veuillez saisir votre mot de passe.</p>
+                    <p>Nous vous rappellons que vous ne pourrez pas récupérer vos données en cas de suppression définitive. Si vous souhaitez tout de même poursuivre, veuillez saisir votre adresse email utilisée sur Stujobs pour obtenir votre code de vérification.</p>
                     <div class="row">
                         <div class="col-xs-12 col-md-6 col-lg-6">
                             <div class="inputGroup">
-                                <label for="delete_password">Mot de passe *</label>
-                                <input type="password" id="delete_password" name="delete_password" required="required" placeholder="Mot de passe..." />
-                                @if ($errors->has('delete_password'))
-                                    <div class="error">{{ $errors->first('delete_password') }}</div>
+                                <label for="delete_email">Votre adresse email *</label>
+                                <input type="email" id="delete_email" name="delete_email" required="required" placeholder="Votre adresse email..." />
+                                @if ($errors->has('delete_email'))
+                                    <div class="error">{{ $errors->first('delete_email') }}</div>
                                  @endif
                             </div>
                         </div>

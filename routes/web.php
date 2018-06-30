@@ -109,14 +109,20 @@ Route::group(['middleware' => 'can:companyAccess'], function() {
 /*
  * Guest : RGPD page
  */
+// Display informations page
 Route::get('/informations', 'Website\DataController@index')->name('informations');
-Route::get('/informations/check', 'Website\DataController@checkPage')->name('informationsCheck');
+// Display information download check page
+Route::get('/informations/check/download', 'Website\DataController@checkPageDownload')->name('informationsCheckDownload');
+// Display information delete check page
+Route::get('/informations/check/delete', 'Website\DataController@checkPageDelete')->name('informationsCheckDelete');
 // Delete all data from Stujobs
 Route::post('/informations/delete', 'Website\DataController@deleteData')->name('informationsDeleteData');
 // Export all data from Stujobs
 Route::post('/informations/download', 'Website\DataController@downloadData')->name('informationsDownloadData');
-// Export all data from Stujobs
-Route::post('/informations/check', 'Website\DataController@checkCode')->name('informationsCheckCode');
+// Download guest Data
+Route::post('/informations/check/download', 'Website\DataController@checkCodeDownload')->name('informationsCheckCodeDownload');
+// Delete guest Data
+Route::post('/informations/check/delete', 'Website\DataController@checkCodeDelete')->name('informationsCheckCodeDelete');
 
 /*
 |--------------------------------------------------------------------------

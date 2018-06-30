@@ -10,18 +10,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4 col-lg-4 marginTop">
+            <div class="col-xs-12 col-md-12 col-lg-12 marginTop">
                 <div class="boxEffect">
-                    <h3 class="boxTitle centerContent">Télécharger vos informations</h3>
-                    <p class="paragraphe">Vous pouvez télécharger une copie de vos informations à tout moment. Le téléchargement de vos informations est un processus protégé par un mot de passe connu de vous uniquement. Si vous souhaitez télécharger vos informations, cliquez sur Télécharger mes informations.</p> 
-                    <a data-toggle="modal" data-target="#modalDownloadData" href="" class="buttonActionLg bgPrimary"><i class="fa fa-download"></i> Télécharger mes informations</a>                   
+                    <h3 class="boxTitle centerContent">Effectuer une demande de copie de vos données</h3>
+                    <p class="paragraphe">Si vous voulez vérifier si nous possédons des informations à votre sujet, vous pouvez télécharger une copie de celles-ci à tout moment. Si vous souhaitez télécharger vos informations, cliquez sur Télécharger mes informations.</p> 
+                    <div style="display: flex;justify-content:center;">
+                        <a data-toggle="modal" data-target="#modalDownloadData" href="" class="buttonActionLg bgPrimary"><i class="fa fa-download"></i> Télécharger mes informations</a>
+                    </div>                   
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4 col-lg-4 marginTop">
+            <div class="col-xs-12 col-md-12 col-lg-12 marginTop">
                 <div class="boxEffect">
-                    <h3 class="boxTitle centerContent">Supprimer votre compte</h3>
-                    <p class="paragraphe">Si vous ne pensez jamais réutiliser Stujobs et souhaitez effacer complètement votre compte, nous pouvons nous en charger. Sachez cependant que vous ne pourrez ni réactiver votre compte ni récupérer son contenu ou ses informations. Si vous souhaitez tout de même supprimer votre compte, cliquez sur Supprimer mon compte.</p> 
-                    <a data-toggle="modal" data-target="#modalDeleteAccount" href="" class="buttonActionLg bgDanger"><i class="fa fa-trash"></i> Supprimer mon compte</a>                   
+                    <h3 class="boxTitle centerContent">Effectuer une demande de suppression de vos données</h3>
+                    <p class="paragraphe">Si vous souhaitez effacer complètement vos données présentes sur Stujobs, nous pouvons nous en charger. Sachez cependant que vous ne pourrez pas récupérer son contenu ou ses informations. Nous vous conseillez d'effectuer avant une demande de copie de vos données. Si vous souhaitez tout de même supprimer celles-ci, cliquez sur Supprimer mes données.</p> 
+                    <div style="display: flex;justify-content:center;">
+                        <a data-toggle="modal" data-target="#modalDeleteAccount" href="" class="buttonActionLg bgDanger"><i class="fa fa-trash"></i> Supprimer mes données</a>   
+                    </div>                
                 </div>
             </div>
         </div>

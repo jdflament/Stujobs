@@ -13,11 +13,11 @@
                 </div>
                 <!-- Modal Body -->
                 <div class="modalBody">
-                    <p>Vous pouvez récupérer une copie de toutes les données existantes sur Stujobs vous concernant. Si vous souhaitez poursuivre, veuillez saisir votre mot de passe.</p>
+                    <p>Vous pouvez récupérer une copie de toutes les données existantes sur Stujobs vous concernant. Si vous souhaitez poursuivre, veuillez saisir votre adresse email utilisée sur notre site afin d'obtenir votre code de vérification.</p>
                     <div class="row">
                         <div class="col-xs-12 col-md-6 col-lg-6">
                             <div class="inputGroup">
-                                <label for="download_password">Votre adresse email</label>
+                                <label for="download_password">Votre adresse email *</label>
                                 <input type="email" id="download_email" name="download_email" required="required" placeholder="Votre adresse email" />
                                 @if ($errors->has('download_email'))
                                     <div class="error">{{ $errors->first('download_email') }}</div>

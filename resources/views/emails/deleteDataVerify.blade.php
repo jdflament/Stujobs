@@ -60,7 +60,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="480" >
                 <tr>
                     <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111;font-size: 48px; font-weight: 400;line-height: 48px;">
-                      <h1 style="font-size: 32px; font-weight: 400; margin: 0; color:#5580e7;">Demande de téléchargement de vos données</h1>
+                      <h1 style="font-size: 32px; font-weight: 400; margin: 0; color:#5580e7;">Demande de suppression de vos données</h1>
                     </td>
                 </tr>
             </table>
@@ -73,8 +73,8 @@
               <!-- COPY -->
               <tr>
                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666;font-size: 18px; font-weight: 400; line-height: 25px;" >
-                <p style="margin: 0;">Voici le code de vérification nécessaire pour pouvoir obtenir une copie de vos données présentes sur Stujobs : <b>{{ $code }}</b></p>
-                <p>Veuillez cliquer sur le bouton ci-dessous pour obtenir vos données.</p>
+                <p style="margin: 0;">Voici le code de vérification nécessaire pour pouvoir confirmer la suppression de vos données présentes sur Stujobs : <b>{{ $code }}</b></p>
+                <p>Veuillez cliquer sur le bouton ci-dessous pour supprimer vos données.</p>
                 </td>
               </tr>
               <!-- BULLETPROOF BUTTON -->
@@ -85,7 +85,7 @@
                       <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                         <table border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                          <td align="center" style="border-radius: 3px;" bgcolor="#5681E7"><a href="{{ env('APP_URL') }}/informations/check/download?email={{ $email }}" style="font-size: 20px;color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Valider votre demande</a></td>
+                          <td align="center" style="border-radius: 3px;" bgcolor="#5681E7"><a href="{{ env('APP_URL') }}/informations/check/delete?email={{ $email }}" style="font-size: 20px;color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Valider votre demande</a></td>
                           </tr>
                         </table>
                       </td>
@@ -104,7 +104,7 @@
               <!-- PERMISSION REMINDER -->
               <tr>
                 <td bgcolor="#f4f4f4" align="left" style="padding: 0px 30px 30px 30px; color: #666666;font-size: 14px; font-weight: 400; line-height: 18px;" >
-                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous avez souhaité obtenir une copie de vos données Stujobs. Si ce n'est pas le cas, <a href="mailto:{{ env('MAIL_USERNAME') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
+                  <p style="margin: 0;margin-top:15px;">Vous avez reçu cet email car vous avez souhaité supprimer vos données Stujobs. Si ce n'est pas le cas, <a href="mailto:{{ env('MAIL_USERNAME') }}" target="_blank" style="color: #111111; font-weight: 700;">contactez-nous</a>.</p>
                 </td>
               </tr>
               

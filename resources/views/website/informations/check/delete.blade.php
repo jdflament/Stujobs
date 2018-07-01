@@ -23,7 +23,7 @@
                             <input type="hidden" name="guest_email" id="guest_email" value="{{ $_GET['email']}}"  />
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <br />
-                            <div style="display: flex;justify-content:center;">
+                            <div class="flexCenter">
                                 <button type="submit" class="buttonActionLg bgPrimary submit-btn">Valider</button>
                             </div>
                         </div>

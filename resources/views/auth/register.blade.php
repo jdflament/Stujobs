@@ -110,6 +110,8 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="paragraphe centerContent marginTop">Vous pouvez vous désinscrire à tout moment en modifiant vos paramètres sur votre compte</p>
+
                     </div>
                     <div class="authFormFooter">
                         <button type="submit" class="buttonActionLg bgPrimary">S'inscrire</button>

@@ -380,3 +380,13 @@ List item
     -moz-transition: all 140ms ease-in;
     -o-transition: all 140ms ease-in;
 }
+
+/**
+Flex Center
+ */
+
+ .flexCenter {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }

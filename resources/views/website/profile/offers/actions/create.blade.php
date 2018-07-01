@@ -117,6 +117,13 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="inputGroup">
+                                    <label for="create_terms">En créant cette offre vous acceptez de ne pas divulger les informations qui vous seront transmises en cas de candidature à celle-ci.</label>
+                                </div>
+                                <input type="checkbox" name="create_terms" id="create_terms" class="checkboxInput" {{ old('create_terms') ? 'checked' : '' }}>
+                                @if ($errors->has('create_terms'))
+                                    <div class="error">{{ $errors->first('create_terms') }}</div>
+                                @endif
                             </div>
                         </div>
                         <div class="boxEffectFooter">

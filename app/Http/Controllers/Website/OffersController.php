@@ -65,7 +65,8 @@ class OffersController extends Controller
             'create_city' => 'required|string|max:255',
             'create_contact_email' => 'required|email',
             'create_contact_phone' => 'required|phone',
-            'create_sector' => 'required'
+            'create_sector' => 'required',
+            'create_terms' => 'required',
         ]);
 
         if ($validator->fails()) {

@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <h3 class="modalTitle" id="myModalLabel">S'inscrire à notre newsletter</h3>
+                    <h3 class="modalTitle" id="myModalLabel">S'inscrire à notre système d'alerte</h3>
                 </div>
                 <!-- Modal Body -->
                 <div class="modalBody">

@@ -6,7 +6,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <div class="boxEffect">
                     <div class="boxEffectHeader">
-                        <h3 class="boxEffectTitle">Confirmation du téléchargement de la copie totlae de vos données</h3>
+                        <h3 class="boxEffectTitle">Confirmation du téléchargement de la copie totale de vos données</h3>
                     </div>
                 </div>
             </div>

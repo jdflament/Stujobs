@@ -86,7 +86,7 @@ class DataController extends Controller
         }
         return $randomString;
     }
-    public function outputCSV($data,$file_name = 'data_stujobs.csv') 
+    public function outputCSV($data_applies,$data_applies_history,$file_name = 'export_stujobs.csv') 
     {
         # output headers so that the file is downloaded rather than displayed
          header("Content-Type: text/csv");
@@ -101,10 +101,26 @@ class DataController extends Controller
          # Start the ouput
          $output = fopen("php://output", "w");
          
-          # Then loop through the rows
-         foreach ($data as $row) {
-             # Add the rows to the body
-             fputcsv($output, $row); // here you can change delimiter/enclosure
+         if(!empty($data_applies)){
+            fputcsv($output, array("Vos candidatures :"));
+            fputcsv($output, array("\n"));
+            fputcsv($output, array('ID', 'Offer_id', 'Prénom', 'Nom', 'Email', 'CV', 'Taille du CV', 'Sujet', 'Message', 'Validée', 'Date de création', 'Date de modification'));
+            # Then loop through the rows
+            foreach ($data_applies as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
+         }
+         if(!empty($data_applies_history)){
+            fputcsv($output, array("\n"));
+            fputcsv($output, array("Historique de vos candidatures :"));
+            fputcsv($output, array("\n"));
+            fputcsv($output, array('ID', 'Apply_id', 'User_id', 'Colonne modifiée', 'Valeur de changement', 'Date de création', 'Date de modification','Motif'));
+            # Then loop through the rows
+            foreach ($data_applies_history as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
          }
          # Close the stream off
          fclose($output);
@@ -133,20 +149,21 @@ class DataController extends Controller
         $guest_email= Input::only('guest_email');
 
         $check = GuestData::where('email', '=', $guest_email['guest_email'])->first();
-        $data_export = array();
+        $data_applies = array();
+        $data_applies_history = array();
         if (strcmp($code['code_check'], $check->code) == 0) {
             $applies = Apply::where('email', '=', $check->email)->get()->toArray();
             foreach($applies as $apply){
                 $apply_history = AppliesHistory::where('apply_id', '=', $apply["id"])->get()->toArray();
                     if ($apply_history) {
                         foreach ($apply_history as $val) {
-                            array_push($data_export, $val);
+                            array_push($data_applies_history, $val);
                         }
                     }
-                array_push($data_export, $apply);
+                array_push($data_applies, $apply);
             }
             $check->delete();
-            $this->outputCSV($data_export, 'download.csv');
+            $this->outputCSV($data_applies,$data_applies_history, 'export_stujobs.csv');
             
             // return redirect()->back()->with('success', 'Votre fichier à été téléchargé');
         }

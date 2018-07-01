@@ -257,20 +257,26 @@ class ProfileController extends Controller
 
         if(Hash::check($download_password["download_password"], $pass)) {
             // Password correct, delete all data form all tables in DB
-            $data = array();
+            $data_user = array();
+            $data_company = array();
+            $data_offers = array();
+            $data_offers_history = array();
+            $data_applies = array();
+            $data_applies_history = array();
+            
             $user = Auth::user()->toArray();
-            array_push($data, $user);            
+            array_push($data_user, $user);            
             $company = Company::where('user_id', $id)->get()->first()->toArray();
-            array_push($data, $company);            
+            array_push($data_company, $company);            
             $id_company = $company["id"];
             $offers = Offer::where('company_id', '=', $id)->get()->toArray();
             if($offers){
                 foreach($offers as $offer){
-                    array_push($data, $offer);
+                    array_push($data_offers, $offer);
                     $offer_history = OffersHistory::where('offer_id', '=', $offer["id"])->get()->toArray();
                     if ($offer_history) {
                         foreach ($offer_history as $line) {
-                            array_push($data, $line);
+                            array_push($data_offers_history, $line);
                         }
                     }
                     $applies = Apply::where('offer_id', '=', $offer["id"])->get()->toArray();
@@ -279,16 +285,15 @@ class ProfileController extends Controller
                             $apply_history = AppliesHistory::where('apply_id', '=', $apply["id"])->get()->toArray();
                             if ($apply_history) {
                                 foreach ($apply_history as $val) {
-                                    array_push($data, $val);
+                                    array_push($data_applies_history, $val);
                                 }
                             }
-                            array_push($data, $apply);
+                            array_push($data_applies, $apply);
                         }
                     }
                 }
             }
-            $this->outputCSV($data, 'download.csv');
-
+            $this->outputCSV($data_user,$data_company,$data_offers,$data_offers_history,$data_applies,$data_applies_history,'export_stujobs.csv');
             // return redirect()->route('profileSettings')->with('success', 'Vos données ont été exportées'); 
 
         }
@@ -298,7 +303,7 @@ class ProfileController extends Controller
         }
 
     }
-    public function outputCSV($data,$file_name = 'data_stujobs.csv') {
+    public function outputCSV($data_user,$data_company,$data_offers,$data_offers_history,$data_applies,$data_applies_history,$file_name = 'export_stujobs.csv') {
         # output headers so that the file is downloaded rather than displayed
          header("Content-Type: text/csv");
          header("Content-Disposition: attachment; filename=$file_name");
@@ -311,11 +316,75 @@ class ProfileController extends Controller
      
          # Start the ouput
          $output = fopen("php://output", "w");
-         
-          # Then loop through the rows
-         foreach ($data as $row) {
-             # Add the rows to the body
-             fputcsv($output, $row); // here you can change delimiter/enclosure
+         fputcsv($output, array("Informations utilisateur :"));
+         fputcsv($output, array("\n"));
+
+         if(!empty($data_user)){
+            fputcsv($output, array('ID', 'Email', 'Date de création', 'Date de modification', 'Rôle','Vérifié'));
+            # Then loop through the rows
+            foreach ($data_user as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
+         }
+         fputcsv($output, array("\n"));
+         fputcsv($output, array("Informations entreprise :"));
+         fputcsv($output, array("\n"));
+         if(!empty($data_company)){
+            fputcsv($output, array('ID', 'User_id', 'Nom', 'Siret', 'Adresse', 'Téléphone', 'Date de création', 'Date de modification', 'Description'));
+            # Then loop through the rows
+            foreach ($data_company as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
+         }
+
+         if(!empty($data_offers)){
+            fputcsv($output, array("\n"));
+            fputcsv($output, array("Vos offres :"));
+            fputcsv($output, array("\n"));
+            fputcsv($output, array('ID', 'Company_id', 'Titre', 'Description', 'Type de contrat', 'Durée', 'Rémunération', 'Validée', 'Date de création', 'Date de modification', 'Terminée', 'Contact Email', 'Contact Téléphone', 'Ville', 'Domaine activité'));
+            # Then loop through the rows
+            foreach ($data_offers as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
+         }
+
+         if(!empty($data_offers_history)){
+            fputcsv($output, array("\n"));
+            fputcsv($output, array("Historique de vos offres :"));
+            fputcsv($output, array("\n"));
+            fputcsv($output, array('ID', 'Offer_id', 'User_id', 'Colonne modifiée', 'Valeur de changement', 'Date de création', 'Date de modification','Motif'));
+            # Then loop through the rows
+            foreach ($data_offers_history as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
+         }
+
+         if(!empty($data_applies)){
+            fputcsv($output, array("\n"));
+            fputcsv($output, array("Candidatures à vos offres :"));
+            fputcsv($output, array("\n"));
+            fputcsv($output, array('ID', 'Offer_id', 'Prénom', 'Nom', 'Email', 'CV', 'Taille du CV', 'Sujet', 'Message', 'Validée', 'Date de création', 'Date de modification'));
+            # Then loop through the rows
+            foreach ($data_applies as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
+         }
+
+         if(!empty($data_applies_history)){
+            fputcsv($output, array("\n"));
+            fputcsv($output, array("Historique des candidatures à vos offres :"));
+            fputcsv($output, array("\n"));
+            fputcsv($output, array('ID', 'Apply_id', 'User_id', 'Colonne modifiée', 'Valeur de changement', 'Date de création', 'Date de modification','Motif'));
+            # Then loop through the rows
+            foreach ($data_applies_history as $row) {
+                # Add the rows to the body
+                fputcsv($output, $row); // here you can change delimiter/enclosure
+            }
          }
          # Close the stream off
          fclose($output);

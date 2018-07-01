@@ -7,6 +7,8 @@
                 <div class="boxEffect">
                     <div class="boxEffectHeader">
                         <h3 class="boxEffectTitle">Vos données sur Stujobs :</h3>
+                        <br />
+                        <p class="paragraphe">Pour des raisons de confidentialité, vous êtes en droit de demander la copie ou l'effacement de certaines informations personnelles vous concernant.</p>
                     </div>
                 </div>
             </div>

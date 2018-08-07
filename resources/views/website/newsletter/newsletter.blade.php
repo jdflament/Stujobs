@@ -44,6 +44,12 @@
                                 @endforeach
                             </ul>
                         </div>
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="inputGroup checkboxGroup">
+                                <input type="checkbox" name="newsletter_terms" id="newsletter_terms" class="checkboxInput">
+                                <label for="newsletter_terms">En vous inscrivant à notre système d'alerte, vous acceptez de recevoir des emails de la part de Stujobs</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Modal Footer -->

@@ -84,3 +84,11 @@
     padding: 15px 0;
     margin: 0 auto 10px auto;
 }
+
+#iframeCGU {
+    border: none;
+}
+
+#iframeCGU .navbarTop {
+    display: none;
+}

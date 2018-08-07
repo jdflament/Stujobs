@@ -32,10 +32,10 @@
                                     </span>
                                     @endif
                                 </div>
-                                <div class="inputGroup">
+                                <div class="inputGroup checkboxGroup">
+                                    <input type="checkbox" name="remember" id="remember" class="checkboxInput" {{ old('remember') ? 'checked' : '' }}>
                                     <label for="remember">Garder la session</label>
                                 </div>
-                                <input type="checkbox" name="remember" class="checkboxInput" {{ old('remember') ? 'checked' : '' }}>
                             </div>
                         </div>
                     </div>

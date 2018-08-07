@@ -180,8 +180,12 @@
             <button class="buttonActionLg bgPrimary" data-toggle="modal" data-target="#modalNewsletter"><i class="fa fa-bell"></i> Être alerté lors d'une nouvelle offre</button>
         </div>
         <div class="rightSide">
+            @if(!Auth::user())
+                <a href="{{ route('informations') }}">Informations</a>
+            @endif
             <a href="mailto:team.stujobs@gmail.com">Contact</a>
             <a href="{{ route('legals') }}">Mentions légales</a>
+            <a href="{{ route('cgu') }}">CGU</a>
         </div>
     </div>
 </footer>

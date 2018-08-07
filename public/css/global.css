@@ -1109,3 +1109,17 @@ List style
         margin: 8px 0 0;
     }
 }
+
+
+/**
+ Checkbox Style
+*/
+.checkboxGroup {
+    display: flex;
+    align-items: center;
+}
+
+.checkboxGroup input {
+    width: auto;
+    margin-top: 5px;
+}

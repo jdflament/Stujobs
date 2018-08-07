@@ -264,3 +264,8 @@ Route::group(['middleware' => 'can:allAdminsAccess'], function() {
  * Legals
  */
 Route::get('/legals', 'Website\LegalsController@index')->name('legals');
+
+/*
+ * CGU
+ */
+Route::get('/conditions-utilisation', 'Website\CGUController@index')->name('cgu');

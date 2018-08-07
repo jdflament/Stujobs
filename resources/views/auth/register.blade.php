@@ -110,8 +110,17 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="paragraphe centerContent marginTop">Vous pouvez vous désinscrire à tout moment en modifiant vos paramètres sur votre compte</p>
+                        <div class="inputGroup checkboxGroup">
+                            <input type="checkbox" name="cgu" id="cgu" class="checkboxInput">
+                        <label for="cgu">Veuillez acceptez nos <a href=" {{ env('APP_URL') }}/conditions-utilisation">CGU</a></label>
+                        </div>
+                        @if ($errors->has('cgu'))
+                            <span class="invalid-feedback" style="display: block;">
+                                <strong>{{ $errors->first('cgu') }}</strong>
+                            </span>
+                        @endif
 
+                        <p class="paragraphe centerContent marginTop">Vous pouvez vous désinscrire à tout moment en modifiant vos paramètres sur votre compte</p>
                     </div>
                     <div class="authFormFooter">
                         <button type="submit" class="buttonActionLg bgPrimary">S'inscrire</button>

@@ -4,11 +4,7 @@
 <div class="containerLg">
     <div class="row justify-content-center">
             <div class="col-xs-12 col-md-12 col-lg-12">
-                <div class="boxEffect">
-                    <div class="boxEffectHeader">
-                        <h3 class="boxEffectTitle">Confirmation du téléchargement de la copie totale de vos données</h3>
-                    </div>
-                </div>
+                <h3 class="boxEffectTitle centerContent">Confirmation du téléchargement de la copie totale de vos données</h3>
             </div>
             <div class="col-xs-12 col-md-6 col-lg-6 marginTop">
                 <div class="boxEffect">

@@ -16,6 +16,7 @@ class NewsletterController extends Controller
         // Inputs errors
         $validator = Validator::make($request->all(), [
             'newsletter_email' => 'required|email',
+            'newsletter_terms' => 'required',
         ]);
 
         if ($validator->fails()) {

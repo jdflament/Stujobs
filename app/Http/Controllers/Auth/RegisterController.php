@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
             'g-recaptcha-response' => new Captcha(),
+            'cgu' => 'required',
         ]);
     }
 

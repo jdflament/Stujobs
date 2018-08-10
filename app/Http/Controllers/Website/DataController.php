@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DownloadDataVerify;
 use App\Mail\DeleteDataVerify;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DataController extends Controller
 {
@@ -88,16 +89,6 @@ class DataController extends Controller
     }
     public function outputCSV($data_applies,$data_applies_history,$file_name = 'export_stujobs.csv') 
     {
-        # output headers so that the file is downloaded rather than displayed
-         header("Content-Type: text/csv");
-         header("Content-Disposition: attachment; filename=$file_name");
-         # Disable caching - HTTP 1.1
-         header("Cache-Control: no-cache, no-store, must-revalidate");
-         # Disable caching - HTTP 1.0
-         header("Pragma: no-cache");
-         # Disable caching - Proxies
-         header("Expires: 0");
-     
          # Start the ouput
          $output = fopen("php://output", "w");
          
@@ -110,6 +101,9 @@ class DataController extends Controller
                 # Add the rows to the body
                 fputcsv($output, $row); // here you can change delimiter/enclosure
             }
+         }
+         else {
+            fputcsv($output, array("Aucune données vous concernant"));
          }
          if(!empty($data_applies_history)){
             fputcsv($output, array("\n"));
@@ -163,13 +157,20 @@ class DataController extends Controller
                 array_push($data_applies, $apply);
             }
             $check->delete();
-            $this->outputCSV($data_applies,$data_applies_history, 'export_stujobs.csv');
-            
-            // return redirect()->back()->with('success', 'Votre fichier à été téléchargé');
+
+            $response = new StreamedResponse();
+            $response->setCallback(function() use ($data_applies, $data_applies_history) {
+                $this->outputCSV($data_applies,$data_applies_history);
+            });
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+            $response->headers->set('Content-Disposition','attachment; filename=export_stujobs.csv');
         }
         else {
             dd('Le code ne correspond pas');
         }
+        
+        return $response;
         
      }
      public function checkCodeDelete(Request $request)
@@ -199,12 +200,14 @@ class DataController extends Controller
                     $apply->delete();
             }
             $check->delete();
-            
-            // return redirect()->back()->with('success', 'Vos données ont été totalement supprimées');
+            $response = "ok";
+
         }
         else {
             dd('Le code ne correspond pas');
         }
+
+        return $response;
         
      }
 

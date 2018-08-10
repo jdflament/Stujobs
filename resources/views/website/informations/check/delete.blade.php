@@ -9,7 +9,7 @@
             <div class="col-xs-12 col-md-6 col-lg-6 marginTop">
                 <div class="boxEffect">
                     <h3 class="boxTitle centerContent">Entrer le code de vérification reçu à l'adresse : <b>{{ $_GET['email'] }}</b></h3>
-                    <form name="checkCode" role="form" method="post" action="/informations/check/delete">
+                    <form name="checkCodeDelete" role="form" method="post" action="/informations/check/delete">
                         <div class="inputGroup">
                             <label for="code_check">Votre code reçu par mail</label>
                             <input type="text" id="code_check" name="code_check" required="required" placeholder="Votre code reçu par mail" />

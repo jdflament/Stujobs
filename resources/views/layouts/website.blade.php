@@ -45,7 +45,7 @@
     }
 ?>
 
-<div id="app">
+<div id="app" data-url="{{ env('APP_URL') }}">
     @if (!isset($exception))
     <nav class="navbarTop">
         <div class="containerLg">

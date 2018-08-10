@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ProfileController extends Controller
 {
@@ -293,8 +294,15 @@ class ProfileController extends Controller
                     }
                 }
             }
-            $this->outputCSV($data_user,$data_company,$data_offers,$data_offers_history,$data_applies,$data_applies_history,'export_stujobs.csv');
-            // return redirect()->route('profileSettings')->with('success', 'Vos données ont été exportées'); 
+            $response = new StreamedResponse();
+            $response->setCallback(function() use ($data_user, $data_company, $data_offers, $data_offers_history, $data_applies, $data_applies_history) {
+                $this->outputCSV($data_user,$data_company,$data_offers,$data_offers_history,$data_applies,$data_applies_history,'export_stujobs.csv');
+            });
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+            $response->headers->set('Content-Disposition','attachment; filename=export_stujobs.csv');
+
+            return $response;
 
         }
         else {
@@ -303,18 +311,9 @@ class ProfileController extends Controller
         }
 
     }
-    public function outputCSV($data_user,$data_company,$data_offers,$data_offers_history,$data_applies,$data_applies_history,$file_name = 'export_stujobs.csv') {
-        # output headers so that the file is downloaded rather than displayed
-         header("Content-Type: text/csv");
-         header("Content-Disposition: attachment; filename=$file_name");
-         # Disable caching - HTTP 1.1
-         header("Cache-Control: no-cache, no-store, must-revalidate");
-         # Disable caching - HTTP 1.0
-         header("Pragma: no-cache");
-         # Disable caching - Proxies
-         header("Expires: 0");
-     
-         # Start the ouput
+    public function outputCSV($data_user,$data_company,$data_offers,$data_offers_history,$data_applies,$data_applies_history,$file_name = 'export_stujobs.csv') 
+    {  
+        # Start the ouput
          $output = fopen("php://output", "w");
          fputcsv($output, array("Informations utilisateur :"));
          fputcsv($output, array("\n"));

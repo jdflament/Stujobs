@@ -32,10 +32,13 @@ class DeleteDataVerify extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.deleteDataVerify')
-                    ->with([
-                        'email' => $this->email,
-                        'code' => $this->code
-                    ]);
+        return 
+            $this
+                ->subject('Stujobs : Votre demande de suppression de vos données')
+                ->view('emails.deleteDataVerify')
+                ->with([
+                    'email' => $this->email,
+                    'code' => $this->code
+                ]);
     }
 }

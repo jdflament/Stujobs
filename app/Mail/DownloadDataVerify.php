@@ -32,10 +32,12 @@ class DownloadDataVerify extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.downloadDataVerify')
-                    ->with([
-                        'email' => $this->email,
-                        'code' => $this->code
-                    ]);
+        return $this
+                ->subject('Stujobs : Votre demande de téléchargement de vos données')
+                ->view('emails.downloadDataVerify')
+                ->with([
+                    'email' => $this->email,
+                    'code' => $this->code
+                ]);
     }
 }

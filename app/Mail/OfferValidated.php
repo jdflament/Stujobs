@@ -29,7 +29,9 @@ class OfferValidated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.offerValidated')
+        return $this
+                    ->subject('Stujobs : Votre offre à été validée')
+                    ->view('emails.offerValidated')
                     ->with([
                         'offer' => $this->offer
                     ]);
